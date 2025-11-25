@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizador de Imagens - Site Dra. Nadia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+        }
+        
+        .upload-area {
+            border: 3px dashed #cbd5e0;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+        }
+        
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: #edf2f7;
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            color: #4a5568;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .upload-hint {
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .image-item {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            background: #f7fafc;
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .image-item input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .image-item label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 30px;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #9ae6b4;
+            display: block;
+        }
+        
+        .status.error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #fc8181;
+            display: block;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 30px 0 20px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .instructions {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .instructions h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Atualizador de Imagens</h1>
+        <p class="subtitle">Adicione suas fotos de forma fácil e rápida!</p>
+        
+        <div class="instructions">
+            <h3>📋 Como usar:</h3>
+            <ol>
+                <li>Arraste suas imagens para a área abaixo OU clique para selecionar</li>
+                <li>As imagens serão automaticamente organizadas por seção</li>
+                <li>Renomeie cada imagem conforme indicado (ou deixe o nome sugerido)</li>
+                <li>Clique em "Atualizar Site" para aplicar as mudanças</li>
+            </ol>
+        </div>
+        
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📁</div>
+            <div class="upload-text">Arraste suas imagens aqui</div>
+            <div class="upload-hint">ou clique para selecionar</div>
+            <input type="file" id="fileInput" multiple accept="image/*">
+        </div>
+        
+        <div id="imagesContainer"></div>
+        
+        <button class="btn" id="updateBtn" onclick="updateSite()">
+            ✨ Atualizar Site
+        </button>
+        
+        <div id="status"></div>
+    </div>
+    
+    <script>
+        const imageConfig = {
+            hero: ['hero-slide-1', 'hero-slide-2', 'hero-slide-3'],
+            sobre: ['sobre-foto'],
+            diferenciais: ['diferencial-1', 'diferencial-2', 'diferencial-3', 'diferencial-4'],
+            galeria: ['galeria-1', 'galeria-2', 'galeria-3', 'galeria-4', 'galeria-5', 'galeria-6', 'galeria-7', 'galeria-8', 'galeria-9'],
+            dicas: ['dica-1', 'dica-2', 'dica-3', 'dica-4', 'dica-5', 'dica-6']
+        };
+        
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const imagesContainer = document.getElementById('imagesContainer');
+        
+        let uploadedFiles = [];
+        let fileCounter = { hero: 0, sobre: 0, diferenciais: 0, galeria: 0, dicas: 0 };
+        
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+        
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        uploadedFiles.push({
+                            file: file,
+                            preview: e.target.result,
+                            assigned: false
+                        });
+                        displayImages();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        function displayImages() {
+            imagesContainer.innerHTML = '';
+            
+            Object.keys(imageConfig).forEach(section => {
+                const sectionTitle = document.createElement('div');
+                sectionTitle.className = 'section-title';
+                sectionTitle.textContent = getSectionName(section);
+                imagesContainer.appendChild(sectionTitle);
+                
+                const grid = document.createElement('div');
+                grid.className = 'images-grid';
+                
+                imageConfig[section].forEach((key, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'image-item';
+                    
+                    const label = document.createElement('label');
+                    label.textContent = key.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    
+                    const img = document.createElement('img');
+                    img.src = getImageForKey(key) || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="150"%3E%3Crect fill="%23e2e8f0" width="200" height="150"/%3E%3Ctext fill="%239ca3af" font-family="sans-serif" font-size="14" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3ESem imagem%3C/text%3E%3C/svg%3E';
+                    img.style.cursor = 'pointer';
+                    img.onclick = () => selectImage(key, img);
+                    
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.placeholder = 'Nome do arquivo...';
+                    input.value = getFileNameForKey(key);
+                    input.onchange = (e) => saveFileName(key, e.target.value);
+                    
+                    item.appendChild(label);
+                    item.appendChild(img);
+                    item.appendChild(input);
+                    grid.appendChild(item);
+                });
+                
+                imagesContainer.appendChild(grid);
+            });
+        }
+        
+        function getSectionName(section) {
+            const names = {
+                hero: '🎬 Hero Slider',
+                sobre: '👩‍⚕️ Seção Sobre',
+                diferenciais: '⭐ Diferenciais',
+                galeria: '🖼️ Galeria',
+                dicas: '💡 Dicas'
+            };
+            return names[section] || section;
+        }
+        
+        function getImageForKey(key) {
+            const saved = localStorage.getItem(`img_${key}`);
+            return saved || null;
+        }
+        
+        function getFileNameForKey(key) {
+            return localStorage.getItem(`file_${key}`) || '';
+        }
+        
+        function saveFileName(key, filename) {
+            localStorage.setItem(`file_${key}`, filename);
+        }
+        
+        function selectImage(key, imgElement) {
+            const unassigned = uploadedFiles.filter(f => !f.assigned);
+            if (unassigned.length === 0) {
+                alert('Todas as imagens já foram atribuídas! Faça upload de mais imagens.');
+                return;
+            }
+            
+            const selected = unassigned[0];
+            selected.assigned = true;
+            imgElement.src = selected.preview;
+            localStorage.setItem(`img_${key}`, selected.preview);
+            
+            const defaultName = `${key}.${selected.file.name.split('.').pop()}`;
+            const input = imgElement.parentElement.querySelector('input');
+            if (!input.value) {
+                input.value = defaultName;
+                saveFileName(key, defaultName);
+            }
+        }
+        
+        function updateSite() {
+            const config = {};
+            Object.keys(imageConfig).forEach(section => {
+                imageConfig[section].forEach(key => {
+                    const filename = getFileNameForKey(key);
+                    if (filename) {
+                        config[key] = filename;
+                    }
+                });
+            });
+            
+            // Criar arquivo de configuração
+            const configText = Object.entries(config)
+                .map(([key, value]) => `${key}=${value}`)
+                .join('\n');
+            
+            const blob = new Blob([configText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'imagens-config.txt';
+            a.click();
+            
+            showStatus('✅ Configuração salva! Agora você precisa copiar as imagens para a pasta "images/" e atualizar o index.html manualmente, ou me avise que eu faço isso para você!', 'success');
+        }
+        
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Carregar imagens salvas ao iniciar
+        displayImages();
+    </script>
+</body>
+</html>
+

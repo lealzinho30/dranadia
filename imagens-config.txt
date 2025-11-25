@@ -1,0 +1,59 @@
+# 📸 CONFIGURAÇÃO DE IMAGENS - GUIA RÁPIDO
+# 
+# INSTRUÇÕES SIMPLES:
+# 1. Coloque suas imagens na pasta "images/"
+# 2. Preencha os nomes dos arquivos abaixo (sem o caminho, só o nome)
+# 3. Salve este arquivo
+# 4. Execute o script atualizar-imagens.html no navegador
+#
+# ============================================
+# HERO SLIDER (3 imagens principais)
+# ============================================
+hero-slide-1=hero-1.jpg
+hero-slide-2=hero-2.jpg
+hero-slide-3=hero-3.jpg
+
+# ============================================
+# SEÇÃO SOBRE (Foto da Dra. Nadia)
+# ============================================
+sobre-foto=dra-nadia.jpg
+
+# ============================================
+# DIFERENCIAIS (4 imagens pequenas)
+# ============================================
+diferencial-1=diferencial-1.jpg
+diferencial-2=diferencial-2.jpg
+diferencial-3=diferencial-3.jpg
+diferencial-4=diferencial-4.jpg
+
+# ============================================
+# GALERIA (9 imagens)
+# ============================================
+galeria-1=galeria-1.jpg
+galeria-2=galeria-2.jpg
+galeria-3=galeria-3.jpg
+galeria-4=galeria-4.jpg
+galeria-5=galeria-5.jpg
+galeria-6=galeria-6.jpg
+galeria-7=galeria-7.jpg
+galeria-8=galeria-8.jpg
+galeria-9=galeria-9.jpg
+
+# ============================================
+# DICAS (6 imagens)
+# ============================================
+dica-1=dica-1.jpg
+dica-2=dica-2.jpg
+dica-3=dica-3.jpg
+dica-4=dica-4.jpg
+dica-5=dica-5.jpg
+dica-6=dica-6.jpg
+
+# ============================================
+# DICAS IMPORTANTES:
+# - Use apenas o nome do arquivo (ex: foto.jpg)
+# - Não precisa colocar o caminho "images/"
+# - Se não tiver uma imagem, deixe vazio ou use o placeholder
+# - Formatos aceitos: .jpg, .jpeg, .png, .webp
+# ============================================
+

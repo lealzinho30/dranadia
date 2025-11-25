@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Site Dra. Nadia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="logo-admin">
+                    <i class="fas fa-tooth"></i>
+                    <h2>Painel Admin</h2>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#imagens" class="nav-item active" data-section="imagens">
+                    <i class="fas fa-images"></i>
+                    <span>Imagens</span>
+                </a>
+                <a href="#contato" class="nav-item" data-section="contato">
+                    <i class="fas fa-address-book"></i>
+                    <span>Contato</span>
+                </a>
+                <a href="#redes-sociais" class="nav-item" data-section="redes-sociais">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Redes Sociais</span>
+                </a>
+                <a href="#textos" class="nav-item" data-section="textos">
+                    <i class="fas fa-edit"></i>
+                    <span>Textos</span>
+                </a>
+                <a href="#servicos" class="nav-item" data-section="servicos">
+                    <i class="fas fa-briefcase-medical"></i>
+                    <span>Serviços</span>
+                </a>
+                <a href="#depoimentos" class="nav-item" data-section="depoimentos">
+                    <i class="fas fa-comments"></i>
+                    <span>Depoimentos</span>
+                </a>
+                <a href="../index.html" class="nav-item" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Ver Site</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="sectionTitle">Gerenciar Imagens</h1>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="carregarConfig()">
+                        <i class="fas fa-sync"></i> Recarregar
+                    </button>
+                    <button class="btn btn-primary" onclick="salvarTudo()">
+                        <i class="fas fa-save"></i> Salvar Tudo
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Seção Imagens -->
+                <section id="imagens" class="admin-section active">
+                    <div class="section-card">
+                        <h3><i class="fas fa-sliders-h"></i> Hero Slider (3 imagens)</h3>
+                        <p class="section-description">Imagens principais que aparecem no topo do site, em formato slider. Recomendado: 1920x1080px (formato paisagem)</p>
+                        <div class="images-grid">
+                            <div class="image-upload-item">
+                                <div class="image-item-header">
+                                    <div>
+                                        <label>Hero Slide 1</label>
+                                        <span class="image-hint">Primeira imagem do slider principal</span>
+                                    </div>
+                                    <button class="btn-remove-image" onclick="removerImagem('hero-slide-1', 'hero-1')" title="Remover imagem">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="image-preview" id="preview-hero-1">
+                                    <i class="fas fa-image"></i>
+                                    <span>Sem imagem</span>
+                                </div>
+                                <input type="file" accept="image/*" data-key="hero-slide-1" onchange="previewImage(this, 'hero-1')">
+                                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-1">
+                                <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-1', 'hero-1')" style="margin-top: 0.5rem;">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                            </div>
+                            <div class="image-upload-item">
+                                <div class="image-item-header">
+                                    <div>
+                                        <label>Hero Slide 2</label>
+                                        <span class="image-hint">Segunda imagem do slider principal</span>
+                                    </div>
+                                    <button class="btn-remove-image" onclick="removerImagem('hero-slide-2', 'hero-2')" title="Remover imagem">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="image-preview" id="preview-hero-2">
+                                    <i class="fas fa-image"></i>
+                                    <span>Sem imagem</span>
+                                </div>
+                                <input type="file" accept="image/*" data-key="hero-slide-2" onchange="previewImage(this, 'hero-2')">
+                                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-2">
+                                <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-2', 'hero-2')" style="margin-top: 0.5rem;">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                            </div>
+                            <div class="image-upload-item">
+                                <div class="image-item-header">
+                                    <div>
+                                        <label>Hero Slide 3</label>
+                                        <span class="image-hint">Terceira imagem do slider principal</span>
+                                    </div>
+                                    <button class="btn-remove-image" onclick="removerImagem('hero-slide-3', 'hero-3')" title="Remover imagem">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="image-preview" id="preview-hero-3">
+                                    <i class="fas fa-image"></i>
+                                    <span>Sem imagem</span>
+                                </div>
+                                <input type="file" accept="image/*" data-key="hero-slide-3" onchange="previewImage(this, 'hero-3')">
+                                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-3">
+                                <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-3', 'hero-3')" style="margin-top: 0.5rem;">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-user-md"></i> Foto Dra. Nadia (Seção Sobre)</h3>
+                        <p class="section-description">Foto profissional da Dra. Nadia que aparece na seção "Sobre". Recomendado: 800x1000px (formato retrato vertical)</p>
+                        <div class="image-upload-item single">
+                            <div class="image-item-header">
+                                <div>
+                                    <label>Foto Profissional</label>
+                                    <span class="image-hint">Aparece na seção "Sobre" ao lado das informações</span>
+                                </div>
+                                <button class="btn-remove-image" onclick="removerImagem('sobre-foto', 'sobre')" title="Remover imagem">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="image-preview" id="preview-sobre">
+                                <i class="fas fa-image"></i>
+                                <span>Sem imagem</span>
+                            </div>
+                            <input type="file" accept="image/*" data-key="sobre-foto" onchange="previewImage(this, 'sobre')">
+                            <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="sobre-foto">
+                            <button class="btn btn-small" onclick="editarImagemExistente('sobre-foto', 'sobre')" style="margin-top: 0.5rem;">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-images"></i> Galeria (9 imagens)</h3>
+                        <p class="section-description">Fotos da clínica, atendimentos e equipamentos que aparecem na seção "Galeria". Recomendado: 1200x1200px (quadrado) ou 1200x800px</p>
+                        <div class="images-grid" id="galeria-grid">
+                            <!-- Será preenchido pelo JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-star"></i> Diferenciais (4 imagens)</h3>
+                        <p class="section-description">Imagens pequenas que aparecem na seção "Diferenciais" mostrando os pontos fortes do atendimento. Recomendado: 400x300px</p>
+                        <div class="images-grid" id="diferenciais-grid">
+                            <!-- Será preenchido pelo JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-lightbulb"></i> Dicas (6 imagens)</h3>
+                        <p class="section-description">Imagens que ilustram as dicas de saúde bucal na seção "Dicas". Recomendado: 400x300px</p>
+                        <div class="images-grid" id="dicas-grid">
+                            <!-- Será preenchido pelo JavaScript -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Contato -->
+                <section id="contato" class="admin-section">
+                    <div class="section-card">
+                        <h3><i class="fas fa-phone"></i> Telefone/WhatsApp</h3>
+                        <div class="form-group">
+                            <label>Número (formato: 5511999999999)</label>
+                            <input type="text" id="telefone" placeholder="5511913141625" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-envelope"></i> E-mail</h3>
+                        <div class="form-group">
+                            <label>E-mail de contato</label>
+                            <input type="email" id="email" placeholder="contato@dranadiaodontopediatra.com.br" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-map-marker-alt"></i> Endereço</h3>
+                        <div class="form-group">
+                            <label>Endereço completo</label>
+                            <textarea id="endereco" rows="3" class="form-control" placeholder="Rua Fernando Falcão, 1111 - Mooca - SP"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-clock"></i> Horário de Atendimento</h3>
+                        <div class="form-group">
+                            <label>Horários</label>
+                            <textarea id="horario" rows="3" class="form-control" placeholder="Segunda a Sexta: 8h às 18h&#10;Sábado: 8h às 12h"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Redes Sociais -->
+                <section id="redes-sociais" class="admin-section">
+                    <div class="section-card">
+                        <h3><i class="fab fa-instagram"></i> Instagram</h3>
+                        <div class="form-group">
+                            <label>URL do Instagram</label>
+                            <input type="url" id="instagram" placeholder="https://www.instagram.com/dra_nadia_odontopediatra/" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fab fa-google"></i> Google Meu Negócio</h3>
+                        <div class="form-group">
+                            <label>URL do Google Meu Negócio</label>
+                            <input type="url" id="google" placeholder="https://share.google.com/..." class="form-control">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Textos -->
+                <section id="textos" class="admin-section">
+                    <div class="section-card">
+                        <h3><i class="fas fa-heading"></i> Hero - Título Principal</h3>
+                        <div class="form-group">
+                            <label>Linha 1</label>
+                            <input type="text" id="hero-title-1" placeholder="Especialista em" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Linha 2</label>
+                            <input type="text" id="hero-title-2" placeholder="Saúde Bucal Infantil" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-paragraph"></i> Hero - Subtítulo</h3>
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea id="hero-subtitle" rows="3" class="form-control" placeholder="Atendemos todas as necessidades..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-quote-left"></i> Sobre - Compromisso</h3>
+                        <div class="form-group">
+                            <label>Texto de compromisso</label>
+                            <textarea id="sobre-compromisso" rows="4" class="form-control" placeholder="Nosso compromisso é..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Serviços -->
+                <section id="servicos" class="admin-section">
+                    <div id="servicos-container">
+                        <!-- Serviços serão carregados dinamicamente -->
+                    </div>
+                    <button class="btn btn-secondary" onclick="adicionarServico()">
+                        <i class="fas fa-plus"></i> Adicionar Serviço
+                    </button>
+                </section>
+
+                <!-- Seção Depoimentos -->
+                <section id="depoimentos" class="admin-section">
+                    <div id="depoimentos-container">
+                        <!-- Depoimentos serão carregados dinamicamente -->
+                    </div>
+                    <button class="btn btn-secondary" onclick="adicionarDepoimento()">
+                        <i class="fas fa-plus"></i> Adicionar Depoimento
+                    </button>
+                </section>
+            </div>
+
+            <!-- Status Message -->
+            <div id="statusMessage" class="status-message"></div>
+        </main>
+    </div>
+
+    <!-- Modal Editor de Imagem -->
+    <div id="imageEditorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Editar Imagem</h3>
+                <button class="modal-close" onclick="fecharEditor()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="editor-container">
+                    <div class="editor-preview">
+                        <img id="editorImage" src="" alt="Preview">
+                    </div>
+                    <div class="editor-controls">
+                        <div class="control-section">
+                            <h4><i class="fas fa-ruler"></i> Tamanho</h4>
+                            <div class="control-group">
+                                <label>Largura (px)</label>
+                                <input type="number" id="editorWidth" value="800" min="100" max="5000" step="10">
+                            </div>
+                            <div class="control-group">
+                                <label>Altura (px)</label>
+                                <input type="number" id="editorHeight" value="600" min="100" max="5000" step="10">
+                            </div>
+                            <div class="control-group">
+                                <label>Manter Proporção</label>
+                                <input type="checkbox" id="maintainAspect" checked onchange="toggleAspectRatio()">
+                            </div>
+                            <div class="control-group">
+                                <label>Proporções Pré-definidas</label>
+                                <select id="aspectRatio" class="form-control" onchange="aplicarProporcao()">
+                                    <option value="">Personalizado</option>
+                                    <option value="16:9">16:9 (Widescreen)</option>
+                                    <option value="4:3">4:3 (Padrão)</option>
+                                    <option value="1:1">1:1 (Quadrado)</option>
+                                    <option value="3:4">3:4 (Retrato)</option>
+                                    <option value="21:9">21:9 (Ultrawide)</option>
+                                </select>
+                            </div>
+                            <div class="size-presets">
+                                <button class="btn-preset" onclick="aplicarTamanho(1920, 1080)">1920x1080</button>
+                                <button class="btn-preset" onclick="aplicarTamanho(1200, 1200)">1200x1200</button>
+                                <button class="btn-preset" onclick="aplicarTamanho(800, 1000)">800x1000</button>
+                                <button class="btn-preset" onclick="aplicarTamanho(400, 300)">400x300</button>
+                            </div>
+                        </div>
+                        
+                        <div class="control-section">
+                            <h4><i class="fas fa-sliders-h"></i> Ajustes</h4>
+                            <div class="control-group">
+                                <label>Qualidade (1-100)</label>
+                                <input type="range" id="editorQuality" value="90" min="1" max="100" step="1">
+                                <span id="qualityValue">90%</span>
+                            </div>
+                            <div class="control-buttons">
+                                <button class="btn btn-secondary" onclick="girarImagem(-90)">
+                                    <i class="fas fa-undo"></i> Girar Esquerda
+                                </button>
+                                <button class="btn btn-secondary" onclick="girarImagem(90)">
+                                    <i class="fas fa-redo"></i> Girar Direita
+                                </button>
+                                <button class="btn btn-secondary" onclick="espelharImagem()">
+                                    <i class="fas fa-exchange-alt"></i> Espelhar
+                                </button>
+                                <button class="btn btn-secondary" onclick="resetarImagem()">
+                                    <i class="fas fa-sync"></i> Resetar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="control-section">
+                            <h4><i class="fas fa-info-circle"></i> Preview</h4>
+                            <div class="size-preview">
+                                <div class="preview-info">
+                                    <span>Tamanho Final:</span>
+                                    <strong id="sizePreview">800 x 600 px</strong>
+                                </div>
+                                <div class="preview-info">
+                                    <span>Tamanho do Arquivo:</span>
+                                    <strong id="fileSizePreview">-</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button class="btn btn-primary" onclick="aplicarEdicao()">
+                                <i class="fas fa-check"></i> Aplicar Edições
+                            </button>
+                            <button class="btn btn-secondary" onclick="fecharEditor()">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
+

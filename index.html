@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dra. Nadia - Odontopediatra especializada em cuidados dentários para crianças. Atendimento humanizado e ambiente acolhedor.">
+    <title>Dra. Nadia - Odontopediatra | Cuidado com o Sorriso do seu Filho</title>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="images/2022-07-19-editado-editado.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+</head>
+<body>
+    <!-- Mouse Interactive Background -->
+    <div class="mouse-bg">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+        <div class="bg-blob blob-4"></div>
+        <div class="bg-blob blob-5"></div>
+    </div>
+    <!-- Header / Navbar -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-tooth"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-name">Dra. Nadia</span>
+                            <span class="logo-subtitle">Odontopediatra</span>
+                        </div>
+                    </div>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#inicio" class="nav-link">Início</a></li>
+                        <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                        <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                        <li><a href="#galeria" class="nav-link">Galeria</a></li>
+                        <li><a href="#dicas" class="nav-link">Dicas</a></li>
+                        <li><a href="#depoimentos" class="nav-link">Por que Escolher</a></li>
+                        <li><a href="#contato" class="nav-link">Contato</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <a href="https://wa.me/5511913141625" class="btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Agendar</span>
+                        </a>
+                        <button class="menu-toggle" id="menuToggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+            <div class="hero-slider">
+            <div class="hero-slide active" data-slide="0" style="background: linear-gradient(135deg, rgba(255, 107, 157, 0.85) 0%, rgba(255, 182, 193, 0.85) 100%), url('images/2022-07-19-editado-editado.webp') center/cover; background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-slide" data-slide="1" style="background: linear-gradient(135deg, rgba(0, 180, 166, 0.85) 0%, rgba(0, 139, 127, 0.85) 100%);">
+                <div class="hero-overlay"></div>
+            </div>
+        </div>
+        <div class="hero-pagination">
+            <span class="pagination-dot active" data-slide="0"></span>
+            <span class="pagination-dot" data-slide="1"></span>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-heart"></i>
+                    <span>Odontopediatra perto de você</span>
+                </div>
+                <h1 class="hero-title" id="heroTitle">
+                    <span class="title-line">Especialista em</span>
+                    <span class="title-line highlight">Saúde Bucal Infantil</span>
+                </h1>
+                <p class="hero-subtitle" id="heroSubtitle">Atendemos todas as necessidades de saúde bucal de crianças e adolescentes. Ambiente acolhedor e lúdico pensado especialmente para os pequenos!</p>
+                <div class="hero-buttons">
+                    <a href="#contato" class="btn btn-primary btn-hero">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Agende Agora uma Consulta!</span>
+                    </a>
+                    <a href="#servicos" class="btn btn-secondary">
+                        <span>Conheça nossos Serviços</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+                <div class="hero-location" id="heroLocation">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Rua Fernando Falcão, 1111 - Mooca - SP</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=1000&fit=crop&q=80" alt="Crianças felizes no dentista" class="hero-main-image" data-slide="0" loading="lazy" decoding="async">
+                    <div class="hero-map-wrapper" data-slide="1">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.5!2d-46.6!3d-23.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef5c5c5c5c5c5%3A0x5c5c5c5c5c5c5c5c!2sEdif%C3%ADcio%20Bernini%20-%20R.%20Fernando%20Falc%C3%A3o%2C%201111%20-%20Sala%20810%20-%20Vila%20Claudia%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2003180-003!5e0!3m2!1spt-BR!2sbr!4v1234567890!5m2!1spt-BR!2sbr" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; border-radius: 15px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Localização da Clínica - Edifício Bernini"
+                            fetchpriority="low">
+                        </iframe>
+                    </div>
+                    <div class="hero-decorations">
+                        <div class="decoration-circle circle-1"></div>
+                        <div class="decoration-circle circle-2"></div>
+                        <div class="decoration-circle circle-3"></div>
+                        <div class="decoration-star star-1">⭐</div>
+                        <div class="decoration-star star-2">✨</div>
+                        <div class="decoration-heart heart-1">💙</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais Section -->
+    <section class="diferenciais">
+        <div class="container">
+            <div class="diferenciais-grid">
+                <div class="diferencial-card">
+                    <div class="diferencial-image">
+                        <img src="images/2025-11-10-editado.webp" alt="Criança feliz no dentista - atendimento humanizado" loading="lazy" decoding="async">
+                    </div>
+                    <div class="diferencial-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Atendimento Humanizado</h3>
+                    <p>Cuidado especial com cada criança, criando um ambiente acolhedor e seguro.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-image">
+                        <img src="images/2024-12-05-editado.webp" alt="Equipamentos modernos odontológicos para crianças" loading="lazy" decoding="async">
+                    </div>
+                    <div class="diferencial-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Equipamentos Modernos</h3>
+                    <p>Utilizamos tecnologia de ponta para garantir o melhor tratamento.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-image">
+                        <img src="images/2024-09-20-editado.webp" alt="Família no consultório odontopediátrico" loading="lazy" decoding="async">
+                    </div>
+                    <div class="diferencial-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Ambiente Familiar</h3>
+                    <p>Espaço pensado para que toda a família se sinta confortável.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-image">
+                        <img src="images/2024-12-05 (1)-editado.webp" alt="Consultório odontopediátrico moderno" loading="lazy" decoding="async">
+                    </div>
+                    <div class="diferencial-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Horários Flexíveis</h3>
+                    <p>Atendimento em horários que se adequam à sua rotina.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section class="sobre" id="sobre">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Sobre a Dra. Nadia</span>
+                <h2 class="section-title">Dedicação e Carinho em Cada Atendimento</h2>
+                <p class="section-description">
+                    Especializada em odontopediatria com foco em proporcionar uma experiência 
+                    única e acolhedora para crianças e seus pais.
+                </p>
+            </div>
+            <div class="sobre-content">
+                <div class="sobre-image">
+                    <div class="image-frame">
+                        <img src="images/2022-07-19-editado-editado.webp" alt="Dra. Nadia - Odontopediatra atendendo criança" class="sobre-img" loading="lazy" decoding="async">
+                        <div class="image-badge">
+                            <i class="fas fa-award"></i>
+                            <span>Especialista Certificada</span>
+                        </div>
+                    </div>
+                    <div class="sobre-certificados">
+                        <div class="certificado-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Graduação em Odontologia</span>
+                        </div>
+                        <div class="certificado-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Especialização em Odontopediatria</span>
+                        </div>
+                        <div class="certificado-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Cursos de Atualização Contínua</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sobre-text">
+                    <div class="sobre-intro">
+                        <div class="sobre-compromisso">
+                            <div class="compromisso-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Nosso compromisso é proporcionar um ambiente acolhedor e seguro, onde nossos pequenos pacientes possam sentir-se confortáveis e confiantes durante seus tratamentos."</p>
+                            <div class="compromisso-icon right">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sobre-formacao-compact">
+                        <div class="formacao-card scroll-fade-in" data-delay="0">
+                            <div class="formacao-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="formacao-content">
+                                <h4>Mestrado em Odontopediatria</h4>
+                                <p>USP - Faculdade de Odontologia</p>
+                            </div>
+                        </div>
+                        <div class="formacao-card scroll-fade-in" data-delay="100">
+                            <div class="formacao-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="formacao-content">
+                                <h4>Especialização Completa</h4>
+                                <p>Odontopediatria | Ortodontia Infantil | Sedação | Laserterapia</p>
+                            </div>
+                        </div>
+                        <div class="formacao-card scroll-fade-in" data-delay="200">
+                            <div class="formacao-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="formacao-content">
+                                <h4>Professora Colaboradora</h4>
+                                <p>Curso de Bebês - FUNDECTO-USP (2025 - atual)</p>
+                            </div>
+                        </div>
+                        <div class="formacao-card scroll-fade-in" data-delay="300">
+                            <div class="formacao-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <div class="formacao-content">
+                                <h4>Formação Contínua</h4>
+                                <p>Primeiros Socorros | Odontologia do Sono | Ortodontia (em curso)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sobre-cta">
+                        <a href="#contato" class="btn btn-primary">
+                            <span>Entre em Contato</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Section -->
+    <section class="servicos" id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossos Serviços</span>
+                <h2 class="section-title">Cuidados Especializados para o Sorriso do seu Filho</h2>
+                <p class="section-description">
+                    Oferecemos uma gama completa de serviços odontológicos especializados para crianças
+                </p>
+            </div>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <div class="servico-header">
+                        <div class="servico-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="servico-number">01</div>
+                    </div>
+                    <h3>Odontologia Preventiva</h3>
+                    <ul class="servico-list">
+                        <li><i class="fas fa-check"></i> Exame tátil-visual e radiográfico</li>
+                        <li><i class="fas fa-check"></i> Orientação aos pais e filhos</li>
+                        <li><i class="fas fa-check"></i> Consultas periódicas</li>
+                        <li><i class="fas fa-check"></i> Prevenção de doenças bucais</li>
+                    </ul>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-header">
+                        <div class="servico-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="servico-number">02</div>
+                    </div>
+                    <h3>Reabilitação Dentária</h3>
+                    <ul class="servico-list">
+                        <li><i class="fas fa-check"></i> Obturação</li>
+                        <li><i class="fas fa-check"></i> Tratamento de canal</li>
+                        <li><i class="fas fa-check"></i> Restauração de dentes danificados</li>
+                        <li><i class="fas fa-check"></i> Recuperação da saúde bucal</li>
+                    </ul>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-header">
+                        <div class="servico-icon">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                        <div class="servico-number">03</div>
+                    </div>
+                    <h3>Primeira Consulta</h3>
+                    <ul class="servico-list">
+                        <li><i class="fas fa-check"></i> Avaliação inicial</li>
+                        <li><i class="fas fa-check"></i> Orientação aos pais</li>
+                        <li><i class="fas fa-check"></i> Prevenção desde cedo</li>
+                        <li><i class="fas fa-check"></i> Criação de hábitos saudáveis</li>
+                    </ul>
+                </div>
+                <div class="servico-card servico-hidden">
+                    <div class="servico-header">
+                        <div class="servico-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="servico-number">04</div>
+                    </div>
+                    <h3>Tratamentos Preventivos</h3>
+                    <ul class="servico-list">
+                        <li><i class="fas fa-check"></i> Aplicação de flúor</li>
+                        <li><i class="fas fa-check"></i> Selantes dentários</li>
+                        <li><i class="fas fa-check"></i> Limpeza profissional</li>
+                        <li><i class="fas fa-check"></i> Educação em saúde bucal</li>
+                    </ul>
+                </div>
+                <div class="servico-card servico-hidden">
+                    <div class="servico-header">
+                        <div class="servico-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="servico-number">05</div>
+                    </div>
+                    <h3>Orientacao aos Pais</h3>
+                    <ul class="servico-list">
+                        <li><i class="fas fa-check"></i> Técnicas de escovação</li>
+                        <li><i class="fas fa-check"></i> Escolha de produtos adequados</li>
+                        <li><i class="fas fa-check"></i> Alimentação saudável</li>
+                        <li><i class="fas fa-check"></i> Prevenção de cáries</li>
+                    </ul>
+                </div>
+                <div class="servico-card servico-hidden">
+                    <div class="servico-header">
+                        <div class="servico-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="servico-number">06</div>
+                    </div>
+                    <h3>Consultas Periódicas</h3>
+                    <ul class="servico-list">
+                        <li><i class="fas fa-check"></i> Acompanhamento contínuo</li>
+                        <li><i class="fas fa-check"></i> Exames periódicos</li>
+                        <li><i class="fas fa-check"></i> Prevenção de problemas</li>
+                        <li><i class="fas fa-check"></i> Manutenção da saúde bucal</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="servicos-more-container" style="text-align: center; margin-top: var(--spacing-xl);">
+                <button class="btn btn-primary" id="verMaisServicos">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Ver Mais Serviços</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Section -->
+    <section class="galeria" id="galeria">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossa Galeria</span>
+                <h2 class="section-title">Conheça Nossa Clínica</h2>
+                <p class="section-description">
+                    Ambiente acolhedor e moderno pensado especialmente para as crianças
+                </p>
+            </div>
+            <div class="galeria-grid">
+                <div class="galeria-item" data-category="atendimento">
+                    <img src="images/2024-12-06 (1)-editado.webp" alt="Criança sendo atendida no consultório odontopediátrico" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="atendimento">
+                    <img src="images/2024-12-05-editado.webp" alt="Dentista atendendo criança com carinho" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="atendimento">
+                    <img src="images/unnamed (1)-editado.webp" alt="Criança feliz no consultório odontopediátrico" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="clinica">
+                    <img src="images/2025-11-21-editado.webp" alt="Consultório odontopediátrico moderno e acolhedor" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="atendimento">
+                    <img src="images/2024-12-05 (1)-editado.webp" alt="Atendimento odontopediátrico humanizado" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="atendimento">
+                    <img src="images/unnamed (2)-editado.webp" alt="Criança no dentista - ambiente acolhedor" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="clinica">
+                    <img src="images/2025-11-19-editado.webp" alt="Clínica odontopediátrica" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="atendimento">
+                    <img src="images/2024-09-20-editado.webp" alt="Atendimento odontopediátrico" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="atendimento">
+                    <img src="images/2025-11-10 (1)-editado.webp" alt="Crianças felizes no consultório odontopediátrico" class="galeria-img" loading="lazy" decoding="async">
+                    <div class="galeria-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="lightbox-prev" id="lightboxPrev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-next" id="lightboxNext">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <img src="" alt="" class="lightbox-img" id="lightboxImg">
+    </div>
+
+    <!-- Modal Dica Detalhada -->
+    <div class="dica-modal" id="dicaModal">
+        <div class="dica-modal-overlay" id="dicaModalOverlay"></div>
+        <div class="dica-modal-content">
+            <button class="dica-modal-close" id="dicaModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="dica-modal-body" id="dicaModalBody">
+                <!-- Conteúdo será inserido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Dicas e Educação Section -->
+    <section class="dicas" id="dicas">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Dicas e Educação</span>
+                <h2 class="section-title">Cuidados com a Saúde Bucal Infantil</h2>
+                <p class="section-description">
+                    Informações importantes para cuidar do sorriso do seu filho desde cedo
+                </p>
+            </div>
+            <div class="dicas-grid">
+                <div class="dica-card" data-dica="primeira-consulta">
+                    <div class="dica-image">
+                        <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=400&h=300&fit=crop&q=80" alt="Primeira consulta odontopediátrica - criança no dentista" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dica-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3>Primeira Consulta</h3>
+                    <p>
+                        A primeira consulta deve acontecer quando o primeiro dente nasce ou até 
+                        o primeiro aniversário. Quanto mais cedo, melhor para prevenir problemas futuros.
+                    </p>
+                    <div class="dica-tag">Importante</div>
+                    <button class="dica-btn">Ler Mais</button>
+                </div>
+                <div class="dica-card" data-dica="escovacao">
+                    <div class="dica-image">
+                        <img src="images/retrato-de-crianca-segurando-o-icone-de-papel-editado.jpg" alt="Criança escovando os dentes corretamente" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dica-icon">
+                        <i class="fas fa-toothbrush"></i>
+                    </div>
+                    <h3>Escovação Correta</h3>
+                    <p>
+                        Use escova macia e creme dental com flúor (quantidade equivalente a um grão de arroz 
+                        para crianças até 3 anos). Escove pelo menos 2 vezes ao dia.
+                    </p>
+                    <div class="dica-tag">Higiene</div>
+                    <button class="dica-btn">Ler Mais</button>
+                </div>
+                <div class="dica-card" data-dica="alimentacao">
+                    <div class="dica-image">
+                        <img src="images/vista-superior-de-uma-variedade-de-vegetais-em-um-saco-de-papel-editado.jpg" alt="Alimentação saudável para crianças - frutas e legumes" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dica-icon">
+                        <i class="fas fa-candy-cane"></i>
+                    </div>
+                    <h3>Alimentação Saudável</h3>
+                    <p>
+                        Evite açúcares em excesso, especialmente antes de dormir. Prefira frutas, 
+                        legumes e alimentos naturais. A água é a melhor bebida para os dentes.
+                    </p>
+                    <div class="dica-tag">Prevenção</div>
+                    <button class="dica-btn">Ler Mais</button>
+                </div>
+                <div class="dica-card dica-hidden" data-dica="fluor">
+                    <div class="dica-image">
+                        <img src="https://images.unsplash.com/photo-1606811971618-4486c8054375?w=400&h=300&fit=crop&q=80" alt="Aplicação de flúor e selantes dentários em crianças" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dica-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Flúor e Selantes</h3>
+                    <p>
+                        A aplicação de flúor e selantes dentários são importantes para prevenir cáries. 
+                        Converse com o odontopediatra sobre a melhor opção para seu filho.
+                    </p>
+                    <div class="dica-tag">Proteção</div>
+                    <button class="dica-btn">Ler Mais</button>
+                </div>
+                <div class="dica-card dica-hidden" data-dica="traumatismo">
+                    <div class="dica-image">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=400&h=300&fit=crop&q=80" alt="Atendimento de emergência - traumatismo dental infantil" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dica-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Traumatismo Dental</h3>
+                    <p>
+                        Em caso de queda ou batida nos dentes, procure atendimento imediato. 
+                        Guarde o dente em leite ou soro fisiológico e vá ao dentista rapidamente.
+                    </p>
+                    <div class="dica-tag">Emergência</div>
+                    <button class="dica-btn">Ler Mais</button>
+                </div>
+                <div class="dica-card dica-hidden" data-dica="consultas">
+                    <div class="dica-image">
+                        <img src="https://images.unsplash.com/photo-1606811971618-4486c8054375?w=400&h=300&fit=crop&q=80" alt="Consultas regulares ao odontopediatra" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dica-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Consultas Regulares</h3>
+                    <p>
+                        Visitas periódicas ao odontopediatra (a cada 6 meses) são essenciais para 
+                        prevenir problemas e manter a saúde bucal em dia.
+                    </p>
+                    <div class="dica-tag">Rotina</div>
+                    <button class="dica-btn">Ler Mais</button>
+                </div>
+            </div>
+            <div class="dicas-more-container">
+                <button class="btn btn-secondary" id="dicasLerMais">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Ver Mais Dicas</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Perguntas Frequentes</span>
+                <h2 class="section-title">Tire suas Dúvidas</h2>
+                <p class="section-description">
+                    Respostas para as principais dúvidas sobre odontopediatria
+                </p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Com quantos meses devo levar meu filho ao dentista pela primeira vez?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            A primeira consulta deve acontecer quando o primeiro dente nasce ou até 
+                            o primeiro aniversário da criança. Quanto mais cedo, melhor para prevenir 
+                            problemas e criar hábitos saudáveis desde cedo.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Meu filho tem medo de dentista. Como proceder?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            É normal que algumas crianças tenham medo. Nossa abordagem é humanizada e 
+                            acolhedora. Explicamos tudo de forma lúdica, criamos um ambiente seguro e 
+                            trabalhamos com técnicas de distração. Aos poucos, a criança se sente mais 
+                            confortável e a experiência se torna positiva.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quando devo começar a escovar os dentes do meu filho?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            A higiene bucal deve começar antes mesmo dos dentes nascerem, limpando a 
+                            gengiva com uma gaze úmida. Quando o primeiro dente aparecer, use uma 
+                            escova macia e creme dental com flúor na quantidade adequada para a idade.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Chupeta e mamadeira fazem mal aos dentes?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            O uso prolongado de chupeta e mamadeira pode causar problemas de oclusão 
+                            e posicionamento dos dentes. O ideal é retirar a chupeta até os 2-3 anos 
+                            e a mamadeira até os 12-18 meses. Converse conosco sobre a melhor forma 
+                            de fazer essa transição.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Dentes de leite precisam de tratamento?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Sim! Os dentes de leite são muito importantes. Eles mantêm o espaço para 
+                            os dentes permanentes, ajudam na fala e mastigação. Cáries em dentes de 
+                            leite podem causar dor, infecção e até afetar os dentes permanentes. 
+                            Por isso, é essencial tratá-los.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Com que frequência devo levar meu filho ao dentista?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Recomendamos consultas a cada 6 meses para prevenção e acompanhamento. 
+                            Em casos específicos ou quando há algum problema, o intervalo pode ser 
+                            menor conforme orientação do odontopediatra.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por que Escolher Section -->
+    <section class="porque-escolher" id="depoimentos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Por que escolher</span>
+                <h2 class="section-title">Cuidados Especiais para o seu Filho</h2>
+                <p class="section-description">
+                    Nossa abordagem única garante uma experiência positiva e educativa
+                </p>
+            </div>
+            <div class="porque-grid">
+                <div class="porque-card">
+                    <div class="porque-icon">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <h3>Ambiente Acolhedor</h3>
+                    <p>
+                        Clínica especialmente projetada para crianças, com ambiente lúdico e 
+                        acolhedor que transforma a experiência do dentista em algo positivo e divertido.
+                    </p>
+                </div>
+                <div class="porque-card">
+                    <div class="porque-icon">
+                        <i class="fas fa-user-doctor"></i>
+                    </div>
+                    <h3>Experiência e Dedicação</h3>
+                    <p>
+                        Mais de 10 anos de experiência cuidando do sorriso das crianças, 
+                        com formação contínua e atualização constante nas melhores práticas.
+                    </p>
+                </div>
+                <div class="porque-card">
+                    <div class="porque-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Comunicação Clara</h3>
+                    <p>
+                        Explicamos tudo de forma simples e didática, tanto para as crianças 
+                        quanto para os pais, garantindo que todos entendam o tratamento.
+                    </p>
+                </div>
+                <div class="porque-card">
+                    <div class="porque-icon">
+                        <i class="fas fa-shield-heart"></i>
+                    </div>
+                    <h3>Prevenção em Primeiro Lugar</h3>
+                    <p>
+                        Focamos na prevenção e educação, ensinando hábitos saudáveis desde cedo 
+                        para garantir um sorriso saudável por toda a vida.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section class="contato" id="contato">
+        <div class="container">
+            <div class="contato-wrapper">
+                <div class="contato-info">
+                    <div class="section-header">
+                        <span class="section-tag">Entre em Contato</span>
+                        <h2 class="section-title">Vamos Cuidar do Sorriso do seu Filho</h2>
+                        <p class="section-description">
+                            Estamos prontos para atender seu filho com todo carinho e dedicação. 
+                            Entre em contato e agende uma consulta!
+                        </p>
+                    </div>
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                        <div class="info-content">
+                            <h4>Endereço</h4>
+                            <p>Rua Fernando Falcão, 1111<br>Edifício Bernini - Sala 810, 8° andar<br>Mooca - SP | CEP: 03180-003</p>
+                        </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                        <div class="info-content">
+                            <h4>Telefone</h4>
+                            <p><a href="tel:+5511913141625" style="color: inherit; text-decoration: none;">(11) 91314-1625</a></p>
+                        </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        <div class="info-content">
+                            <h4>E-mail</h4>
+                            <p><a href="mailto:dranadiaodontopediatra@gmail.com" style="color: inherit; text-decoration: none;">dranadiaodontopediatra@gmail.com</a></p>
+                        </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        <div class="info-content">
+                            <h4>Horário de Atendimento</h4>
+                            <p>De Segunda a Sábado<br>Das 8h00 às 17h00</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/dra_nadia_odontopediatra/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://wa.me/5511913141625" target="_blank" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="https://share.google/C4zChttSybrBBCZWW" target="_blank" class="social-link">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contato-form">
+                    <form id="contactForm" class="form">
+                        <h3>Envie sua Mensagem</h3>
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Enviar Mensagem</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-tooth"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-name">Dra. Nadia</span>
+                            <span class="logo-subtitle">Odontopediatra</span>
+                        </div>
+                    </div>
+                    <p>Cuidando do sorriso do seu filho com carinho, dedicação e profissionalismo.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#galeria">Galeria</a></li>
+                        <li><a href="#dicas">Dicas</a></li>
+                        <li><a href="#depoimentos">Por que Escolher</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> (11) 91314-1625</li>
+                        <li><i class="fas fa-envelope"></i> dranadiaodontopediatra@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/dra_nadia_odontopediatra/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5511913141625" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Dra. Nadia - Odontopediatra. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

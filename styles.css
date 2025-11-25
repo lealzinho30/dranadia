@@ -63,6 +63,8 @@ body {
     overflow-x: hidden;
     background: var(--white);
     position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .mouse-bg {
@@ -2257,6 +2259,15 @@ section {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 968px) {
+    * {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
     .nav-menu {
         position: fixed;
         top: 80px;
@@ -2379,6 +2390,7 @@ section {
 
     .sobre-content {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
 
     .sobre-image {
@@ -2386,16 +2398,107 @@ section {
         top: 0;
     }
 
+    .sobre-compromisso {
+        font-size: 1.1rem;
+        padding: var(--spacing-md) var(--spacing-sm);
+        margin: var(--spacing-md) 0;
+    }
+
+    .sobre-intro p {
+        font-size: 1rem;
+        padding: 0 var(--spacing-xs);
+    }
+
+    .formacao-card {
+        padding: var(--spacing-sm);
+    }
+
+    .formacao-content h4 {
+        font-size: 1rem;
+    }
+
+    .formacao-content p {
+        font-size: 0.85rem;
+    }
+
     .contato-wrapper {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
 
     .contato-info .section-header {
         text-align: center;
     }
 
+    .info-card {
+        padding: var(--spacing-sm);
+    }
+
+    .info-content p {
+        font-size: 0.9rem;
+        word-break: break-word;
+    }
+
+    .contato-form {
+        padding: var(--spacing-md);
+    }
+
     .servicos-grid {
         grid-template-columns: 1fr;
+    }
+
+    .servico-card {
+        padding: var(--spacing-md);
+    }
+
+    .servico-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .servico-card p {
+        font-size: 0.95rem;
+        word-break: break-word;
+    }
+
+    .diferencial-card h3 {
+        font-size: 1.1rem;
+        padding: 0 var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .diferencial-card p {
+        font-size: 0.9rem;
+        padding: 0 var(--spacing-sm) var(--spacing-sm);
+        word-break: break-word;
+    }
+
+    .dica-card h3 {
+        font-size: 1.2rem;
+        padding: 0 var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .dica-card p {
+        font-size: 0.9rem;
+        padding: 0 var(--spacing-sm) var(--spacing-sm);
+        word-break: break-word;
+    }
+
+    .faq-question h3 {
+        font-size: 1rem;
+        padding-right: var(--spacing-sm);
+    }
+
+    .faq-answer p {
+        font-size: 0.9rem;
+        word-break: break-word;
+    }
+
+    .porque-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .porque-card p {
+        font-size: 0.9rem;
+        word-break: break-word;
     }
 
     .galeria-grid {
@@ -2405,6 +2508,16 @@ section {
 
     .galeria-item {
         border-radius: 12px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        padding: 0 var(--spacing-xs);
+    }
+
+    .section-description {
+        font-size: 0.95rem;
+        padding: 0 var(--spacing-xs);
     }
 }
 
@@ -2422,15 +2535,22 @@ section {
     .hero-subtitle {
         font-size: 0.95rem;
         line-height: 1.5;
+        word-break: break-word;
     }
 
     .hero-badge {
         font-size: 0.75rem;
         padding: 0.35rem 0.9rem;
+        white-space: normal;
     }
 
     .section-title {
         font-size: 1.8rem;
+        word-break: break-word;
+    }
+
+    .section-description {
+        word-break: break-word;
     }
 
     .hero-buttons {
@@ -2582,11 +2702,102 @@ section {
         display: block;
         width: 100%;
         margin-top: 0.2rem;
+        word-break: break-word;
     }
 
     .hero-stats {
         margin-top: var(--spacing-sm);
         gap: var(--spacing-xs);
+    }
+
+    .sobre-compromisso {
+        font-size: 1rem;
+        padding: var(--spacing-sm);
+        margin: var(--spacing-sm) 0;
+    }
+
+    .sobre-compromisso p {
+        word-break: break-word;
+        font-size: 0.95rem;
+    }
+
+    .formacao-content h4 {
+        font-size: 0.95rem;
+    }
+
+    .formacao-content p {
+        font-size: 0.8rem;
+        word-break: break-word;
+    }
+
+    .servico-card h3 {
+        font-size: 1.2rem;
+        word-break: break-word;
+    }
+
+    .servico-card p {
+        font-size: 0.9rem;
+        word-break: break-word;
+    }
+
+    .diferencial-card h3 {
+        font-size: 1rem;
+        word-break: break-word;
+    }
+
+    .diferencial-card p {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+
+    .dica-card h3 {
+        font-size: 1.1rem;
+        word-break: break-word;
+    }
+
+    .dica-card p {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+
+    .faq-question h3 {
+        font-size: 0.95rem;
+        word-break: break-word;
+    }
+
+    .faq-answer {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .faq-answer p {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+
+    .porque-card h3 {
+        font-size: 1.1rem;
+        word-break: break-word;
+    }
+
+    .porque-card p {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+
+    .info-content h4 {
+        font-size: 1rem;
+        word-break: break-word;
+    }
+
+    .info-content p {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+
+    .social-link {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+        white-space: nowrap;
     }
 
     .stat-item {
@@ -2631,6 +2842,14 @@ section {
 
     .section-description {
         font-size: 0.85rem;
+        word-break: break-word;
+        padding: 0 var(--spacing-xs);
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        word-break: break-word;
+        padding: 0 var(--spacing-xs);
     }
 
     .galeria-grid {
@@ -2640,6 +2859,16 @@ section {
 
     .galeria-item {
         border-radius: 8px;
+    }
+
+    .contato-form {
+        padding: var(--spacing-sm);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
     }
 
     .logo-icon {

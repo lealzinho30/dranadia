@@ -1,0 +1,90 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     ✅ CORREÇÃO - CARREGAMENTO DE IMAGENS                ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🔧 PROBLEMAS CORRIGIDOS                                ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. ✅ CORRIGIDO erro no HTML
+     → Removido "-editado.webp" duplicado no caminho
+     → Agora: url('images/2025-11-21 (1)-editado.webp')
+
+  2. ✅ MELHORADO carregamento de imagens no painel
+     → Agora tenta múltiplas URLs
+     → Mostra mensagem de "Carregando..." enquanto busca
+     → Melhor tratamento de erros
+
+  3. ✅ MELHORADO servidor de imagens
+     → Decodifica corretamente nomes com caracteres especiais
+     → Busca case-insensitive se não encontrar
+     → Melhor tratamento de erros
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  📋 COMO TESTAR                                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. REINICIE o servidor admin:
+     → Feche a janela do servidor (Ctrl+C)
+     → Execute: INICIAR-ADMIN-SIMPLES.bat novamente
+
+  2. RECARREGUE o painel no navegador:
+     → Pressione Ctrl+F5 (limpar cache)
+     → OU feche e abra o navegador novamente
+
+  3. VERIFIQUE se a imagem aparece:
+     → Deve aparecer no preview do Hero Slide 1
+     → Se não aparecer, abra o Console do navegador (F12)
+     → Veja se há erros
+
+  4. TESTE o site:
+     → Abra index.html no navegador
+     → A imagem deve aparecer no hero slide
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ⚠️  SE AINDA NÃO FUNCIONAR                            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. Verifique se o arquivo existe:
+     → Execute: TESTAR-IMAGENS.bat
+     → Confirme que o arquivo está na pasta images/
+
+  2. Verifique o config.json:
+     → Abra o arquivo config.json
+     → Veja se tem: "hero-slide-1": "2025-11-21 (1)-editado.webp"
+
+  3. Teste o servidor diretamente:
+     → Com o servidor rodando, acesse:
+     → http://localhost:8001/images/2025-11-21 (1)-editado.webp
+     → A imagem deve abrir no navegador
+
+  4. Limpe o cache:
+     → No navegador: Ctrl+Shift+Delete
+     → Limpe cache e cookies
+     → Recarregue a página
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  💡 DICAS                                              ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  • SEMPRE reinicie o servidor após mudanças no código
+  • Use Ctrl+F5 para limpar cache do navegador
+  • Verifique o Console do navegador (F12) para erros
+  • Nomes de arquivos com espaços e parênteses funcionam agora
+
+
+═══════════════════════════════════════════════════════════
+
+   🚀 PRÓXIMOS PASSOS:
+   1. Reinicie o servidor admin
+   2. Recarregue o painel (Ctrl+F5)
+   3. A imagem deve aparecer!
+
+═══════════════════════════════════════════════════════════
+

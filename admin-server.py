@@ -10,6 +10,10 @@ import socketserver
 import json
 import os
 import urllib.parse
+import socket
+import webbrowser
+import threading
+import time
 from pathlib import Path
 import shutil
 
@@ -34,8 +38,54 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             self.send_config()
         elif self.path == '/api/images':
             self.send_images_list()
+        elif self.path.startswith('/images/'):
+            # Servir imagens diretamente
+            self.serve_image()
         else:
             super().do_GET()
+    
+    def serve_image(self):
+        """Serve uma imagem específica"""
+        try:
+            # Decodificar URL e remover /images/
+            filename = urllib.parse.unquote(self.path.replace('/images/', ''))
+            file_path = IMAGES_DIR / filename
+            
+            # Se não encontrar com o nome exato, tentar encontrar arquivos similares
+            if not file_path.exists() or not file_path.is_file():
+                # Tentar encontrar arquivo com nome similar (case-insensitive)
+                filename_lower = filename.lower()
+                for file in IMAGES_DIR.iterdir():
+                    if file.is_file() and file.name.lower() == filename_lower:
+                        file_path = file
+                        break
+                else:
+                    self.send_error(404, f"File not found: {filename}")
+                    return
+            
+            # Determinar content type
+            ext = file_path.suffix.lower()
+            content_types = {
+                '.jpg': 'image/jpeg',
+                '.jpeg': 'image/jpeg',
+                '.png': 'image/png',
+                '.webp': 'image/webp',
+                '.gif': 'image/gif'
+            }
+            content_type = content_types.get(ext, 'application/octet-stream')
+            
+            self.send_response(200)
+            self.send_header('Content-Type', content_type)
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Content-Length', str(file_path.stat().st_size))
+            self.end_headers()
+            
+            with open(file_path, 'rb') as f:
+                self.wfile.write(f.read())
+        except Exception as e:
+            import traceback
+            self.send_error(500, f"Error serving image: {str(e)}\n{traceback.format_exc()}")
     
     def do_POST(self):
         if self.path == '/api/upload':
@@ -175,21 +225,70 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_error_response('Dados inválidos')
                     
         except Exception as e:
+            import traceback
+            error_msg = f"{str(e)}\n{traceback.format_exc()}"
+            print(f"ERRO no upload: {error_msg}")
             self.send_error_response(str(e))
     
     def handle_save_config(self):
-        """Salva a configuração"""
+        """Salva a configuração e atualiza o site automaticamente"""
         try:
             content_length = int(self.headers.get('Content-Length', 0))
             post_data = self.rfile.read(content_length)
             config = json.loads(post_data.decode('utf-8'))
             
+            # Salvar configuração
             self.save_config(config)
             
-            self.send_json_response({
-                'success': True,
-                'message': 'Configuração salva com sucesso!'
-            })
+            # Atualizar site automaticamente
+            update_success = False
+            update_message = ""
+            try:
+                import sys
+                import importlib.util
+                
+                spec = importlib.util.spec_from_file_location("atualizar_site", BASE_DIR / "atualizar_site.py")
+                atualizar_site_module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(atualizar_site_module)
+                
+                if hasattr(atualizar_site_module, 'atualizar_site_completo'):
+                    atualizar_site_module.atualizar_site_completo()
+                    update_success = True
+                    update_message = 'Site atualizado localmente. '
+                else:
+                    update_message = 'Erro ao atualizar site localmente. '
+            except Exception as update_error:
+                update_message = f'Erro ao atualizar site: {str(update_error)}. '
+            
+            # Fazer deploy para GitHub automaticamente
+            deploy_success = False
+            deploy_message = ""
+            try:
+                deploy_result = self.deploy_to_github()
+                if deploy_result:
+                    deploy_success = True
+                    deploy_message = "Deploy para GitHub concluído! O site será atualizado em 1-2 minutos."
+                else:
+                    deploy_message = "Deploy para GitHub falhou. Execute deploy-rapido.ps1 manualmente."
+            except Exception as deploy_error:
+                deploy_message = f"Erro no deploy: {str(deploy_error)}. Execute deploy-rapido.ps1 manualmente."
+            
+            # Resposta final
+            if update_success and deploy_success:
+                self.send_json_response({
+                    'success': True,
+                    'message': '✅ Tudo salvo, site atualizado e deploy para GitHub concluído! O site será atualizado em 1-2 minutos.'
+                })
+            elif update_success:
+                self.send_json_response({
+                    'success': True,
+                    'message': f'✅ Configuração salva e site atualizado localmente. ⚠️ {deploy_message}'
+                })
+            else:
+                self.send_json_response({
+                    'success': True,
+                    'message': f'✅ Configuração salva. ⚠️ {update_message}{deploy_message}'
+                })
         except Exception as e:
             self.send_error_response(str(e))
     
@@ -271,6 +370,86 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             'error': message
         }, ensure_ascii=False).encode('utf-8'))
     
+    def deploy_to_github(self):
+        """Faz deploy automático para GitHub"""
+        try:
+            import subprocess
+            import os
+            
+            # Verificar se está em um repositório git
+            if not (BASE_DIR / ".git").exists():
+                print("Repositório Git não encontrado")
+                return False
+            
+            # Adicionar todos os arquivos (incluindo imagens)
+            result = subprocess.run(
+                ['git', 'add', '.'],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=30,
+                shell=False
+            )
+            
+            if result.returncode != 0:
+                print(f"Erro ao adicionar arquivos: {result.stderr}")
+                return False
+            
+            # Verificar se há mudanças
+            result = subprocess.run(
+                ['git', 'status', '--porcelain'],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=30,
+                shell=False
+            )
+            
+            if not result.stdout.strip():
+                # Nenhuma mudança - já está atualizado
+                print("Nenhuma mudança para commitar")
+                return True
+            
+            # Fazer commit
+            result = subprocess.run(
+                ['git', 'commit', '-m', 'Atualização automática do site via painel admin'],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=30,
+                shell=False
+            )
+            
+            if result.returncode != 0:
+                print(f"Erro ao fazer commit: {result.stderr}")
+                return False
+            
+            # Fazer push
+            result = subprocess.run(
+                ['git', 'push', 'origin', 'main'],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=120,
+                shell=False
+            )
+            
+            if result.returncode == 0:
+                print("Deploy concluído com sucesso!")
+                return True
+            else:
+                print(f"Erro no push: {result.stderr}")
+                return False
+            
+        except subprocess.TimeoutExpired:
+            print("Timeout no deploy")
+            return False
+        except Exception as e:
+            print(f"Erro no deploy: {e}")
+            import traceback
+            print(traceback.format_exc())
+            return False
+    
     def log_message(self, format, *args):
         """Override para reduzir logs"""
         pass
@@ -278,19 +457,61 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
 def run_server(port=8001):
     """Inicia o servidor"""
     handler = AdminHandler
-    with socketserver.TCPServer(("", port), handler) as httpd:
+    
+    # Verificar se a porta está disponível
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex(('127.0.0.1', port))
+    sock.close()
+    
+    if result == 0:
         print("=" * 60)
-        print("🚀 SERVIDOR ADMIN INICIADO")
+        print("⚠️  ERRO: Porta {} já está em uso!".format(port))
         print("=" * 60)
-        print(f"📡 Acesse: http://localhost:{port}/admin.html")
-        print(f"📡 Site principal: http://localhost:8000")
+        print("Possíveis soluções:")
+        print("1. Feche outros programas usando a porta {}".format(port))
+        print("2. Ou altere a porta no código (linha 312)")
         print("=" * 60)
-        print("Pressione Ctrl+C para parar")
-        print()
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\n\nServidor encerrado.")
+        return
+    
+    try:
+        with socketserver.TCPServer(("", port), handler) as httpd:
+            url = f"http://localhost:{port}/admin.html"
+            print("=" * 60)
+            print("🚀 SERVIDOR ADMIN INICIADO")
+            print("=" * 60)
+            print(f"📡 Acesse: {url}")
+            print(f"📡 Site principal: http://localhost:8000")
+            print("=" * 60)
+            print("Pressione Ctrl+C para parar")
+            print()
+            
+            # Abrir navegador automaticamente após 1 segundo
+            def abrir_navegador():
+                time.sleep(1.5)  # Aguardar servidor iniciar
+                try:
+                    webbrowser.open(url)
+                    print(f"✅ Navegador aberto automaticamente!")
+                except:
+                    print(f"⚠️  Não foi possível abrir o navegador automaticamente.")
+                    print(f"   Acesse manualmente: {url}")
+            
+            threading.Thread(target=abrir_navegador, daemon=True).start()
+            
+            try:
+                httpd.serve_forever()
+            except KeyboardInterrupt:
+                print("\n\nServidor encerrado.")
+    except OSError as e:
+        print("=" * 60)
+        print("❌ ERRO ao iniciar servidor!")
+        print("=" * 60)
+        print(f"Erro: {e}")
+        print("=" * 60)
+        print("Possíveis causas:")
+        print("1. Porta {} já está em uso".format(port))
+        print("2. Permissões insuficientes")
+        print("3. Firewall bloqueando a porta")
+        print("=" * 60)
 
 if __name__ == "__main__":
     run_server()

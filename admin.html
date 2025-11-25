@@ -69,14 +69,14 @@
                 <!-- Seção Imagens -->
                 <section id="imagens" class="admin-section active">
                     <div class="section-card">
-                        <h3><i class="fas fa-sliders-h"></i> Hero Slider (3 imagens)</h3>
+                        <h3><i class="fas fa-sliders-h"></i> Hero Slider (2 imagens)</h3>
                         <p class="section-description">Imagens principais que aparecem no topo do site, em formato slider. Recomendado: 1920x1080px (formato paisagem)</p>
                         <div class="images-grid">
                             <div class="image-upload-item">
                                 <div class="image-item-header">
                                     <div>
                                         <label>Hero Slide 1</label>
-                                        <span class="image-hint">Primeira imagem do slider principal</span>
+                                        <span class="image-hint">Primeira imagem do slider principal (data-slide="0")</span>
                                     </div>
                                     <button class="btn-remove-image" onclick="removerImagem('hero-slide-1', 'hero-1')" title="Remover imagem">
                                         <i class="fas fa-trash"></i>
@@ -96,7 +96,7 @@
                                 <div class="image-item-header">
                                     <div>
                                         <label>Hero Slide 2</label>
-                                        <span class="image-hint">Segunda imagem do slider principal</span>
+                                        <span class="image-hint">Segunda imagem do slider principal (data-slide="1")</span>
                                     </div>
                                     <button class="btn-remove-image" onclick="removerImagem('hero-slide-2', 'hero-2')" title="Remover imagem">
                                         <i class="fas fa-trash"></i>
@@ -109,26 +109,6 @@
                                 <input type="file" accept="image/*" data-key="hero-slide-2" onchange="previewImage(this, 'hero-2')">
                                 <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-2">
                                 <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-2', 'hero-2')" style="margin-top: 0.5rem;">
-                                    <i class="fas fa-edit"></i> Editar
-                                </button>
-                            </div>
-                            <div class="image-upload-item">
-                                <div class="image-item-header">
-                                    <div>
-                                        <label>Hero Slide 3</label>
-                                        <span class="image-hint">Terceira imagem do slider principal</span>
-                                    </div>
-                                    <button class="btn-remove-image" onclick="removerImagem('hero-slide-3', 'hero-3')" title="Remover imagem">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <div class="image-preview" id="preview-hero-3">
-                                    <i class="fas fa-image"></i>
-                                    <span>Sem imagem</span>
-                                </div>
-                                <input type="file" accept="image/*" data-key="hero-slide-3" onchange="previewImage(this, 'hero-3')">
-                                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-3">
-                                <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-3', 'hero-3')" style="margin-top: 0.5rem;">
                                     <i class="fas fa-edit"></i> Editar
                                 </button>
                             </div>

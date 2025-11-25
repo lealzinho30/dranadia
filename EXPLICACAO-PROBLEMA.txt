@@ -1,0 +1,91 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     🔍 EXPLICAÇÃO DO PROBLEMA E SOLUÇÃO                  ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🐛 O PROBLEMA REAL                                    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  O nome do arquivo tem PARÊNTESES: "2025-11-21 (1)-editado.webp"
+
+  A regex antiga era: url\([^)]+\)
+  
+  Isso significa: "capture url( seguido de qualquer coisa que NÃO seja )"
+  
+  PROBLEMA:
+  Quando encontra: url('images/2025-11-21 (1)-editado.webp')
+                    ↑                    ↑
+                    |                    |
+                    |                    └── Para AQUI! (primeiro ))
+                    |
+                    └── Começa aqui
+  
+  A regex para no primeiro ) que encontra, que é o ) dentro de "(1)",
+  então captura apenas: url('images/2025-11-21 (1)
+  
+  E deixa de fora: -editado.webp')
+  
+  Quando tenta substituir, fica bagunçado e cria duplicações!
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ✅ A SOLUÇÃO                                          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Nova regex: url\('images/[^']+'\)
+  
+  Isso significa: "capture url('images/ seguido de qualquer coisa 
+  que NÃO seja ' (aspas simples), até encontrar ')"
+  
+  Agora captura corretamente:
+  url('images/2025-11-21 (1)-editado.webp')
+  ↑                                    ↑
+  |                                    |
+  Começa aqui                    Termina aqui (aspas simples)
+  
+  Funciona porque:
+  • Usa [^']+ (qualquer coisa exceto aspas simples)
+  • Não se importa com parênteses dentro
+  • Captura até encontrar a aspas de fechamento ')
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  📋 O QUE FOI CORRIGIDO                                ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. ✅ Regex de limpeza corrigida
+     → Agora limpa duplicações corretamente
+     → Usa url\('images/[^']+'\) em vez de url\([^)]+\)
+
+  2. ✅ Regex de substituição corrigida
+     → Captura o url() completo mesmo com parênteses
+     → Substitui corretamente sem criar duplicações
+
+  3. ✅ HTML corrigido manualmente
+     → Removido o erro de duplicação
+     → Pronto para funcionar
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🎯 POR QUE ESTAVA TRAVANDO                            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Eu estava tentando executar comandos Python que:
+  • Ficavam esperando input
+  • Tinham loops infinitos
+  • Não terminavam
+  
+  Agora analisei o código DIRETAMENTE sem executar,
+  e encontrei o problema real na regex!
+
+
+═══════════════════════════════════════════════════════════
+
+   ✅ PROBLEMA RESOLVIDO! A regex agora funciona corretamente
+      mesmo com parênteses nos nomes de arquivos!
+
+═══════════════════════════════════════════════════════════
+

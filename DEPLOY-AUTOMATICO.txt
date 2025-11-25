@@ -1,0 +1,95 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     ✅ DEPLOY AUTOMÁTICO PARA GITHUB PAGES              ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🚀 COMO FUNCIONA AGORA                                ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Quando você clica em "Salvar Tudo" no painel:
+
+  1. ✓ Salva as configurações (config.json)
+  2. ✓ Atualiza o site local (index.html)
+  3. ✓ Faz commit no Git
+  4. ✓ Faz push para GitHub automaticamente
+  5. ✓ O site no GitHub Pages é atualizado em 1-2 minutos!
+
+  TUDO AUTOMÁTICO! Não precisa fazer nada manualmente!
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ⚠️  PRIMEIRA VEZ - CONFIGURAÇÃO NECESSÁRIA            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Para o deploy automático funcionar, você precisa:
+
+  1. Ter Git instalado:
+     → https://git-scm.com/downloads
+
+  2. Ter o repositório configurado:
+     → Execute: deploy-rapido.ps1 (uma vez só)
+     → Isso configura o Git e conecta ao GitHub
+
+  3. Fazer login no Git (se necessário):
+     → O Git pode pedir suas credenciais do GitHub
+     → Use seu token de acesso pessoal se necessário
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  📋 COMO USAR                                          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. Abra o painel: INICIAR-ADMIN-SIMPLES.bat
+
+  2. Faça suas alterações (imagens, textos, etc.)
+
+  3. Clique em "Salvar Tudo"
+
+  4. Aguarde a mensagem:
+     → "✅ Tudo salvo, site atualizado e deploy para GitHub concluído!"
+
+  5. Aguarde 1-2 minutos e acesse:
+     → https://lealzinho30.github.io/dranadia/
+     → As mudanças estarão lá!
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ❌ SE O DEPLOY FALHAR                                 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Se aparecer mensagem de erro no deploy:
+
+  1. Execute manualmente:
+     → deploy-rapido.ps1
+     → Isso faz o deploy manualmente
+
+  2. Verifique:
+     → Git está instalado?
+     → Repositório está configurado?
+     → Você tem permissão no GitHub?
+
+  3. O site local ainda foi atualizado!
+     → Mesmo se o deploy falhar, as mudanças estão salvas localmente
+     → Você pode fazer deploy manual depois
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  💡 DICAS                                              ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  • O deploy automático só funciona se o Git estiver configurado
+  • Se falhar, você sempre pode usar deploy-rapido.ps1 manualmente
+  • O site no GitHub Pages leva 1-2 minutos para atualizar
+  • Limpe o cache do navegador (Ctrl+F5) para ver as mudanças
+
+
+═══════════════════════════════════════════════════════════
+
+   🚀 AGORA É SÓ SALVAR NO PAINEL E TUDO VAI PARA O GITHUB
+      AUTOMATICAMENTE!
+
+═══════════════════════════════════════════════════════════
+

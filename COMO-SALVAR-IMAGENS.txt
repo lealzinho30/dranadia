@@ -1,0 +1,97 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     📸 COMO SALVAR IMAGENS NO SITE                       ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ✅ PROCESSO COMPLETO                                    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. Abra o painel admin:
+     → Execute: INICIAR-ADMIN-SIMPLES.bat
+     → Aguarde o navegador abrir
+
+  2. No painel, vá em "Imagens"
+
+  3. Para cada imagem que quer adicionar:
+     a) Clique em "Escolher arquivo"
+     b) Selecione a imagem
+     c) A imagem vai abrir no editor
+     d) Ajuste tamanho, corte, etc. (se quiser)
+     e) Digite o nome do arquivo (ex: hero-1.jpg)
+     f) Clique em "Aplicar Edições"
+     g) A imagem será salva automaticamente na pasta images/
+
+  4. Depois de adicionar todas as imagens:
+     → Clique em "Salvar Tudo" no topo do painel
+     → O sistema vai:
+        ✓ Salvar as configurações
+        ✓ Atualizar o site automaticamente
+     → Você verá: "✅ Tudo salvo e site atualizado com sucesso!"
+
+  5. Para ver as mudanças:
+     → Abra o arquivo index.html no navegador
+     → OU recarregue a página (Ctrl+F5 para limpar cache)
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ⚠️  SE AS IMAGENS NÃO APARECEREM NO SITE              ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Se após salvar, as imagens não aparecerem:
+
+  1. Execute manualmente:
+     → ATUALIZAR-SITE.bat
+     → Isso vai atualizar o site novamente
+
+  2. Verifique se:
+     ✓ As imagens estão na pasta images/
+     ✓ Os nomes dos arquivos estão corretos
+     ✓ O config.json tem as imagens configuradas
+
+  3. Limpe o cache do navegador:
+     → Pressione Ctrl+F5 no site
+     → Ou feche e abra o navegador novamente
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🔍 VERIFICAR SE ESTÁ FUNCIONANDO                      ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. Abra o arquivo config.json
+  2. Veja se a seção "imagens" tem as imagens:
+     {
+       "imagens": {
+         "hero-slide-1": "nome-do-arquivo.jpg",
+         "hero-slide-2": "outro-arquivo.jpg",
+         ...
+       }
+     }
+
+  3. Verifique se os arquivos existem na pasta images/
+
+  4. Execute ATUALIZAR-SITE.bat e veja as mensagens:
+     → Deve mostrar: "✓ Hero slide 1 atualizado: ..."
+     → Deve mostrar: "✅ Total de X imagem(ns) atualizada(s)"
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  💡 DICAS IMPORTANTES                                   ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  • SEMPRE clique em "Salvar Tudo" após fazer alterações
+  • O nome do arquivo no painel deve ser o mesmo da pasta images/
+  • Use nomes simples, sem espaços (ex: hero-1.jpg)
+  • Formatos aceitos: .jpg, .jpeg, .png, .webp
+  • Após salvar, recarregue o site (Ctrl+F5)
+
+
+═══════════════════════════════════════════════════════════
+
+   🚀 RESUMO: Salve no painel → Clique "Salvar Tudo" → 
+              Recarregue o site (Ctrl+F5)
+
+═══════════════════════════════════════════════════════════
+

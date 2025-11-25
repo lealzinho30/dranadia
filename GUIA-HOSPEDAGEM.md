@@ -108,3 +108,5 @@ Se tiver dúvidas durante o processo, me avise que eu ajudo!
 
 **Dica:** O Netlify permite fazer deploy arrastando a pasta inteira. É literalmente arrastar e soltar! 🚀
 
+
+

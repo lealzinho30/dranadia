@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Modo Offline</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; }
+        .error {
+            background: #fee;
+            border: 2px solid #fcc;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #efe;
+            border: 2px solid #cfc;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .btn:hover { background: #2980b9; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #229954; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚠️ Servidor não está rodando</h1>
+        
+        <div class="error">
+            <h2>O painel admin precisa do servidor para funcionar</h2>
+            <p>Para usar o painel, você precisa:</p>
+            <ol>
+                <li>Executar o arquivo <strong>ABRIR-ADMIN.bat</strong> ou <strong>INICIAR-ADMIN-SIMPLES.bat</strong></li>
+                <li>Aguardar o servidor iniciar</li>
+                <li>Acessar: <strong>http://localhost:8001/admin.html</strong></li>
+            </ol>
+        </div>
+
+        <div class="success">
+            <h3>✅ Solução Rápida:</h3>
+            <p><strong>1.</strong> Feche esta janela</p>
+            <p><strong>2.</strong> Clique duas vezes em: <code>INICIAR-ADMIN-SIMPLES.bat</code></p>
+            <p><strong>3.</strong> Aguarde o servidor iniciar</p>
+            <p><strong>4.</strong> O navegador abrirá automaticamente</p>
+        </div>
+
+        <button class="btn btn-success" onclick="window.location.href='http://localhost:8001/admin.html'">
+            Tentar Conectar Novamente
+        </button>
+        
+        <button class="btn" onclick="window.location.href='index.html'">
+            Ver Site Principal
+        </button>
+
+        <hr style="margin: 30px 0;">
+
+        <h3>📋 Checklist de Problemas:</h3>
+        <ul>
+            <li>✓ Python está instalado? (Execute: <code>python --version</code>)</li>
+            <li>✓ Arquivo <code>admin-server.py</code> existe?</li>
+            <li>✓ Porta 8001 está livre? (Feche outros programas)</li>
+            <li>✓ Firewall não está bloqueando?</li>
+        </ul>
+
+        <h3>🔧 Se ainda não funcionar:</h3>
+        <ol>
+            <li>Abra o PowerShell ou CMD</li>
+            <li>Navegue até a pasta do projeto</li>
+            <li>Execute: <code>python admin-server.py</code></li>
+            <li>Veja a mensagem de erro e me informe</li>
+        </ol>
+    </div>
+
+    <script>
+        // Tentar detectar se o servidor está rodando
+        fetch('http://localhost:8001/api/config')
+            .then(() => {
+                window.location.href = 'http://localhost:8001/admin.html';
+            })
+            .catch(() => {
+                // Servidor não está rodando, mostrar esta página
+            });
+    </script>
+</body>
+</html>
+

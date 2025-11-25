@@ -61,11 +61,46 @@ async function carregarConfig() {
             preencherFormularios();
             carregarPreviews();
         } else {
+            console.warn('Resposta do servidor não OK, usando configuração padrão');
             criarConfigPadrao();
         }
     } catch (error) {
-        console.log('Servidor não disponível, usando modo offline...');
+        console.error('Erro ao conectar com servidor:', error);
+        mostrarErroServidor();
         criarConfigPadrao();
+    }
+}
+
+function mostrarErroServidor() {
+    const statusDiv = document.getElementById('statusMessage');
+    if (statusDiv) {
+        statusDiv.innerHTML = '⚠️ <strong>Servidor não está rodando!</strong> Execute INICIAR-ADMIN-SIMPLES.bat';
+        statusDiv.className = 'status-message error show';
+        
+        // Adicionar link de ajuda após 2 segundos
+        setTimeout(() => {
+            const helpLink = document.createElement('a');
+            helpLink.href = 'admin-offline.html';
+            helpLink.target = '_blank';
+            helpLink.textContent = 'Ver Instruções';
+            helpLink.style.marginLeft = '10px';
+            helpLink.style.color = 'white';
+            helpLink.style.textDecoration = 'underline';
+            statusDiv.appendChild(helpLink);
+        }, 2000);
+    } else {
+        // Se não existir, criar um alerta no topo
+        const alert = document.createElement('div');
+        alert.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#e74c3c;color:white;padding:15px;text-align:center;z-index:10000;';
+        alert.innerHTML = '⚠️ <strong>Servidor não está rodando!</strong> Execute INICIAR-ADMIN-SIMPLES.bat | ';
+        const link = document.createElement('a');
+        link.href = 'admin-offline.html';
+        link.target = '_blank';
+        link.textContent = 'Ver Instruções';
+        link.style.color = 'white';
+        link.style.textDecoration = 'underline';
+        alert.appendChild(link);
+        document.body.insertBefore(alert, document.body.firstChild);
     }
 }
 
@@ -129,23 +164,74 @@ function preencherFormularios() {
     }
 }
 
+// Mapeamento entre keys de imagens e IDs de preview
+const imageKeyToPreviewId = {
+    'hero-slide-1': 'hero-1',
+    'hero-slide-2': 'hero-2',
+    'sobre-foto': 'sobre'
+};
+
 function carregarPreviews() {
     if (siteConfig.imagens) {
         Object.keys(siteConfig.imagens).forEach(key => {
             const filename = siteConfig.imagens[key];
-            const previewId = `preview-${key.replace(/-/g, '-')}`;
-            const preview = document.getElementById(previewId);
-            if (preview && filename) {
-                const img = document.createElement('img');
-                img.src = `images/${filename}`;
-                img.onerror = () => {
-                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
-                };
-                img.onload = () => {
-                    preview.innerHTML = '';
-                    preview.appendChild(img);
-                };
+            if (!filename) return;
+            
+            // Mapear key para previewId
+            let previewId = imageKeyToPreviewId[key];
+            if (!previewId) {
+                // Para galeria, diferenciais e dicas, usar a própria key
+                previewId = key;
             }
+            const preview = document.getElementById(`preview-${previewId}`);
+            if (!preview) {
+                console.warn(`Preview não encontrado: preview-${previewId}`);
+                return;
+            }
+            
+            // Limpar preview primeiro
+            preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
+            
+            const img = document.createElement('img');
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
+            img.style.objectFit = 'contain';
+            
+            // Construir URL da imagem - tentar múltiplas opções
+            const baseUrl = API_BASE.replace('/api', '');
+            const urls = [
+                `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`,
+                `images/${encodeURIComponent(filename)}?t=${Date.now()}`,
+                `${baseUrl}/images/${filename}?t=${Date.now()}`,
+                `images/${filename}?t=${Date.now()}`
+            ];
+            
+            let urlIndex = 0;
+            
+            function tryNextUrl() {
+                if (urlIndex >= urls.length) {
+                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
+                    console.error(`Não foi possível carregar: ${filename}`);
+                    return;
+                }
+                
+                img.src = urls[urlIndex];
+                urlIndex++;
+            }
+            
+            img.onerror = () => {
+                console.warn(`Erro ao carregar ${urls[urlIndex - 1]}, tentando próximo...`);
+                tryNextUrl();
+            };
+            
+            img.onload = () => {
+                preview.innerHTML = '';
+                preview.appendChild(img);
+                console.log(`Imagem carregada: ${filename}`);
+            };
+            
+            // Começar a tentar carregar
+            tryNextUrl();
         });
     }
 }
@@ -377,7 +463,18 @@ async function editarImagemExistente(key, previewId) {
     img.onerror = () => {
         mostrarStatus('❌ Erro ao carregar imagem. Verifique se o arquivo existe.', 'error');
     };
-    img.src = `images/${filename}?t=${Date.now()}`;
+    // Construir URL da imagem
+    let imageUrl;
+    if (API_BASE.includes('localhost') || API_BASE.includes('127.0.0.1')) {
+        const baseUrl = API_BASE.replace('/api', '');
+        imageUrl = `${baseUrl}/images/${filename}?t=${Date.now()}`;
+    } else {
+        imageUrl = `images/${filename}?t=${Date.now()}`;
+    }
+    img.src = imageUrl;
+    img.onerror = () => {
+        img.src = `images/${filename}?t=${Date.now()}`;
+    };
 }
 
 function girarImagem(graus) {
@@ -418,22 +515,33 @@ async function aplicarEdicao() {
     });
     
     canvas.toBlob(async (blob) => {
+        if (!blob) {
+            mostrarStatus('❌ Erro ao processar imagem. Tente novamente.', 'error');
+            return;
+        }
+        
         // Atualizar preview do tamanho do arquivo
         const fileSize = (blob.size / 1024).toFixed(2);
-        document.getElementById('fileSizePreview').textContent = `${fileSize} KB`;
+        const fileSizeElement = document.getElementById('fileSizePreview');
+        if (fileSizeElement) {
+            fileSizeElement.textContent = `${fileSize} KB`;
+        }
         
         // Gerar nome do arquivo
         const filenameInput = document.querySelector(`.filename-input[data-key="${currentImageKey}"]`);
-        let filename = filenameInput ? filenameInput.value : currentImageFile.name;
+        let filename = filenameInput ? filenameInput.value.trim() : '';
         
-        if (!filename || filename === currentImageFile.name) {
-            const extension = currentImageFile.name.split('.').pop();
-            const baseName = currentImageFile.name.replace(/\.[^/.]+$/, '');
+        if (!filename || filename === (currentImageFile ? currentImageFile.name : '')) {
+            const originalName = currentImageFile ? currentImageFile.name : 'imagem';
+            const extension = originalName.split('.').pop() || 'jpg';
+            const baseName = originalName.replace(/\.[^/.]+$/, '') || 'imagem';
             filename = `${baseName}-editado.${extension}`;
             if (filenameInput) {
                 filenameInput.value = filename;
             }
         }
+        
+        console.log('Fazendo upload da imagem:', filename);
         
         // Converter blob para base64
         const reader = new FileReader();
@@ -457,27 +565,86 @@ async function aplicarEdicao() {
                 const result = await response.json();
                 
                 if (result.success) {
-                    // Atualizar preview
-                    const preview = document.getElementById(`preview-${currentPreviewId}`);
-                    if (preview) {
-                        preview.innerHTML = '';
-                        const img = document.createElement('img');
-                        img.src = `images/${filename}?t=${Date.now()}`;
-                        preview.appendChild(img);
-                    }
+                    console.log('Upload bem-sucedido:', result);
                     
-                    // Atualizar config local
+                    // Atualizar config local primeiro
                     if (!siteConfig.imagens) {
                         siteConfig.imagens = {};
                     }
                     siteConfig.imagens[currentImageKey] = filename;
                     
+                    // Atualizar preview - usar múltiplas tentativas
+                    const preview = document.getElementById(`preview-${currentPreviewId}`);
+                    if (preview) {
+                        // Limpar preview
+                        preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
+                        
+                        // Criar imagem
+                        const img = document.createElement('img');
+                        img.style.maxWidth = '100%';
+                        img.style.maxHeight = '100%';
+                        img.style.objectFit = 'contain';
+                        
+                        // Construir URLs para tentar
+                        const baseUrl = API_BASE.replace('/api', '');
+                        const urls = [
+                            `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`,
+                            `images/${encodeURIComponent(filename)}?t=${Date.now()}`,
+                            `${baseUrl}/images/${filename}?t=${Date.now()}`,
+                            `images/${filename}?t=${Date.now()}`
+                        ];
+                        
+                        let urlIndex = 0;
+                        
+                        // Guardar blob para fallback
+                        const imageBlob = blob;
+                        
+                        function tryNextUrl() {
+                            if (urlIndex >= urls.length) {
+                                // Se nenhuma URL funcionar, usar o blob diretamente
+                                try {
+                                    const blobUrl = URL.createObjectURL(imageBlob);
+                                    img.src = blobUrl;
+                                    preview.innerHTML = '';
+                                    preview.appendChild(img);
+                                    console.warn('Usando blob URL como fallback');
+                                } catch (e) {
+                                    console.error('Erro ao criar blob URL:', e);
+                                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem salva (recarregue a página)</span>';
+                                }
+                                return;
+                            }
+                            
+                            img.src = urls[urlIndex];
+                            console.log(`Tentando carregar imagem: ${urls[urlIndex]}`);
+                            urlIndex++;
+                        }
+                        
+                        img.onerror = () => {
+                            console.warn(`Erro ao carregar ${urls[urlIndex - 1]}, tentando próximo...`);
+                            tryNextUrl();
+                        };
+                        
+                        img.onload = () => {
+                            console.log(`Imagem carregada com sucesso: ${urls[urlIndex - 1]}`);
+                            preview.innerHTML = '';
+                            preview.appendChild(img);
+                        };
+                        
+                        // Começar a tentar carregar
+                        tryNextUrl();
+                    } else {
+                        console.error(`Preview não encontrado: preview-${currentPreviewId}`);
+                    }
+                    
                     mostrarStatus('✅ Imagem salva com sucesso!', 'success');
                     fecharEditor();
                 } else {
-                    mostrarStatus('❌ Erro ao salvar: ' + result.error, 'error');
+                    console.error('Erro no upload:', result);
+                    mostrarStatus('❌ Erro ao salvar: ' + (result.error || 'Erro desconhecido'), 'error');
                 }
             } catch (error) {
+                console.error('Erro ao fazer upload:', error);
                 mostrarStatus('❌ Erro ao fazer upload: ' + error.message, 'error');
             }
         };
@@ -547,19 +714,14 @@ async function salvarTudo() {
         const result = await response.json();
         
         if (result.success) {
-            // Atualizar site
-            const updateResponse = await fetch(`${API_BASE}/update-site`, {
-                method: 'POST'
-            });
+            // Mostrar mensagem do servidor (pode incluir info sobre deploy)
+            mostrarStatus(result.message || '✅ Tudo salvo com sucesso!', 'success');
+            siteConfig = dados;
             
-            const updateResult = await updateResponse.json();
-            
-            if (updateResult.success) {
-                mostrarStatus('✅ Tudo salvo e site atualizado com sucesso!', 'success');
-                siteConfig = dados;
-            } else {
-                mostrarStatus('⚠️ Configuração salva, mas erro ao atualizar site: ' + updateResult.error, 'warning');
-            }
+            // Recarregar previews para mostrar as imagens atualizadas
+            setTimeout(() => {
+                carregarPreviews();
+            }, 500);
         } else {
             mostrarStatus('❌ Erro ao salvar: ' + result.error, 'error');
         }
@@ -798,10 +960,16 @@ function atualizarDepoimento(index) {
 // Status Message
 function mostrarStatus(message, type = 'success') {
     const status = document.getElementById('statusMessage');
-    status.textContent = message;
-    status.className = `status-message ${type} show`;
-    
-    setTimeout(() => {
-        status.classList.remove('show');
-    }, 5000);
+    if (status) {
+        status.textContent = message;
+        status.className = `status-message ${type} show`;
+        console.log(`Status: [${type}] ${message}`);
+        
+        setTimeout(() => {
+            status.classList.remove('show');
+        }, 5000);
+    } else {
+        console.error('Elemento statusMessage não encontrado!');
+        alert(message); // Fallback se o elemento não existir
+    }
 }

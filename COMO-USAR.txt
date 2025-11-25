@@ -1,0 +1,51 @@
+========================================
+   COMO USAR O PAINEL ADMIN
+   Site Dra. Nadia
+========================================
+
+PASSO 1: ABRIR O PAINEL
+------------------------
+Clique duas vezes no arquivo:
+   >>> ABRIR-ADMIN.bat <<<
+
+O servidor vai iniciar automaticamente e o navegador vai abrir sozinho!
+
+
+PASSO 2: USAR O PAINEL
+------------------------
+1. No painel, você pode:
+   - Adicionar/editar imagens
+   - Alterar textos
+   - Atualizar contatos
+   - Gerenciar serviços e depoimentos
+
+2. Depois de fazer alterações:
+   - Clique em "Salvar Tudo" no topo
+   - As mudanças serão aplicadas automaticamente
+
+
+PASSO 3: VER O SITE
+--------------------
+Abra o arquivo index.html no navegador para ver o site atualizado.
+
+
+========================================
+PROBLEMAS?
+========================================
+
+Se o navegador não abrir automaticamente:
+- Acesse manualmente: http://localhost:8001/admin.html
+
+Se der erro de Python:
+- Instale o Python em: https://www.python.org/downloads/
+- Marque a opção "Add Python to PATH" durante a instalação
+
+Se a porta estiver ocupada:
+- Feche outros programas
+- Ou reinicie o computador
+
+
+========================================
+PRONTO! É SÓ ISSO!
+========================================
+

@@ -57,3 +57,5 @@ dica-6=dica-6.jpg
 # - Formatos aceitos: .jpg, .jpeg, .png, .webp
 # ============================================
 
+
+

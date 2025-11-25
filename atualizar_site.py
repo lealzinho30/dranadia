@@ -14,6 +14,10 @@ HTML_FILE = BASE_DIR / "index.html"
 
 def atualizar_site_completo():
     """Atualiza o site completo baseado na configuração"""
+    print("=" * 60)
+    print("🔄 ATUALIZANDO SITE...")
+    print("=" * 60)
+    
     if not CONFIG_FILE.exists():
         print("❌ Arquivo config.json não encontrado!")
         return False
@@ -26,9 +30,14 @@ def atualizar_site_completo():
     with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
         config = json.load(f)
     
+    print(f"✓ Configuração carregada: {len(config.get('imagens', {}))} imagem(ns) configurada(s)")
+    
     # Carregar HTML
     with open(HTML_FILE, 'r', encoding='utf-8') as f:
         html = f.read()
+    
+    print("✓ HTML carregado")
+    print()
     
     # Aplicar atualizações
     html = atualizar_contato(html, config)
@@ -41,6 +50,11 @@ def atualizar_site_completo():
     # Salvar HTML atualizado
     with open(HTML_FILE, 'w', encoding='utf-8') as f:
         f.write(html)
+    
+    print()
+    print("=" * 60)
+    print("✅ SITE ATUALIZADO COM SUCESSO!")
+    print("=" * 60)
     
     return True
 
@@ -127,72 +141,138 @@ def atualizar_textos(html, config):
 def atualizar_imagens(html, config):
     """Atualiza imagens do site"""
     imagens = config.get('imagens', {})
+    alteracoes = 0
     
-    # Hero Slides
-    hero_slides = []
-    for i in range(1, 4):
-        key = f'hero-slide-{i}'
+    if not imagens:
+        print("⚠️  Nenhuma imagem configurada no config.json")
+        return html
+    
+    print(f"📸 Atualizando {len(imagens)} imagem(ns)...")
+    
+    # Hero Slides - mapear hero-slide-1 → data-slide="0", hero-slide-2 → data-slide="1"
+    hero_slides_map = {
+        'hero-slide-1': 0,  # Primeiro slide (data-slide="0")
+        'hero-slide-2': 1   # Segundo slide (data-slide="1")
+    }
+    
+    for key, slide_index in hero_slides_map.items():
         if key in imagens:
-            hero_slides.append(imagens[key])
+            filename = imagens[key]
+            # Limpar filename de caracteres problemáticos e garantir que não tenha duplicações
+            filename = filename.strip()
+            # Remover duplicações de "-editado.webp" usando regex
+            import re as re_module
+            filename = re_module.sub(r'\)-editado\.webp\)+', ')-editado.webp', filename)
+            novo_url = f"url('images/{filename}')"
+            
+            # Procurar por div com data-slide correspondente
+            # PROBLEMA IDENTIFICADO: A regex url\([^)]+\) para no primeiro ), 
+            # mas o nome do arquivo tem parênteses: "2025-11-21 (1)"
+            # SOLUÇÃO: Usar uma regex que captura o url() completo, incluindo parênteses internos
+            
+            # Primeiro, limpar qualquer duplicação existente no HTML
+            # Padrão: url('images/...')-editado.webp') -> url('images/...')
+            padrao_limpar = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*url\(\'images/[^\']+\'\))(-editado\.webp\'\))+([^\"]*\")'
+            html = re.sub(padrao_limpar, r'\1\3', html)
+            
+            # Agora substituir o url() completo
+            # Usar uma regex que captura url('images/qualquer-coisa') corretamente
+            padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))([^\"]*\")'
+            if re.search(padrao, html):
+                html = re.sub(padrao, rf'\1{novo_url}\3', html, count=1)
+                alteracoes += 1
+                print(f"  ✓ Hero slide {slide_index+1} (data-slide=\"{slide_index}\") atualizado: {filename}")
+            else:
+                # Se não encontrar com data-slide, tentar pela ordem (primeiro, segundo)
+                # Usar regex que captura url('images/...') corretamente
+                padrao = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))([^\"]*\")'
+                matches = list(re.finditer(padrao, html))
+                if slide_index < len(matches):
+                    match = matches[slide_index]
+                    html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                    alteracoes += 1
+                    print(f"  ✓ Hero slide {slide_index+1} atualizado: {filename}")
+                else:
+                    print(f"  ⚠️  Hero slide {slide_index+1} não encontrado no HTML")
     
-    if hero_slides:
-        # Substituir hero slides
-        padrao = r'<div class="hero-slide[^"]*"[^>]*style="[^"]*url\([^)]+\)'
-        matches = list(re.finditer(padrao, html))
-        for i, filename in enumerate(hero_slides[:3]):
-            if i < len(matches):
-                match = matches[i]
-                novo_style = match.group(0).split('url(')[0] + f"url('images/{filename}')"
-                html = html[:match.start()] + novo_style + html[match.end():]
-    
-    # Foto Dra. Nadia
+    # Foto Dra. Nadia - class="sobre-img"
     if 'sobre-foto' in imagens:
         filename = imagens['sobre-foto']
         novo_url = f"images/{filename}"
-        html = re.sub(r'(<img src=")https://images\.unsplash\.com[^"]*(" alt="Dra\. Nadia[^"]*" class="sobre-img")', 
-                     f'\\1{novo_url}\\2', html)
+        padrao = r'(<img[^>]*class="[^"]*sobre-img[^"]*"[^>]*src=")([^"]*)(")'
+        if re.search(padrao, html):
+            html = re.sub(padrao, f'\\1{novo_url}\\3', html, count=1)
+            alteracoes += 1
+            print(f"  ✓ Foto Dra. Nadia atualizada: {filename}")
     
-    # Galeria
+    # Galeria - substituir imagens com class="galeria-img" na ordem
     galeria_keys = [f'galeria-{i}' for i in range(1, 10)]
+    galeria_imagens = []
     for key in galeria_keys:
         if key in imagens:
-            filename = imagens[key]
-            novo_url = f"images/{filename}"
-            # Substituir primeira imagem da galeria encontrada
-            html = re.sub(r'(<img src=")https://images\.unsplash\.com[^"]*(" alt="[^"]*" class="galeria-img")', 
-                         f'\\1{novo_url}\\2', html, count=1)
+            galeria_imagens.append(imagens[key])
     
-    # Diferenciais
-    diferenciais_alt = [
-        "atendimento humanizado",
-        "Equipamentos modernos",
-        "Família no consultório",
-        "Consultório odontopediátrico moderno"
-    ]
-    for i, alt_text in enumerate(diferenciais_alt, 1):
-        key = f'diferencial-{i}'
+    if galeria_imagens:
+        # Encontrar todas as imagens com class="galeria-img"
+        padrao = r'(<img[^>]*class="[^"]*galeria-img[^"]*"[^>]*src=")([^"]*)(")'
+        matches = list(re.finditer(padrao, html))
+        
+        for i, filename in enumerate(galeria_imagens):
+            if i < len(matches):
+                match = matches[i]
+                novo_url = f"images/{filename}"
+                html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                alteracoes += 1
+                print(f"  ✓ Galeria {i+1} atualizada: {filename}")
+    
+    # Diferenciais - por alt text
+    diferenciais_map = {
+        'diferencial-1': 'atendimento humanizado',
+        'diferencial-2': 'Equipamentos modernos',
+        'diferencial-3': 'Família no consultório',
+        'diferencial-4': 'Consultório odontopediátrico moderno'
+    }
+    
+    for key, alt_text in diferenciais_map.items():
         if key in imagens:
             filename = imagens[key]
             novo_url = f"images/{filename}"
-            padrao = f'(<img src=")https://images\\.unsplash\\.com[^"]*(" alt="[^"]*{re.escape(alt_text)}[^"]*")'
-            html = re.sub(padrao, f'\\1{novo_url}\\2', html, count=1)
+            # Procurar por img com alt contendo o texto
+            padrao = r'(<img[^>]*src=")([^"]*)("[^>]*alt="[^"]*' + re.escape(alt_text) + r'[^"]*")'
+            if re.search(padrao, html, re.IGNORECASE):
+                html = re.sub(padrao, f'\\1{novo_url}\\3', html, count=1, flags=re.IGNORECASE)
+                alteracoes += 1
+                print(f"  ✓ Diferencial {key} atualizado: {filename}")
     
-    # Dicas
-    dicas_alt = [
-        "Primeira consulta",
-        "escovando os dentes",
-        "Alimentação saudável",
-        "Aplicação de flúor",
-        "Atendimento de emergência",
-        "Consultas regulares"
-    ]
-    for i, alt_text in enumerate(dicas_alt, 1):
-        key = f'dica-{i}'
+    # Dicas - por alt text
+    dicas_map = {
+        'dica-1': 'Primeira consulta',
+        'dica-2': 'escovando os dentes',
+        'dica-3': 'Alimentação saudável',
+        'dica-4': 'Aplicação de flúor',
+        'dica-5': 'Atendimento de emergência',
+        'dica-6': 'Consultas regulares'
+    }
+    
+    for key, alt_text in dicas_map.items():
         if key in imagens:
             filename = imagens[key]
             novo_url = f"images/{filename}"
-            padrao = f'(<img src=")https://images\\.unsplash\\.com[^"]*(" alt="[^"]*{re.escape(alt_text)}[^"]*")'
-            html = re.sub(padrao, f'\\1{novo_url}\\2', html, count=1)
+            # Procurar por img com alt contendo o texto
+            padrao = r'(<img[^>]*src=")([^"]*)("[^>]*alt="[^"]*' + re.escape(alt_text) + r'[^"]*")'
+            if re.search(padrao, html, re.IGNORECASE):
+                html = re.sub(padrao, f'\\1{novo_url}\\3', html, count=1, flags=re.IGNORECASE)
+                alteracoes += 1
+                print(f"  ✓ Dica {key} atualizada: {filename}")
+    
+    if alteracoes > 0:
+        print(f"\n✅ Total de {alteracoes} imagem(ns) atualizada(s)")
+    else:
+        print("⚠️  Nenhuma imagem foi atualizada.")
+        print("   Verifique se:")
+        print("   - As imagens estão no config.json")
+        print("   - Os nomes das chaves estão corretos (hero-slide-1, galeria-1, etc.)")
+        print("   - As imagens existem na pasta images/")
     
     return html
 
@@ -211,4 +291,5 @@ if __name__ == "__main__":
         print("✅ Site atualizado com sucesso!")
     else:
         print("❌ Erro ao atualizar site")
+
 

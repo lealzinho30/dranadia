@@ -8,12 +8,13 @@ let currentPreviewId = null;
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    carregarConfig();
+    console.log('Iniciando painel admin...');
+    gerarImageUploadItems(); // Gerar todos os campos de upload primeiro
     setupNavigation();
+    setupQualitySlider();
     carregarServicos();
     carregarDepoimentos();
-    gerarImageUploadItems();
-    setupQualitySlider();
+    carregarConfig(); // Carregar config por último para preencher os campos
 });
 
 // Navegação entre seções
@@ -130,7 +131,8 @@ function preencherFormularios() {
 const imageKeyToPreviewId = {
     'hero-slide-1': 'hero-1',
     'hero-slide-2': 'hero-2',
-    'sobre-foto': 'sobre'
+    'sobre-foto': 'sobre',
+    // Galeria, diferenciais e dicas usam o mesmo ID (galeria-1, diferencial-1, dica-1, etc)
 };
 
 function carregarPreviews() {
@@ -212,7 +214,7 @@ function carregarPreviews() {
     });
 }
 
-// Upload e preview de imagem - VERSÃO COMPLETA E FUNCIONAL
+// Upload e preview de imagem
 async function previewImage(input, previewId) {
     const file = input.files[0];
     if (!file) return;
@@ -221,9 +223,11 @@ async function previewImage(input, previewId) {
     currentImageKey = input.getAttribute('data-key');
     currentPreviewId = previewId;
     
+    console.log('Imagem selecionada:', file.name, 'para', currentImageKey);
+    
     const preview = document.getElementById(`preview-${previewId}`);
     if (!preview) {
-        alert(`Erro: Preview não encontrado (preview-${previewId})`);
+        console.error(`Preview não encontrado: preview-${previewId}`);
         return;
     }
     
@@ -231,7 +235,7 @@ async function previewImage(input, previewId) {
     
     const reader = new FileReader();
     reader.onerror = () => {
-        preview.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Erro ao carregar</span>';
+        preview.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Erro</span>';
         mostrarStatus('❌ Erro ao carregar imagem', 'error');
     };
     
@@ -239,10 +243,11 @@ async function previewImage(input, previewId) {
         preview.innerHTML = '';
         const img = document.createElement('img');
         img.src = e.target.result;
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '100%';
-        img.style.objectFit = 'contain';
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        img.style.display = 'block';
         preview.appendChild(img);
+        console.log('Preview mostrado com sucesso');
         
         setTimeout(() => abrirEditor(e.target.result), 100);
     };
@@ -381,7 +386,7 @@ async function aplicarEdicao() {
         return;
     }
     
-    mostrarStatus('Processando imagem...', 'info');
+    mostrarStatus('Processando e salvando imagem...', 'info');
     
     const quality = parseInt(document.getElementById('editorQuality').value) / 100;
     const width = parseInt(document.getElementById('editorWidth').value);
@@ -405,11 +410,13 @@ async function aplicarEdicao() {
         
         if (!filename) {
             const originalName = currentImageFile ? currentImageFile.name : 'imagem';
-            const extension = originalName.split('.').pop() || 'jpg';
+            const extension = originalName.split('.').pop() || 'webp';
             const baseName = originalName.replace(/\.[^/.]+$/, '') || 'imagem';
             filename = `${baseName}-editado.${extension}`;
             if (filenameInput) filenameInput.value = filename;
         }
+        
+        console.log('Enviando imagem:', filename);
         
         const reader = new FileReader();
         reader.onload = async () => {
@@ -427,6 +434,8 @@ async function aplicarEdicao() {
                 const result = await response.json();
                 
                 if (result.success) {
+                    console.log('Upload bem-sucedido!');
+                    
                     if (!siteConfig.imagens) siteConfig.imagens = {};
                     siteConfig.imagens[currentImageKey] = filename;
                     
@@ -434,35 +443,30 @@ async function aplicarEdicao() {
                     if (preview) {
                         preview.innerHTML = '';
                         const img = document.createElement('img');
-                        img.style.maxWidth = '100%';
-                        img.style.maxHeight = '100%';
-                        img.style.objectFit = 'contain';
+                        img.style.width = '100%';
+                        img.style.height = 'auto';
+                        img.style.display = 'block';
                         
                         const blobUrl = URL.createObjectURL(blob);
                         img.src = blobUrl;
                         preview.appendChild(img);
-                        
-                        const baseUrl = API_BASE.replace('/api', '');
-                        const serverImg = new Image();
-                        serverImg.onload = () => {
-                            img.src = `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`;
-                            URL.revokeObjectURL(blobUrl);
-                        };
-                        serverImg.src = `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`;
+                        console.log('Preview atualizado');
                     }
                     
-                    mostrarStatus('✅ Imagem salva com sucesso!', 'success');
+                    mostrarStatus(result.message || '✅ Imagem salva e deploy iniciado!', 'success');
                     fecharEditor();
                 } else {
+                    console.error('Erro no upload:', result);
                     mostrarStatus('❌ Erro: ' + (result.error || 'Erro desconhecido'), 'error');
                 }
             } catch (error) {
+                console.error('Erro ao fazer upload:', error);
                 mostrarStatus('❌ Erro ao fazer upload: ' + error.message, 'error');
             }
         };
         
         reader.readAsDataURL(blob);
-    }, 'image/jpeg', quality);
+    }, 'image/webp', quality);
 }
 
 function fecharEditor() {
@@ -608,38 +612,114 @@ function setupQualitySlider() {
 }
 
 function gerarImageUploadItems() {
-    const container = document.getElementById('imageUploadItems');
-    if (!container) return;
+    console.log('Gerando itens de upload de imagens...');
     
-    const imageKeys = [
-        { key: 'hero-slide-1', label: 'Hero Slide 1', previewId: 'hero-1' },
-        { key: 'hero-slide-2', label: 'Hero Slide 2', previewId: 'hero-2' },
-        { key: 'sobre-foto', label: 'Foto Dra. Nadia', previewId: 'sobre' }
-    ];
-    
-    imageKeys.forEach(({ key, label, previewId }) => {
-        const item = document.createElement('div');
-        item.className = 'image-upload-item';
-        item.innerHTML = `
-            <h4>${label}</h4>
-            <div class="preview-container">
-                <div id="preview-${previewId}" class="preview-box">
+    // Galeria (9 imagens)
+    const galeriaGrid = document.getElementById('galeria-grid');
+    if (galeriaGrid) {
+        galeriaGrid.innerHTML = ''; // Limpar antes de adicionar
+        for (let i = 1; i <= 9; i++) {
+            const key = `galeria-${i}`;
+            const item = document.createElement('div');
+            item.className = 'image-upload-item';
+            item.innerHTML = `
+                <div class="image-item-header">
+                    <div>
+                        <label>Galeria ${i}</label>
+                        <span class="image-hint">Foto ${i} da galeria</span>
+                    </div>
+                    <button class="btn-remove-image" onclick="removerImagem('${key}', '${key}')" title="Remover">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="image-preview" id="preview-${key}">
                     <i class="fas fa-image"></i><span>Sem imagem</span>
                 </div>
-            </div>
-            <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${previewId}')">
-            <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
-            <div class="button-group">
-                <button class="btn btn-small" onclick="editarImagemExistente('${key}', '${previewId}')">
+                <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${key}')">
+                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
+                <button class="btn btn-small" onclick="editarImagemExistente('${key}', '${key}')" style="margin-top:0.5rem;">
                     <i class="fas fa-edit"></i> Editar
                 </button>
-                <button class="btn btn-small btn-danger" onclick="removerImagem('${key}', '${previewId}')">
-                    <i class="fas fa-trash"></i> Remover
+            `;
+            galeriaGrid.appendChild(item);
+        }
+        console.log('✓ 9 itens de galeria gerados');
+    }
+    
+    // Diferenciais (4 imagens)
+    const diferenciaisGrid = document.getElementById('diferenciais-grid');
+    if (diferenciaisGrid) {
+        diferenciaisGrid.innerHTML = ''; // Limpar antes de adicionar
+        for (let i = 1; i <= 4; i++) {
+            const key = `diferencial-${i}`;
+            const item = document.createElement('div');
+            item.className = 'image-upload-item';
+            item.innerHTML = `
+                <div class="image-item-header">
+                    <div>
+                        <label>Diferencial ${i}</label>
+                        <span class="image-hint">Imagem diferencial ${i}</span>
+                    </div>
+                    <button class="btn-remove-image" onclick="removerImagem('${key}', '${key}')" title="Remover">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="image-preview" id="preview-${key}">
+                    <i class="fas fa-image"></i><span>Sem imagem</span>
+                </div>
+                <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${key}')">
+                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
+                <button class="btn btn-small" onclick="editarImagemExistente('${key}', '${key}')" style="margin-top:0.5rem;">
+                    <i class="fas fa-edit"></i> Editar
                 </button>
-            </div>
-        `;
-        container.appendChild(item);
-    });
+            `;
+            diferenciaisGrid.appendChild(item);
+        }
+        console.log('✓ 4 itens de diferenciais gerados');
+    }
+    
+    // Dicas (6 imagens) - ESSAS SÃO AS DO "LER MAIS"
+    const dicasGrid = document.getElementById('dicas-grid');
+    if (dicasGrid) {
+        dicasGrid.innerHTML = ''; // Limpar antes de adicionar
+        const dicasTitulos = [
+            'Escovação Correta',
+            'Primeira Visita',
+            'Alimentação Saudável',
+            'Uso do Fio Dental',
+            'Chupeta e Mamadeira',
+            'Cuidados com os Dentes'
+        ];
+        
+        for (let i = 1; i <= 6; i++) {
+            const key = `dica-${i}`;
+            const item = document.createElement('div');
+            item.className = 'image-upload-item';
+            item.innerHTML = `
+                <div class="image-item-header">
+                    <div>
+                        <label>Dica ${i}: ${dicasTitulos[i-1]}</label>
+                        <span class="image-hint">Imagem do card "${dicasTitulos[i-1]}"</span>
+                    </div>
+                    <button class="btn-remove-image" onclick="removerImagem('${key}', '${key}')" title="Remover">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="image-preview" id="preview-${key}">
+                    <i class="fas fa-image"></i><span>Sem imagem</span>
+                </div>
+                <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${key}')">
+                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
+                <button class="btn btn-small" onclick="editarImagemExistente('${key}', '${key}')" style="margin-top:0.5rem;">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+            `;
+            dicasGrid.appendChild(item);
+        }
+        console.log('✓ 6 itens de dicas gerados');
+    }
+    
+    console.log('✅ Todos os itens de upload gerados!');
 }
 
 function carregarServicos() {

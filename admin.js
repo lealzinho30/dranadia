@@ -61,11 +61,9 @@ async function carregarConfig() {
             preencherFormularios();
             carregarPreviews();
         } else {
-            console.warn('Resposta do servidor não OK, usando configuração padrão');
             criarConfigPadrao();
         }
     } catch (error) {
-        console.error('Erro ao conectar com servidor:', error);
         mostrarErroServidor();
         criarConfigPadrao();
     }
@@ -76,95 +74,59 @@ function mostrarErroServidor() {
     if (statusDiv) {
         statusDiv.innerHTML = '⚠️ <strong>Servidor não está rodando!</strong> Execute INICIAR-ADMIN-SIMPLES.bat';
         statusDiv.className = 'status-message error show';
-        
-        // Adicionar link de ajuda após 2 segundos
-        setTimeout(() => {
-            const helpLink = document.createElement('a');
-            helpLink.href = 'admin-offline.html';
-            helpLink.target = '_blank';
-            helpLink.textContent = 'Ver Instruções';
-            helpLink.style.marginLeft = '10px';
-            helpLink.style.color = 'white';
-            helpLink.style.textDecoration = 'underline';
-            statusDiv.appendChild(helpLink);
-        }, 2000);
-    } else {
-        // Se não existir, criar um alerta no topo
-        const alert = document.createElement('div');
-        alert.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#e74c3c;color:white;padding:15px;text-align:center;z-index:10000;';
-        alert.innerHTML = '⚠️ <strong>Servidor não está rodando!</strong> Execute INICIAR-ADMIN-SIMPLES.bat | ';
-        const link = document.createElement('a');
-        link.href = 'admin-offline.html';
-        link.target = '_blank';
-        link.textContent = 'Ver Instruções';
-        link.style.color = 'white';
-        link.style.textDecoration = 'underline';
-        alert.appendChild(link);
-        document.body.insertBefore(alert, document.body.firstChild);
     }
 }
 
 function criarConfigPadrao() {
     siteConfig = {
-        contato: {
-            telefone: '5511913141625',
-            email: 'dranadiaodontopediatra@gmail.com',
-            endereco: 'Rua Fernando Falcão, 1111\nEdifício Bernini - Sala 810, 8° andar\nMooca - SP | CEP: 03180-003',
-            horario: 'De Segunda a Sábado\nDas 8h00 às 17h00'
-        },
-        redesSociais: {
-            instagram: 'https://www.instagram.com/dra_nadia_odontopediatra/',
-            google: 'https://share.google.com/C4zChttSybrBBCZWW'
-        },
-        textos: {
-            heroTitle1: 'Especialista em',
-            heroTitle2: 'Saúde Bucal Infantil',
-            heroSubtitle: 'Atendemos todas as necessidades de saúde bucal de crianças e adolescentes. Ambiente acolhedor e lúdico pensado especialmente para os pequenos!',
-            sobreCompromisso: 'Nosso compromisso é proporcionar um ambiente acolhedor e seguro, onde nossos pequenos pacientes possam sentir-se confortáveis e confiantes durante seus tratamentos.'
-        },
+        contato: { telefone: '', email: '', endereco: '', horario: '' },
+        redesSociais: { instagram: '', google: '' },
+        textos: { heroTitle1: '', heroTitle2: '', heroSubtitle: '', sobreCompromisso: '' },
         imagens: {},
         servicos: [],
         depoimentos: []
     };
-    preencherFormularios();
 }
 
 function preencherFormularios() {
-    // Contato
     if (siteConfig.contato) {
-        document.getElementById('telefone').value = siteConfig.contato.telefone || '';
-        document.getElementById('email').value = siteConfig.contato.email || '';
-        document.getElementById('endereco').value = siteConfig.contato.endereco || '';
-        document.getElementById('horario').value = siteConfig.contato.horario || '';
+        const telefone = document.getElementById('telefone');
+        const email = document.getElementById('email');
+        const endereco = document.getElementById('endereco');
+        const horario = document.getElementById('horario');
+        if (telefone) telefone.value = siteConfig.contato.telefone || '';
+        if (email) email.value = siteConfig.contato.email || '';
+        if (endereco) endereco.value = siteConfig.contato.endereco || '';
+        if (horario) horario.value = siteConfig.contato.horario || '';
     }
     
-    // Redes Sociais
     if (siteConfig.redesSociais) {
-        document.getElementById('instagram').value = siteConfig.redesSociais.instagram || '';
-        document.getElementById('google').value = siteConfig.redesSociais.google || '';
+        const instagram = document.getElementById('instagram');
+        const google = document.getElementById('google');
+        if (instagram) instagram.value = siteConfig.redesSociais.instagram || '';
+        if (google) google.value = siteConfig.redesSociais.google || '';
     }
     
-    // Textos
     if (siteConfig.textos) {
-        document.getElementById('hero-title-1').value = siteConfig.textos.heroTitle1 || '';
-        document.getElementById('hero-title-2').value = siteConfig.textos.heroTitle2 || '';
-        document.getElementById('hero-subtitle').value = siteConfig.textos.heroSubtitle || '';
-        document.getElementById('sobre-compromisso').value = siteConfig.textos.sobreCompromisso || '';
+        const heroTitle1 = document.getElementById('hero-title-1');
+        const heroTitle2 = document.getElementById('hero-title-2');
+        const heroSubtitle = document.getElementById('hero-subtitle');
+        const sobreCompromisso = document.getElementById('sobre-compromisso');
+        if (heroTitle1) heroTitle1.value = siteConfig.textos.heroTitle1 || '';
+        if (heroTitle2) heroTitle2.value = siteConfig.textos.heroTitle2 || '';
+        if (heroSubtitle) heroSubtitle.value = siteConfig.textos.heroSubtitle || '';
+        if (sobreCompromisso) sobreCompromisso.value = siteConfig.textos.sobreCompromisso || '';
     }
     
-    // Imagens - preencher nomes de arquivos
     if (siteConfig.imagens) {
         Object.keys(siteConfig.imagens).forEach(key => {
             const filename = siteConfig.imagens[key];
             const input = document.querySelector(`.filename-input[data-key="${key}"]`);
-            if (input) {
-                input.value = filename;
-            }
+            if (input) input.value = filename;
         });
     }
 }
 
-// Mapeamento entre keys de imagens e IDs de preview
 const imageKeyToPreviewId = {
     'hero-slide-1': 'hero-1',
     'hero-slide-2': 'hero-2',
@@ -172,71 +134,44 @@ const imageKeyToPreviewId = {
 };
 
 function carregarPreviews() {
-    if (siteConfig.imagens) {
-        Object.keys(siteConfig.imagens).forEach(key => {
-            const filename = siteConfig.imagens[key];
-            if (!filename) return;
-            
-            // Mapear key para previewId
-            let previewId = imageKeyToPreviewId[key];
-            if (!previewId) {
-                // Para galeria, diferenciais e dicas, usar a própria key
-                previewId = key;
-            }
-            const preview = document.getElementById(`preview-${previewId}`);
-            if (!preview) {
-                console.warn(`Preview não encontrado: preview-${previewId}`);
-                return;
-            }
-            
-            // Limpar preview primeiro
-            preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
-            
-            const img = document.createElement('img');
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '100%';
-            img.style.objectFit = 'contain';
-            
-            // Construir URL da imagem - tentar múltiplas opções
-            const baseUrl = API_BASE.replace('/api', '');
-            const urls = [
-                `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`,
-                `images/${encodeURIComponent(filename)}?t=${Date.now()}`,
-                `${baseUrl}/images/${filename}?t=${Date.now()}`,
-                `images/${filename}?t=${Date.now()}`
-            ];
-            
-            let urlIndex = 0;
-            
-            function tryNextUrl() {
-                if (urlIndex >= urls.length) {
-                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
-                    console.error(`Não foi possível carregar: ${filename}`);
-                    return;
-                }
-                
-                img.src = urls[urlIndex];
-                urlIndex++;
-            }
-            
+    if (!siteConfig || !siteConfig.imagens) return;
+    
+    Object.keys(siteConfig.imagens).forEach(key => {
+        const filename = siteConfig.imagens[key];
+        if (!filename) return;
+        
+        const previewId = imageKeyToPreviewId[key] || key;
+        const preview = document.getElementById(`preview-${previewId}`);
+        if (!preview) return;
+        
+        preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
+        
+        const img = document.createElement('img');
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        img.style.objectFit = 'contain';
+        
+        const baseUrl = API_BASE.replace('/api', '');
+        const url = `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`;
+        
+        img.onload = () => {
+            preview.innerHTML = '';
+            preview.appendChild(img);
+        };
+        
+        img.onerror = () => {
+            const fallbackUrl = `images/${encodeURIComponent(filename)}?t=${Date.now()}`;
+            img.src = fallbackUrl;
             img.onerror = () => {
-                console.warn(`Erro ao carregar ${urls[urlIndex - 1]}, tentando próximo...`);
-                tryNextUrl();
+                preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
             };
-            
-            img.onload = () => {
-                preview.innerHTML = '';
-                preview.appendChild(img);
-                console.log(`Imagem carregada: ${filename}`);
-            };
-            
-            // Começar a tentar carregar
-            tryNextUrl();
-        });
-    }
+        };
+        
+        img.src = url;
+    });
 }
 
-// Upload e preview de imagem
+// Upload e preview de imagem - VERSÃO COMPLETA E FUNCIONAL
 async function previewImage(input, previewId) {
     const file = input.files[0];
     if (!file) return;
@@ -245,33 +180,47 @@ async function previewImage(input, previewId) {
     currentImageKey = input.getAttribute('data-key');
     currentPreviewId = previewId;
     
-    // Mostrar preview imediato
+    const preview = document.getElementById(`preview-${previewId}`);
+    if (!preview) {
+        alert(`Erro: Preview não encontrado (preview-${previewId})`);
+        return;
+    }
+    
+    preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
+    
     const reader = new FileReader();
-    reader.onload = (e) => {
-        const preview = document.getElementById(`preview-${previewId}`);
-        if (preview) {
-            preview.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            preview.appendChild(img);
-        }
-        
-        // Abrir editor
-        abrirEditor(e.target.result);
+    reader.onerror = () => {
+        preview.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Erro ao carregar</span>';
+        mostrarStatus('❌ Erro ao carregar imagem', 'error');
     };
+    
+    reader.onload = (e) => {
+        preview.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        img.style.objectFit = 'contain';
+        preview.appendChild(img);
+        
+        setTimeout(() => abrirEditor(e.target.result), 100);
+    };
+    
     reader.readAsDataURL(file);
 }
 
-// Abrir editor de imagem
 function abrirEditor(imageSrc) {
     const modal = document.getElementById('imageEditorModal');
     const editorImage = document.getElementById('editorImage');
     
+    if (!modal || !editorImage || typeof Cropper === 'undefined') {
+        mostrarStatus('⚠️ Editor não disponível', 'warning');
+        return;
+    }
+    
     editorImage.src = imageSrc;
     editorImage.onload = () => {
-        if (cropper) {
-            cropper.destroy();
-        }
+        if (cropper) cropper.destroy();
         
         cropper = new Cropper(editorImage, {
             aspectRatio: NaN,
@@ -289,8 +238,10 @@ function abrirEditor(imageSrc) {
                 const canvas = cropper.getCanvasData();
                 const width = Math.round(canvas.width);
                 const height = Math.round(canvas.height);
-                document.getElementById('editorWidth').value = width;
-                document.getElementById('editorHeight').value = height;
+                const widthInput = document.getElementById('editorWidth');
+                const heightInput = document.getElementById('editorHeight');
+                if (widthInput) widthInput.value = width;
+                if (heightInput) heightInput.value = height;
                 originalAspectRatio = height / width;
                 atualizarPreview();
             }
@@ -301,186 +252,72 @@ function abrirEditor(imageSrc) {
     };
 }
 
-function atualizarControles() {
-    if (cropper) {
-        const canvas = cropper.getCanvasData();
-        const width = Math.round(canvas.width);
-        const height = Math.round(canvas.height);
-        document.getElementById('editorWidth').value = width;
-        document.getElementById('editorHeight').value = height;
-        atualizarPreview();
-    }
-}
-
-let maintainAspect = true;
 let originalAspectRatio = 1;
 
-function setupQualitySlider() {
-    const qualitySlider = document.getElementById('editorQuality');
-    const qualityValue = document.getElementById('qualityValue');
-    if (qualitySlider && qualityValue) {
-        qualitySlider.addEventListener('input', (e) => {
-            qualityValue.textContent = e.target.value + '%';
-        });
-    }
+function atualizarControles() {
+    if (!cropper) return;
+    
+    const canvas = cropper.getCanvasData();
+    const width = Math.round(canvas.width);
+    const height = Math.round(canvas.height);
     
     const widthInput = document.getElementById('editorWidth');
     const heightInput = document.getElementById('editorHeight');
     
-    if (widthInput && heightInput) {
-        widthInput.addEventListener('input', () => {
-            atualizarTamanho();
-            atualizarPreview();
-        });
-        
-        heightInput.addEventListener('input', () => {
-            atualizarTamanho();
-            atualizarPreview();
-        });
-    }
+    if (widthInput) widthInput.value = width;
+    if (heightInput) heightInput.value = height;
+    
+    const sizePreview = document.getElementById('sizePreview');
+    if (sizePreview) sizePreview.textContent = `${width} x ${height} px`;
+}
+
+function atualizarPreview() {
+    atualizarControles();
 }
 
 function toggleAspectRatio() {
-    const checkbox = document.getElementById('maintainAspect');
-    maintainAspect = checkbox.checked;
-    if (cropper && maintainAspect) {
+    const maintainAspect = document.getElementById('maintainAspect').checked;
+    if (maintainAspect && cropper) {
         const canvas = cropper.getCanvasData();
         originalAspectRatio = canvas.height / canvas.width;
     }
 }
 
-function atualizarTamanho() {
+function aplicarProporcao() {
+    const aspectSelect = document.getElementById('aspectRatio');
+    const aspectValue = aspectSelect.value;
+    
+    if (!aspectValue || !cropper) return;
+    
+    const [w, h] = aspectValue.split(':').map(Number);
+    const aspectRatio = h / w;
+    
+    cropper.setAspectRatio(aspectRatio);
+    originalAspectRatio = aspectRatio;
+    
+    document.getElementById('maintainAspect').checked = true;
+}
+
+function ajustarTamanho() {
     if (!cropper) return;
     
-    const widthInput = document.getElementById('editorWidth');
-    const heightInput = document.getElementById('editorHeight');
-    const width = parseInt(widthInput.value);
-    const height = parseInt(heightInput.value);
+    const width = parseInt(document.getElementById('editorWidth').value);
+    const height = parseInt(document.getElementById('editorHeight').value);
+    const maintainAspect = document.getElementById('maintainAspect').checked;
     
-    if (maintainAspect && widthInput === document.activeElement) {
+    if (maintainAspect && originalAspectRatio) {
         const newHeight = Math.round(width * originalAspectRatio);
-        heightInput.value = newHeight;
+        document.getElementById('editorHeight').value = newHeight;
         cropper.setCanvasData({ width: width, height: newHeight });
-    } else if (maintainAspect && heightInput === document.activeElement) {
-        const newWidth = Math.round(height / originalAspectRatio);
-        widthInput.value = newWidth;
-        cropper.setCanvasData({ width: newWidth, height: height });
     } else {
         cropper.setCanvasData({ width: width, height: height });
     }
-}
-
-function aplicarProporcao() {
-    const select = document.getElementById('aspectRatio');
-    const ratio = select.value;
-    if (!ratio || !cropper) return;
     
-    const [w, h] = ratio.split(':').map(Number);
-    const aspectRatio = h / w;
-    
-    const widthInput = document.getElementById('editorWidth');
-    const currentWidth = parseInt(widthInput.value) || 800;
-    const newHeight = Math.round(currentWidth * aspectRatio);
-    
-    document.getElementById('editorHeight').value = newHeight;
-    originalAspectRatio = aspectRatio;
-    cropper.setAspectRatio(w / h);
-    atualizarTamanho();
-}
-
-function aplicarTamanho(width, height) {
-    if (!cropper) return;
-    
-    document.getElementById('editorWidth').value = width;
-    document.getElementById('editorHeight').value = height;
-    cropper.setCanvasData({ width: width, height: height });
-    originalAspectRatio = height / width;
-    atualizarPreview();
-}
-
-function atualizarPreview() {
-    const width = document.getElementById('editorWidth').value;
-    const height = document.getElementById('editorHeight').value;
-    document.getElementById('sizePreview').textContent = `${width} x ${height} px`;
-}
-
-// Remover imagem
-async function removerImagem(key, previewId) {
-    if (!confirm('Tem certeza que deseja remover esta imagem?')) {
-        return;
-    }
-    
-    // Limpar preview
-    const preview = document.getElementById(`preview-${previewId}`);
-    if (preview) {
-        preview.innerHTML = '<i class="fas fa-image"></i><span>Sem imagem</span>';
-    }
-    
-    // Limpar input de arquivo
-    const fileInput = document.querySelector(`input[type="file"][data-key="${key}"]`);
-    if (fileInput) {
-        fileInput.value = '';
-    }
-    
-    // Limpar nome do arquivo
-    const filenameInput = document.querySelector(`.filename-input[data-key="${key}"]`);
-    if (filenameInput) {
-        filenameInput.value = '';
-    }
-    
-    // Remover da configuração
-    if (siteConfig.imagens && siteConfig.imagens[key]) {
-        delete siteConfig.imagens[key];
-    }
-    
-    mostrarStatus('✅ Imagem removida. Clique em "Salvar Tudo" para aplicar.', 'success');
-}
-
-// Editar imagem existente
-async function editarImagemExistente(key, previewId) {
-    const filenameInput = document.querySelector(`.filename-input[data-key="${key}"]`);
-    const filename = filenameInput ? filenameInput.value.trim() : '';
-    
-    if (!filename) {
-        mostrarStatus('⚠️ Nenhuma imagem encontrada. Selecione uma imagem primeiro.', 'warning');
-        return;
-    }
-    
-    // Carregar imagem existente
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        
-        currentImageKey = key;
-        currentPreviewId = previewId;
-        abrirEditor(canvas.toDataURL('image/jpeg'));
-    };
-    img.onerror = () => {
-        mostrarStatus('❌ Erro ao carregar imagem. Verifique se o arquivo existe.', 'error');
-    };
-    // Construir URL da imagem
-    let imageUrl;
-    if (API_BASE.includes('localhost') || API_BASE.includes('127.0.0.1')) {
-        const baseUrl = API_BASE.replace('/api', '');
-        imageUrl = `${baseUrl}/images/${filename}?t=${Date.now()}`;
-    } else {
-        imageUrl = `images/${filename}?t=${Date.now()}`;
-    }
-    img.src = imageUrl;
-    img.onerror = () => {
-        img.src = `images/${filename}?t=${Date.now()}`;
-    };
+    atualizarControles();
 }
 
 function girarImagem(graus) {
-    if (cropper) {
-        cropper.rotate(graus);
-    }
+    if (cropper) cropper.rotate(graus);
 }
 
 function espelharImagem() {
@@ -497,9 +334,11 @@ function resetarImagem() {
     }
 }
 
-// Aplicar edições e fazer upload
 async function aplicarEdicao() {
-    if (!cropper || !currentImageKey) return;
+    if (!cropper || !currentImageKey) {
+        mostrarStatus('❌ Nenhuma imagem selecionada', 'error');
+        return;
+    }
     
     mostrarStatus('Processando imagem...', 'info');
     
@@ -516,148 +355,83 @@ async function aplicarEdicao() {
     
     canvas.toBlob(async (blob) => {
         if (!blob) {
-            mostrarStatus('❌ Erro ao processar imagem. Tente novamente.', 'error');
+            mostrarStatus('❌ Erro ao processar imagem', 'error');
             return;
         }
         
-        // Atualizar preview do tamanho do arquivo
-        const fileSize = (blob.size / 1024).toFixed(2);
-        const fileSizeElement = document.getElementById('fileSizePreview');
-        if (fileSizeElement) {
-            fileSizeElement.textContent = `${fileSize} KB`;
-        }
-        
-        // Gerar nome do arquivo
         const filenameInput = document.querySelector(`.filename-input[data-key="${currentImageKey}"]`);
         let filename = filenameInput ? filenameInput.value.trim() : '';
         
-        if (!filename || filename === (currentImageFile ? currentImageFile.name : '')) {
+        if (!filename) {
             const originalName = currentImageFile ? currentImageFile.name : 'imagem';
             const extension = originalName.split('.').pop() || 'jpg';
             const baseName = originalName.replace(/\.[^/.]+$/, '') || 'imagem';
             filename = `${baseName}-editado.${extension}`;
-            if (filenameInput) {
-                filenameInput.value = filename;
-            }
+            if (filenameInput) filenameInput.value = filename;
         }
         
-        console.log('Fazendo upload da imagem:', filename);
-        
-        // Converter blob para base64
         const reader = new FileReader();
         reader.onload = async () => {
-            const base64 = reader.result;
-            
-            // Fazer upload
             try {
                 const response = await fetch(`${API_BASE}/upload`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         filename: filename,
                         key: currentImageKey,
-                        data: base64
+                        data: reader.result
                     })
                 });
                 
                 const result = await response.json();
                 
                 if (result.success) {
-                    console.log('Upload bem-sucedido:', result);
-                    
-                    // Atualizar config local primeiro
-                    if (!siteConfig.imagens) {
-                        siteConfig.imagens = {};
-                    }
+                    if (!siteConfig.imagens) siteConfig.imagens = {};
                     siteConfig.imagens[currentImageKey] = filename;
                     
-                    // Atualizar preview - usar múltiplas tentativas
                     const preview = document.getElementById(`preview-${currentPreviewId}`);
                     if (preview) {
-                        // Limpar preview
-                        preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
-                        
-                        // Criar imagem
+                        preview.innerHTML = '';
                         const img = document.createElement('img');
                         img.style.maxWidth = '100%';
                         img.style.maxHeight = '100%';
                         img.style.objectFit = 'contain';
                         
-                        // Construir URLs para tentar
+                        const blobUrl = URL.createObjectURL(blob);
+                        img.src = blobUrl;
+                        preview.appendChild(img);
+                        
                         const baseUrl = API_BASE.replace('/api', '');
-                        const urls = [
-                            `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`,
-                            `images/${encodeURIComponent(filename)}?t=${Date.now()}`,
-                            `${baseUrl}/images/${filename}?t=${Date.now()}`,
-                            `images/${filename}?t=${Date.now()}`
-                        ];
-                        
-                        let urlIndex = 0;
-                        
-                        // Guardar blob para fallback
-                        const imageBlob = blob;
-                        
-                        function tryNextUrl() {
-                            if (urlIndex >= urls.length) {
-                                // Se nenhuma URL funcionar, usar o blob diretamente
-                                try {
-                                    const blobUrl = URL.createObjectURL(imageBlob);
-                                    img.src = blobUrl;
-                                    preview.innerHTML = '';
-                                    preview.appendChild(img);
-                                    console.warn('Usando blob URL como fallback');
-                                } catch (e) {
-                                    console.error('Erro ao criar blob URL:', e);
-                                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem salva (recarregue a página)</span>';
-                                }
-                                return;
-                            }
-                            
-                            img.src = urls[urlIndex];
-                            console.log(`Tentando carregar imagem: ${urls[urlIndex]}`);
-                            urlIndex++;
-                        }
-                        
-                        img.onerror = () => {
-                            console.warn(`Erro ao carregar ${urls[urlIndex - 1]}, tentando próximo...`);
-                            tryNextUrl();
+                        const serverImg = new Image();
+                        serverImg.onload = () => {
+                            img.src = `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`;
+                            URL.revokeObjectURL(blobUrl);
                         };
-                        
-                        img.onload = () => {
-                            console.log(`Imagem carregada com sucesso: ${urls[urlIndex - 1]}`);
-                            preview.innerHTML = '';
-                            preview.appendChild(img);
-                        };
-                        
-                        // Começar a tentar carregar
-                        tryNextUrl();
-                    } else {
-                        console.error(`Preview não encontrado: preview-${currentPreviewId}`);
+                        serverImg.src = `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`;
                     }
                     
                     mostrarStatus('✅ Imagem salva com sucesso!', 'success');
                     fecharEditor();
                 } else {
-                    console.error('Erro no upload:', result);
-                    mostrarStatus('❌ Erro ao salvar: ' + (result.error || 'Erro desconhecido'), 'error');
+                    mostrarStatus('❌ Erro: ' + (result.error || 'Erro desconhecido'), 'error');
                 }
             } catch (error) {
-                console.error('Erro ao fazer upload:', error);
                 mostrarStatus('❌ Erro ao fazer upload: ' + error.message, 'error');
             }
         };
+        
         reader.readAsDataURL(blob);
     }, 'image/jpeg', quality);
 }
 
 function fecharEditor() {
     const modal = document.getElementById('imageEditorModal');
-    modal.classList.remove('show');
+    if (modal) modal.classList.remove('show');
     
     if (cropper) {
-        cropper.destroy();
+        try {
+            cropper.destroy();
+        } catch (e) {}
         cropper = null;
     }
     
@@ -666,7 +440,57 @@ function fecharEditor() {
     currentPreviewId = null;
 }
 
-// Salvar tudo
+async function removerImagem(key, previewId) {
+    if (!confirm('Tem certeza que deseja remover esta imagem?')) return;
+    
+    const preview = document.getElementById(`preview-${previewId}`);
+    if (preview) preview.innerHTML = '<i class="fas fa-image"></i><span>Sem imagem</span>';
+    
+    const fileInput = document.querySelector(`input[type="file"][data-key="${key}"]`);
+    if (fileInput) fileInput.value = '';
+    
+    const filenameInput = document.querySelector(`.filename-input[data-key="${key}"]`);
+    if (filenameInput) filenameInput.value = '';
+    
+    if (siteConfig.imagens && siteConfig.imagens[key]) {
+        delete siteConfig.imagens[key];
+    }
+    
+    mostrarStatus('✅ Imagem removida. Clique em "Salvar Tudo" para aplicar.', 'success');
+}
+
+async function editarImagemExistente(key, previewId) {
+    const filenameInput = document.querySelector(`.filename-input[data-key="${key}"]`);
+    const filename = filenameInput ? filenameInput.value.trim() : '';
+    
+    if (!filename) {
+        mostrarStatus('⚠️ Nenhuma imagem encontrada', 'warning');
+        return;
+    }
+    
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        
+        currentImageKey = key;
+        currentPreviewId = previewId;
+        abrirEditor(canvas.toDataURL('image/jpeg'));
+    };
+    
+    img.onerror = () => {
+        mostrarStatus('❌ Erro ao carregar imagem', 'error');
+    };
+    
+    const baseUrl = API_BASE.replace('/api', '');
+    img.src = `${baseUrl}/images/${filename}?t=${Date.now()}`;
+}
+
 async function salvarTudo() {
     mostrarStatus('Salvando configurações...', 'info');
     
@@ -692,128 +516,92 @@ async function salvarTudo() {
         depoimentos: siteConfig.depoimentos || []
     };
     
-    // Coletar imagens
     document.querySelectorAll('.filename-input').forEach(input => {
         const key = input.getAttribute('data-key');
         const value = input.value.trim();
-        if (value) {
-            dados.imagens[key] = value;
-        }
+        if (value) dados.imagens[key] = value;
     });
     
     try {
-        // Salvar configuração
         const response = await fetch(`${API_BASE}/save-config`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
         });
         
         const result = await response.json();
         
         if (result.success) {
-            // Mostrar mensagem do servidor (pode incluir info sobre deploy)
-            mostrarStatus(result.message || '✅ Tudo salvo com sucesso!', 'success');
             siteConfig = dados;
-            
-            // Recarregar previews para mostrar as imagens atualizadas
-            setTimeout(() => {
-                carregarPreviews();
-            }, 500);
+            mostrarStatus(result.message || '✅ Tudo salvo com sucesso!', 'success');
+            carregarPreviews();
         } else {
-            mostrarStatus('❌ Erro ao salvar: ' + result.error, 'error');
+            mostrarStatus('❌ Erro: ' + result.error, 'error');
         }
     } catch (error) {
-        mostrarStatus('❌ Erro de conexão: ' + error.message, 'error');
+        mostrarStatus('❌ Erro ao salvar: ' + error.message, 'error');
     }
 }
 
-// Gerar itens de upload
+function mostrarStatus(message, type = 'success') {
+    const status = document.getElementById('statusMessage');
+    if (status) {
+        status.textContent = message;
+        status.className = `status-message ${type} show`;
+        setTimeout(() => status.classList.remove('show'), 5000);
+    }
+}
+
+function setupQualitySlider() {
+    const slider = document.getElementById('editorQuality');
+    const display = document.getElementById('qualityDisplay');
+    if (slider && display) {
+        slider.addEventListener('input', () => {
+            display.textContent = slider.value + '%';
+        });
+    }
+}
+
 function gerarImageUploadItems() {
-    const galeriaGrid = document.getElementById('galeria-grid');
-    if (galeriaGrid) {
-        for (let i = 1; i <= 9; i++) {
-            galeriaGrid.appendChild(criarImageUploadItem(`galeria-${i}`, `Galeria ${i}`));
-        }
-    }
+    const container = document.getElementById('imageUploadItems');
+    if (!container) return;
     
-    const diferenciaisGrid = document.getElementById('diferenciais-grid');
-    if (diferenciaisGrid) {
-        for (let i = 1; i <= 4; i++) {
-            diferenciaisGrid.appendChild(criarImageUploadItem(`diferencial-${i}`, `Diferencial ${i}`));
-        }
-    }
+    const imageKeys = [
+        { key: 'hero-slide-1', label: 'Hero Slide 1', previewId: 'hero-1' },
+        { key: 'hero-slide-2', label: 'Hero Slide 2', previewId: 'hero-2' },
+        { key: 'sobre-foto', label: 'Foto Dra. Nadia', previewId: 'sobre' }
+    ];
     
-    const dicasGrid = document.getElementById('dicas-grid');
-    if (dicasGrid) {
-        for (let i = 1; i <= 6; i++) {
-            dicasGrid.appendChild(criarImageUploadItem(`dica-${i}`, `Dica ${i}`));
-        }
-    }
-}
-
-function criarImageUploadItem(key, label) {
-    const div = document.createElement('div');
-    div.className = 'image-upload-item';
-    const previewId = `preview-${key}`;
-    
-    // Descrições específicas para cada tipo de imagem
-    const hints = {
-        'galeria-1': 'Primeira foto da galeria - Clínica/Consultório',
-        'galeria-2': 'Segunda foto da galeria - Atendimento',
-        'galeria-3': 'Terceira foto da galeria - Equipamentos',
-        'galeria-4': 'Quarta foto da galeria - Ambiente',
-        'galeria-5': 'Quinta foto da galeria - Sala de espera',
-        'galeria-6': 'Sexta foto da galeria - Tratamento',
-        'galeria-7': 'Sétima foto da galeria - Crianças felizes',
-        'galeria-8': 'Oitava foto da galeria - Profissional',
-        'galeria-9': 'Nona foto da galeria - Resultados',
-        'diferencial-1': 'Atendimento Humanizado - Criança sendo atendida com carinho',
-        'diferencial-2': 'Equipamentos Modernos - Tecnologia de ponta',
-        'diferencial-3': 'Atendimento Familiar - Família no consultório',
-        'diferencial-4': 'Ambiente Acolhedor - Consultório moderno e lúdico',
-        'dica-1': 'Primeira Consulta - Criança na primeira visita ao dentista',
-        'dica-2': 'Escovação - Criança escovando os dentes corretamente',
-        'dica-3': 'Alimentação - Frutas e alimentos saudáveis',
-        'dica-4': 'Flúor e Selantes - Aplicação de proteção dental',
-        'dica-5': 'Emergência - Atendimento de urgência/traumatismo',
-        'dica-6': 'Consultas Regulares - Importância das visitas periódicas'
-    };
-    
-    const hint = hints[key] || 'Imagem para esta seção';
-    
-    div.innerHTML = `
-        <div class="image-item-header">
-            <div>
-                <label>${label}</label>
-                <span class="image-hint">${hint}</span>
+    imageKeys.forEach(({ key, label, previewId }) => {
+        const item = document.createElement('div');
+        item.className = 'image-upload-item';
+        item.innerHTML = `
+            <h4>${label}</h4>
+            <div class="preview-container">
+                <div id="preview-${previewId}" class="preview-box">
+                    <i class="fas fa-image"></i><span>Sem imagem</span>
+                </div>
             </div>
-            <button class="btn-remove-image" onclick="removerImagem('${key}', '${key}')" title="Remover imagem">
-                <i class="fas fa-trash"></i>
-            </button>
-        </div>
-        <div class="image-preview" id="${previewId}">
-            <i class="fas fa-image"></i>
-            <span>Sem imagem</span>
-        </div>
-        <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${key}')">
-        <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
-        <button class="btn btn-small" onclick="editarImagemExistente('${key}', '${key}')" style="margin-top: 0.5rem;">
-            <i class="fas fa-edit"></i> Editar
-        </button>
-    `;
-    return div;
+            <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${previewId}')">
+            <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
+            <div class="button-group">
+                <button class="btn btn-small" onclick="editarImagemExistente('${key}', '${previewId}')">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+                <button class="btn btn-small btn-danger" onclick="removerImagem('${key}', '${previewId}')">
+                    <i class="fas fa-trash"></i> Remover
+                </button>
+            </div>
+        `;
+        container.appendChild(item);
+    });
 }
 
-// Serviços
 function carregarServicos() {
-    const container = document.getElementById('servicos-container');
-    if (!siteConfig.servicos || siteConfig.servicos.length === 0) {
-        container.innerHTML = '<p style="color: var(--gray); margin-bottom: 1rem;">Nenhum serviço cadastrado.</p>';
-        return;
-    }
+    const container = document.getElementById('servicosContainer');
+    if (!container) return;
+    
+    if (!siteConfig.servicos) siteConfig.servicos = [];
     
     container.innerHTML = '';
     siteConfig.servicos.forEach((servico, index) => {
@@ -839,28 +627,13 @@ function criarItemServico(servico, index) {
             <label>Descrição</label>
             <textarea class="form-control servico-descricao" rows="3" data-index="${index}">${servico.descricao || ''}</textarea>
         </div>
-        <div class="form-group">
-            <label>Ícone (Font Awesome)</label>
-            <input type="text" class="form-control servico-icone" value="${servico.icone || ''}" placeholder="fas fa-tooth" data-index="${index}">
-        </div>
     `;
-    
-    div.querySelectorAll('input, textarea').forEach(input => {
-        input.addEventListener('change', () => atualizarServico(index));
-    });
-    
     return div;
 }
 
 function adicionarServico() {
-    if (!siteConfig.servicos) {
-        siteConfig.servicos = [];
-    }
-    siteConfig.servicos.push({
-        titulo: 'Novo Serviço',
-        descricao: 'Descrição do serviço...',
-        icone: 'fas fa-tooth'
-    });
+    if (!siteConfig.servicos) siteConfig.servicos = [];
+    siteConfig.servicos.push({ titulo: '', descricao: '' });
     carregarServicos();
 }
 
@@ -871,24 +644,11 @@ function removerServico(index) {
     }
 }
 
-function atualizarServico(index) {
-    const item = document.querySelector(`.servico-item:nth-child(${index + 1})`);
-    if (item) {
-        siteConfig.servicos[index] = {
-            titulo: item.querySelector('.servico-titulo').value,
-            descricao: item.querySelector('.servico-descricao').value,
-            icone: item.querySelector('.servico-icone').value
-        };
-    }
-}
-
-// Depoimentos
 function carregarDepoimentos() {
-    const container = document.getElementById('depoimentos-container');
-    if (!siteConfig.depoimentos || siteConfig.depoimentos.length === 0) {
-        container.innerHTML = '<p style="color: var(--gray); margin-bottom: 1rem;">Nenhum depoimento cadastrado.</p>';
-        return;
-    }
+    const container = document.getElementById('depoimentosContainer');
+    if (!container) return;
+    
+    if (!siteConfig.depoimentos) siteConfig.depoimentos = [];
     
     container.innerHTML = '';
     siteConfig.depoimentos.forEach((depoimento, index) => {
@@ -916,26 +676,15 @@ function criarItemDepoimento(depoimento, index) {
         </div>
         <div class="form-group">
             <label>Avaliação (1-5)</label>
-            <input type="number" min="1" max="5" class="form-control depoimento-avaliacao" value="${depoimento.avaliacao || 5}" data-index="${index}">
+            <input type="number" class="form-control depoimento-avaliacao" min="1" max="5" value="${depoimento.avaliacao || 5}" data-index="${index}">
         </div>
     `;
-    
-    div.querySelectorAll('input, textarea').forEach(input => {
-        input.addEventListener('change', () => atualizarDepoimento(index));
-    });
-    
     return div;
 }
 
 function adicionarDepoimento() {
-    if (!siteConfig.depoimentos) {
-        siteConfig.depoimentos = [];
-    }
-    siteConfig.depoimentos.push({
-        nome: 'Nome do Cliente',
-        texto: 'Depoimento do cliente...',
-        avaliacao: 5
-    });
+    if (!siteConfig.depoimentos) siteConfig.depoimentos = [];
+    siteConfig.depoimentos.push({ nome: '', texto: '', avaliacao: 5 });
     carregarDepoimentos();
 }
 
@@ -943,33 +692,5 @@ function removerDepoimento(index) {
     if (confirm('Tem certeza que deseja remover este depoimento?')) {
         siteConfig.depoimentos.splice(index, 1);
         carregarDepoimentos();
-    }
-}
-
-function atualizarDepoimento(index) {
-    const item = document.querySelector(`.depoimento-item:nth-child(${index + 1})`);
-    if (item) {
-        siteConfig.depoimentos[index] = {
-            nome: item.querySelector('.depoimento-nome').value,
-            texto: item.querySelector('.depoimento-texto').value,
-            avaliacao: parseInt(item.querySelector('.depoimento-avaliacao').value)
-        };
-    }
-}
-
-// Status Message
-function mostrarStatus(message, type = 'success') {
-    const status = document.getElementById('statusMessage');
-    if (status) {
-        status.textContent = message;
-        status.className = `status-message ${type} show`;
-        console.log(`Status: [${type}] ${message}`);
-        
-        setTimeout(() => {
-            status.classList.remove('show');
-        }, 5000);
-    } else {
-        console.error('Elemento statusMessage não encontrado!');
-        alert(message); // Fallback se o elemento não existir
     }
 }

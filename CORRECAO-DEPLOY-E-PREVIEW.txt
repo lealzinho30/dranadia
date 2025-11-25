@@ -1,0 +1,92 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     ✅ CORREÇÃO - DEPLOY E PREVIEW                       ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🔧 PROBLEMAS CORRIGIDOS                                ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. ✅ DEPLOY MELHORADO
+     → Logs detalhados no servidor
+     → Mostra cada etapa do processo
+     → Mensagens de erro claras
+     → Verifica se já está atualizado
+
+  2. ✅ PREVIEW NÃO DESAPARECE MAIS
+     → Config atualizada ANTES de recarregar previews
+     → Aguarda 1 segundo para garantir salvamento
+     → Logs no console para debug
+     → Verifica se filename existe antes de carregar
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  📋 O QUE FOI MELHORADO                                 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  DEPLOY:
+  ✓ Logs em cada etapa (add, commit, push)
+  ✓ Verifica se já está atualizado
+  ✓ Mensagens claras de erro
+  ✓ Timeout adequado (120s para push)
+
+  PREVIEW:
+  ✓ siteConfig atualizado antes de recarregar
+  ✓ Aguarda 1 segundo para garantir salvamento
+  ✓ Logs no console para debug
+  ✓ Verifica se filename existe
+  ✓ Atualiza campo de nome do arquivo
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🚀 COMO TESTAR                                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. Reinicie o servidor:
+     → Feche o servidor atual (Ctrl+C)
+     → Execute: INICIAR-ADMIN-SIMPLES.bat
+
+  2. No painel:
+     → Adicione/edite uma imagem
+     → Clique em "Aplicar Edições"
+     → A imagem deve aparecer no preview
+
+  3. Clique em "Salvar Tudo":
+     → Veja a mensagem sobre deploy
+     → A imagem NÃO deve desaparecer
+     → Veja os logs no console (F12)
+
+  4. Verifique o servidor:
+     → Veja a janela do servidor
+     → Deve mostrar logs do deploy
+     → Se falhar, mostra o erro
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  💡 DEBUG                                              ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Para ver o que está acontecendo:
+
+  1. Console do navegador (F12):
+     → Veja os logs de carregamento
+     → Veja se há erros
+
+  2. Janela do servidor:
+     → Veja os logs do deploy
+     → Veja se há erros no Git
+
+  3. Se o deploy falhar:
+     → Execute: deploy-rapido.ps1 manualmente
+     → Veja qual erro aparece
+
+
+═══════════════════════════════════════════════════════════
+
+   ✅ REINICIE O SERVIDOR E TESTE! Agora com logs detalhados
+      você pode ver exatamente o que está acontecendo!
+
+═══════════════════════════════════════════════════════════
+

@@ -264,13 +264,18 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             deploy_success = False
             deploy_message = ""
             try:
+                print("Iniciando deploy para GitHub...")
                 deploy_result = self.deploy_to_github()
+                print(f"Resultado do deploy: {deploy_result}")
                 if deploy_result:
                     deploy_success = True
                     deploy_message = "Deploy para GitHub concluído! O site será atualizado em 1-2 minutos."
                 else:
-                    deploy_message = "Deploy para GitHub falhou. Execute deploy-rapido.ps1 manualmente."
+                    deploy_message = "Deploy para GitHub falhou. Verifique os logs do servidor ou execute deploy-rapido.ps1 manualmente."
             except Exception as deploy_error:
+                import traceback
+                error_trace = traceback.format_exc()
+                print(f"EXCEÇÃO no deploy: {error_trace}")
                 deploy_message = f"Erro no deploy: {str(deploy_error)}. Execute deploy-rapido.ps1 manualmente."
             
             # Resposta final
@@ -376,12 +381,17 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             import subprocess
             import os
             
+            print(f"Verificando repositório Git em: {BASE_DIR}")
+            
             # Verificar se está em um repositório git
             if not (BASE_DIR / ".git").exists():
-                print("Repositório Git não encontrado")
+                print("❌ Repositório Git não encontrado")
                 return False
             
+            print("✓ Repositório Git encontrado")
+            
             # Adicionar todos os arquivos (incluindo imagens)
+            print("Adicionando arquivos ao Git...")
             result = subprocess.run(
                 ['git', 'add', '.'],
                 cwd=str(BASE_DIR),
@@ -392,10 +402,13 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             )
             
             if result.returncode != 0:
-                print(f"Erro ao adicionar arquivos: {result.stderr}")
+                print(f"❌ Erro ao adicionar arquivos: {result.stderr}")
                 return False
             
+            print("✓ Arquivos adicionados")
+            
             # Verificar se há mudanças
+            print("Verificando mudanças...")
             result = subprocess.run(
                 ['git', 'status', '--porcelain'],
                 cwd=str(BASE_DIR),
@@ -407,10 +420,13 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             
             if not result.stdout.strip():
                 # Nenhuma mudança - já está atualizado
-                print("Nenhuma mudança para commitar")
+                print("ℹ️  Nenhuma mudança para commitar (já está atualizado)")
                 return True
             
+            print(f"✓ Mudanças encontradas: {len(result.stdout.strip().split(chr(10)))} arquivo(s)")
+            
             # Fazer commit
+            print("Fazendo commit...")
             result = subprocess.run(
                 ['git', 'commit', '-m', 'Atualização automática do site via painel admin'],
                 cwd=str(BASE_DIR),
@@ -421,10 +437,16 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             )
             
             if result.returncode != 0:
-                print(f"Erro ao fazer commit: {result.stderr}")
+                print(f"❌ Erro ao fazer commit: {result.stderr}")
+                if "nothing to commit" in result.stdout.lower():
+                    print("ℹ️  Nada para commitar (arquivos já commitados)")
+                    return True
                 return False
             
+            print("✓ Commit criado")
+            
             # Fazer push
+            print("Fazendo push para GitHub...")
             result = subprocess.run(
                 ['git', 'push', 'origin', 'main'],
                 cwd=str(BASE_DIR),
@@ -435,17 +457,20 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             )
             
             if result.returncode == 0:
-                print("Deploy concluído com sucesso!")
+                print("✅ Deploy concluído com sucesso!")
                 return True
             else:
-                print(f"Erro no push: {result.stderr}")
+                print(f"❌ Erro no push: {result.stderr}")
+                if "no changes" in result.stdout.lower() or "up to date" in result.stdout.lower():
+                    print("ℹ️  Repositório já está atualizado")
+                    return True
                 return False
             
         except subprocess.TimeoutExpired:
-            print("Timeout no deploy")
+            print("❌ Timeout no deploy")
             return False
         except Exception as e:
-            print(f"Erro no deploy: {e}")
+            print(f"❌ Erro no deploy: {e}")
             import traceback
             print(traceback.format_exc())
             return False

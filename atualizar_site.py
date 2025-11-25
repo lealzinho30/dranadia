@@ -170,30 +170,28 @@ def atualizar_imagens(html, config):
             # mas o nome do arquivo tem parênteses: "2025-11-21 (1)"
             # SOLUÇÃO: Usar uma regex que captura o url() completo, incluindo parênteses internos
             
-            # Primeiro, limpar qualquer duplicação existente no HTML
-            # Padrão: url('images/...')-editado.webp') -> url('images/...')
-            padrao_limpar = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*url\(\'images/[^\']+\'\))(-editado\.webp\'\))+([^\"]*\")'
-            html = re.sub(padrao_limpar, r'\1\3', html)
+            # Limpar duplicações primeiro
+            padrao_duplicacao = rf'(url\(\'images/[^\']+\'\))(-editado\.webp\'\))+'
+            html = re.sub(padrao_duplicacao, r'\1', html)
             
-            # Agora substituir o url() completo
-            # Usar uma regex que captura url('images/qualquer-coisa') corretamente
+            # Substituir url() completo - usar busca mais específica
             padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))([^\"]*\")'
-            if re.search(padrao, html):
-                html = re.sub(padrao, rf'\1{novo_url}\3', html, count=1)
+            match = re.search(padrao, html)
+            if match:
+                html = html[:match.start(2)] + novo_url + html[match.end(2):]
                 alteracoes += 1
-                print(f"  ✓ Hero slide {slide_index+1} (data-slide=\"{slide_index}\") atualizado: {filename}")
+                print(f"  ✓ Hero slide {slide_index+1} atualizado: {filename}")
             else:
-                # Se não encontrar com data-slide, tentar pela ordem (primeiro, segundo)
-                # Usar regex que captura url('images/...') corretamente
-                padrao = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))([^\"]*\")'
-                matches = list(re.finditer(padrao, html))
+                # Fallback: buscar por ordem
+                padrao_fallback = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))([^\"]*\")'
+                matches = list(re.finditer(padrao_fallback, html))
                 if slide_index < len(matches):
                     match = matches[slide_index]
                     html = html[:match.start(2)] + novo_url + html[match.end(2):]
                     alteracoes += 1
                     print(f"  ✓ Hero slide {slide_index+1} atualizado: {filename}")
                 else:
-                    print(f"  ⚠️  Hero slide {slide_index+1} não encontrado no HTML")
+                    print(f"  ⚠️  Hero slide {slide_index+1} não encontrado")
     
     # Foto Dra. Nadia - class="sobre-img"
     if 'sobre-foto' in imagens:

@@ -134,15 +134,26 @@ const imageKeyToPreviewId = {
 };
 
 function carregarPreviews() {
-    if (!siteConfig || !siteConfig.imagens) return;
+    if (!siteConfig || !siteConfig.imagens) {
+        console.log('Nenhuma imagem configurada');
+        return;
+    }
+    
+    console.log('Carregando previews:', siteConfig.imagens);
     
     Object.keys(siteConfig.imagens).forEach(key => {
         const filename = siteConfig.imagens[key];
-        if (!filename) return;
+        if (!filename || !filename.trim()) {
+            console.warn(`Filename vazio para ${key}`);
+            return;
+        }
         
         const previewId = imageKeyToPreviewId[key] || key;
         const preview = document.getElementById(`preview-${previewId}`);
-        if (!preview) return;
+        if (!preview) {
+            console.warn(`Preview não encontrado: preview-${previewId}`);
+            return;
+        }
         
         preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
         
@@ -150,18 +161,18 @@ function carregarPreviews() {
         img.style.maxWidth = '100%';
         img.style.maxHeight = '100%';
         img.style.objectFit = 'contain';
+        img.style.display = 'block';
         
         const baseUrl = API_BASE.replace('/api', '');
         const timestamp = Date.now();
+        const cleanFilename = filename.trim();
         
-        // Tentar múltiplas URLs com diferentes encodings
+        // Tentar múltiplas URLs
         const urls = [
-            `${baseUrl}/images/${encodeURIComponent(filename)}?t=${timestamp}`,
-            `${baseUrl}/images/${filename}?t=${timestamp}`,
-            `${baseUrl}/images/${encodeURI(filename)}?t=${timestamp}`,
-            `images/${encodeURIComponent(filename)}?t=${timestamp}`,
-            `images/${filename}?t=${timestamp}`,
-            `images/${encodeURI(filename)}?t=${timestamp}`
+            `${baseUrl}/images/${encodeURIComponent(cleanFilename)}?t=${timestamp}`,
+            `${baseUrl}/images/${cleanFilename}?t=${timestamp}`,
+            `images/${encodeURIComponent(cleanFilename)}?t=${timestamp}`,
+            `images/${cleanFilename}?t=${timestamp}`
         ];
         
         let urlIndex = 0;
@@ -171,18 +182,14 @@ function carregarPreviews() {
             if (loaded) return;
             
             if (urlIndex >= urls.length) {
-                if (!loaded) {
-                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
-                    console.error(`Não foi possível carregar: ${filename}`);
-                    console.error('Tentou URLs:', urls);
-                }
+                preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
+                console.error(`Não foi possível carregar: ${cleanFilename}`);
                 return;
             }
             
             const currentUrl = urls[urlIndex];
             urlIndex++;
             
-            // Criar nova imagem para cada tentativa
             const testImg = new Image();
             testImg.onload = () => {
                 if (!loaded) {
@@ -190,19 +197,17 @@ function carregarPreviews() {
                     img.src = currentUrl;
                     preview.innerHTML = '';
                     preview.appendChild(img);
-                    console.log(`✓ Imagem carregada: ${currentUrl}`);
+                    console.log(`✓ Imagem carregada: ${cleanFilename}`);
                 }
             };
             
             testImg.onerror = () => {
-                console.warn(`✗ Erro ao carregar: ${currentUrl}`);
-                setTimeout(tryNextUrl, 100);
+                setTimeout(tryNextUrl, 50);
             };
             
             testImg.src = currentUrl;
         }
         
-        // Começar a tentar
         tryNextUrl();
     });
 }
@@ -570,10 +575,11 @@ async function salvarTudo() {
         if (result.success) {
             siteConfig = dados;
             mostrarStatus(result.message || '✅ Tudo salvo com sucesso!', 'success');
-            // Aguardar um pouco antes de recarregar previews para garantir que o servidor salvou tudo
+            // Recarregar previews imediatamente e depois novamente após delay
+            carregarPreviews();
             setTimeout(() => {
                 carregarPreviews();
-            }, 500);
+            }, 1000);
         } else {
             mostrarStatus('❌ Erro: ' + result.error, 'error');
         }

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Imagem no GitHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+        }
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .image-test {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .image-test h3 {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .image-test img {
+            max-width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            margin: 10px 0;
+            border: 3px solid #ddd;
+        }
+        .image-test img.loaded {
+            border-color: #28a745;
+        }
+        .image-test img.error {
+            border-color: #dc3545;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status.loading {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .url-display {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        .actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Teste de Carregamento da Imagem Hero</h1>
+        
+        <div class="test-section">
+            <h2>📊 Resultados dos Testes</h2>
+            
+            <div class="image-test">
+                <h3>1. URL Normal (com espaço e parênteses)</h3>
+                <div class="url-display" id="url1"></div>
+                <div class="status loading" id="status1">⏳ Testando...</div>
+                <img id="img1" alt="Teste 1">
+            </div>
+            
+            <div class="image-test">
+                <h3>2. URL com encodeURIComponent</h3>
+                <div class="url-display" id="url2"></div>
+                <div class="status loading" id="status2">⏳ Testando...</div>
+                <img id="img2" alt="Teste 2">
+            </div>
+            
+            <div class="image-test">
+                <h3>3. URL com encodeURI</h3>
+                <div class="url-display" id="url3"></div>
+                <div class="status loading" id="status3">⏳ Testando...</div>
+                <img id="img3" alt="Teste 3">
+            </div>
+            
+            <div class="image-test">
+                <h3>4. URL com %20 manual</h3>
+                <div class="url-display" id="url4"></div>
+                <div class="status loading" id="status4">⏳ Testando...</div>
+                <img id="img4" alt="Teste 4">
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button onclick="testarNovamente()">🔄 Testar Novamente</button>
+            <button onclick="window.open('https://lealzinho30.github.io/dranadia/', '_blank')" style="background: #28a745;">
+                🌐 Abrir Site
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        const baseUrl = 'https://lealzinho30.github.io/dranadia/images/';
+        const imageName = '2025-11-21 (1)-editado.webp';
+        
+        function testarImagem(index, url) {
+            const img = document.getElementById('img' + index);
+            const status = document.getElementById('status' + index);
+            const urlDisplay = document.getElementById('url' + index);
+            
+            urlDisplay.textContent = url;
+            
+            img.onload = function() {
+                status.className = 'status success';
+                status.textContent = '✅ Imagem carregada com sucesso!';
+                img.className = 'loaded';
+            };
+            
+            img.onerror = function() {
+                status.className = 'status error';
+                status.textContent = '❌ Erro ao carregar imagem (404 ou bloqueado)';
+                img.className = 'error';
+                img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="%23f8d7da"/><text x="50%" y="50%" text-anchor="middle" fill="%23721c24" font-size="20">Imagem não encontrada</text></svg>';
+            };
+            
+            // Adicionar timestamp para evitar cache
+            const timestamp = new Date().getTime();
+            img.src = url + '?t=' + timestamp;
+        }
+        
+        function testarTudo() {
+            // Teste 1: URL normal
+            const url1 = baseUrl + imageName;
+            testarImagem(1, url1);
+            
+            // Teste 2: encodeURIComponent
+            const url2 = baseUrl + encodeURIComponent(imageName);
+            testarImagem(2, url2);
+            
+            // Teste 3: encodeURI
+            const url3 = baseUrl + encodeURI(imageName);
+            testarImagem(3, url3);
+            
+            // Teste 4: %20 manual
+            const url4 = baseUrl + imageName.replace(/ /g, '%20');
+            testarImagem(4, url4);
+        }
+        
+        function testarNovamente() {
+            location.reload();
+        }
+        
+        // Iniciar testes automaticamente
+        window.onload = testarTudo;
+    </script>
+</body>
+</html>
+

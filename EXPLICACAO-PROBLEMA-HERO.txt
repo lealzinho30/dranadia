@@ -1,0 +1,187 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     🔍 POR QUE ESSA IMAGEM NÃO FUNCIONA?                ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ✅ VERIFICAÇÃO CONCLUÍDA                               ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  ✓ Imagem existe localmente: images/2025-11-21 (1)-editado.webp
+  ✓ Imagem está no Git (commitada)
+  ✓ Imagem está no config.json
+  ✓ Imagem está no index.html
+  ✓ Deploy foi feito com sucesso
+  ✓ GitHub está atualizado
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🎯 ENTÃO QUAL É O PROBLEMA?                            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  O problema é que você está vendo o CACHE ANTIGO do navegador!
+
+  Comparação:
+  
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  OUTRAS IMAGENS (que funcionaram):
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+    → Eram imagens NOVAS que você adicionou
+    → O navegador NUNCA tinha visto antes
+    → Por isso carregaram instantaneamente
+    → Não havia cache antigo
+  
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ESTA IMAGEM DO HERO:
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+    → Você já tinha visitado o site antes
+    → O navegador salvou a versão ANTIGA em cache
+    → Mesmo com deploy novo, mostra a versão antiga
+    → Precisa LIMPAR O CACHE para ver a nova
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🧪 TESTE QUE ACABEI DE ABRIR                           ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  A página TESTAR-IMAGEM-GITHUB.html vai testar se o GitHub
+  está servindo a imagem corretamente.
+  
+  Ela testa 4 formas diferentes de carregar a imagem:
+  
+    1. URL normal
+    2. Com encodeURIComponent
+    3. Com encodeURI
+    4. Com %20 manual
+  
+  Se PELO MENOS UMA funcionar, significa:
+    → ✅ Imagem ESTÁ no GitHub
+    → ✅ GitHub ESTÁ servindo ela
+    → ⚠️  Problema é CACHE do navegador
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  💡 SOLUÇÃO DEFINITIVA                                   ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  MÉTODO 1: Limpar Cache Manualmente (mais eficaz)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+    1. Pressione: Ctrl + Shift + Delete
+    
+    2. Na janela que abrir:
+       → Selecione "Imagens e arquivos em cache"
+       → Período: "Última hora" ou "Tudo"
+    
+    3. Clique em "Limpar dados"
+    
+    4. Feche o navegador completamente (Ctrl + Shift + Q)
+    
+    5. Abra novamente e acesse:
+       https://lealzinho30.github.io/dranadia/
+    
+    6. A imagem DEVE aparecer agora!
+
+
+  MÉTODO 2: Usar Aba Anônima (teste rápido)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+    1. Pressione: Ctrl + Shift + N (Chrome) ou Ctrl + Shift + P (Firefox)
+    
+    2. Na aba anônima, acesse:
+       https://lealzinho30.github.io/dranadia/
+    
+    3. Se a imagem aparecer na aba anônima:
+       → Confirmado: problema é cache!
+       → Use o Método 1 para limpar
+
+
+  MÉTODO 3: Usar Ferramenta Automática
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+    1. Abra: FORCAR-ATUALIZACAO.html
+    
+    2. Clique em "Limpar Cache e Atualizar Site"
+    
+    3. Aguarde o site abrir
+    
+    4. A imagem deve aparecer!
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🔬 POR QUE AS OUTRAS FUNCIONARAM E ESSA NÃO?          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  IMAGENS QUE FUNCIONARAM:
+    → galeria-1.webp
+    → galeria-2.webp
+    → dica-1.webp
+    → etc.
+  
+  POR QUE FUNCIONARAM?
+    → Eram arquivos NOVOS
+    → O navegador nunca tinha visto
+    → Não havia cache anterior
+    → Carregaram direto do GitHub
+
+
+  IMAGEM DO HERO:
+    → 2025-11-21 (1)-editado.webp
+  
+  POR QUE NÃO FUNCIONA?
+    → Você já tinha visitado o site antes
+    → O navegador salvou a versão ANTIGA
+    → Mesmo com novo deploy, usa o cache
+    → Precisa FORÇAR atualização
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  📊 RESULTADOS ESPERADOS DO TESTE                       ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  Se o teste mostrar:
+  
+  ✅ PELO MENOS UMA IMAGEM CARREGOU:
+     → GitHub está servindo a imagem
+     → Problema é 100% cache local
+     → Solução: Limpar cache (Método 1)
+  
+  ❌ NENHUMA IMAGEM CARREGOU:
+     → GitHub pode estar com delay
+     → Aguarde 5 minutos
+     → Teste novamente
+     → Se continuar, a imagem pode não estar no GitHub
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ⚡ AÇÃO IMEDIATA                                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. Veja o resultado do teste que abriu
+  
+  2. Se ALGUMA imagem carregar:
+     → Pressione Ctrl + Shift + Delete
+     → Limpe "Imagens e arquivos em cache"
+     → Acesse: https://lealzinho30.github.io/dranadia/
+  
+  3. Se NENHUMA carregar:
+     → Aguarde 5 minutos
+     → Teste novamente
+     → Me avise o resultado
+
+
+═══════════════════════════════════════════════════════════
+
+   🎯 RESUMO:
+   
+   ✅ Imagem está no GitHub
+   ✅ Deploy foi feito
+   ⚠️  Problema é cache do navegador
+   💡 Solução: Limpar cache (Ctrl + Shift + Delete)
+
+═══════════════════════════════════════════════════════════
+

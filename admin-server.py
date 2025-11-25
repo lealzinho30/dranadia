@@ -168,6 +168,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                     file_path = IMAGES_DIR / filename
                     with open(file_path, 'wb') as f:
                         f.write(file_data)
+                    print(f"✓ Imagem salva: {filename}")
                     
                     # Update config
                     config = self.load_config()
@@ -177,12 +178,35 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                         config['imagens'][key] = filename
                     self.save_config(config)
                     
-                    self.send_json_response({
-                        'success': True,
-                        'message': 'Imagem salva com sucesso!',
-                        'filename': filename,
-                        'path': f'images/{filename}'
-                    })
+                    # Atualizar site
+                    try:
+                        import sys
+                        import importlib.util
+                        spec = importlib.util.spec_from_file_location("atualizar_site", BASE_DIR / "atualizar_site.py")
+                        atualizar_site_module = importlib.util.module_from_spec(spec)
+                        spec.loader.exec_module(atualizar_site_module)
+                        if hasattr(atualizar_site_module, 'atualizar_site_completo'):
+                            atualizar_site_module.atualizar_site_completo()
+                            print("✓ Site atualizado")
+                    except Exception as e:
+                        print(f"⚠️ Erro ao atualizar site: {e}")
+                    
+                    # Fazer deploy automaticamente
+                    deploy_result = self.deploy_to_github()
+                    if deploy_result:
+                        self.send_json_response({
+                            'success': True,
+                            'message': '✅ Imagem salva, site atualizado e deploy concluído!',
+                            'filename': filename,
+                            'path': f'images/{filename}'
+                        })
+                    else:
+                        self.send_json_response({
+                            'success': True,
+                            'message': '✅ Imagem salva e site atualizado. ⚠️ Deploy falhou - execute deploy-rapido.ps1 manualmente.',
+                            'filename': filename,
+                            'path': f'images/{filename}'
+                        })
                 else:
                     self.send_error_response('Erro ao processar upload')
             else:
@@ -206,6 +230,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                     file_path = IMAGES_DIR / filename
                     with open(file_path, 'wb') as f:
                         f.write(file_data)
+                    print(f"✓ Imagem salva: {filename}")
                     
                     # Update config
                     config = self.load_config()
@@ -215,12 +240,35 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                         config['imagens'][key] = filename
                     self.save_config(config)
                     
-                    self.send_json_response({
-                        'success': True,
-                        'message': 'Imagem salva com sucesso!',
-                        'filename': filename,
-                        'path': f'images/{filename}'
-                    })
+                    # Atualizar site
+                    try:
+                        import sys
+                        import importlib.util
+                        spec = importlib.util.spec_from_file_location("atualizar_site", BASE_DIR / "atualizar_site.py")
+                        atualizar_site_module = importlib.util.module_from_spec(spec)
+                        spec.loader.exec_module(atualizar_site_module)
+                        if hasattr(atualizar_site_module, 'atualizar_site_completo'):
+                            atualizar_site_module.atualizar_site_completo()
+                            print("✓ Site atualizado")
+                    except Exception as e:
+                        print(f"⚠️ Erro ao atualizar site: {e}")
+                    
+                    # Fazer deploy automaticamente
+                    deploy_result = self.deploy_to_github()
+                    if deploy_result:
+                        self.send_json_response({
+                            'success': True,
+                            'message': '✅ Imagem salva, site atualizado e deploy concluído!',
+                            'filename': filename,
+                            'path': f'images/{filename}'
+                        })
+                    else:
+                        self.send_json_response({
+                            'success': True,
+                            'message': '✅ Imagem salva e site atualizado. ⚠️ Deploy falhou - execute deploy-rapido.ps1 manualmente.',
+                            'filename': filename,
+                            'path': f'images/{filename}'
+                        })
                 else:
                     self.send_error_response('Dados inválidos')
                     

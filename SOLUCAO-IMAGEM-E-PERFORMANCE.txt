@@ -1,0 +1,132 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     🔧 SOLUÇÃO: IMAGEM NÃO MUDA + SITE LENTO            ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🖼️ PROBLEMA 1: IMAGEM NÃO MUDA                         ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  DIAGNÓSTICO:
+  ✓ GitHub está atualizado
+  ✓ Deploy foi feito com sucesso
+  ✓ Imagem atual: 2025-11-21 (1)-editado.webp
+
+  CAUSA:
+  • Você pode estar vendo o CACHE antigo do navegador
+  • Ou ainda não fez upload de uma nova imagem diferente
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ✅ COMO TROCAR A IMAGEM CORRETAMENTE                   ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  PASSO A PASSO COMPLETO:
+
+  1. Abra o painel:
+     http://localhost:8001/admin.html
+
+  2. Clique em "Imagens" no menu lateral
+
+  3. Vá até "Hero Slide 1"
+
+  4. Clique em "Selecionar Imagem"
+     → Escolha uma NOVA imagem do seu computador
+     → A imagem aparecerá no preview
+
+  5. O editor abre automaticamente
+     → Edite se quiser
+     → Ajuste tamanho, qualidade, etc
+
+  6. Clique em "APLICAR EDIÇÕES"
+     → AGUARDE a mensagem de sucesso
+     → A mensagem deve dizer: "Imagem salva e deploy iniciado!"
+
+  7. Aguarde 2-3 minutos
+
+  8. Limpe o cache do navegador:
+     → Ctrl + Shift + Delete
+     → Ou Ctrl + F5 (recarregar forçado)
+
+  9. Acesse o site:
+     https://lealzinho30.github.io/dranadia/
+
+  10. A nova imagem deve aparecer!
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🐌 PROBLEMA 2: SITE LENTO                              ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  CAUSAS IDENTIFICADAS:
+  • Imagens muito grandes (alguns arquivos .webp pesados)
+  • GitHub Pages pode ter delay no primeiro acesso
+  • Cache do navegador pode estar cheio
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ⚡ COMO MELHORAR A PERFORMANCE                         ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. OTIMIZE AS IMAGENS NO PAINEL:
+     → Quando fizer upload, reduza a qualidade para 70-80%
+     → Reduza o tamanho para max 1920x1080px
+     → O editor já faz isso automaticamente!
+
+  2. LIMPE O CACHE:
+     → Ctrl + Shift + Delete
+     → Marque "Imagens e arquivos em cache"
+     → Clique em "Limpar dados"
+
+  3. AGUARDE O CACHE DO GITHUB PAGES:
+     → Na primeira visita após deploy pode demorar
+     → Nas próximas será mais rápido
+
+  4. USE NAVEGADOR ATUALIZADO:
+     → Chrome, Edge ou Firefox atualizados
+     → Evite Internet Explorer
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🔍 COMO VERIFICAR SE A IMAGEM MUDOU                    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  1. Abra o Console do navegador (F12)
+
+  2. Vá na aba "Network" (Rede)
+
+  3. Recarregue a página (F5)
+
+  4. Procure por arquivos .webp
+
+  5. Veja o nome do arquivo:
+     → Se for diferente da imagem antiga, mudou!
+     → Se for o mesmo nome, ainda não atualizou
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ⚠️ IMPORTANTE                                           ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  • SEMPRE use o painel para fazer mudanças
+  • SEMPRE clique em "Aplicar Edições" após editar
+  • SEMPRE aguarde a mensagem de sucesso
+  • SEMPRE aguarde 2-3 minutos antes de ver no site
+  • SEMPRE limpe o cache (Ctrl + F5)
+
+
+═══════════════════════════════════════════════════════════
+
+   🎯 RESUMO:
+   
+   1. Abra o painel: http://localhost:8001/admin.html
+   2. Selecione NOVA imagem
+   3. Clique "Aplicar Edições"
+   4. Aguarde 2-3 minutos
+   5. Limpe cache (Ctrl + F5)
+   6. Acesse: https://lealzinho30.github.io/dranadia/
+
+═══════════════════════════════════════════════════════════
+

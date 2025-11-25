@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forçar Atualização do Site</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+        .status {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        .status.loading {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+        .status.success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+        .status.error {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .info h3 {
+            color: #2196F3;
+            margin-bottom: 10px;
+        }
+        .info ol {
+            padding-left: 20px;
+        }
+        .info li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .spinner {
+            border: 4px solid rgba(0,0,0,0.1);
+            border-left-color: #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        .spinner.active {
+            display: block;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Forçar Atualização do Site</h1>
+        
+        <div class="status" id="status">
+            Clique no botão abaixo para limpar o cache e atualizar o site
+        </div>
+        
+        <div class="spinner" id="spinner"></div>
+        
+        <button onclick="forcarAtualizacao()" id="btnAtualizar">
+            🚀 Limpar Cache e Atualizar Site
+        </button>
+        
+        <button onclick="abrirSite()" id="btnAbrir" style="background: #28a745;">
+            🌐 Abrir Site Atualizado
+        </button>
+        
+        <div class="info">
+            <h3>📋 O que este botão faz:</h3>
+            <ol>
+                <li>Limpa o cache do navegador para este site</li>
+                <li>Adiciona um timestamp para forçar atualização</li>
+                <li>Carrega uma versão nova de todas as imagens</li>
+                <li>Redireciona para o site com cache limpo</li>
+            </ol>
+        </div>
+        
+        <div class="info" style="border-left-color: #ff6b9d;">
+            <h3>⚠️ Se ainda não atualizar:</h3>
+            <ol>
+                <li>Aguarde 2-3 minutos (GitHub está atualizando)</li>
+                <li>Pressione <strong>Ctrl + Shift + Delete</strong></li>
+                <li>Limpe "Imagens e arquivos em cache"</li>
+                <li>Tente em outra aba anônima</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        const siteUrl = 'https://lealzinho30.github.io/dranadia/';
+        
+        function mostrarStatus(mensagem, tipo) {
+            const status = document.getElementById('status');
+            status.textContent = mensagem;
+            status.className = 'status ' + tipo;
+        }
+        
+        function mostrarSpinner(show) {
+            const spinner = document.getElementById('spinner');
+            spinner.className = show ? 'spinner active' : 'spinner';
+        }
+        
+        async function forcarAtualizacao() {
+            const btn = document.getElementById('btnAtualizar');
+            btn.disabled = true;
+            mostrarSpinner(true);
+            mostrarStatus('🔄 Limpando cache...', 'loading');
+            
+            try {
+                // 1. Limpar localStorage
+                localStorage.clear();
+                await new Promise(r => setTimeout(r, 500));
+                
+                // 2. Limpar sessionStorage
+                sessionStorage.clear();
+                await new Promise(r => setTimeout(r, 500));
+                
+                // 3. Tentar limpar cache API (se disponível)
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    await Promise.all(cacheNames.map(name => caches.delete(name)));
+                    mostrarStatus('🗑️ Cache API limpo...', 'loading');
+                    await new Promise(r => setTimeout(r, 500));
+                }
+                
+                // 4. Forçar reload de imagens
+                mostrarStatus('🖼️ Recarregando imagens...', 'loading');
+                await new Promise(r => setTimeout(r, 500));
+                
+                // 5. Preparar URL com timestamp
+                const timestamp = new Date().getTime();
+                const urlComTimestamp = `${siteUrl}?t=${timestamp}&nocache=true`;
+                
+                mostrarStatus('✅ Cache limpo! Abrindo site...', 'success');
+                mostrarSpinner(false);
+                
+                await new Promise(r => setTimeout(r, 1000));
+                
+                // 6. Abrir site
+                window.open(urlComTimestamp, '_blank');
+                
+                mostrarStatus('✅ Site aberto! Se a imagem não aparecer, aguarde 2 minutos e tente novamente.', 'success');
+                btn.disabled = false;
+                
+            } catch (error) {
+                mostrarStatus('❌ Erro: ' + error.message, 'error');
+                mostrarSpinner(false);
+                btn.disabled = false;
+            }
+        }
+        
+        function abrirSite() {
+            const timestamp = new Date().getTime();
+            window.open(`${siteUrl}?t=${timestamp}`, '_blank');
+        }
+        
+        // Atalhos de teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                forcarAtualizacao();
+            }
+        });
+    </script>
+</body>
+</html>
+

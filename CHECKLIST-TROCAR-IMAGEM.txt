@@ -1,0 +1,95 @@
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║     ✅ CHECKLIST: TROCAR IMAGEM DO HERO                  ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  📋 PASSO A PASSO                                       ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  ☐ 1. Abrir o painel
+       → http://localhost:8001/admin.html
+       → Se não abrir, execute: INICIAR-ADMIN-SIMPLES.bat
+
+  ☐ 2. Clicar em "Imagens" no menu lateral
+
+  ☐ 3. Localizar "Hero Slide 1"
+
+  ☐ 4. Clicar no botão verde "Selecionar Imagem"
+
+  ☐ 5. Escolher uma NOVA imagem do computador
+       → Escolha uma imagem DIFERENTE da atual
+       → Formato: .jpg, .png, .webp
+
+  ☐ 6. Aguardar o editor abrir (abre automaticamente)
+
+  ☐ 7. Editar a imagem se quiser:
+       → Ajustar tamanho
+       → Ajustar qualidade (70-80% é ideal)
+       → Cortar se necessário
+
+  ☐ 8. Clicar em "APLICAR EDIÇÕES" (botão verde grande)
+
+  ☐ 9. Aguardar a mensagem:
+       → "✅ Imagem salva e deploy iniciado!"
+       → Deve aparecer no topo da tela
+
+  ☐ 10. Aguardar 2-3 minutos (GitHub está atualizando)
+
+  ☐ 11. Abrir o site:
+        → https://lealzinho30.github.io/dranadia/
+
+  ☐ 12. Forçar atualização:
+        → Ctrl + F5 (Windows)
+        → Cmd + Shift + R (Mac)
+
+  ☐ 13. Verificar se a imagem mudou!
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ❌ ERROS COMUNS                                         ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  ✗ Esqueceu de clicar em "Aplicar Edições"
+    → A imagem não é salva
+
+  ✗ Não aguardou a mensagem de sucesso
+    → Upload ainda está processando
+
+  ✗ Não aguardou 2-3 minutos
+    → GitHub Pages demora para atualizar
+
+  ✗ Não limpou o cache (Ctrl + F5)
+    → Navegador mostra versão antiga
+
+  ✗ Abriu file:// ao invés de https://
+    → Vendo arquivo local, não o site real
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  💡 DICAS                                                ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  • Use imagens com nomes diferentes
+    (facilita identificar se mudou)
+
+  • Abra o Console (F12) para ver logs
+    (ajuda a identificar problemas)
+
+  • Teste em aba anônima
+    (garante que não é cache)
+
+  • Se não funcionar, aguarde 5 minutos
+    (às vezes GitHub demora mais)
+
+
+═══════════════════════════════════════════════════════════
+
+   🚀 O painel está abrindo agora!
+      
+      Siga o checklist acima para trocar a imagem.
+
+═══════════════════════════════════════════════════════════
+

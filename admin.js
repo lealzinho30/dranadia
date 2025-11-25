@@ -141,12 +141,11 @@ function carregarPreviews() {
         return;
     }
     
-    console.log('Carregando previews:', siteConfig.imagens);
+    console.log('Carregando previews:', Object.keys(siteConfig.imagens).length, 'imagens');
     
-    Object.keys(siteConfig.imagens).forEach(key => {
-        const filename = siteConfig.imagens[key];
+        Object.keys(siteConfig.imagens).forEach(key => {
+            const filename = siteConfig.imagens[key];
         if (!filename || !filename.trim()) {
-            console.warn(`Filename vazio para ${key}`);
             return;
         }
         
@@ -157,19 +156,24 @@ function carregarPreviews() {
             return;
         }
         
+        // Verificar se já existe uma imagem carregada
+        const existingImg = preview.querySelector('img');
+        if (existingImg && existingImg.src && !existingImg.src.includes('blob:')) {
+            console.log(`✓ Preview já carregado: ${key}`);
+            return; // Não recarregar se já está carregado
+        }
+        
         preview.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Carregando...</span>';
         
-        const img = document.createElement('img');
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '100%';
-        img.style.objectFit = 'contain';
+                const img = document.createElement('img');
+        img.style.width = '100%';
+        img.style.height = 'auto';
         img.style.display = 'block';
         
         const baseUrl = API_BASE.replace('/api', '');
         const timestamp = Date.now();
         const cleanFilename = filename.trim();
         
-        // Tentar múltiplas URLs
         const urls = [
             `${baseUrl}/images/${encodeURIComponent(cleanFilename)}?t=${timestamp}`,
             `${baseUrl}/images/${cleanFilename}?t=${timestamp}`,
@@ -184,8 +188,7 @@ function carregarPreviews() {
             if (loaded) return;
             
             if (urlIndex >= urls.length) {
-                preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
-                console.error(`Não foi possível carregar: ${cleanFilename}`);
+                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
                 return;
             }
             
@@ -199,7 +202,7 @@ function carregarPreviews() {
                     img.src = currentUrl;
                     preview.innerHTML = '';
                     preview.appendChild(img);
-                    console.log(`✓ Imagem carregada: ${cleanFilename}`);
+                    console.log(`✓ ${key} carregado`);
                 }
             };
             
@@ -240,13 +243,13 @@ async function previewImage(input, previewId) {
     };
     
     reader.onload = (e) => {
-        preview.innerHTML = '';
-        const img = document.createElement('img');
-        img.src = e.target.result;
+            preview.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = e.target.result;
         img.style.width = '100%';
         img.style.height = 'auto';
         img.style.display = 'block';
-        preview.appendChild(img);
+            preview.appendChild(img);
         console.log('Preview mostrado com sucesso');
         
         setTimeout(() => abrirEditor(e.target.result), 100);
@@ -303,9 +306,9 @@ let originalAspectRatio = 1;
 function atualizarControles() {
     if (!cropper) return;
     
-    const canvas = cropper.getCanvasData();
-    const width = Math.round(canvas.width);
-    const height = Math.round(canvas.height);
+        const canvas = cropper.getCanvasData();
+        const width = Math.round(canvas.width);
+        const height = Math.round(canvas.height);
     
     const widthInput = document.getElementById('editorWidth');
     const heightInput = document.getElementById('editorHeight');
@@ -475,7 +478,7 @@ function fecharEditor() {
     
     if (cropper) {
         try {
-            cropper.destroy();
+        cropper.destroy();
         } catch (e) {}
         cropper = null;
     }
@@ -556,15 +559,18 @@ async function salvarTudo() {
             heroSubtitle: document.getElementById('hero-subtitle').value,
             sobreCompromisso: document.getElementById('sobre-compromisso').value
         },
-        imagens: {},
+        imagens: siteConfig.imagens || {}, // Manter imagens existentes
         servicos: siteConfig.servicos || [],
         depoimentos: siteConfig.depoimentos || []
     };
     
+    // Coletar imagens dos inputs (atualizar ou adicionar)
     document.querySelectorAll('.filename-input').forEach(input => {
         const key = input.getAttribute('data-key');
         const value = input.value.trim();
-        if (value) dados.imagens[key] = value;
+        if (value) {
+            dados.imagens[key] = value;
+        }
     });
     
     try {
@@ -577,14 +583,13 @@ async function salvarTudo() {
         const result = await response.json();
         
         if (result.success) {
-            siteConfig = dados;
+            console.log('Salvamento bem-sucedido!');
+            siteConfig = dados; // Atualizar config local
             mostrarStatus(result.message || '✅ Tudo salvo com sucesso!', 'success');
-            // Recarregar previews imediatamente e depois novamente após delay
-            carregarPreviews();
-            setTimeout(() => {
-                carregarPreviews();
-            }, 1000);
+            // NÃO recarregar previews - manter imagens visíveis
+            console.log('Previews mantidos sem recarregar');
         } else {
+            console.error('Erro ao salvar:', result);
             mostrarStatus('❌ Erro: ' + result.error, 'error');
         }
     } catch (error) {
@@ -696,29 +701,29 @@ function gerarImageUploadItems() {
             const item = document.createElement('div');
             item.className = 'image-upload-item';
             item.innerHTML = `
-                <div class="image-item-header">
-                    <div>
+        <div class="image-item-header">
+            <div>
                         <label>Dica ${i}: ${dicasTitulos[i-1]}</label>
                         <span class="image-hint">Imagem do card "${dicasTitulos[i-1]}"</span>
-                    </div>
+            </div>
                     <button class="btn-remove-image" onclick="removerImagem('${key}', '${key}')" title="Remover">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
                 <div class="image-preview" id="preview-${key}">
                     <i class="fas fa-image"></i><span>Sem imagem</span>
-                </div>
-                <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${key}')">
-                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
+        </div>
+        <input type="file" accept="image/*" data-key="${key}" onchange="previewImage(this, '${key}')">
+        <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="${key}">
                 <button class="btn btn-small" onclick="editarImagemExistente('${key}', '${key}')" style="margin-top:0.5rem;">
-                    <i class="fas fa-edit"></i> Editar
-                </button>
-            `;
+            <i class="fas fa-edit"></i> Editar
+        </button>
+    `;
             dicasGrid.appendChild(item);
         }
         console.log('✓ 6 itens de dicas gerados');
-    }
-    
+}
+
     console.log('✅ Todos os itens de upload gerados!');
 }
 

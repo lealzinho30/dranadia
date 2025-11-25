@@ -152,22 +152,58 @@ function carregarPreviews() {
         img.style.objectFit = 'contain';
         
         const baseUrl = API_BASE.replace('/api', '');
-        const url = `${baseUrl}/images/${encodeURIComponent(filename)}?t=${Date.now()}`;
+        const timestamp = Date.now();
         
-        img.onload = () => {
-            preview.innerHTML = '';
-            preview.appendChild(img);
-        };
+        // Tentar múltiplas URLs com diferentes encodings
+        const urls = [
+            `${baseUrl}/images/${encodeURIComponent(filename)}?t=${timestamp}`,
+            `${baseUrl}/images/${filename}?t=${timestamp}`,
+            `${baseUrl}/images/${encodeURI(filename)}?t=${timestamp}`,
+            `images/${encodeURIComponent(filename)}?t=${timestamp}`,
+            `images/${filename}?t=${timestamp}`,
+            `images/${encodeURI(filename)}?t=${timestamp}`
+        ];
         
-        img.onerror = () => {
-            const fallbackUrl = `images/${encodeURIComponent(filename)}?t=${Date.now()}`;
-            img.src = fallbackUrl;
-            img.onerror = () => {
-                preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
+        let urlIndex = 0;
+        let loaded = false;
+        
+        function tryNextUrl() {
+            if (loaded) return;
+            
+            if (urlIndex >= urls.length) {
+                if (!loaded) {
+                    preview.innerHTML = '<i class="fas fa-image"></i><span>Imagem não encontrada</span>';
+                    console.error(`Não foi possível carregar: ${filename}`);
+                    console.error('Tentou URLs:', urls);
+                }
+                return;
+            }
+            
+            const currentUrl = urls[urlIndex];
+            urlIndex++;
+            
+            // Criar nova imagem para cada tentativa
+            const testImg = new Image();
+            testImg.onload = () => {
+                if (!loaded) {
+                    loaded = true;
+                    img.src = currentUrl;
+                    preview.innerHTML = '';
+                    preview.appendChild(img);
+                    console.log(`✓ Imagem carregada: ${currentUrl}`);
+                }
             };
-        };
+            
+            testImg.onerror = () => {
+                console.warn(`✗ Erro ao carregar: ${currentUrl}`);
+                setTimeout(tryNextUrl, 100);
+            };
+            
+            testImg.src = currentUrl;
+        }
         
-        img.src = url;
+        // Começar a tentar
+        tryNextUrl();
     });
 }
 
@@ -534,7 +570,10 @@ async function salvarTudo() {
         if (result.success) {
             siteConfig = dados;
             mostrarStatus(result.message || '✅ Tudo salvo com sucesso!', 'success');
-            carregarPreviews();
+            // Aguardar um pouco antes de recarregar previews para garantir que o servidor salvou tudo
+            setTimeout(() => {
+                carregarPreviews();
+            }, 500);
         } else {
             mostrarStatus('❌ Erro: ' + result.error, 'error');
         }

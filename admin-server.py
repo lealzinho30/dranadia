@@ -506,12 +506,27 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             
             if result.returncode == 0:
                 print("✅ Deploy concluído com sucesso!")
+                print(f"   Output: {result.stdout}")
                 return True
             else:
                 print(f"❌ Erro no push: {result.stderr}")
+                print(f"   Output: {result.stdout}")
                 if "no changes" in result.stdout.lower() or "up to date" in result.stdout.lower():
                     print("ℹ️  Repositório já está atualizado")
                     return True
+                # Tentar configurar remote se não existir
+                if "remote" in result.stderr.lower() or "origin" in result.stderr.lower():
+                    print("⚠️  Tentando configurar remote...")
+                    subprocess.run(['git', 'remote', 'add', 'origin', 'https://github.com/lealzinho30/dranadia.git'], 
+                                 cwd=str(BASE_DIR), capture_output=True, timeout=10)
+                    subprocess.run(['git', 'branch', '-M', 'main'], 
+                                 cwd=str(BASE_DIR), capture_output=True, timeout=10)
+                    # Tentar push novamente
+                    result2 = subprocess.run(['git', 'push', '-u', 'origin', 'main'],
+                                            cwd=str(BASE_DIR), capture_output=True, text=True, timeout=120)
+                    if result2.returncode == 0:
+                        print("✅ Deploy concluído após configurar remote!")
+                        return True
                 return False
             
         except subprocess.TimeoutExpired:

@@ -168,6 +168,7 @@ def atualizar_imagens(html, config):
             import re as re_module
             filename = re_module.sub(r'\)-editado\.webp\)+', ')-editado.webp', filename)
             novo_url = f"url('images/{filename}')"
+            novo_src = f"images/{filename}"
             
             # Limpar duplicações primeiro
             padrao_duplicacao = rf'(url\(\'images/[^\']+\'\))(-editado\.webp\'\))+'
@@ -183,7 +184,7 @@ def atualizar_imagens(html, config):
                     style_end = match.end(1)
                     html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
                 alteracoes += 1
-                print(f"  ✓ Hero slide {slide_index+1} atualizado: {filename}")
+                print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
             else:
                 # Fallback: buscar por ordem
                 padrao_fallback = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
@@ -196,9 +197,20 @@ def atualizar_imagens(html, config):
                         style_end = match.end(1)
                         html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
                     alteracoes += 1
-                    print(f"  ✓ Hero slide {slide_index+1} atualizado: {filename}")
+                    print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
                 else:
                     print(f"  ⚠️  Hero slide {slide_index+1} não encontrado")
+            
+            # Se for o primeiro slide (hero-slide-1), também atualizar a imagem principal (hero-main-image)
+            if key == 'hero-slide-1':
+                padrao_img = r'(<img[^>]*class="[^"]*hero-main-image[^"]*"[^>]*src=")([^"]*)(")'
+                match_img = re.search(padrao_img, html)
+                if match_img:
+                    html = html[:match_img.start(2)] + novo_src + html[match_img.end(2):]
+                    alteracoes += 1
+                    print(f"  ✓ Hero imagem principal atualizada: {filename}")
+                else:
+                    print(f"  ⚠️  Hero imagem principal não encontrada")
         else:
             # Remover imagem se não estiver mais no config
             match = re.search(padrao, html)

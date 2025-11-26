@@ -90,12 +90,20 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         if self.path == '/api/upload':
             self.handle_upload()
+        elif self.path == '/api/config':
+            self.handle_save_config()
         elif self.path == '/api/save-config':
             self.handle_save_config()
         elif self.path == '/api/update-site':
             self.handle_update_site()
         else:
             super().do_POST()
+    
+    def do_DELETE(self):
+        if self.path.startswith('/api/images/'):
+            self.handle_delete_image()
+        else:
+            self.send_error(404, "Not Found")
     
     def send_config(self):
         """Envia a configuração atual"""
@@ -117,11 +125,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             if IMAGES_DIR.exists():
                 for file in IMAGES_DIR.iterdir():
                     if file.is_file() and file.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp', '.gif']:
-                        images.append({
-                            'name': file.name,
-                            'size': file.stat().st_size,
-                            'path': f'images/{file.name}'
-                        })
+                        images.append(file.name)
             
             self.send_json_response({'images': images})
         except Exception as e:
@@ -152,10 +156,13 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                             filename_line = part.split(b'filename=')[1].split(b'\r\n')[0]
                             filename = filename_line.strip(b'"').decode('utf-8')
                         
-                        # Extract field name
+                        # Extract field name (key or image)
                         if b'name="key"' in part:
                             key_line = part.split(b'name="key"')[1].split(b'\r\n\r\n')[1].split(b'\r\n')[0]
                             key = key_line.decode('utf-8')
+                        elif b'name="image"' in part:
+                            # New system uses "image" field
+                            pass
                     
                     # Extract file data
                     if b'\r\n\r\n' in part and filename:
@@ -170,43 +177,21 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                         f.write(file_data)
                     print(f"✓ Imagem salva: {filename}")
                     
-                    # Update config
-                    config = self.load_config()
-                    if 'imagens' not in config:
-                        config['imagens'] = {}
+                    # Update config only if key is provided
                     if key:
+                        config = self.load_config()
+                        if 'imagens' not in config:
+                            config['imagens'] = {}
                         config['imagens'][key] = filename
-                    self.save_config(config)
+                        self.save_config(config)
                     
-                    # Atualizar site
-                    try:
-                        import sys
-                        import importlib.util
-                        spec = importlib.util.spec_from_file_location("atualizar_site", BASE_DIR / "atualizar_site.py")
-                        atualizar_site_module = importlib.util.module_from_spec(spec)
-                        spec.loader.exec_module(atualizar_site_module)
-                        if hasattr(atualizar_site_module, 'atualizar_site_completo'):
-                            atualizar_site_module.atualizar_site_completo()
-                            print("✓ Site atualizado")
-                    except Exception as e:
-                        print(f"⚠️ Erro ao atualizar site: {e}")
-                    
-                    # Fazer deploy automaticamente
-                    deploy_result = self.deploy_to_github()
-                    if deploy_result:
-                        self.send_json_response({
-                            'success': True,
-                            'message': '✅ Imagem salva, site atualizado e deploy concluído!',
-                            'filename': filename,
-                            'path': f'images/{filename}'
-                        })
-                    else:
-                        self.send_json_response({
-                            'success': True,
-                            'message': '✅ Imagem salva e site atualizado. ⚠️ Deploy falhou - execute deploy-rapido.ps1 manualmente.',
-                            'filename': filename,
-                            'path': f'images/{filename}'
-                        })
+                    # Return success
+                    self.send_json_response({
+                        'success': True,
+                        'message': '✅ Imagem salva com sucesso!',
+                        'filename': filename,
+                        'path': f'images/{filename}'
+                    })
                 else:
                     self.send_error_response('Erro ao processar upload')
             else:

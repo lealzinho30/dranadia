@@ -29,7 +29,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
     
@@ -171,26 +171,31 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                             file_data = file_data[:-4]
                 
                 if filename and file_data:
+                    # Clean filename - remove special characters
+                    import re
+                    safe_filename = re.sub(r'[^\w\s\-_\.]', '', filename)
+                    safe_filename = safe_filename.strip()
+                    
                     # Save file
-                    file_path = IMAGES_DIR / filename
+                    file_path = IMAGES_DIR / safe_filename
                     with open(file_path, 'wb') as f:
                         f.write(file_data)
-                    print(f"✓ Imagem salva: {filename}")
+                    print(f"✓ Imagem salva: {safe_filename}")
                     
                     # Update config only if key is provided
                     if key:
                         config = self.load_config()
                         if 'imagens' not in config:
                             config['imagens'] = {}
-                        config['imagens'][key] = filename
+                        config['imagens'][key] = safe_filename
                         self.save_config(config)
                     
                     # Return success
                     self.send_json_response({
                         'success': True,
                         'message': '✅ Imagem salva com sucesso!',
-                        'filename': filename,
-                        'path': f'images/{filename}'
+                        'filename': safe_filename,
+                        'path': f'images/{safe_filename}'
                     })
                 else:
                     self.send_error_response('Erro ao processar upload')

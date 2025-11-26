@@ -156,9 +156,6 @@ def atualizar_imagens(html, config):
     }
     
     for key, slide_index in hero_slides_map.items():
-        # Procurar por div com data-slide correspondente
-        padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
-        
         if key in imagens and imagens[key]:
             # Atualizar com nova imagem
             filename = imagens[key]
@@ -167,41 +164,10 @@ def atualizar_imagens(html, config):
             # Remover duplicações de "-editado.webp" usando regex
             import re as re_module
             filename = re_module.sub(r'\)-editado\.webp\)+', ')-editado.webp', filename)
-            novo_url = f"url('images/{filename}')"
             novo_src = f"images/{filename}"
             
-            # Limpar duplicações primeiro
-            padrao_duplicacao = rf'(url\(\'images/[^\']+\'\))(-editado\.webp\'\))+'
-            html = re.sub(padrao_duplicacao, r'\1', html)
-            
-            # Substituir url() completo - usar busca mais específica
-            match = re.search(padrao, html)
-            if match:
-                # Se já tem uma imagem, substituir; se não, adicionar
-                if match.group(2):  # Já tem url()
-                    html = html[:match.start(2)] + novo_url + html[match.end(2):]
-                else:  # Não tem url(), adicionar antes do fechamento do style
-                    style_end = match.end(1)
-                    html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
-                alteracoes += 1
-                print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
-            else:
-                # Fallback: buscar por ordem
-                padrao_fallback = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
-                matches = list(re.finditer(padrao_fallback, html))
-                if slide_index < len(matches):
-                    match = matches[slide_index]
-                    if match.group(2):  # Já tem url()
-                        html = html[:match.start(2)] + novo_url + html[match.end(2):]
-                    else:  # Não tem url(), adicionar
-                        style_end = match.end(1)
-                        html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
-                    alteracoes += 1
-                    print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
-                else:
-                    print(f"  ⚠️  Hero slide {slide_index+1} não encontrado")
-            
-            # Se for o primeiro slide (hero-slide-1), também atualizar a imagem principal (hero-main-image)
+            # Se for o primeiro slide (hero-slide-1), atualizar APENAS a imagem principal (hero-main-image)
+            # NÃO alterar o background
             if key == 'hero-slide-1':
                 padrao_img = r'(<img[^>]*class="[^"]*hero-main-image[^"]*"[^>]*src=")([^"]*)(")'
                 match_img = re.search(padrao_img, html)
@@ -211,14 +177,41 @@ def atualizar_imagens(html, config):
                     print(f"  ✓ Hero imagem principal atualizada: {filename}")
                 else:
                     print(f"  ⚠️  Hero imagem principal não encontrada")
-        else:
-            # Remover imagem se não estiver mais no config
-            match = re.search(padrao, html)
-            if match and match.group(2):  # Se tem url() para remover
-                # Remover o url() mas manter o style
-                html = html[:match.start(2)] + html[match.end(2):]
-                alteracoes += 1
-                print(f"  ✓ Hero slide {slide_index+1} removido (imagem não configurada)")
+            else:
+                # Para hero-slide-2, atualizar apenas o background (comportamento original)
+                padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
+                novo_url = f"url('images/{filename}')"
+                
+                # Limpar duplicações primeiro
+                padrao_duplicacao = rf'(url\(\'images/[^\']+\'\))(-editado\.webp\'\))+'
+                html = re.sub(padrao_duplicacao, r'\1', html)
+                
+                # Substituir url() completo - usar busca mais específica
+                match = re.search(padrao, html)
+                if match:
+                    # Se já tem uma imagem, substituir; se não, adicionar
+                    if match.group(2):  # Já tem url()
+                        html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                    else:  # Não tem url(), adicionar antes do fechamento do style
+                        style_end = match.end(1)
+                        html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
+                    alteracoes += 1
+                    print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
+                else:
+                    # Fallback: buscar por ordem
+                    padrao_fallback = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
+                    matches = list(re.finditer(padrao_fallback, html))
+                    if slide_index < len(matches):
+                        match = matches[slide_index]
+                        if match.group(2):  # Já tem url()
+                            html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                        else:  # Não tem url(), adicionar
+                            style_end = match.end(1)
+                            html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
+                        alteracoes += 1
+                        print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
+                    else:
+                        print(f"  ⚠️  Hero slide {slide_index+1} não encontrado")
     
     # Foto Dra. Nadia - class="sobre-img"
     if 'sobre-foto' in imagens:

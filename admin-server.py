@@ -263,6 +263,25 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             print(f"ERRO no upload: {error_msg}")
             self.send_error_response(str(e))
     
+    def handle_delete_image(self):
+        """Remove uma imagem"""
+        try:
+            # Extract filename from path /api/images/filename
+            filename = urllib.parse.unquote(self.path.replace('/api/images/', ''))
+            file_path = IMAGES_DIR / filename
+            
+            if file_path.exists() and file_path.is_file():
+                file_path.unlink()
+                print(f"✓ Imagem removida: {filename}")
+                self.send_json_response({
+                    'success': True,
+                    'message': f'✅ Imagem "{filename}" removida com sucesso!'
+                })
+            else:
+                self.send_error_response(f'Imagem não encontrada: {filename}')
+        except Exception as e:
+            self.send_error_response(str(e))
+    
     def handle_save_config(self):
         """Salva a configuração e atualiza o site automaticamente"""
         try:

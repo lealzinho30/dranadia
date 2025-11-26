@@ -396,18 +396,21 @@
                     body: formData
                 });
 
-                if (res.ok) {
-                    const data = await res.json();
-                    images.push(data.filename);
-                    displayImages();
+                const data = await res.json();
+                
+                if (res.ok && data.success) {
+                    const filename = data.filename || file.name;
+                    if (!images.includes(filename)) {
+                        images.push(filename);
+                    }
+                    await loadData(); // Reload to get updated list
                     showStatus('✅ Imagem enviada!', 'success');
                 } else {
-                    const error = await res.json();
-                    showStatus('❌ ' + (error.error || 'Erro ao enviar'), 'error');
+                    showStatus('❌ ' + (data.error || data.message || 'Erro ao enviar'), 'error');
                 }
             } catch (error) {
-                showStatus('❌ Erro de conexão', 'error');
-                console.error(error);
+                showStatus('❌ Erro de conexão: ' + error.message, 'error');
+                console.error('Upload error:', error);
             }
         }
 
@@ -491,7 +494,7 @@
                     await loadData(); // Reload
                     showStatus('✅ Imagem removida', 'success');
                 } else {
-                    showStatus('❌ ' + (data.error || 'Erro ao remover'), 'error');
+                    showStatus('❌ ' + (data.error || data.message || 'Erro ao remover'), 'error');
                 }
             } catch (error) {
                 showStatus('❌ Erro de conexão: ' + error.message, 'error');

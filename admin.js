@@ -129,7 +129,7 @@ function preencherFormularios() {
 }
 
 const imageKeyToPreviewId = {
-    'hero-slide-1': 'hero-1',
+    'hero-slide-1': 'hero-main',  // Imagem principal do hero (hero-main-image)
     'hero-slide-2': 'hero-2',
     'sobre-foto': 'sobre',
     // Galeria, diferenciais e dicas usam o mesmo ID (galeria-1, diferencial-1, dica-1, etc)

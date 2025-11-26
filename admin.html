@@ -69,29 +69,57 @@
                 <!-- Seção Imagens -->
                 <section id="imagens" class="admin-section active">
                     <div class="section-card">
-                        <h3><i class="fas fa-sliders-h"></i> Hero Slider (2 imagens)</h3>
-                        <p class="section-description">Imagens principais que aparecem no topo do site, em formato slider. Recomendado: 1920x1080px (formato paisagem)</p>
+                        <h3><i class="fas fa-user-circle"></i> Imagem Principal do Hero</h3>
+                        <p class="section-description">Foto principal que aparece no lado direito do hero (foto da pessoa com aparelho). Esta é a imagem que fica em destaque, não o background. Recomendado: 800x1000px (formato retrato vertical)</p>
+                        <div class="alert-info" style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffc107;">
+                            <strong><i class="fas fa-info-circle"></i> Importante:</strong> Esta é a foto principal que aparece em destaque no hero. Para remover, clique no botão <i class="fas fa-trash"></i> e depois adicione uma nova imagem.
+                        </div>
+                        <div class="image-upload-item single">
+                            <div class="image-item-header">
+                                <div>
+                                    <label>Foto Principal do Hero</label>
+                                    <span class="image-hint">Imagem em destaque no lado direito (hero-main-image)</span>
+                                </div>
+                                <button class="btn-remove-image" onclick="removerImagem('hero-slide-1', 'hero-main')" title="Remover imagem">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="image-preview" id="preview-hero-main">
+                                <i class="fas fa-image"></i>
+                                <span>Sem imagem</span>
+                            </div>
+                            <input type="file" accept="image/*" data-key="hero-slide-1" onchange="previewImage(this, 'hero-main')">
+                            <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-1">
+                            <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-1', 'hero-main')" style="margin-top: 0.5rem;">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3><i class="fas fa-sliders-h"></i> Hero Slider - Backgrounds (2 imagens)</h3>
+                        <p class="section-description">Imagens de fundo do slider (atualmente desativadas - apenas gradientes). Recomendado: 1920x1080px (formato paisagem)</p>
                         <div class="alert-info" style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #2196f3;">
-                            <strong><i class="fas fa-info-circle"></i> Como alterar:</strong> Clique no botão <i class="fas fa-trash"></i> para remover a imagem atual, depois clique em "Escolher arquivo" para adicionar uma nova imagem.
+                            <strong><i class="fas fa-info-circle"></i> Nota:</strong> Os backgrounds estão desativados. Apenas os gradientes são exibidos.
                         </div>
                         <div class="images-grid">
                             <div class="image-upload-item">
                                 <div class="image-item-header">
                                     <div>
-                                        <label>Hero Slide 1</label>
-                                        <span class="image-hint">Primeira imagem do slider principal (data-slide="0")</span>
+                                        <label>Hero Slide 2 (Background)</label>
+                                        <span class="image-hint">Segunda imagem do slider principal (data-slide="1") - Background</span>
                                     </div>
-                                    <button class="btn-remove-image" onclick="removerImagem('hero-slide-1', 'hero-1')" title="Remover imagem">
+                                    <button class="btn-remove-image" onclick="removerImagem('hero-slide-2', 'hero-2')" title="Remover imagem">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
-                                <div class="image-preview" id="preview-hero-1">
+                                <div class="image-preview" id="preview-hero-2">
                                     <i class="fas fa-image"></i>
                                     <span>Sem imagem</span>
                                 </div>
-                                <input type="file" accept="image/*" data-key="hero-slide-1" onchange="previewImage(this, 'hero-1')">
-                                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-1">
-                                <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-1', 'hero-1')" style="margin-top: 0.5rem;">
+                                <input type="file" accept="image/*" data-key="hero-slide-2" onchange="previewImage(this, 'hero-2')">
+                                <input type="text" placeholder="Nome do arquivo..." class="filename-input" data-key="hero-slide-2">
+                                <button class="btn btn-small" onclick="editarImagemExistente('hero-slide-2', 'hero-2')" style="margin-top: 0.5rem;">
                                     <i class="fas fa-edit"></i> Editar
                                 </button>
                             </div>

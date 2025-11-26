@@ -463,19 +463,21 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 500px;
+    max-width: 400px;
     margin-left: auto;
 }
 
 .hero-image-wrapper {
     position: relative;
     width: 100%;
-    max-width: 450px;
+    max-width: 350px;
 }
 
 .hero-main-image {
     width: 100%;
     height: auto;
+    max-height: 500px;
+    object-fit: contain;
     border-radius: 30px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     position: relative;

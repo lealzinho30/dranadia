@@ -167,16 +167,30 @@ def atualizar_imagens(html, config):
             novo_src = f"images/{filename}"
             
             # Se for o primeiro slide (hero-slide-1), atualizar APENAS a imagem principal (hero-main-image)
-            # NÃO alterar o background
+            # NÃO alterar o background do slide
             if key == 'hero-slide-1':
-                padrao_img = r'(<img[^>]*class="[^"]*hero-main-image[^"]*"[^>]*src=")([^"]*)(")'
+                # Procurar pela tag img com hero-main-image
+                padrao_img = r'(<img[^>]*id="hero-main-image"[^>]*src=")([^"]*)(")'
                 match_img = re.search(padrao_img, html)
+                if not match_img:
+                    # Tentar sem id, apenas com class
+                    padrao_img = r'(<img[^>]*class="[^"]*hero-main-image[^"]*"[^>]*src=")([^"]*)(")'
+                    match_img = re.search(padrao_img, html)
+                
                 if match_img:
                     html = html[:match_img.start(2)] + novo_src + html[match_img.end(2):]
                     alteracoes += 1
                     print(f"  ✓ Hero imagem principal atualizada: {filename}")
                 else:
-                    print(f"  ⚠️  Hero imagem principal não encontrada")
+                    print(f"  ⚠️  Hero imagem principal não encontrada no HTML")
+                    # Tentar adicionar se não existir
+                    padrao_hero_image = r'(<div class="hero-image-wrapper">)'
+                    match_wrapper = re.search(padrao_hero_image, html)
+                    if match_wrapper:
+                        nova_img = f'\\1\n                    <img src="{novo_src}" alt="Foto principal do hero" class="hero-main-image" data-slide="0" loading="lazy" decoding="async" id="hero-main-image">'
+                        html = re.sub(padrao_hero_image, nova_img, html)
+                        alteracoes += 1
+                        print(f"  ✓ Hero imagem principal adicionada: {filename}")
             else:
                 # Para hero-slide-2, atualizar apenas o background (comportamento original)
                 padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'

@@ -42,8 +42,28 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
         elif self.path.startswith('/images/'):
             # Servir imagens diretamente
             self.serve_image()
+        elif self.path == '/upload-simples.html' or self.path == '/':
+            # Servir upload-simples.html
+            self.serve_upload_page()
         else:
             super().do_GET()
+    
+    def serve_upload_page(self):
+        """Serve a página de upload"""
+        try:
+            upload_file = BASE_DIR / 'upload-simples.html'
+            if upload_file.exists():
+                with open(upload_file, 'rb') as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+            else:
+                self.send_error(404, "File not found")
+        except Exception as e:
+            self.send_error(500, str(e))
     
     def serve_image(self):
         """Serve uma imagem específica"""

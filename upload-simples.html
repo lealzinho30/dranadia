@@ -396,7 +396,13 @@
                     body: formData
                 });
 
-                const data = await res.json();
+                let data;
+                try {
+                    data = await res.json();
+                } catch (e) {
+                    showStatus('❌ Erro ao processar resposta do servidor', 'error');
+                    return;
+                }
                 
                 if (res.ok && data.success) {
                     const filename = data.filename || file.name;
@@ -406,7 +412,9 @@
                     await loadData(); // Reload to get updated list
                     showStatus('✅ Imagem enviada!', 'success');
                 } else {
-                    showStatus('❌ ' + (data.error || data.message || 'Erro ao enviar'), 'error');
+                    const errorMsg = data.error || data.message || `Erro ${res.status}: ${res.statusText}`;
+                    showStatus('❌ ' + errorMsg, 'error');
+                    console.error('Upload error:', data);
                 }
             } catch (error) {
                 showStatus('❌ Erro de conexão: ' + error.message, 'error');

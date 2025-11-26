@@ -32,6 +32,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
+        self.end_headers()
     
     def do_GET(self):
         if self.path == '/api/config':
@@ -150,25 +151,48 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                 key = None
                 
                 for part in parts:
+                    if not part.strip():
+                        continue
+                    
                     if b'Content-Disposition' in part:
                         # Extract filename
                         if b'filename=' in part:
-                            filename_line = part.split(b'filename=')[1].split(b'\r\n')[0]
-                            filename = filename_line.strip(b'"').decode('utf-8')
+                            try:
+                                filename_line = part.split(b'filename=')[1].split(b'\r\n')[0]
+                                filename = filename_line.strip(b'"').decode('utf-8', errors='ignore')
+                            except:
+                                pass
                         
                         # Extract field name (key or image)
                         if b'name="key"' in part:
-                            key_line = part.split(b'name="key"')[1].split(b'\r\n\r\n')[1].split(b'\r\n')[0]
-                            key = key_line.decode('utf-8')
+                            try:
+                                key_line = part.split(b'name="key"')[1].split(b'\r\n\r\n')[1].split(b'\r\n')[0]
+                                key = key_line.decode('utf-8', errors='ignore')
+                            except:
+                                pass
                         elif b'name="image"' in part:
                             # New system uses "image" field
                             pass
                     
-                    # Extract file data
-                    if b'\r\n\r\n' in part and filename:
-                        file_data = part.split(b'\r\n\r\n', 1)[1]
-                        if file_data.endswith(b'\r\n--'):
-                            file_data = file_data[:-4]
+                    # Extract file data - look for the actual file content
+                    if filename and b'\r\n\r\n' in part and not file_data:
+                        try:
+                            file_data = part.split(b'\r\n\r\n', 1)[1]
+                            # Remove boundary markers and trailing data
+                            if file_data.endswith(b'\r\n--\r\n'):
+                                file_data = file_data[:-6]
+                            elif file_data.endswith(b'\r\n--'):
+                                file_data = file_data[:-4]
+                            elif file_data.endswith(b'--\r\n'):
+                                file_data = file_data[:-4]
+                            elif file_data.endswith(b'--'):
+                                file_data = file_data[:-2]
+                            # Remove trailing \r\n if present
+                            if file_data.endswith(b'\r\n'):
+                                file_data = file_data[:-2]
+                        except Exception as e:
+                            print(f"Erro ao extrair dados: {e}")
+                            continue
                 
                 if filename and file_data:
                     # Clean filename - remove special characters

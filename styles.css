@@ -476,8 +476,10 @@ section {
 .hero-main-image {
     width: 100%;
     height: auto;
+    min-height: 400px;
     max-height: 500px;
-    object-fit: contain;
+    object-fit: cover;
+    background-color: #000000;
     border-radius: 30px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -487,6 +489,23 @@ section {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.hero-main-image[src*="placeholder"] {
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-main-image[src*="placeholder"]::before {
+    content: "📷";
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .hero-map-wrapper {

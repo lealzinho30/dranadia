@@ -193,39 +193,27 @@ def atualizar_imagens(html, config):
                         print(f"  ✓ Hero imagem principal adicionada: {filename}")
             else:
                 # Para hero-slide-2, atualizar apenas o background (comportamento original)
-                padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
-                novo_url = f"url('images/{filename}')"
+                # Primeiro, limpar TODAS as duplicações de background-image no slide específico
+                padrao_limpar = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(background-image:\s*url\([^\)]+\);\s*)+'
+                html = re.sub(padrao_limpar, r'\1', html)
                 
-                # Limpar duplicações primeiro
-                padrao_duplicacao = rf'(url\(\'images/[^\']+\'\))(-editado\.webp\'\))+'
-                html = re.sub(padrao_duplicacao, r'\1', html)
+                # Agora adicionar a nova imagem
+                padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style=")([^\"]*)(")'
+                novo_url = f"background-image: url('images/{filename}');"
                 
-                # Substituir url() completo - usar busca mais específica
                 match = re.search(padrao, html)
                 if match:
-                    # Se já tem uma imagem, substituir; se não, adicionar
-                    if match.group(2):  # Já tem url()
-                        html = html[:match.start(2)] + novo_url + html[match.end(2):]
-                    else:  # Não tem url(), adicionar antes do fechamento do style
-                        style_end = match.end(1)
-                        html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
-                    alteracoes += 1
-                    print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
-                else:
-                    # Fallback: buscar por ordem
-                    padrao_fallback = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
-                    matches = list(re.finditer(padrao_fallback, html))
-                    if slide_index < len(matches):
-                        match = matches[slide_index]
-                        if match.group(2):  # Já tem url()
-                            html = html[:match.start(2)] + novo_url + html[match.end(2):]
-                        else:  # Não tem url(), adicionar
-                            style_end = match.end(1)
-                            html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
+                    # Adicionar a imagem ao style, mantendo o que já existe
+                    style_atual = match.group(2)
+                    if novo_url not in style_atual:
+                        novo_style = style_atual.rstrip('; ') + '; ' + novo_url
+                        html = html[:match.start(2)] + novo_style + html[match.end(2):]
                         alteracoes += 1
                         print(f"  ✓ Hero slide {slide_index+1} (background) atualizado: {filename}")
                     else:
-                        print(f"  ⚠️  Hero slide {slide_index+1} não encontrado")
+                        print(f"  ℹ️  Hero slide {slide_index+1} já tem esta imagem")
+                else:
+                    print(f"  ⚠️  Hero slide {slide_index+1} não encontrado")
     
     # Foto Dra. Nadia - class="sobre-img"
     if 'sobre-foto' in imagens:

@@ -420,7 +420,10 @@
                 showStatus('🔄 Atualizando hero...', 'info');
                 
                 const configRes = await fetch(`${API}/config`);
-                if (!configRes.ok) throw new Error('Erro ao carregar config');
+                if (!configRes.ok) {
+                    const error = await configRes.json().catch(() => ({ error: 'Erro ao carregar config' }));
+                    throw new Error(error.error || 'Erro ao carregar config');
+                }
                 
                 const config = await configRes.json();
                 if (!config.imagens) config.imagens = {};
@@ -434,27 +437,36 @@
 
                 if (saveRes.ok) {
                     // Update site
-                    await fetch(`${API}/update-site`, { method: 'POST' });
+                    try {
+                        await fetch(`${API}/update-site`, { method: 'POST' });
+                    } catch (e) {
+                        console.warn('Erro ao atualizar site:', e);
+                    }
                     
                     heroImage = filename;
                     displayHero();
-                    showStatus('✅ Hero atualizado! Atualizando site...', 'success');
+                    showStatus('✅ Hero atualizado!', 'success');
                     
-                    // Deploy
+                    // Deploy (opcional, não bloqueia)
                     setTimeout(async () => {
-                        await fetch(`${API}/save-config`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(config)
-                        });
-                        showStatus('✅ Deploy iniciado! Site será atualizado em 1-2 minutos.', 'success');
-                    }, 1000);
+                        try {
+                            await fetch(`${API}/save-config`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(config)
+                            });
+                            showStatus('✅ Deploy iniciado!', 'success');
+                        } catch (e) {
+                            console.warn('Erro no deploy:', e);
+                        }
+                    }, 500);
                 } else {
-                    showStatus('❌ Erro ao atualizar hero', 'error');
+                    const error = await saveRes.json().catch(() => ({ error: 'Erro desconhecido' }));
+                    showStatus('❌ Erro: ' + (error.error || 'Erro ao atualizar hero'), 'error');
                 }
             } catch (error) {
                 showStatus('❌ Erro: ' + error.message, 'error');
-                console.error(error);
+                console.error('Set hero error:', error);
             }
         }
 

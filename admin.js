@@ -500,11 +500,62 @@ async function removerImagem(key, previewId) {
     const filenameInput = document.querySelector(`.filename-input[data-key="${key}"]`);
     if (filenameInput) filenameInput.value = '';
     
+    // Remover do config local
     if (siteConfig.imagens && siteConfig.imagens[key]) {
         delete siteConfig.imagens[key];
     }
     
-    mostrarStatus('✅ Imagem removida. Clique em "Salvar Tudo" para aplicar.', 'success');
+    // Salvar automaticamente a remoção
+    try {
+        const dados = {
+            contato: {
+                telefone: document.getElementById('telefone')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                endereco: document.getElementById('endereco')?.value || '',
+                horario: document.getElementById('horario')?.value || ''
+            },
+            redesSociais: {
+                instagram: document.getElementById('instagram')?.value || '',
+                google: document.getElementById('google')?.value || ''
+            },
+            textos: {
+                heroTitle1: document.getElementById('hero-title-1')?.value || '',
+                heroTitle2: document.getElementById('hero-title-2')?.value || '',
+                heroSubtitle: document.getElementById('hero-subtitle')?.value || '',
+                sobreCompromisso: document.getElementById('sobre-compromisso')?.value || ''
+            },
+            imagens: { ...siteConfig.imagens }, // Usar config atualizado (sem a imagem removida)
+            servicos: siteConfig.servicos || [],
+            depoimentos: siteConfig.depoimentos || []
+        };
+        
+        // Coletar imagens dos inputs (mas não incluir a removida)
+        document.querySelectorAll('.filename-input').forEach(input => {
+            const inputKey = input.getAttribute('data-key');
+            const value = input.value.trim();
+            if (value && inputKey !== key) { // Não incluir a imagem removida
+                dados.imagens[inputKey] = value;
+            }
+        });
+        
+        const response = await fetch(`${API_BASE}/save-config`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dados)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            siteConfig = dados; // Atualizar config local
+            mostrarStatus('✅ Imagem removida e salva com sucesso!', 'success');
+        } else {
+            mostrarStatus('⚠️ Imagem removida localmente. Clique em "Salvar Tudo" para aplicar.', 'warning');
+        }
+    } catch (error) {
+        console.error('Erro ao salvar remoção:', error);
+        mostrarStatus('⚠️ Imagem removida localmente. Clique em "Salvar Tudo" para aplicar.', 'warning');
+    }
 }
 
 async function editarImagemExistente(key, previewId) {
@@ -564,13 +615,18 @@ async function salvarTudo() {
         depoimentos: siteConfig.depoimentos || []
     };
     
-    // Coletar imagens dos inputs (atualizar ou adicionar)
+    // Coletar imagens dos inputs (atualizar, adicionar ou remover)
+    // Primeiro, limpar todas as imagens do config
+    dados.imagens = {};
+    
+    // Depois, adicionar apenas as que têm valor
     document.querySelectorAll('.filename-input').forEach(input => {
         const key = input.getAttribute('data-key');
         const value = input.value.trim();
         if (value) {
             dados.imagens[key] = value;
         }
+        // Se não tiver valor, a imagem será removida (não será adicionada ao objeto)
     });
     
     try {

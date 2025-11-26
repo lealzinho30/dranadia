@@ -156,7 +156,11 @@ def atualizar_imagens(html, config):
     }
     
     for key, slide_index in hero_slides_map.items():
-        if key in imagens:
+        # Procurar por div com data-slide correspondente
+        padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
+        
+        if key in imagens and imagens[key]:
+            # Atualizar com nova imagem
             filename = imagens[key]
             # Limpar filename de caracteres problemáticos e garantir que não tenha duplicações
             filename = filename.strip()
@@ -165,33 +169,44 @@ def atualizar_imagens(html, config):
             filename = re_module.sub(r'\)-editado\.webp\)+', ')-editado.webp', filename)
             novo_url = f"url('images/{filename}')"
             
-            # Procurar por div com data-slide correspondente
-            # PROBLEMA IDENTIFICADO: A regex url\([^)]+\) para no primeiro ), 
-            # mas o nome do arquivo tem parênteses: "2025-11-21 (1)"
-            # SOLUÇÃO: Usar uma regex que captura o url() completo, incluindo parênteses internos
-            
             # Limpar duplicações primeiro
             padrao_duplicacao = rf'(url\(\'images/[^\']+\'\))(-editado\.webp\'\))+'
             html = re.sub(padrao_duplicacao, r'\1', html)
             
             # Substituir url() completo - usar busca mais específica
-            padrao = rf'(<div class="hero-slide[^"]*"[^>]*data-slide="{slide_index}"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))([^\"]*\")'
             match = re.search(padrao, html)
             if match:
-                html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                # Se já tem uma imagem, substituir; se não, adicionar
+                if match.group(2):  # Já tem url()
+                    html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                else:  # Não tem url(), adicionar antes do fechamento do style
+                    style_end = match.end(1)
+                    html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
                 alteracoes += 1
                 print(f"  ✓ Hero slide {slide_index+1} atualizado: {filename}")
             else:
                 # Fallback: buscar por ordem
-                padrao_fallback = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))([^\"]*\")'
+                padrao_fallback = r'(<div class="hero-slide[^"]*"[^>]*style="[^\"]*)(url\(\'images/[^\']+\'\))?([^\"]*\")'
                 matches = list(re.finditer(padrao_fallback, html))
                 if slide_index < len(matches):
                     match = matches[slide_index]
-                    html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                    if match.group(2):  # Já tem url()
+                        html = html[:match.start(2)] + novo_url + html[match.end(2):]
+                    else:  # Não tem url(), adicionar
+                        style_end = match.end(1)
+                        html = html[:style_end] + f"background-image: {novo_url}; " + html[style_end:]
                     alteracoes += 1
                     print(f"  ✓ Hero slide {slide_index+1} atualizado: {filename}")
                 else:
                     print(f"  ⚠️  Hero slide {slide_index+1} não encontrado")
+        else:
+            # Remover imagem se não estiver mais no config
+            match = re.search(padrao, html)
+            if match and match.group(2):  # Se tem url() para remover
+                # Remover o url() mas manter o style
+                html = html[:match.start(2)] + html[match.end(2):]
+                alteracoes += 1
+                print(f"  ✓ Hero slide {slide_index+1} removido (imagem não configurada)")
     
     # Foto Dra. Nadia - class="sobre-img"
     if 'sobre-foto' in imagens:

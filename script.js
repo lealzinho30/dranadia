@@ -87,7 +87,7 @@ let slideInterval;
 const slideContent = {
     0: {
         title: '<span class="title-line">Especialista em</span><span class="title-line highlight">Saúde Bucal Infantil</span>',
-        subtitle: 'Atendemos todas as necessidades de saúde bucal de crianças e adolescentes. Ambiente acolhedor e lúdico pensado especialmente para os pequenos!',
+        subtitle: 'Atendemos todas as necessidades de saúde bucal de bebês, crianças e adolescentes. Ambiente acolhedor e lúdico pensado especialmente para os pequenos!',
         location: '<i class="fas fa-map-marker-alt"></i><span>Rua Fernando Falcão, 1111 - Mooca - SP</span>'
     },
     1: {

@@ -471,6 +471,7 @@ section {
     position: relative;
     width: 100%;
     max-width: 350px;
+    min-height: 400px;
 }
 
 .hero-main-image {
@@ -489,12 +490,15 @@ section {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.6s ease, visibility 0.6s ease;
+    display: block;
 }
 
 .hero-main-image[src*="placeholder"] {
     background-color: #000000 !important;
+    background-image: none !important;
     min-height: 400px;
-    display: block;
+    height: 400px;
+    object-fit: none;
 }
 
 .hero-map-wrapper {
@@ -512,7 +516,7 @@ section {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.6s ease, visibility 0.6s ease;
-    z-index: 3;
+    z-index: 1;
 }
 
 .hero-map-wrapper iframe {

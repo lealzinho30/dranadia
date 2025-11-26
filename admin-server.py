@@ -214,17 +214,23 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                             print(f"Erro ao extrair dados: {e}")
                             continue
                 
-                if filename and file_data:
+                if filename and file_data and len(file_data) > 0:
                     # Clean filename - remove special characters
                     import re
                     safe_filename = re.sub(r'[^\w\s\-_\.]', '', filename)
                     safe_filename = safe_filename.strip()
                     
+                    # If filename is empty after cleaning, use a default
+                    if not safe_filename:
+                        import time
+                        ext = Path(filename).suffix or '.jpg'
+                        safe_filename = f'image_{int(time.time())}{ext}'
+                    
                     # Save file
                     file_path = IMAGES_DIR / safe_filename
                     with open(file_path, 'wb') as f:
                         f.write(file_data)
-                    print(f"✓ Imagem salva: {safe_filename}")
+                    print(f"✓ Imagem salva: {safe_filename} ({len(file_data)} bytes)")
                     
                     # Update config only if key is provided
                     if key:
@@ -242,7 +248,15 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                         'path': f'images/{safe_filename}'
                     })
                 else:
-                    self.send_error_response('Erro ao processar upload')
+                    error_msg = 'Erro ao processar upload'
+                    if not filename:
+                        error_msg += ': nome do arquivo não encontrado'
+                    elif not file_data:
+                        error_msg += ': dados do arquivo não encontrados'
+                    elif len(file_data) == 0:
+                        error_msg += ': arquivo vazio'
+                    print(f"❌ {error_msg}")
+                    self.send_error_response(error_msg)
             else:
                 # JSON upload
                 content_length = int(self.headers.get('Content-Length', 0))

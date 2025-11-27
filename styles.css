@@ -1921,66 +1921,83 @@ section {
 
 /* ===== COMO CHEGAR SECTION ===== */
 .como-chegar {
-    background: var(--white);
+    background: linear-gradient(135deg, rgba(45, 167, 186, 0.05) 0%, rgba(241, 144, 34, 0.05) 100%);
     padding: var(--spacing-xl) 0;
 }
 
 .como-chegar-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--spacing-xl);
-    align-items: start;
+    align-items: center;
     margin-top: var(--spacing-lg);
 }
 
-.como-chegar-info {
+.endereco-card {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: 25px;
+    box-shadow: var(--shadow-lg);
     display: flex;
-    flex-direction: column;
     gap: var(--spacing-lg);
+    border: 2px solid rgba(45, 167, 186, 0.1);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
-.endereco-card {
-    background: var(--light-gray);
-    padding: var(--spacing-lg);
-    border-radius: 20px;
-    box-shadow: var(--shadow-md);
-    display: flex;
-    gap: var(--spacing-md);
-    border: 2px solid transparent;
-    transition: var(--transition);
+.endereco-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--gradient-primary);
 }
 
 .endereco-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-xl);
     border-color: var(--primary-color);
 }
 
 .endereco-icon {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background: var(--gradient-primary);
-    border-radius: 15px;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 2rem;
     flex-shrink: 0;
     box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.endereco-card:hover .endereco-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.endereco-content {
+    flex: 1;
 }
 
 .endereco-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--dark-gray);
     margin-bottom: var(--spacing-md);
     font-family: var(--font-display);
+    font-weight: 700;
 }
 
 .endereco-texto {
     color: var(--gray);
-    line-height: 2;
-    font-size: 1rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .endereco-texto strong {
@@ -1988,61 +2005,45 @@ section {
     font-weight: 700;
 }
 
-.info-detalhes {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-sm);
+.endereco-info {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-sm) 0;
+    border-top: 1px solid rgba(45, 167, 186, 0.2);
+    border-bottom: 1px solid rgba(45, 167, 186, 0.2);
 }
 
-.detalhe-item {
-    display: flex;
+.endereco-info span {
+    display: inline-flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm);
-    background: var(--light-gray);
-    border-radius: 12px;
-    transition: var(--transition);
-}
-
-.detalhe-item:hover {
-    background: var(--white);
-    box-shadow: var(--shadow-sm);
-    transform: translateX(5px);
-}
-
-.detalhe-item i {
-    color: var(--primary-color);
-    font-size: 1.2rem;
-    width: 30px;
-    text-align: center;
-}
-
-.detalhe-item div {
-    color: var(--dark-gray);
+    gap: var(--spacing-xs);
+    color: var(--gray);
     font-size: 0.95rem;
 }
 
-.detalhe-item strong {
+.endereco-info i {
     color: var(--primary-color);
 }
 
-.como-chegar-cta {
+.btn-rota {
     margin-top: var(--spacing-md);
-}
-
-.como-chegar-mapa {
-    position: sticky;
-    top: 100px;
+    width: 100%;
+    justify-content: center;
 }
 
 .mapa-container {
     position: relative;
     width: 100%;
-    height: 600px;
-    border-radius: 20px;
+    aspect-ratio: 1;
+    border-radius: 25px;
     overflow: hidden;
     box-shadow: var(--shadow-xl);
     border: 3px solid var(--primary-color);
+    transition: var(--transition);
+}
+
+.mapa-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 60px rgba(45, 167, 186, 0.3);
 }
 
 .mapa-container iframe {
@@ -2627,20 +2628,20 @@ section {
 
     .como-chegar-wrapper {
         grid-template-columns: 1fr;
-        gap: var(--spacing-md);
+        gap: var(--spacing-lg);
     }
 
-    .como-chegar-mapa {
-        position: relative;
-        top: 0;
+    .endereco-card {
+        padding: var(--spacing-lg);
+    }
+
+    .endereco-content h3 {
+        font-size: 1.5rem;
     }
 
     .mapa-container {
-        height: 400px;
-    }
-
-    .info-detalhes {
-        grid-template-columns: 1fr;
+        aspect-ratio: 1;
+        min-height: 300px;
     }
 
     .contato-wrapper {

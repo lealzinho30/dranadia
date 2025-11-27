@@ -554,6 +554,15 @@ section {
     }
 }
 
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-50px, -50px);
+    }
+}
+
 .hero-location {
     display: flex;
     align-items: center;
@@ -900,7 +909,41 @@ section {
 
 /* ===== SOBRE SECTION ===== */
 .sobre {
-    background: var(--white);
+    background: var(--gradient-secondary);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.sobre::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s infinite linear;
+}
+
+.sobre .section-header {
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.sobre .section-title {
+    color: var(--white);
+}
+
+.sobre .section-description {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.sobre-content {
+    position: relative;
+    z-index: 1;
 }
 
 .sobre-content {
@@ -993,16 +1036,17 @@ section {
     position: relative;
     font-size: 1.3rem;
     font-style: italic;
-    color: var(--secondary-color);
+    color: var(--white);
     line-height: 1.8;
     margin: var(--spacing-lg) 0;
     padding: var(--spacing-xl) var(--spacing-lg);
-    background: linear-gradient(135deg, rgba(241, 144, 34, 0.15) 0%, rgba(45, 167, 186, 0.15) 100%);
-    border: 3px solid var(--secondary-color);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
-    box-shadow: 0 10px 40px rgba(241, 144, 34, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
@@ -1031,8 +1075,8 @@ section {
 .compromisso-icon {
     position: absolute;
     font-size: 2.5rem;
-    color: var(--secondary-color);
-    opacity: 0.3;
+    color: var(--white);
+    opacity: 0.4;
     top: 15px;
     left: 20px;
 }
@@ -1058,15 +1102,15 @@ section {
 }
 
 .formacao-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     padding: var(--spacing-md);
     border-radius: 20px;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
     transition: var(--transition);
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     opacity: 0;
     transform: translateY(30px);
 }
@@ -1105,10 +1149,11 @@ section {
 }
 
 .formacao-content p {
-    color: var(--gray);
+    color: var(--dark-gray);
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0;
+    font-weight: 500;
 }
 
 .sobre-features {
@@ -1163,7 +1208,41 @@ section {
 
 /* ===== SERVIÇOS SECTION ===== */
 .servicos {
-    background: var(--light-gray);
+    background: var(--gradient-primary);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.servicos::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s infinite linear;
+}
+
+.servicos .section-header {
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.servicos .section-title {
+    color: var(--white);
+}
+
+.servicos .section-description {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.servicos-grid {
+    position: relative;
+    z-index: 1;
 }
 
 .servicos-grid {
@@ -1173,14 +1252,14 @@ section {
 }
 
 .servico-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     padding: var(--spacing-lg);
     border-radius: 20px;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-xl);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .servico-card::before {
@@ -1237,12 +1316,14 @@ section {
     font-size: 1.5rem;
     margin-bottom: var(--spacing-sm);
     color: var(--dark-gray);
+    font-weight: 700;
 }
 
 .servico-card p {
-    color: var(--gray);
+    color: var(--dark-gray);
     margin-bottom: var(--spacing-md);
     line-height: 1.8;
+    font-weight: 500;
 }
 
 .servico-list {
@@ -1458,8 +1539,42 @@ section {
 
 /* ===== DICAS SECTION ===== */
 .dicas {
-    background: var(--white);
+    background: var(--gradient-secondary);
+    color: var(--white);
     padding: var(--spacing-lg) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.dicas::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s infinite linear;
+}
+
+.dicas .section-header {
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.dicas .section-title {
+    color: var(--white);
+}
+
+.dicas .section-description {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.dicas-grid {
+    position: relative;
+    z-index: 1;
 }
 
 .dicas-grid {
@@ -1470,15 +1585,15 @@ section {
 }
 
 .dica-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     padding: 0;
     border-radius: 20px;
     transition: var(--transition);
     position: relative;
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     overflow: hidden;
     cursor: pointer;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-lg);
 }
 
 .dica-card.dica-hidden {
@@ -1585,9 +1700,10 @@ section {
 }
 
 .dica-card p {
-    color: var(--gray);
+    color: var(--dark-gray);
     line-height: 1.8;
     margin-bottom: var(--spacing-sm);
+    font-weight: 500;
 }
 
 .dica-tag {
@@ -1680,8 +1796,42 @@ section {
 
 /* ===== FAQ SECTION ===== */
 .faq {
-    background: var(--light-gray);
+    background: var(--gradient-primary);
+    color: var(--white);
     padding: var(--spacing-xl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.faq::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s infinite linear;
+}
+
+.faq .section-header {
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.faq .section-title {
+    color: var(--white);
+}
+
+.faq .section-description {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.faq-list {
+    position: relative;
+    z-index: 1;
 }
 
 .faq-list {
@@ -1693,12 +1843,12 @@ section {
 }
 
 .faq-item {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-lg);
     transition: var(--transition);
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .faq-item:hover {
@@ -1722,7 +1872,7 @@ section {
 .faq-question h3 {
     font-size: 1.1rem;
     color: var(--dark-gray);
-    font-weight: 600;
+    font-weight: 700;
     margin: 0;
     flex: 1;
     padding-right: var(--spacing-md);
@@ -1752,9 +1902,10 @@ section {
 }
 
 .faq-answer p {
-    color: var(--gray);
+    color: var(--dark-gray);
     line-height: 1.8;
     margin: 0;
+    font-weight: 500;
 }
 
 
@@ -2116,8 +2267,42 @@ section {
 
 /* ===== CONTATO SECTION ===== */
 .contato {
-    background: var(--light-gray);
+    background: var(--gradient-secondary);
+    color: var(--white);
     padding: var(--spacing-lg) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.contato::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s infinite linear;
+}
+
+.contato .section-header {
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.contato .section-title {
+    color: var(--white);
+}
+
+.contato .section-description {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.contato-wrapper {
+    position: relative;
+    z-index: 1;
 }
 
 .contato-wrapper {
@@ -2141,10 +2326,11 @@ section {
     display: flex;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-lg);
     transition: var(--transition);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .info-card:hover {
@@ -2205,11 +2391,11 @@ section {
 }
 
 .contato-form {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     padding: var(--spacing-lg);
     border-radius: 20px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(45, 167, 186, 0.1);
+    box-shadow: var(--shadow-xl);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .contato-form h3 {

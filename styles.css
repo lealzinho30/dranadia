@@ -238,13 +238,22 @@ section {
 .logo-image {
     height: 50px;
     width: auto;
-    max-width: 180px;
+    max-width: 200px;
     transition: var(--transition);
     object-fit: contain;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .logo-image:hover {
     transform: scale(1.05);
+}
+
+/* Garantir que o logotipo carregue corretamente */
+.logo img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Responsividade do logotipo */
@@ -2459,23 +2468,24 @@ section {
 .footer-logo-image {
     height: 60px;
     width: auto;
-    max-width: 200px;
-    filter: brightness(0) invert(1);
+    max-width: 220px;
     transition: var(--transition);
+    object-fit: contain;
+    display: block;
 }
 
 .footer-logo-image:hover {
     transform: scale(1.05);
-    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(45, 167, 186, 0.5));
-}
-
-/* Fallback para logotipos coloridos */
-.footer-logo-image[src*=".svg"] {
-    filter: none;
-}
-
-.footer-logo-image[src*=".svg"]:hover {
     filter: drop-shadow(0 0 10px rgba(45, 167, 186, 0.5));
+}
+
+/* Se o logotipo tiver fundo escuro, aplicar filtro para clarear no footer */
+.footer-logo-image[data-dark="true"] {
+    filter: brightness(0) invert(1);
+}
+
+.footer-logo-image[data-dark="true"]:hover {
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(45, 167, 186, 0.5));
 }
 
 .footer-section p {

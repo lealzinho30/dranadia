@@ -51,14 +51,23 @@ navLinks.forEach(link => {
 
 // ===== HEADER SCROLL EFFECT =====
 const header = document.getElementById('header');
+let ticking = false;
 
-window.addEventListener('scroll', () => {
+function updateHeader() {
     if (window.scrollY > 100) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
-});
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+    }
+}, { passive: true });
 
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -90,6 +99,7 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target); // Para de observar após animar
         }
     });
 }, observerOptions);
@@ -111,6 +121,7 @@ const formacaoObserver = new IntersectionObserver((entries) => {
             setTimeout(() => {
                 entry.target.classList.add('visible');
             }, delay);
+            formacaoObserver.unobserve(entry.target); // Para de observar após animar
         }
     });
 }, observerOptions);
@@ -362,6 +373,7 @@ function animateCounter(element, target, duration = 2000) {
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            statsObserver.unobserve(entry.target); // Para de observar após animar
             const statNumber = entry.target.querySelector('.stat-number');
             const text = statNumber.textContent;
             const number = parseInt(text.replace(/\D/g, ''));
@@ -382,8 +394,9 @@ document.querySelectorAll('.stat-item').forEach(stat => {
 
 // ===== ACTIVE NAV LINK =====
 const sections = document.querySelectorAll('section[id]');
+let navTicking = false;
 
-window.addEventListener('scroll', () => {
+function updateActiveNav() {
     const scrollY = window.pageYOffset;
 
     sections.forEach(section => {
@@ -399,7 +412,15 @@ window.addEventListener('scroll', () => {
             }
         }
     });
-});
+    navTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!navTicking) {
+        window.requestAnimationFrame(updateActiveNav);
+        navTicking = true;
+    }
+}, { passive: true });
 
 // ===== LAZY LOADING IMAGES =====
 if ('IntersectionObserver' in window) {
@@ -410,7 +431,7 @@ if ('IntersectionObserver' in window) {
                 if (img.dataset.src) {
                     img.src = img.dataset.src;
                     img.removeAttribute('data-src');
-                    observer.unobserve(img);
+                    imageObserver.unobserve(img); // Já estava otimizado
                 }
             }
         });

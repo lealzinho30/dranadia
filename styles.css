@@ -236,16 +236,15 @@ section {
 }
 
 .logo-image {
-    height: 65px;
+    height: 45px;
     width: auto;
-    max-width: 250px;
+    max-width: 180px;
     transition: var(--transition);
     object-fit: contain;
     display: block;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
     background: transparent;
-    mix-blend-mode: multiply;
 }
 
 /* Se o logotipo tiver fundo branco, tentar remover */
@@ -266,37 +265,37 @@ section {
 /* Responsividade do logotipo */
 @media (max-width: 968px) {
     .logo-image {
-        height: 55px;
-        max-width: 220px;
+        height: 40px;
+        max-width: 160px;
     }
 
     .footer-logo-image {
-        height: 70px;
-        max-width: 260px;
+        height: 55px;
+        max-width: 220px;
     }
 }
 
 @media (max-width: 768px) {
     .logo-image {
-        height: 50px;
-        max-width: 200px;
+        height: 38px;
+        max-width: 150px;
     }
 
     .footer-logo-image {
-        height: 65px;
-        max-width: 240px;
+        height: 50px;
+        max-width: 200px;
     }
 }
 
 @media (max-width: 480px) {
     .logo-image {
-        height: 45px;
-        max-width: 180px;
+        height: 35px;
+        max-width: 140px;
     }
 
     .footer-logo-image {
-        height: 60px;
-        max-width: 220px;
+        height: 45px;
+        max-width: 180px;
     }
 }
 
@@ -2485,9 +2484,9 @@ section {
 }
 
 .footer-logo-image {
-    height: 80px;
+    height: 60px;
     width: auto;
-    max-width: 300px;
+    max-width: 240px;
     transition: var(--transition);
     object-fit: contain;
     display: block;

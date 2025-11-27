@@ -341,10 +341,11 @@ section {
 /* ===== HERO SECTION ===== */
 .hero {
     position: relative;
-    min-height: 85vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     padding-top: 80px;
+    padding-bottom: var(--spacing-lg);
     overflow: hidden;
 }
 
@@ -594,10 +595,10 @@ section {
 
 .hero-title {
     font-family: var(--font-display);
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.1;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .title-line {
@@ -611,17 +612,18 @@ section {
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: var(--spacing-lg);
+    font-size: 1.15rem;
+    margin-bottom: var(--spacing-md);
     opacity: 0.95;
-    line-height: 1.8;
-    font-weight: 300;
+    line-height: 1.7;
+    font-weight: 400;
+    max-width: 550px;
 }
 
 .hero-buttons {
     display: flex;
     gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
     flex-wrap: wrap;
 }
 

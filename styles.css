@@ -1868,6 +1868,20 @@ section {
     z-index: 1;
 }
 
+@media (max-width: 968px) {
+    .porque-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 640px) {
+    .porque-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+}
+
 .porque-card {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
@@ -2715,12 +2729,34 @@ section {
         word-break: break-word;
     }
 
+    .porque-escolher {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .porque-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+
+    .porque-card {
+        padding: var(--spacing-sm);
+    }
+
+    .porque-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
     .porque-card h3 {
         font-size: 1.2rem;
+        margin-bottom: var(--spacing-xs);
     }
 
     .porque-card p {
         font-size: 0.9rem;
+        line-height: 1.6;
         word-break: break-word;
     }
 
@@ -3002,14 +3038,48 @@ section {
         word-break: break-word;
     }
 
+    .porque-escolher {
+        padding: var(--spacing-md) 0;
+    }
+
+    .porque-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .porque-card {
+        padding: var(--spacing-md);
+        border-radius: 15px;
+    }
+
+    .porque-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2.2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
     .porque-card h3 {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+        margin-bottom: var(--spacing-xs);
         word-break: break-word;
+        line-height: 1.3;
     }
 
     .porque-card p {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
+        line-height: 1.7;
         word-break: break-word;
+    }
+
+    .porque-escolher .section-title {
+        font-size: 1.8rem;
+        padding: 0 var(--spacing-xs);
+    }
+
+    .porque-escolher .section-description {
+        font-size: 0.95rem;
+        padding: 0 var(--spacing-xs);
     }
 
     .info-content h4 {

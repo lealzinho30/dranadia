@@ -236,9 +236,10 @@ section {
 }
 
 .logo-image {
-    height: 100px;
-    width: auto;
-    max-width: 400px;
+    height: 150px !important;
+    width: auto !important;
+    max-width: 500px !important;
+    min-width: 300px !important;
     transition: var(--transition);
     object-fit: contain;
     display: block;
@@ -252,44 +253,56 @@ section {
 
 /* Garantir que o logotipo carregue corretamente */
 .logo img {
-    max-width: 100%;
-    height: auto;
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    min-height: 150px;
 }
 
 /* Responsividade do logotipo */
 @media (max-width: 968px) {
     .logo-image {
-        height: 85px;
-        max-width: 350px;
+        height: 120px !important;
+        max-width: 400px !important;
+        min-width: 250px !important;
     }
 
     .footer-logo-image {
-        height: 100px;
-        max-width: 380px;
+        height: 150px !important;
+        max-width: 500px !important;
+        min-width: 300px !important;
     }
 }
 
 @media (max-width: 768px) {
     .logo-image {
-        height: 70px;
-        max-width: 280px;
+        height: 100px !important;
+        max-width: 350px !important;
+        min-width: 200px !important;
     }
 
     .footer-logo-image {
-        height: 85px;
-        max-width: 320px;
+        height: 120px !important;
+        max-width: 400px !important;
+        min-width: 250px !important;
     }
 }
 
 @media (max-width: 480px) {
     .logo-image {
-        height: 60px;
-        max-width: 240px;
+        height: 80px !important;
+        max-width: 280px !important;
+        min-width: 180px !important;
     }
 
     .footer-logo-image {
-        height: 70px;
-        max-width: 280px;
+        height: 100px !important;
+        max-width: 350px !important;
+        min-width: 200px !important;
     }
 }
 
@@ -2478,9 +2491,10 @@ section {
 }
 
 .footer-logo-image {
-    height: 120px;
-    width: auto;
-    max-width: 450px;
+    height: 180px !important;
+    width: auto !important;
+    max-width: 600px !important;
+    min-width: 350px !important;
     transition: var(--transition);
     object-fit: contain;
     display: block;

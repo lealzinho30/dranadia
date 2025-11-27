@@ -226,8 +226,9 @@ section {
 
 .nav-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .logo {
@@ -235,6 +236,13 @@ section {
     align-items: center;
     gap: var(--spacing-sm);
     text-decoration: none;
+}
+
+.logo-centered {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo-image {

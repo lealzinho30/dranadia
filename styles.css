@@ -13,8 +13,8 @@
     --secondary-color: #f19022;
     --secondary-dark: #d17a1a;
     --secondary-light: #f5a64a;
-    --accent-color: #FFD93D;
-    --accent-light: #FFE66D;
+    --accent-color: #f19022;
+    --accent-light: #f5a64a;
     
     /* Cores Neutras */
     --white: #FFFFFF;
@@ -26,7 +26,7 @@
     /* Gradientes */
     --gradient-primary: linear-gradient(135deg, #2da7ba 0%, #238a9a 100%);
     --gradient-secondary: linear-gradient(135deg, #f19022 0%, #f5a64a 100%);
-    --gradient-accent: linear-gradient(135deg, #FFD93D 0%, #FFE66D 100%);
+    --gradient-accent: linear-gradient(135deg, #f19022 0%, #f5a64a 100%);
     --gradient-hero: linear-gradient(135deg, rgba(45, 167, 186, 0.95) 0%, rgba(35, 138, 154, 0.95) 100%);
     
     /* Tipografia */
@@ -236,9 +236,9 @@ section {
 }
 
 .logo-image {
-    height: 28px !important;
+    height: 50px !important;
     width: auto !important;
-    max-width: 120px !important;
+    max-width: 200px !important;
     transition: var(--transition);
     object-fit: contain;
     display: block;
@@ -265,8 +265,8 @@ section {
 /* Responsividade do logotipo */
 @media (max-width: 968px) {
     .logo-image {
-        height: 26px !important;
-        max-width: 110px !important;
+        height: 45px !important;
+        max-width: 180px !important;
     }
 
     .footer-logo-image {
@@ -277,8 +277,8 @@ section {
 
 @media (max-width: 768px) {
     .logo-image {
-        height: 24px !important;
-        max-width: 100px !important;
+        height: 40px !important;
+        max-width: 160px !important;
     }
 
     .footer-logo-image {
@@ -289,8 +289,8 @@ section {
 
 @media (max-width: 480px) {
     .logo-image {
-        height: 22px !important;
-        max-width: 90px !important;
+        height: 35px !important;
+        max-width: 140px !important;
     }
 
     .footer-logo-image {

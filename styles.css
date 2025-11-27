@@ -66,6 +66,27 @@ body {
     position: relative;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Otimizações de Performance Mobile */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Áreas de toque mínimas para mobile */
+button,
+a,
+input[type="submit"],
+.btn {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(45, 167, 186, 0.2);
 }
 
 .mouse-bg {
@@ -2619,19 +2640,30 @@ section {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
+/* Mobile First - Otimizações Gerais */
 @media (max-width: 968px) {
     * {
         word-wrap: break-word;
         overflow-wrap: break-word;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-size: 0.95rem;
     }
 
     .container {
         padding: 0 var(--spacing-sm);
+        max-width: 100%;
     }
 
     .nav-menu {
         position: fixed;
-        top: 80px;
+        top: 70px;
         left: -100%;
         flex-direction: column;
         background: var(--white);
@@ -2641,9 +2673,20 @@ section {
         transition: var(--transition);
         align-items: flex-start;
         gap: 0;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        z-index: 1000;
     }
 
     .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu li a {
+        display: block;
+        padding: var(--spacing-sm);
+        min-height: 44px;
         width: 100%;
     }
 
@@ -2653,6 +2696,10 @@ section {
 
     .menu-toggle {
         display: flex;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
     }
 
     .hero {
@@ -2781,20 +2828,39 @@ section {
 
     .como-chegar-wrapper {
         grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
+        gap: var(--spacing-md);
+        padding: 0 var(--spacing-sm);
     }
 
     .endereco-card {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
+        border-radius: 15px;
     }
 
     .endereco-content h3 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .endereco-info-item {
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .endereco-info-item i {
+        font-size: 1.2rem;
+        width: 35px;
+    }
+
+    .endereco-info-item span {
+        font-size: 0.9rem;
     }
 
     .mapa-container {
         aspect-ratio: 1;
-        min-height: 300px;
+        min-height: 280px;
+        border-radius: 15px;
+        overflow: hidden;
     }
 
     .contato-wrapper {
@@ -2821,19 +2887,39 @@ section {
 
     .servicos-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
     }
 
     .servico-card {
         padding: var(--spacing-md);
+        min-height: auto;
     }
 
     .servico-card h3 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        margin-bottom: var(--spacing-xs);
     }
 
     .servico-card p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         word-break: break-word;
+        line-height: 1.6;
+    }
+
+    .servico-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .servico-number {
+        font-size: 2rem;
+    }
+
+    .btn-servico-saiba-mais {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+        min-height: 44px; /* Área de toque mínima */
     }
 
     .diferencial-card h3 {
@@ -2847,15 +2933,51 @@ section {
         word-break: break-word;
     }
 
+    .dicas-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .dica-card {
+        padding: 0;
+        border-radius: 15px;
+    }
+
+    .dica-image {
+        height: 200px;
+    }
+
+    .dica-image img {
+        object-fit: cover;
+    }
+
+    .dica-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        top: 15px;
+        right: 15px;
+    }
+
     .dica-card h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         padding: 0 var(--spacing-sm) var(--spacing-xs);
+        margin-top: var(--spacing-xs);
     }
 
     .dica-card p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         padding: 0 var(--spacing-sm) var(--spacing-sm);
         word-break: break-word;
+        line-height: 1.6;
+    }
+
+    .dica-btn {
+        margin: var(--spacing-sm);
+        padding: 0.75rem 1.5rem;
+        font-size: 0.85rem;
+        min-height: 44px;
+        width: calc(100% - 2rem);
     }
 
     .faq-question h3 {
@@ -2869,7 +2991,7 @@ section {
     }
 
     .porque-escolher {
-        padding: var(--spacing-lg) 0;
+        padding: var(--spacing-md) 0;
     }
 
     .porque-timeline-line {
@@ -2877,27 +2999,36 @@ section {
     }
 
     .porque-items {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: var(--spacing-md);
+        padding: 0 var(--spacing-sm);
+    }
+
+    .porque-item {
+        padding: var(--spacing-md);
+        border-radius: 15px;
     }
 
     .porque-item-icon {
-        width: 80px;
-        height: 80px;
-        font-size: 2.2rem;
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
     }
 
     .porque-item-icon::before {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
     }
 
     .porque-item-content h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        margin-bottom: var(--spacing-xs);
     }
 
     .porque-item-content p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        line-height: 1.6;
     }
 
     .galeria-grid {
@@ -2921,62 +3052,86 @@ section {
 }
 
 @media (max-width: 768px) {
+    /* Header Mobile */
+    .header {
+        padding: var(--spacing-sm) 0;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .nav-actions {
+        gap: var(--spacing-xs);
+    }
+
+    .btn-whatsapp {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        min-height: 44px;
+    }
+
+    /* Hero Mobile */
     .hero {
-        min-height: 100vh;
+        min-height: auto;
         padding-top: 60px;
+        padding-bottom: var(--spacing-md);
     }
 
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         line-height: 1.2;
     }
 
     .hero-subtitle {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         line-height: 1.5;
         word-break: break-word;
     }
 
     .hero-badge {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.9rem;
+        font-size: 0.7rem;
+        padding: 0.35rem 0.8rem;
         white-space: normal;
     }
 
     .section-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         word-break: break-word;
+        padding: 0 var(--spacing-xs);
     }
 
     .section-description {
+        font-size: 0.9rem;
         word-break: break-word;
+        padding: 0 var(--spacing-xs);
     }
 
     .hero-buttons {
         flex-direction: column;
         gap: 0.5rem;
+        width: 100%;
     }
 
     .btn {
         width: 100%;
         justify-content: center;
-        padding: 0.9rem 1.3rem;
+        padding: 0.9rem 1.2rem;
         font-size: 0.9rem;
+        min-height: 44px;
+        touch-action: manipulation;
     }
 
     .btn-hero {
-        padding: 0.95rem 1.3rem;
-        font-size: 0.95rem;
+        padding: 0.95rem 1.2rem;
+        font-size: 0.9rem;
     }
 
     .hero-image {
-        max-width: 50%;
-        margin: 0 auto;
+        max-width: 60%;
+        margin: var(--spacing-sm) auto 0;
     }
 
     .hero-image-wrapper {
         max-width: 100%;
-        aspect-ratio: 4 / 5; /* Manter proporção 800x1000px */
+        aspect-ratio: 4 / 5;
     }
 
     .hero-main-image {
@@ -2988,10 +3143,28 @@ section {
         display: none;
     }
 
-    .depoimentos-slider {
-        grid-template-columns: 1fr;
+    /* Sections Mobile */
+    .section-header {
+        padding: 0 var(--spacing-xs);
+        margin-bottom: var(--spacing-md);
     }
 
+    .section-tag {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    /* Serviços Mobile */
+    .servicos {
+        padding: var(--spacing-md) 0;
+    }
+
+    /* Dicas Mobile */
+    .dicas {
+        padding: var(--spacing-md) 0;
+    }
+
+    /* Galeria Mobile */
     .galeria-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-xs);
@@ -3001,17 +3174,117 @@ section {
         border-radius: 10px;
         aspect-ratio: 1;
     }
+
+    /* FAQ Mobile */
+    .faq-question {
+        padding: var(--spacing-sm);
+        min-height: 44px;
+    }
+
+    .faq-question h3 {
+        font-size: 0.95rem;
+        padding-right: var(--spacing-md);
+    }
+
+    .faq-answer {
+        padding: 0 var(--spacing-sm) var(--spacing-sm);
+    }
+
+    .faq-answer p {
+        font-size: 0.85rem;
+    }
+
+    /* Modal Mobile */
+    .dica-modal-content {
+        width: 95%;
+        max-height: 90vh;
+        margin: 5vh auto;
+        border-radius: 15px;
+    }
+
+    .dica-modal-image {
+        height: 200px;
+    }
+
+    .dica-modal-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .dica-modal-content-text {
+        padding: var(--spacing-sm);
+        font-size: 0.9rem;
+        max-height: calc(90vh - 300px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .dica-modal-content-text h4 {
+        font-size: 1rem;
+        margin-top: var(--spacing-sm);
+    }
+
+    .dica-modal-content-text p,
+    .dica-modal-content-text li {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    /* Formulário Mobile */
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9rem;
+        padding: 0.85rem;
+        min-height: 44px;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.95rem;
+        min-height: 48px;
+    }
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 0 var(--spacing-sm);
+    html {
+        font-size: 15px;
     }
 
+    .container {
+        padding: 0 var(--spacing-xs);
+    }
+
+    /* Header Extra Small */
+    .header {
+        padding: 0.5rem 0;
+    }
+
+    .logo img {
+        max-height: 35px;
+    }
+
+    .btn-whatsapp {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .btn-whatsapp span {
+        display: none;
+    }
+
+    .btn-whatsapp i {
+        font-size: 1.2rem;
+    }
+
+    /* Hero Extra Small */
     .hero {
-        min-height: 100vh;
+        min-height: auto;
         padding-top: 50px;
-        padding-bottom: 30px;
+        padding-bottom: var(--spacing-sm);
     }
 
     .hero .container {
@@ -3024,17 +3297,17 @@ section {
     }
 
     .hero-badge {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.8rem;
+        font-size: 0.65rem;
+        padding: 0.25rem 0.7rem;
         margin-bottom: var(--spacing-xs);
     }
 
     .hero-badge i {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
 
     .hero-title {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         line-height: 1.2;
         margin-bottom: var(--spacing-xs);
     }
@@ -3044,10 +3317,10 @@ section {
     }
 
     .hero-subtitle {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.5;
         margin-bottom: var(--spacing-sm);
-        padding: 0 var(--spacing-xs);
+        padding: 0;
     }
 
     .hero-buttons {
@@ -3057,24 +3330,25 @@ section {
     }
 
     .btn {
-        padding: 0.85rem 1rem;
-        font-size: 0.85rem;
+        padding: 0.8rem 1rem;
+        font-size: 0.8rem;
         border-radius: 40px;
+        min-height: 44px;
     }
 
     .btn i {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .btn-hero {
-        padding: 0.9rem 1rem;
-        font-size: 0.9rem;
+        padding: 0.85rem 1rem;
+        font-size: 0.85rem;
         border-width: 2px;
     }
 
     .hero-image {
         margin-top: var(--spacing-sm);
-        max-width: 50%;
+        max-width: 70%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -3082,7 +3356,7 @@ section {
     .hero-image-wrapper {
         max-width: 100%;
         padding: 0;
-        aspect-ratio: 4 / 5; /* Manter proporção 800x1000px */
+        aspect-ratio: 4 / 5;
     }
 
     .hero-main-image {
@@ -3091,15 +3365,16 @@ section {
     }
 
     .hero-location {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         padding: 0.4rem;
         margin-top: var(--spacing-xs);
         flex-wrap: wrap;
         text-align: center;
+        justify-content: center;
     }
 
     .hero-location i {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
     .hero-location span {
@@ -3107,15 +3382,109 @@ section {
         width: 100%;
         margin-top: 0.2rem;
         word-break: break-word;
+        line-height: 1.4;
     }
 
-    .hero-stats {
-        margin-top: var(--spacing-sm);
-        gap: var(--spacing-xs);
+    /* Sections Extra Small */
+    .section-title {
+        font-size: 1.4rem;
+        padding: 0;
     }
 
-    .sobre-compromisso {
+    .section-description {
+        font-size: 0.85rem;
+        padding: 0;
+    }
+
+    .section-tag {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.7rem;
+    }
+
+    /* Serviços Extra Small */
+    .servico-card {
+        padding: var(--spacing-sm);
+    }
+
+    .servico-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .servico-card p {
+        font-size: 0.85rem;
+    }
+
+    .servico-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+
+    .servico-number {
+        font-size: 1.8rem;
+    }
+
+    /* Por que Escolher Extra Small */
+    .porque-item {
+        padding: var(--spacing-sm);
+    }
+
+    .porque-item-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+
+    .porque-item-icon::before {
+        width: 80px;
+        height: 80px;
+    }
+
+    .porque-item-content h3 {
         font-size: 1rem;
+    }
+
+    .porque-item-content p {
+        font-size: 0.8rem;
+    }
+
+    /* Dicas Extra Small */
+    .dica-image {
+        height: 180px;
+    }
+
+    .dica-card h3 {
+        font-size: 1rem;
+    }
+
+    .dica-card p {
+        font-size: 0.8rem;
+    }
+
+    /* Como Chegar Extra Small */
+    .endereco-card {
+        padding: var(--spacing-sm);
+    }
+
+    .endereco-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .endereco-info-item {
+        padding: var(--spacing-xs);
+    }
+
+    .endereco-info-item span {
+        font-size: 0.85rem;
+    }
+
+    .mapa-container {
+        min-height: 250px;
+    }
+
+    /* Sobre Extra Small */
+    .sobre-compromisso {
+        font-size: 0.9rem;
         padding: var(--spacing-sm);
         margin: var(--spacing-sm) 0;
     }

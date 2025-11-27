@@ -909,41 +909,7 @@ section {
 
 /* ===== SOBRE SECTION ===== */
 .sobre {
-    background: var(--gradient-secondary);
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-}
-
-.sobre::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: float 20s infinite linear;
-}
-
-.sobre .section-header {
-    color: var(--white);
-    position: relative;
-    z-index: 1;
-}
-
-.sobre .section-title {
-    color: var(--white);
-}
-
-.sobre .section-description {
-    color: rgba(255, 255, 255, 0.95);
-}
-
-.sobre-content {
-    position: relative;
-    z-index: 1;
+    background: var(--white);
 }
 
 .sobre-content {
@@ -1036,17 +1002,16 @@ section {
     position: relative;
     font-size: 1.3rem;
     font-style: italic;
-    color: var(--white);
+    color: var(--secondary-color);
     line-height: 1.8;
     margin: var(--spacing-lg) 0;
     padding: var(--spacing-xl) var(--spacing-lg);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, rgba(241, 144, 34, 0.15) 0%, rgba(45, 167, 186, 0.15) 100%);
+    border: 3px solid var(--secondary-color);
     border-radius: 20px;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 40px rgba(241, 144, 34, 0.2);
     overflow: hidden;
 }
 
@@ -1075,8 +1040,8 @@ section {
 .compromisso-icon {
     position: absolute;
     font-size: 2.5rem;
-    color: var(--white);
-    opacity: 0.4;
+    color: var(--secondary-color);
+    opacity: 0.3;
     top: 15px;
     left: 20px;
 }
@@ -1102,15 +1067,15 @@ section {
 }
 
 .formacao-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--white);
     padding: var(--spacing-md);
     border-radius: 20px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
     transition: var(--transition);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid transparent;
     opacity: 0;
     transform: translateY(30px);
 }
@@ -1539,42 +1504,8 @@ section {
 
 /* ===== DICAS SECTION ===== */
 .dicas {
-    background: var(--gradient-secondary);
-    color: var(--white);
+    background: var(--white);
     padding: var(--spacing-lg) 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.dicas::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: float 20s infinite linear;
-}
-
-.dicas .section-header {
-    color: var(--white);
-    position: relative;
-    z-index: 1;
-}
-
-.dicas .section-title {
-    color: var(--white);
-}
-
-.dicas .section-description {
-    color: rgba(255, 255, 255, 0.95);
-}
-
-.dicas-grid {
-    position: relative;
-    z-index: 1;
 }
 
 .dicas-grid {
@@ -1585,15 +1516,15 @@ section {
 }
 
 .dica-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--white);
     padding: 0;
     border-radius: 20px;
     transition: var(--transition);
     position: relative;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid transparent;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-sm);
 }
 
 .dica-card.dica-hidden {
@@ -2267,42 +2198,8 @@ section {
 
 /* ===== CONTATO SECTION ===== */
 .contato {
-    background: var(--gradient-secondary);
-    color: var(--white);
+    background: var(--light-gray);
     padding: var(--spacing-lg) 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.contato::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: float 20s infinite linear;
-}
-
-.contato .section-header {
-    color: var(--white);
-    position: relative;
-    z-index: 1;
-}
-
-.contato .section-title {
-    color: var(--white);
-}
-
-.contato .section-description {
-    color: rgba(255, 255, 255, 0.95);
-}
-
-.contato-wrapper {
-    position: relative;
-    z-index: 1;
 }
 
 .contato-wrapper {
@@ -2326,11 +2223,10 @@ section {
     display: flex;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--white);
     border-radius: 15px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .info-card:hover {
@@ -2391,11 +2287,11 @@ section {
 }
 
 .contato-form {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--white);
     padding: var(--spacing-lg);
     border-radius: 20px;
-    box-shadow: var(--shadow-xl);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(45, 167, 186, 0.1);
 }
 
 .contato-form h3 {

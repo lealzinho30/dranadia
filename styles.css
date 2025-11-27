@@ -244,6 +244,13 @@ section {
     display: block;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    background: transparent;
+    mix-blend-mode: multiply;
+}
+
+/* Se o logotipo tiver fundo branco, tentar remover */
+.logo-image[src*="logotipo"] {
+    background: transparent;
 }
 
 .logo-image:hover {

@@ -430,9 +430,10 @@ section {
     min-height: 70vh;
     display: flex;
     align-items: center;
-    padding-top: 80px;
-    padding-bottom: var(--spacing-lg);
+    padding-top: 120px;
+    padding-bottom: var(--spacing-xl);
     overflow: hidden;
+    scroll-margin-top: 120px;
 }
 
 @media (max-width: 768px) {
@@ -1053,7 +1054,10 @@ section {
 
 /* ===== SECTION STYLES ===== */
 section {
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) 0;
+    scroll-margin-top: 120px;
+    min-height: auto;
+    overflow: visible;
 }
 
 .section-header {
@@ -1104,6 +1108,8 @@ section {
 /* ===== SOBRE SECTION ===== */
 .sobre {
     background: var(--white);
+    padding: var(--spacing-xl) 0;
+    scroll-margin-top: 120px;
 }
 
 .sobre-content {
@@ -1369,9 +1375,10 @@ section {
 .servicos {
     background: var(--gradient-primary);
     color: var(--white);
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) 0;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 120px;
 }
 
 .servicos::before {
@@ -1572,7 +1579,8 @@ section {
 /* ===== GALERIA SECTION ===== */
 .galeria {
     background: var(--white);
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) 0;
+    scroll-margin-top: 120px;
 }
 
 
@@ -1710,7 +1718,8 @@ section {
 /* ===== DICAS SECTION ===== */
 .dicas {
     background: var(--white);
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) 0;
+    scroll-margin-top: 120px;
 }
 
 .dicas-grid {
@@ -1937,6 +1946,7 @@ section {
     padding: var(--spacing-xl) 0;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 120px;
 }
 
 .faq::before {
@@ -2121,6 +2131,7 @@ section {
     padding: var(--spacing-xl) 0;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 120px;
 }
 
 .porque-escolher::before {
@@ -2272,6 +2283,7 @@ section {
 .como-chegar {
     background: linear-gradient(135deg, rgba(45, 167, 186, 0.05) 0%, rgba(241, 144, 34, 0.05) 100%);
     padding: var(--spacing-xl) 0;
+    scroll-margin-top: 120px;
 }
 
 .como-chegar-wrapper {
@@ -2404,7 +2416,8 @@ section {
 /* ===== CONTATO SECTION ===== */
 .contato {
     background: var(--light-gray);
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) 0;
+    scroll-margin-top: 120px;
 }
 
 .contato-wrapper {

@@ -236,9 +236,9 @@ section {
 }
 
 .logo-image {
-    height: 50px !important;
+    height: 60px !important;
     width: auto !important;
-    max-width: 200px !important;
+    max-width: 240px !important;
     transition: var(--transition);
     object-fit: contain;
     display: block;
@@ -265,8 +265,8 @@ section {
 /* Responsividade do logotipo */
 @media (max-width: 968px) {
     .logo-image {
-        height: 45px !important;
-        max-width: 180px !important;
+        height: 55px !important;
+        max-width: 220px !important;
     }
 
     .footer-logo-image {
@@ -277,8 +277,8 @@ section {
 
 @media (max-width: 768px) {
     .logo-image {
-        height: 40px !important;
-        max-width: 160px !important;
+        height: 50px !important;
+        max-width: 200px !important;
     }
 
     .footer-logo-image {
@@ -289,8 +289,8 @@ section {
 
 @media (max-width: 480px) {
     .logo-image {
-        height: 35px !important;
-        max-width: 140px !important;
+        height: 45px !important;
+        max-width: 180px !important;
     }
 
     .footer-logo-image {
@@ -974,6 +974,15 @@ section {
     line-height: 1.2;
 }
 
+/* Títulos com cor laranja em seções específicas */
+.sobre .section-title,
+.galeria .section-title,
+.dicas .section-title,
+.porque-escolher .section-title,
+.contato .section-title {
+    color: var(--secondary-color);
+}
+
 .section-description {
     font-size: 1rem;
     color: var(--gray);
@@ -1359,7 +1368,7 @@ section {
 .servico-card h3 {
     font-size: 1.3rem;
     margin-bottom: var(--spacing-xs);
-    color: var(--dark-gray);
+    color: var(--secondary-color);
     font-weight: 700;
     flex-shrink: 0;
 }
@@ -1710,7 +1719,7 @@ section {
 .dica-card h3 {
     font-size: 1.4rem;
     margin-bottom: var(--spacing-sm);
-    color: var(--dark-gray);
+    color: var(--secondary-color);
     font-weight: 700;
 }
 

@@ -725,9 +725,11 @@ dicaCards.forEach(card => {
 });
 
 function openDicaModal(dica) {
+    // Adiciona timestamp para evitar cache
+    const imageUrl = `${dica.imagem}?v=${Date.now()}`;
     dicaModalBody.innerHTML = `
         <div class="dica-modal-image">
-            <img src="${dica.imagem}" alt="${dica.titulo}">
+            <img src="${imageUrl}" alt="${dica.titulo}">
         </div>
         <div class="dica-modal-header">
             <div class="dica-tag">${dica.tag}</div>

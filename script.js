@@ -493,7 +493,7 @@ const dicasDetalhadas = {
     'primeira-consulta': {
         titulo: 'Primeira Consulta',
         tag: 'Importante',
-        imagem: 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=800&h=400&fit=crop&q=80',
+        imagem: 'images/dentista-examinando-condicao-dos-dentes-pequeno-paciente-editado.jpg',
         conteudo: `
             <h4>Por que a primeira consulta é tão importante?</h4>
             <p>A primeira consulta odontológica é um marco fundamental na vida da criança. Ela deve acontecer quando o primeiro dente nasce ou até o primeiro aniversário da criança, conforme recomendação da Associação Brasileira de Odontopediatria.</p>
@@ -520,7 +520,7 @@ const dicasDetalhadas = {
     'escovacao': {
         titulo: 'Escovação Correta',
         tag: 'Higiene',
-        imagem: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop&q=80',
+        imagem: 'images/retrato-de-crianca-segurando-o-icone-de-papel-editado.jpg',
         conteudo: `
             <h4>A importância da escovação correta</h4>
             <p>A escovação adequada é a base da saúde bucal. Quando feita corretamente desde cedo, previne cáries, gengivite e outros problemas dentários.</p>
@@ -554,7 +554,7 @@ const dicasDetalhadas = {
     'alimentacao': {
         titulo: 'Alimentação Saudável',
         tag: 'Prevenção',
-        imagem: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop&q=80',
+        imagem: 'images/vista-superior-de-uma-variedade-de-vegetais-em-um-saco-de-papel-editado.jpg',
         conteudo: `
             <h4>A relação entre alimentação e saúde bucal</h4>
             <p>A alimentação tem um papel fundamental na saúde bucal das crianças. Uma dieta equilibrada previne cáries e fortalece os dentes.</p>
@@ -589,7 +589,7 @@ const dicasDetalhadas = {
     'fluor': {
         titulo: 'Flúor e Selantes',
         tag: 'Proteção',
-        imagem: 'https://images.unsplash.com/photo-1606811971618-4486c8054375?w=800&h=400&fit=crop&q=80',
+        imagem: 'images/2025-11-10-editado.webp',
         conteudo: `
             <h4>Flúor: proteção essencial</h4>
             <p>O flúor é um mineral natural que fortalece o esmalte dos dentes, tornando-os mais resistentes às cáries. É uma das formas mais eficazes de prevenção.</p>
@@ -623,7 +623,7 @@ const dicasDetalhadas = {
     'traumatismo': {
         titulo: 'Traumatismo Dental',
         tag: 'Emergência',
-        imagem: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop&q=80',
+        imagem: 'images/2025-11-21-editado.webp',
         conteudo: `
             <h4>O que fazer em caso de traumatismo dental?</h4>
             <p>Traumatismos dentais são muito comuns na infância, especialmente durante brincadeiras e atividades esportivas. Saber como agir rapidamente pode salvar o dente!</p>
@@ -663,7 +663,7 @@ const dicasDetalhadas = {
     'consultas': {
         titulo: 'Consultas Regulares',
         tag: 'Rotina',
-        imagem: 'https://images.unsplash.com/photo-1606811971618-4486c8054375?w=800&h=400&fit=crop&q=80',
+        imagem: 'images/2024-12-06-editado.webp',
         conteudo: `
             <h4>Por que consultas regulares são essenciais?</h4>
             <p>As consultas periódicas ao odontopediatra são fundamentais para manter a saúde bucal da criança e prevenir problemas antes que se tornem mais sérios.</p>

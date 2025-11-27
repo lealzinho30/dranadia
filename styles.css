@@ -1175,6 +1175,7 @@ section {
 .servicos {
     background: var(--gradient-primary);
     color: var(--white);
+    padding: var(--spacing-lg) 0;
     position: relative;
     overflow: hidden;
 }
@@ -1212,13 +1213,13 @@ section {
 
 .servicos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-sm);
 }
 
 .servico-card {
     background: rgba(255, 255, 255, 0.95);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     border-radius: 20px;
     box-shadow: var(--shadow-xl);
     transition: var(--transition);
@@ -1253,24 +1254,24 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .servico-icon {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background: var(--gradient-primary);
-    border-radius: 18px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 2rem;
+    font-size: 1.8rem;
     box-shadow: var(--shadow-md);
 }
 
 .servico-number {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 800;
     color: var(--light-gray);
     line-height: 1;
@@ -1278,8 +1279,8 @@ section {
 }
 
 .servico-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-sm);
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-xs);
     color: var(--dark-gray);
     font-weight: 700;
 }
@@ -1295,7 +1296,8 @@ section {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: 0.4rem;
+    margin-bottom: var(--spacing-sm);
 }
 
 .servico-list li {
@@ -1357,7 +1359,7 @@ section {
 
 .servicos-more-container {
     text-align: center;
-    margin-top: var(--spacing-xl);
+    margin-top: var(--spacing-md);
 }
 
 .servicos-more-container.hidden {

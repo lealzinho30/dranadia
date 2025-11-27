@@ -745,6 +745,105 @@ section {
     color: var(--dark-gray);
 }
 
+/* Botões CTA (Call to Action) - Mais Chamativos */
+.btn-cta-hero,
+.btn-cta-sobre,
+.btn-cta-servicos,
+.btn-cta-galeria,
+.btn-cta-dicas,
+.btn-cta-faq,
+.btn-cta-porque,
+.btn-cta-chegar {
+    background: var(--gradient-secondary) !important;
+    color: var(--white) !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    padding: 1.2rem 2.5rem !important;
+    box-shadow: 0 8px 25px rgba(241, 144, 34, 0.4) !important;
+    border: 3px solid var(--white) !important;
+    position: relative;
+    overflow: hidden;
+    animation: pulse-cta 2s ease-in-out infinite;
+}
+
+.btn-cta-hero::before,
+.btn-cta-sobre::before,
+.btn-cta-servicos::before,
+.btn-cta-galeria::before,
+.btn-cta-dicas::before,
+.btn-cta-faq::before,
+.btn-cta-porque::before,
+.btn-cta-chegar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-cta-hero:hover::before,
+.btn-cta-sobre:hover::before,
+.btn-cta-servicos:hover::before,
+.btn-cta-galeria:hover::before,
+.btn-cta-dicas:hover::before,
+.btn-cta-faq:hover::before,
+.btn-cta-porque:hover::before,
+.btn-cta-chegar:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-cta-hero:hover,
+.btn-cta-sobre:hover,
+.btn-cta-servicos:hover,
+.btn-cta-galeria:hover,
+.btn-cta-dicas:hover,
+.btn-cta-faq:hover,
+.btn-cta-porque:hover,
+.btn-cta-chegar:hover {
+    transform: translateY(-5px) scale(1.05) !important;
+    box-shadow: 0 12px 35px rgba(241, 144, 34, 0.6) !important;
+    background: var(--secondary-color) !important;
+}
+
+.btn-cta-hero i,
+.btn-cta-sobre i,
+.btn-cta-servicos i,
+.btn-cta-galeria i,
+.btn-cta-dicas i,
+.btn-cta-faq i,
+.btn-cta-porque i,
+.btn-cta-chegar i {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-cta-hero:hover i,
+.btn-cta-sobre:hover i,
+.btn-cta-servicos:hover i,
+.btn-cta-galeria:hover i,
+.btn-cta-dicas:hover i,
+.btn-cta-faq:hover i,
+.btn-cta-porque:hover i,
+.btn-cta-chegar:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+@keyframes pulse-cta {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(241, 144, 34, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(241, 144, 34, 0.6);
+    }
+}
+
 .btn-hero {
     background: var(--primary-color);
     color: var(--white);
@@ -1413,24 +1512,26 @@ section {
     align-items: center;
     gap: var(--spacing-xs);
     margin-top: auto;
-    padding: 0.75rem 1.5rem;
-    background: var(--gradient-primary);
+    padding: 0.9rem 1.8rem;
+    background: var(--gradient-secondary);
     color: var(--white);
     text-decoration: none;
     border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 700;
+    font-size: 1rem;
     transition: var(--transition);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 6px 20px rgba(241, 144, 34, 0.3);
     width: 100%;
     justify-content: center;
     flex-shrink: 0;
+    border: 2px solid transparent;
 }
 
 .btn-servico-saiba-mais:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    background: var(--primary-dark);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(241, 144, 34, 0.5);
+    background: var(--secondary-color);
+    border-color: var(--white);
 }
 
 .btn-servico-saiba-mais i {

@@ -243,10 +243,14 @@ section {
     max-width: 240px !important;
     transition: var(--transition);
     object-fit: contain;
+    object-position: top center;
     display: block;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
     background: transparent;
+    /* Mostrar apenas a parte superior da logo (coração com figuras), ocultando o texto */
+    clip-path: inset(0 0 45% 0);
+    -webkit-clip-path: inset(0 0 45% 0);
 }
 
 /* Se o logotipo tiver fundo branco, tentar remover */

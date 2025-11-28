@@ -9,7 +9,7 @@ O painel está disponível em: `https://lealzinho30.github.io/dranadia/admin`
 ## Credenciais Padrão
 
 - **Usuário:** `admin`
-- **Senha:** `admin123`
+- **Senha:** `DraNadia2024!@#`
 
 ⚠️ **IMPORTANTE:** Altere as credenciais após o primeiro acesso nas Configurações.
 

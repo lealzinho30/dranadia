@@ -273,16 +273,26 @@ section {
     height: auto;
 }
 
-/* Responsividade do logotipo */
-@media (max-width: 968px) {
+/* Responsividade do logotipo - Ordem: do menor para o maior */
+@media (max-width: 480px) {
+    .nav-wrapper {
+        justify-content: center !important;
+    }
+    
+    .logo-centered {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
     .logo-image {
-        height: 90px !important;
-        max-width: 360px !important;
+        height: 180px !important;
+        max-width: 650px !important;
+        margin: 0 auto !important;
     }
 
     .footer-logo-image {
-        height: 50px !important;
-        max-width: 200px !important;
+        height: 40px !important;
+        max-width: 160px !important;
     }
 }
 
@@ -297,8 +307,8 @@ section {
     }
     
     .logo-image {
-        height: 130px !important;
-        max-width: 500px !important;
+        height: 150px !important;
+        max-width: 550px !important;
         margin: 0 auto !important;
     }
 
@@ -308,25 +318,15 @@ section {
     }
 }
 
-@media (max-width: 480px) {
-    .nav-wrapper {
-        justify-content: center !important;
-    }
-    
-    .logo-centered {
-        width: 100% !important;
-        justify-content: center !important;
-    }
-    
+@media (max-width: 968px) {
     .logo-image {
-        height: 160px !important;
-        max-width: 600px !important;
-        margin: 0 auto !important;
+        height: 120px !important;
+        max-width: 450px !important;
     }
 
     .footer-logo-image {
-        height: 40px !important;
-        max-width: 160px !important;
+        height: 50px !important;
+        max-width: 200px !important;
     }
 }
 

@@ -297,8 +297,8 @@ section {
     }
     
     .logo-image {
-        height: 95px !important;
-        max-width: 380px !important;
+        height: 120px !important;
+        max-width: 450px !important;
         margin: 0 auto !important;
     }
 
@@ -319,8 +319,8 @@ section {
     }
     
     .logo-image {
-        height: 110px !important;
-        max-width: 420px !important;
+        height: 140px !important;
+        max-width: 500px !important;
         margin: 0 auto !important;
     }
 

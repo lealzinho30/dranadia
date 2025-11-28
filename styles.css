@@ -2670,6 +2670,7 @@ section {
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(45, 167, 186, 0.1);
+    scroll-margin-top: 120px;
 }
 
 .contato-form h3 {

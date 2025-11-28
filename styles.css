@@ -2394,9 +2394,11 @@ section {
 .mapa-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 1;
-    border-radius: 25px;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: var(--light-gray);
     box-shadow: var(--shadow-xl);
     border: 3px solid var(--primary-color);
     transition: var(--transition);

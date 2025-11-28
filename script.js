@@ -73,7 +73,8 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        const target = document.querySelector(href);
         if (target) {
             const headerOffset = 120;
             const elementPosition = target.getBoundingClientRect().top;
@@ -83,6 +84,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: Math.max(0, offsetPosition),
                 behavior: 'smooth'
             });
+            
+            // Foco no primeiro campo do formulário se for o formulário
+            if (href === '#formulario-contato') {
+                setTimeout(() => {
+                    const firstInput = target.querySelector('input[type="text"]');
+                    if (firstInput) {
+                        firstInput.focus();
+                    }
+                }, 500);
+            }
         }
     });
 });

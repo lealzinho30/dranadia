@@ -3544,6 +3544,16 @@ section {
     .contato-wrapper {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .contato-form {
+        order: -1;
+    }
+    
+    .contato-info {
+        order: 1;
     }
 
     .contato-info .section-header {

@@ -74,69 +74,138 @@
             <div class="admin-content">
                 <!-- Stats Cards -->
                 <div class="stats-grid">
-                    <div class="stat-card">
+                    <div class="stat-card stat-card-primary">
                         <div class="stat-icon stat-primary">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="stat-content">
                             <h3 class="stat-value" id="totalMessages">0</h3>
                             <p class="stat-label">Total de Mensagens</p>
-                            <p class="stat-change" id="totalChange"></p>
+                            <div class="stat-trend">
+                                <i class="fas fa-chart-line"></i>
+                                <span class="stat-change" id="totalChange">Sem mudanças</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card stat-card-warning">
                         <div class="stat-icon stat-warning">
                             <i class="fas fa-envelope-open"></i>
                         </div>
                         <div class="stat-content">
                             <h3 class="stat-value" id="unreadMessages">0</h3>
                             <p class="stat-label">Não Lidas</p>
-                            <p class="stat-change" id="unreadChange"></p>
+                            <div class="stat-trend">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span class="stat-change" id="unreadChange">Sem mudanças</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card stat-card-success">
                         <div class="stat-icon stat-success">
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="stat-content">
                             <h3 class="stat-value" id="readMessages">0</h3>
                             <p class="stat-label">Lidas</p>
-                            <p class="stat-change" id="readChange"></p>
+                            <div class="stat-trend">
+                                <i class="fas fa-check"></i>
+                                <span class="stat-change" id="readChange">Sem mudanças</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card stat-card-info">
                         <div class="stat-icon stat-info">
                             <i class="fas fa-calendar-day"></i>
                         </div>
                         <div class="stat-content">
                             <h3 class="stat-value" id="todayMessages">0</h3>
                             <p class="stat-label">Hoje</p>
-                            <p class="stat-change" id="todayChange"></p>
+                            <div class="stat-trend">
+                                <i class="fas fa-sun"></i>
+                                <span class="stat-change" id="todayChange">Sem mudanças</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card stat-card-purple">
                         <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                             <i class="fas fa-calendar-week"></i>
                         </div>
                         <div class="stat-content">
                             <h3 class="stat-value" id="weekMessages">0</h3>
                             <p class="stat-label">Esta Semana</p>
-                            <p class="stat-change" id="weekChange"></p>
+                            <div class="stat-trend">
+                                <i class="fas fa-calendar"></i>
+                                <span class="stat-change" id="weekChange">Sem mudanças</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card stat-card-pink">
                         <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
                         <div class="stat-content">
                             <h3 class="stat-value" id="monthMessages">0</h3>
                             <p class="stat-label">Este Mês</p>
-                            <p class="stat-change" id="monthChange"></p>
+                            <div class="stat-trend">
+                                <i class="fas fa-calendar-check"></i>
+                                <span class="stat-change" id="monthChange">Sem mudanças</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos e Análises -->
+                <div class="dashboard-charts-grid">
+                    <!-- Gráfico de Mensagens por Período -->
+                    <div class="dashboard-section chart-section">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="fas fa-chart-line"></i>
+                                Mensagens por Período (Últimos 7 Dias)
+                            </h2>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-bars" id="messagesChart">
+                                <!-- Gráfico será gerado via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Distribuição -->
+                    <div class="dashboard-section chart-section">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="fas fa-chart-pie"></i>
+                                Distribuição de Mensagens
+                            </h2>
+                        </div>
+                        <div class="pie-chart-container">
+                            <div class="pie-chart" id="pieChart">
+                                <svg viewBox="0 0 200 200" class="pie-svg">
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#e0e0e0" stroke-width="40"/>
+                                    <circle id="pieCircle" cx="100" cy="100" r="80" fill="none" stroke="var(--primary-color)" stroke-width="40" 
+                                            stroke-dasharray="0 502" transform="rotate(-90 100 100)"/>
+                                </svg>
+                                <div class="pie-center">
+                                    <span class="pie-value" id="pieValue">0%</span>
+                                    <span class="pie-label">Lidas</span>
+                                </div>
+                            </div>
+                            <div class="pie-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: var(--success);"></span>
+                                    <span>Lidas: <strong id="legendRead">0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: var(--warning);"></span>
+                                    <span>Não Lidas: <strong id="legendUnread">0</strong></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,30 +215,57 @@
                     <div class="section-header">
                         <h2 class="section-title">
                             <i class="fas fa-chart-bar"></i>
-                            Análise de Mensagens
+                            Análise Detalhada
                         </h2>
                     </div>
                     <div class="stats-detail-grid">
                         <div class="detail-card">
-                            <h4><i class="fas fa-clock"></i> Tempo Médio de Resposta</h4>
-                            <p class="detail-value" id="avgResponseTime">-</p>
-                            <p class="detail-desc">Baseado em mensagens lidas</p>
+                            <h4><i class="fas fa-percentage"></i> Taxa de Leitura</h4>
+                            <p class="detail-value" id="readRate">0%</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="readRateBar" style="width: 0%"></div>
+                            </div>
+                            <p class="detail-desc">Mensagens lidas vs total</p>
                         </div>
                         <div class="detail-card">
                             <h4><i class="fas fa-calendar-check"></i> Primeira Mensagem</h4>
                             <p class="detail-value" id="firstMessage">-</p>
-                            <p class="detail-desc" id="firstMessageDate">-</p>
+                            <p class="detail-desc" id="firstMessageDate">Nenhuma mensagem ainda</p>
                         </div>
                         <div class="detail-card">
                             <h4><i class="fas fa-calendar-star"></i> Última Mensagem</h4>
                             <p class="detail-value" id="lastMessage">-</p>
-                            <p class="detail-desc" id="lastMessageDate">-</p>
+                            <p class="detail-desc" id="lastMessageDate">Nenhuma mensagem ainda</p>
                         </div>
                         <div class="detail-card">
-                            <h4><i class="fas fa-percentage"></i> Taxa de Leitura</h4>
-                            <p class="detail-value" id="readRate">0%</p>
-                            <p class="detail-desc">Mensagens lidas vs total</p>
+                            <h4><i class="fas fa-clock"></i> Tempo Médio</h4>
+                            <p class="detail-value" id="avgResponseTime">-</p>
+                            <p class="detail-desc">Entre primeira e última mensagem</p>
                         </div>
+                        <div class="detail-card">
+                            <h4><i class="fas fa-tachometer-alt"></i> Taxa Diária</h4>
+                            <p class="detail-value" id="dailyRate">0</p>
+                            <p class="detail-desc">Mensagens por dia (média)</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4><i class="fas fa-fire"></i> Pico de Atividade</h4>
+                            <p class="detail-value" id="peakDay">-</p>
+                            <p class="detail-desc" id="peakDayCount">Nenhum dado ainda</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Tendência Mensal -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-area"></i>
+                            Tendência Mensal (Últimos 6 Meses)
+                        </h2>
+                    </div>
+                    <div class="line-chart-container">
+                        <canvas id="lineChart" width="800" height="300"></canvas>
+                        <div class="line-chart-legend" id="lineChartLegend"></div>
                     </div>
                 </div>
 
@@ -192,20 +288,6 @@
                     </div>
                 </div>
 
-                <!-- Gráfico de Mensagens por Período -->
-                <div class="dashboard-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-chart-line"></i>
-                            Mensagens por Período
-                        </h2>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-bars" id="messagesChart">
-                            <!-- Gráfico será gerado via JavaScript -->
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Ações Rápidas -->
                 <div class="dashboard-section">
@@ -322,8 +404,11 @@
             // Salvar stats para próxima comparação
             previousStats = { total, unread, read, today: todayMessages, week: weekMessages, month: monthMessages };
 
-            // Gerar gráfico
+            // Gerar gráficos
             generateChart(messages);
+            generatePieChart(messages);
+            generateLineChart(messages);
+            calculateAdditionalStats(messages);
         }
 
         // Atualizar mudanças
@@ -382,7 +467,7 @@
                 });
             }
 
-            const maxCount = Math.max(...last7Days.map(d => d.count), 1);
+            const maxCount = Math.max(...last7Days.map(d => d.count), 1) || 1;
 
             container.innerHTML = last7Days.map(day => {
                 const height = (day.count / maxCount) * 100;
@@ -395,6 +480,168 @@
                 </div>
             `;
             }).join('');
+        }
+
+        // Gerar gráfico de pizza
+        function generatePieChart(messages) {
+            const total = messages.length;
+            const read = messages.filter(m => m.read).length;
+            const unread = total - read;
+            
+            const readPercentage = total > 0 ? (read / total) * 100 : 0;
+            const circumference = 2 * Math.PI * 80;
+            const dashArray = `${(readPercentage / 100) * circumference} ${circumference}`;
+            
+            document.getElementById('pieCircle').setAttribute('stroke-dasharray', dashArray);
+            document.getElementById('pieValue').textContent = Math.round(readPercentage) + '%';
+            document.getElementById('legendRead').textContent = read;
+            document.getElementById('legendUnread').textContent = unread;
+            
+            // Atualizar barra de progresso
+            document.getElementById('readRateBar').style.width = readPercentage + '%';
+        }
+
+        // Gerar gráfico de linha (tendência mensal)
+        function generateLineChart(messages) {
+            const canvas = document.getElementById('lineChart');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            // Limpar canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Calcular dados dos últimos 6 meses
+            const months = [];
+            const today = new Date();
+            
+            for (let i = 5; i >= 0; i--) {
+                const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+                const monthName = date.toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' });
+                
+                const count = messages.filter(m => {
+                    const msgDate = new Date(m.date);
+                    return msgDate.getMonth() === date.getMonth() && 
+                           msgDate.getFullYear() === date.getFullYear();
+                }).length;
+                
+                months.push({ name: monthName, count: count });
+            }
+            
+            const maxCount = Math.max(...months.map(m => m.count), 1);
+            const padding = 40;
+            const chartWidth = width - padding * 2;
+            const chartHeight = height - padding * 2;
+            
+            // Desenhar eixos
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.lineTo(width - padding, height - padding);
+            ctx.stroke();
+            
+            // Desenhar linha
+            if (maxCount > 0) {
+                ctx.strokeStyle = '#2da7ba';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                
+                months.forEach((month, index) => {
+                    const x = padding + (index / (months.length - 1 || 1)) * chartWidth;
+                    const y = height - padding - (month.count / maxCount) * chartHeight;
+                    
+                    if (index === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                });
+                
+                ctx.stroke();
+                
+                // Desenhar pontos
+                ctx.fillStyle = '#2da7ba';
+                months.forEach((month, index) => {
+                    const x = padding + (index / (months.length - 1 || 1)) * chartWidth;
+                    const y = height - padding - (month.count / maxCount) * chartHeight;
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                    
+                    // Labels
+                    ctx.fillStyle = '#666';
+                    ctx.font = '12px Poppins';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(month.count.toString(), x, y - 15);
+                    ctx.fillText(month.name, x, height - padding + 20);
+                });
+            } else {
+                // Mostrar mensagem quando não há dados
+                ctx.fillStyle = '#999';
+                ctx.font = '14px Poppins';
+                ctx.textAlign = 'center';
+                ctx.fillText('Nenhum dado disponível', width / 2, height / 2);
+            }
+        }
+
+        // Calcular estatísticas adicionais
+        function calculateAdditionalStats(messages) {
+            // Taxa de leitura
+            const total = messages.length;
+            const read = messages.filter(m => m.read).length;
+            const readRate = total > 0 ? Math.round((read / total) * 100) : 0;
+            document.getElementById('readRate').textContent = readRate + '%';
+            document.getElementById('readRateBar').style.width = readRate + '%';
+
+            // Primeira e última mensagem
+            if (messages.length > 0) {
+                const sorted = [...messages].sort((a, b) => new Date(a.date) - new Date(b.date));
+                const first = sorted[0];
+                const last = sorted[sorted.length - 1];
+                
+                document.getElementById('firstMessage').textContent = first.nome || '-';
+                document.getElementById('firstMessageDate').textContent = adminUtils.formatDateFull(first.date);
+                document.getElementById('lastMessage').textContent = last.nome || '-';
+                document.getElementById('lastMessageDate').textContent = adminUtils.formatDateFull(last.date);
+                
+                // Tempo médio
+                const timeDiff = new Date(last.date) - new Date(first.date);
+                const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                if (daysDiff > 0) {
+                    document.getElementById('avgResponseTime').textContent = daysDiff + ' dias';
+                } else {
+                    document.getElementById('avgResponseTime').textContent = 'Mesmo dia';
+                }
+                
+                // Taxa diária
+                const dailyRate = total > 0 ? (total / Math.max(daysDiff, 1)).toFixed(1) : '0';
+                document.getElementById('dailyRate').textContent = dailyRate;
+                
+                // Pico de atividade
+                const dayCounts = {};
+                messages.forEach(m => {
+                    const day = new Date(m.date).toLocaleDateString('pt-BR');
+                    dayCounts[day] = (dayCounts[day] || 0) + 1;
+                });
+                
+                const peakDay = Object.entries(dayCounts).sort((a, b) => b[1] - a[1])[0];
+                if (peakDay) {
+                    document.getElementById('peakDay').textContent = peakDay[0];
+                    document.getElementById('peakDayCount').textContent = peakDay[1] + ' mensagens';
+                }
+            } else {
+                document.getElementById('firstMessage').textContent = '-';
+                document.getElementById('firstMessageDate').textContent = 'Nenhuma mensagem ainda';
+                document.getElementById('lastMessage').textContent = '-';
+                document.getElementById('lastMessageDate').textContent = 'Nenhuma mensagem ainda';
+                document.getElementById('avgResponseTime').textContent = '-';
+                document.getElementById('dailyRate').textContent = '0';
+                document.getElementById('peakDay').textContent = '-';
+                document.getElementById('peakDayCount').textContent = 'Nenhum dado ainda';
+            }
         }
 
         // Atualizar dashboard

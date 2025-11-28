@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css?v=2.24">
+    <link rel="stylesheet" href="styles.css?v=2.25">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" crossorigin>
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
@@ -899,47 +899,82 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-top">
+                <div class="footer-cta">
+                    <h3>Pronto para cuidar do sorriso do seu filho?</h3>
+                    <p>Agende uma consulta e venha conhecer nosso espaço acolhedor</p>
+                    <a href="#contato" class="btn btn-primary btn-footer-cta">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Agendar Consulta</span>
+                    </a>
+                </div>
+            </div>
             <div class="footer-content">
-                <div class="footer-section">
+                <div class="footer-section footer-about">
                     <div class="footer-logo">
                         <img src="images/logotipo.dranadia.png" alt="Dra. Nadia Salem - Odontopediatra" class="footer-logo-image">
                     </div>
-                    <p>Cuidando do sorriso do seu filho com carinho, dedicação e profissionalismo.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="#inicio">Início</a></li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#servicos">Serviços</a></li>
-                        <li><a href="#galeria">Galeria</a></li>
-                        <li><a href="#dicas">Dicas</a></li>
-                        <li><a href="#porque-escolher">Por que Escolher</a></li>
-                        <li><a href="#como-chegar">Como Chegar</a></li>
-                        <li><a href="#contato">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> (11) 91314-1625</li>
-                        <li><i class="fas fa-envelope"></i> dranadiaodontopediatra@gmail.com</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Redes Sociais</h4>
+                    <p>Cuidando do sorriso do seu filho com carinho, dedicação e profissionalismo. Especializada em odontopediatria com abordagem humanizada e ambiente acolhedor.</p>
                     <div class="footer-social">
-                        <a href="https://www.instagram.com/dra_nadia_odontopediatra/" target="_blank">
+                        <a href="https://www.instagram.com/dra_nadia_odontopediatra/" target="_blank" class="social-link" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/5511913141625" target="_blank">
+                        <a href="https://wa.me/5511913141625" target="_blank" class="social-link" aria-label="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio"><i class="fas fa-chevron-right"></i> Início</a></li>
+                        <li><a href="#sobre"><i class="fas fa-chevron-right"></i> Sobre</a></li>
+                        <li><a href="#servicos"><i class="fas fa-chevron-right"></i> Serviços</a></li>
+                        <li><a href="#galeria"><i class="fas fa-chevron-right"></i> Galeria</a></li>
+                        <li><a href="#dicas"><i class="fas fa-chevron-right"></i> Dicas</a></li>
+                        <li><a href="#porque-escolher"><i class="fas fa-chevron-right"></i> Por que Escolher</a></li>
+                        <li><a href="#contato"><i class="fas fa-chevron-right"></i> Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Endereço</strong>
+                                <p>Rua Fernando Falcão, 1111<br>Edifício Bernini - Sala 810<br>Mooca - SP | CEP: 03180-003</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Telefone</strong>
+                                <p><a href="tel:+5511913141625">(11) 91314-1625</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>E-mail</strong>
+                                <p><a href="mailto:dranadiaodontopediatra@gmail.com">dranadiaodontopediatra@gmail.com</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Horário</strong>
+                                <p>Segunda a Sábado<br>Das 8h00 às 20h00</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Dra. Nadia - Odontopediatra. Todos os direitos reservados.</p>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 <strong>Dra. Nadia Salem</strong> - Odontopediatra. Todos os direitos reservados.</p>
+                    <p class="footer-dev">Desenvolvido com <i class="fas fa-heart"></i> para cuidar de sorrisos</p>
+                </div>
             </div>
         </div>
     </footer>

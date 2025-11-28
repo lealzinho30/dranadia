@@ -268,6 +268,21 @@ contactForm.addEventListener('submit', (e) => {
         mensagem: document.getElementById('mensagem').value
     };
 
+    // Salvar mensagem no localStorage para o painel admin
+    try {
+        const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
+        const newMessage = {
+            id: Date.now(),
+            ...formData,
+            date: new Date().toISOString(),
+            read: false
+        };
+        messages.push(newMessage);
+        localStorage.setItem('contact_messages', JSON.stringify(messages));
+    } catch (error) {
+        console.error('Erro ao salvar mensagem:', error);
+    }
+
     // Criar mensagem para WhatsApp
     const whatsappMessage = `Olá! Meu nome é ${formData.nome}.\n\nEmail: ${formData.email}\nTelefone: ${formData.telefone}\n\nMensagem: ${formData.mensagem}`;
     const whatsappURL = `https://wa.me/5511913141625?text=${encodeURIComponent(whatsappMessage)}`;

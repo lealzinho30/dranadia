@@ -24,21 +24,13 @@
             
             <nav class="sidebar-menu">
                 <a href="dashboard.html" class="menu-item active">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-chart-line"></i>
                     <span>Dashboard</span>
                 </a>
                 <a href="mensagens.html" class="menu-item">
                     <i class="fas fa-envelope"></i>
                     <span>Mensagens</span>
                     <span id="unreadBadge" class="badge badge-danger"></span>
-                </a>
-                <a href="conteudo.html" class="menu-item">
-                    <i class="fas fa-edit"></i>
-                    <span>Conteúdo</span>
-                </a>
-                <a href="config.html" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Configurações</span>
                 </a>
                 <a href="../index.html" class="menu-item" target="_blank">
                     <i class="fas fa-external-link-alt"></i>
@@ -68,11 +60,11 @@
             <header class="admin-header">
                 <div class="header-left">
                     <h1 class="page-title">Dashboard</h1>
-                    <p class="page-subtitle">Visão geral do sistema</p>
+                    <p class="page-subtitle">Estatísticas e dados do site</p>
                 </div>
                 <div class="header-right">
                     <div class="header-actions">
-                        <button class="btn-icon" title="Atualizar">
+                        <button class="btn-icon" onclick="refreshDashboard()" title="Atualizar">
                             <i class="fas fa-sync-alt"></i>
                         </button>
                     </div>
@@ -89,6 +81,7 @@
                         <div class="stat-content">
                             <h3 class="stat-value" id="totalMessages">0</h3>
                             <p class="stat-label">Total de Mensagens</p>
+                            <p class="stat-change" id="totalChange"></p>
                         </div>
                     </div>
 
@@ -99,6 +92,7 @@
                         <div class="stat-content">
                             <h3 class="stat-value" id="unreadMessages">0</h3>
                             <p class="stat-label">Não Lidas</p>
+                            <p class="stat-change" id="unreadChange"></p>
                         </div>
                     </div>
 
@@ -109,6 +103,7 @@
                         <div class="stat-content">
                             <h3 class="stat-value" id="readMessages">0</h3>
                             <p class="stat-label">Lidas</p>
+                            <p class="stat-change" id="readChange"></p>
                         </div>
                     </div>
 
@@ -119,6 +114,61 @@
                         <div class="stat-content">
                             <h3 class="stat-value" id="todayMessages">0</h3>
                             <p class="stat-label">Hoje</p>
+                            <p class="stat-change" id="todayChange"></p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value" id="weekMessages">0</h3>
+                            <p class="stat-label">Esta Semana</p>
+                            <p class="stat-change" id="weekChange"></p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value" id="monthMessages">0</h3>
+                            <p class="stat-label">Este Mês</p>
+                            <p class="stat-change" id="monthChange"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estatísticas Detalhadas -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-bar"></i>
+                            Análise de Mensagens
+                        </h2>
+                    </div>
+                    <div class="stats-detail-grid">
+                        <div class="detail-card">
+                            <h4><i class="fas fa-clock"></i> Tempo Médio de Resposta</h4>
+                            <p class="detail-value" id="avgResponseTime">-</p>
+                            <p class="detail-desc">Baseado em mensagens lidas</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4><i class="fas fa-calendar-check"></i> Primeira Mensagem</h4>
+                            <p class="detail-value" id="firstMessage">-</p>
+                            <p class="detail-desc" id="firstMessageDate">-</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4><i class="fas fa-calendar-star"></i> Última Mensagem</h4>
+                            <p class="detail-value" id="lastMessage">-</p>
+                            <p class="detail-desc" id="lastMessageDate">-</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4><i class="fas fa-percentage"></i> Taxa de Leitura</h4>
+                            <p class="detail-value" id="readRate">0%</p>
+                            <p class="detail-desc">Mensagens lidas vs total</p>
                         </div>
                     </div>
                 </div>
@@ -142,7 +192,22 @@
                     </div>
                 </div>
 
-                <!-- Quick Actions -->
+                <!-- Gráfico de Mensagens por Período -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-line"></i>
+                            Mensagens por Período
+                        </h2>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-bars" id="messagesChart">
+                            <!-- Gráfico será gerado via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações Rápidas -->
                 <div class="dashboard-section">
                     <div class="section-header">
                         <h2 class="section-title">
@@ -153,19 +218,19 @@
                     <div class="quick-actions">
                         <a href="mensagens.html" class="action-card">
                             <i class="fas fa-envelope"></i>
-                            <span>Ver Mensagens</span>
+                            <span>Ver Todas as Mensagens</span>
                         </a>
-                        <a href="conteudo.html" class="action-card">
-                            <i class="fas fa-edit"></i>
-                            <span>Editar Conteúdo</span>
-                        </a>
-                        <a href="config.html" class="action-card">
-                            <i class="fas fa-cog"></i>
-                            <span>Configurações</span>
+                        <a href="mensagens.html?filter=unread" class="action-card">
+                            <i class="fas fa-envelope-open"></i>
+                            <span>Ver Não Lidas</span>
                         </a>
                         <a href="../index.html" target="_blank" class="action-card">
                             <i class="fas fa-external-link-alt"></i>
                             <span>Ver Site</span>
+                        </a>
+                        <a href="mensagens.html?filter=today" class="action-card">
+                            <i class="fas fa-calendar-day"></i>
+                            <span>Mensagens de Hoje</span>
                         </a>
                     </div>
                 </div>
@@ -185,6 +250,8 @@
             document.getElementById('userName').textContent = user.name || 'Administrador';
         }
 
+        let previousStats = { total: 0, unread: 0, read: 0, today: 0, week: 0, month: 0 };
+
         // Carregar estatísticas
         function loadStats() {
             const messages = adminUtils.getMessages();
@@ -193,16 +260,55 @@
             const read = messages.filter(m => m.read).length;
             
             // Mensagens de hoje
-            const today = new Date().toDateString();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
             const todayMessages = messages.filter(m => {
-                const msgDate = new Date(m.date).toDateString();
-                return msgDate === today;
+                const msgDate = new Date(m.date);
+                msgDate.setHours(0, 0, 0, 0);
+                return msgDate.getTime() === today.getTime();
             }).length;
 
+            // Mensagens desta semana
+            const weekAgo = new Date(today);
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const weekMessages = messages.filter(m => {
+                const msgDate = new Date(m.date);
+                return msgDate >= weekAgo;
+            }).length;
+
+            // Mensagens deste mês
+            const monthMessages = messages.filter(m => {
+                const msgDate = new Date(m.date);
+                return msgDate.getMonth() === today.getMonth() && 
+                       msgDate.getFullYear() === today.getFullYear();
+            }).length;
+
+            // Atualizar valores
             document.getElementById('totalMessages').textContent = total;
             document.getElementById('unreadMessages').textContent = unread;
             document.getElementById('readMessages').textContent = read;
             document.getElementById('todayMessages').textContent = todayMessages;
+            document.getElementById('weekMessages').textContent = weekMessages;
+            document.getElementById('monthMessages').textContent = monthMessages;
+
+            // Calcular mudanças
+            updateChanges(total, unread, read, todayMessages, weekMessages, monthMessages);
+
+            // Taxa de leitura
+            const readRate = total > 0 ? Math.round((read / total) * 100) : 0;
+            document.getElementById('readRate').textContent = readRate + '%';
+
+            // Primeira e última mensagem
+            if (messages.length > 0) {
+                const sorted = [...messages].sort((a, b) => new Date(a.date) - new Date(b.date));
+                const first = sorted[0];
+                const last = sorted[sorted.length - 1];
+                
+                document.getElementById('firstMessage').textContent = first.nome;
+                document.getElementById('firstMessageDate').textContent = adminUtils.formatDateFull(first.date);
+                document.getElementById('lastMessage').textContent = last.nome;
+                document.getElementById('lastMessageDate').textContent = adminUtils.formatDateFull(last.date);
+            }
 
             // Atualizar badge
             const badge = document.getElementById('unreadBadge');
@@ -212,6 +318,90 @@
             } else {
                 badge.style.display = 'none';
             }
+
+            // Salvar stats para próxima comparação
+            previousStats = { total, unread, read, today: todayMessages, week: weekMessages, month: monthMessages };
+
+            // Gerar gráfico
+            generateChart(messages);
+        }
+
+        // Atualizar mudanças
+        function updateChanges(total, unread, read, today, week, month) {
+            const changes = {
+                total: total - previousStats.total,
+                unread: unread - previousStats.unread,
+                read: read - previousStats.read,
+                today: today - previousStats.today,
+                week: week - previousStats.week,
+                month: month - previousStats.month
+            };
+
+            function formatChange(value, id) {
+                const el = document.getElementById(id);
+                if (value > 0) {
+                    el.textContent = `+${value} desde última atualização`;
+                    el.style.color = 'var(--success)';
+                } else if (value < 0) {
+                    el.textContent = `${value} desde última atualização`;
+                    el.style.color = 'var(--error)';
+                } else {
+                    el.textContent = 'Sem mudanças';
+                    el.style.color = 'var(--gray)';
+                }
+            }
+
+            formatChange(changes.total, 'totalChange');
+            formatChange(changes.unread, 'unreadChange');
+            formatChange(changes.read, 'readChange');
+            formatChange(changes.today, 'todayChange');
+            formatChange(changes.week, 'weekChange');
+            formatChange(changes.month, 'monthChange');
+        }
+
+        // Gerar gráfico de barras
+        function generateChart(messages) {
+            const container = document.getElementById('messagesChart');
+            const last7Days = [];
+            const today = new Date();
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                date.setHours(0, 0, 0, 0);
+                
+                const count = messages.filter(m => {
+                    const msgDate = new Date(m.date);
+                    msgDate.setHours(0, 0, 0, 0);
+                    return msgDate.getTime() === date.getTime();
+                }).length;
+                
+                last7Days.push({
+                    date: date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }),
+                    count: count
+                });
+            }
+
+            const maxCount = Math.max(...last7Days.map(d => d.count), 1);
+
+            container.innerHTML = last7Days.map(day => {
+                const height = (day.count / maxCount) * 100;
+                return `
+                    <div class="chart-bar-item">
+                        <div class="chart-bar" style="height: ${height}%">
+                            <span class="chart-value">${day.count}</span>
+                        </div>
+                        <span class="chart-label">${day.date}</span>
+                </div>
+            `;
+            }).join('');
+        }
+
+        // Atualizar dashboard
+        function refreshDashboard() {
+            loadStats();
+            loadRecentMessages();
+            adminUtils.showNotification('Dashboard atualizado!', 'success');
         }
 
         // Carregar mensagens recentes
@@ -221,10 +411,10 @@
 
             if (messages.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-inbox"></i>
-                        <p>Nenhuma mensagem ainda</p>
-                    </div>
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>Nenhuma mensagem ainda</p>
+                            </div>
                 `;
                 return;
             }

@@ -24,21 +24,13 @@
             
             <nav class="sidebar-menu">
                 <a href="dashboard.html" class="menu-item">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-chart-line"></i>
                     <span>Dashboard</span>
                 </a>
                 <a href="mensagens.html" class="menu-item active">
                     <i class="fas fa-envelope"></i>
                     <span>Mensagens</span>
                     <span id="unreadBadge" class="badge badge-danger"></span>
-                </a>
-                <a href="conteudo.html" class="menu-item">
-                    <i class="fas fa-edit"></i>
-                    <span>Conteúdo</span>
-                </a>
-                <a href="config.html" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Configurações</span>
                 </a>
                 <a href="../index.html" class="menu-item" target="_blank">
                     <i class="fas fa-external-link-alt"></i>
@@ -75,10 +67,6 @@
                         <button class="btn btn-secondary" onclick="markAllAsRead()">
                             <i class="fas fa-check-double"></i>
                             Marcar todas como lidas
-                        </button>
-                        <button class="btn btn-danger" onclick="deleteAllRead()">
-                            <i class="fas fa-trash"></i>
-                            Excluir lidas
                         </button>
                         <button class="btn-icon" onclick="loadMessages()" title="Atualizar">
                             <i class="fas fa-sync-alt"></i>
@@ -140,10 +128,6 @@
                     <i class="fab fa-whatsapp"></i>
                     Responder no WhatsApp
                 </a>
-                <button class="btn btn-danger" id="deleteBtn" onclick="deleteMessage()">
-                    <i class="fas fa-trash"></i>
-                    Excluir
-                </button>
             </div>
         </div>
     </div>
@@ -347,16 +331,6 @@
             closeMessageModal();
         }
 
-        // Excluir mensagem
-        function deleteMessage() {
-            if (!currentMessageId) return;
-            if (confirm('Tem certeza que deseja excluir esta mensagem?')) {
-                adminUtils.deleteMessage(currentMessageId);
-                loadMessages();
-                closeMessageModal();
-            }
-        }
-
         // Marcar todas como lidas
         function markAllAsRead() {
             if (confirm('Marcar todas as mensagens como lidas?')) {
@@ -366,18 +340,7 @@
                     }
                 });
                 loadMessages();
-            }
-        }
-
-        // Excluir todas as lidas
-        function deleteAllRead() {
-            if (confirm('Tem certeza que deseja excluir todas as mensagens lidas?')) {
-                allMessages.forEach(msg => {
-                    if (msg.read) {
-                        adminUtils.deleteMessage(msg.id);
-                    }
-                });
-                loadMessages();
+                adminUtils.showNotification('Todas as mensagens foram marcadas como lidas!', 'success');
             }
         }
 

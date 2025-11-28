@@ -9,7 +9,23 @@ class AuthSystem {
         // Verificar se há usuário logado
         const user = localStorage.getItem('admin_user');
         if (user) {
-            this.currentUser = JSON.parse(user);
+            try {
+                this.currentUser = JSON.parse(user);
+                // Verificar se a sessão não expirou (24 horas)
+                if (this.currentUser.loginTime) {
+                    const loginTime = new Date(this.currentUser.loginTime);
+                    const now = new Date();
+                    const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+                    
+                    if (hoursDiff > 24) {
+                        // Sessão expirada
+                        this.logout();
+                    }
+                }
+            } catch (e) {
+                this.currentUser = null;
+                localStorage.removeItem('admin_user');
+            }
         }
     }
 
@@ -60,10 +76,28 @@ class AuthSystem {
         const credentials = {
             username: newUsername,
             password: newPassword,
-            name: newName
+            name: newName || 'Administrador'
         };
         localStorage.setItem('admin_credentials', JSON.stringify(credentials));
+        
+        // Atualizar usuário atual se for o mesmo
+        if (this.currentUser && this.currentUser.username === credentials.username) {
+            this.currentUser.name = credentials.name;
+            localStorage.setItem('admin_user', JSON.stringify(this.currentUser));
+        }
+        
         return true;
+    }
+
+    // Verificar se a senha está correta (sem fazer login)
+    verifyPassword(password) {
+        const savedUser = localStorage.getItem('admin_credentials');
+        const defaultUser = {
+            username: 'admin',
+            password: 'admin123'
+        };
+        const credentials = savedUser ? JSON.parse(savedUser) : defaultUser;
+        return password === credentials.password;
     }
 }
 
@@ -80,11 +114,15 @@ function protectPage() {
 }
 
 // Verificar autenticação ao carregar página
-if (window.location.pathname.includes('/admin/') && 
-    !window.location.pathname.includes('index.html') && 
-    !window.location.pathname.endsWith('/admin/')) {
-    if (!protectPage()) {
-        // Redirecionamento já foi feito
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPath = window.location.pathname;
+    const isAdminPage = currentPath.includes('/admin/');
+    const isLoginPage = currentPath.includes('index.html') || currentPath.endsWith('/admin/');
+    
+    if (isAdminPage && !isLoginPage) {
+        if (!protectPage()) {
+            // Redirecionamento já foi feito
+            return;
+        }
     }
-}
-
+});

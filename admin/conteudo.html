@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conteúdo - Painel Administrativo</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>Conteúdo - Painel Administrativo | Dra. Nadia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2da7ba;
-            --primary-dark: #238a9a;
-            --secondary-color: #f19022;
-        }
-    </style>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <div class="admin-container">
@@ -24,24 +17,32 @@
                     <i class="fas fa-tooth"></i>
                     <span>Admin</span>
                 </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
             
             <nav class="sidebar-menu">
                 <a href="dashboard.html" class="menu-item">
                     <i class="fas fa-home"></i>
-                    Dashboard
+                    <span>Dashboard</span>
                 </a>
                 <a href="mensagens.html" class="menu-item">
                     <i class="fas fa-envelope"></i>
-                    Mensagens
+                    <span>Mensagens</span>
+                    <span id="unreadBadge" class="badge badge-danger"></span>
                 </a>
                 <a href="conteudo.html" class="menu-item active">
                     <i class="fas fa-edit"></i>
-                    Conteúdo
+                    <span>Conteúdo</span>
                 </a>
                 <a href="config.html" class="menu-item">
                     <i class="fas fa-cog"></i>
-                    Configurações
+                    <span>Configurações</span>
+                </a>
+                <a href="../index.html" class="menu-item" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Ver Site</span>
                 </a>
             </nav>
             
@@ -51,11 +52,11 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="user-details">
-                        <div class="user-name" id="userName">Administrador</div>
-                        <div class="user-status" id="userInfo">Online</div>
+                        <span class="user-name" id="userName">Administrador</span>
+                        <span class="user-role">Admin</span>
                     </div>
                 </div>
-                <button class="btn-logout" id="logoutBtn">
+                <button class="btn-logout" onclick="auth.logout()">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </button>
@@ -66,39 +67,97 @@
         <main class="admin-main">
             <header class="admin-header">
                 <div class="header-left">
-                    <button class="menu-toggle" id="menuToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h1 class="header-title">Conteúdo</h1>
+                    <h1 class="page-title">Gerenciar Conteúdo</h1>
+                    <p class="page-subtitle">Edite textos e informações do site</p>
                 </div>
                 <div class="header-right">
-                    <a href="../index.html" target="_blank" class="btn btn-secondary btn-sm">
-                        <i class="fas fa-external-link-alt"></i>
-                        Ver Site
-                    </a>
+                    <button class="btn btn-primary" onclick="saveContent()">
+                        <i class="fas fa-save"></i>
+                        Salvar Alterações
+                    </button>
                 </div>
             </header>
 
             <div class="admin-content">
-                <div class="page-header">
-                    <h2 class="page-title">Gerenciamento de Conteúdo</h2>
-                    <p class="page-subtitle">Edite textos e informações do site</p>
+                <div class="content-tabs">
+                    <button class="tab-btn active" onclick="switchTab('hero')">
+                        <i class="fas fa-home"></i> Hero
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('sobre')">
+                        <i class="fas fa-info-circle"></i> Sobre
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('servicos')">
+                        <i class="fas fa-briefcase-medical"></i> Serviços
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('contato')">
+                        <i class="fas fa-address-book"></i> Contato
+                    </button>
                 </div>
 
-                <div class="content-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Informações do Site</h3>
+                <!-- Hero Tab -->
+                <div class="tab-content active" id="tab-hero">
+                    <div class="content-section">
+                        <h2 class="section-title">Seção Hero</h2>
+                        <div class="form-group">
+                            <label>Título Principal (Linha 1)</label>
+                            <input type="text" id="hero-title-1" class="form-input" placeholder="Especialista em">
+                        </div>
+                        <div class="form-group">
+                            <label>Título Principal (Linha 2)</label>
+                            <input type="text" id="hero-title-2" class="form-input" placeholder="Saúde Bucal Infantil">
+                        </div>
+                        <div class="form-group">
+                            <label>Subtítulo</label>
+                            <textarea id="hero-subtitle" class="form-textarea" rows="3" placeholder="Descrição do hero"></textarea>
+                        </div>
                     </div>
-                    <div style="padding: 1.5rem;">
-                        <p style="color: var(--gray); margin-bottom: 1.5rem;">
-                            Esta funcionalidade permite editar o conteúdo do site. As alterações são salvas localmente e podem ser aplicadas ao site principal.
+                </div>
+
+                <!-- Sobre Tab -->
+                <div class="tab-content" id="tab-sobre">
+                    <div class="content-section">
+                        <h2 class="section-title">Seção Sobre</h2>
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" id="sobre-title" class="form-input" placeholder="Título da seção sobre">
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea id="sobre-description" class="form-textarea" rows="5" placeholder="Descrição sobre a clínica"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serviços Tab -->
+                <div class="tab-content" id="tab-servicos">
+                    <div class="content-section">
+                        <h2 class="section-title">Seção Serviços</h2>
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" id="servicos-title" class="form-input" placeholder="Título da seção serviços">
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea id="servicos-description" class="form-textarea" rows="3" placeholder="Descrição dos serviços"></textarea>
+                        </div>
+                        <p class="info-text">
+                            <i class="fas fa-info-circle"></i>
+                            Para editar serviços individuais, edite diretamente no arquivo index.html
                         </p>
-                        <div class="empty-state">
-                            <i class="fas fa-tools"></i>
-                            <p>Funcionalidade em desenvolvimento</p>
-                            <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">
-                                Em breve você poderá editar textos, títulos e outras informações do site diretamente aqui.
-                            </p>
+                    </div>
+                </div>
+
+                <!-- Contato Tab -->
+                <div class="tab-content" id="tab-contato">
+                    <div class="content-section">
+                        <h2 class="section-title">Seção Contato</h2>
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" id="contato-title" class="form-input" placeholder="Vamos Cuidar do Sorriso do seu Filho">
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea id="contato-description" class="form-textarea" rows="3" placeholder="Descrição da seção de contato"></textarea>
                         </div>
                     </div>
                 </div>
@@ -110,10 +169,83 @@
     <script src="admin.js"></script>
     <script>
         // Verificar autenticação
-        if (!auth.isAuthenticated()) {
-            window.location.href = 'index.html';
+        if (!protectPage()) return;
+
+        // Carregar dados do usuário
+        const user = auth.getCurrentUser();
+        if (user) {
+            document.getElementById('userName').textContent = user.name || 'Administrador';
         }
+
+        // Alternar tabs
+        function switchTab(tabName) {
+            // Remover active de todos
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Adicionar active no selecionado
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+
+        // Carregar conteúdo salvo
+        function loadContent() {
+            const config = adminUtils.getConfig();
+            
+            // Hero
+            if (config.hero) {
+                document.getElementById('hero-title-1').value = config.hero.title1 || '';
+                document.getElementById('hero-title-2').value = config.hero.title2 || '';
+                document.getElementById('hero-subtitle').value = config.hero.subtitle || '';
+            }
+
+            // Sobre
+            if (config.sobre) {
+                document.getElementById('sobre-title').value = config.sobre.title || '';
+                document.getElementById('sobre-description').value = config.sobre.description || '';
+            }
+
+            // Serviços
+            if (config.servicos) {
+                document.getElementById('servicos-title').value = config.servicos.title || '';
+                document.getElementById('servicos-description').value = config.servicos.description || '';
+            }
+
+            // Contato
+            if (config.contato) {
+                document.getElementById('contato-title').value = config.contato.title || '';
+                document.getElementById('contato-description').value = config.contato.description || '';
+            }
+        }
+
+        // Salvar conteúdo
+        function saveContent() {
+            const config = {
+                hero: {
+                    title1: document.getElementById('hero-title-1').value,
+                    title2: document.getElementById('hero-title-2').value,
+                    subtitle: document.getElementById('hero-subtitle').value
+                },
+                sobre: {
+                    title: document.getElementById('sobre-title').value,
+                    description: document.getElementById('sobre-description').value
+                },
+                servicos: {
+                    title: document.getElementById('servicos-title').value,
+                    description: document.getElementById('servicos-description').value
+                },
+                contato: {
+                    title: document.getElementById('contato-title').value,
+                    description: document.getElementById('contato-description').value
+                }
+            };
+
+            adminUtils.saveConfig(config);
+            adminUtils.showNotification('Conteúdo salvo com sucesso!', 'success');
+        }
+
+        // Inicializar
+        loadContent();
     </script>
 </body>
 </html>
-

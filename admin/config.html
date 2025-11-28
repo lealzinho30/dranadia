@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações - Painel Administrativo</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>Configurações - Painel Administrativo | Dra. Nadia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2da7ba;
-            --primary-dark: #238a9a;
-            --secondary-color: #f19022;
-        }
-    </style>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <div class="admin-container">
@@ -24,24 +17,32 @@
                     <i class="fas fa-tooth"></i>
                     <span>Admin</span>
                 </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
             
             <nav class="sidebar-menu">
                 <a href="dashboard.html" class="menu-item">
                     <i class="fas fa-home"></i>
-                    Dashboard
+                    <span>Dashboard</span>
                 </a>
                 <a href="mensagens.html" class="menu-item">
                     <i class="fas fa-envelope"></i>
-                    Mensagens
+                    <span>Mensagens</span>
+                    <span id="unreadBadge" class="badge badge-danger"></span>
                 </a>
                 <a href="conteudo.html" class="menu-item">
                     <i class="fas fa-edit"></i>
-                    Conteúdo
+                    <span>Conteúdo</span>
                 </a>
                 <a href="config.html" class="menu-item active">
                     <i class="fas fa-cog"></i>
-                    Configurações
+                    <span>Configurações</span>
+                </a>
+                <a href="../index.html" class="menu-item" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Ver Site</span>
                 </a>
             </nav>
             
@@ -51,11 +52,11 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="user-details">
-                        <div class="user-name" id="userName">Administrador</div>
-                        <div class="user-status" id="userInfo">Online</div>
+                        <span class="user-name" id="userName">Administrador</span>
+                        <span class="user-role">Admin</span>
                     </div>
                 </div>
-                <button class="btn-logout" id="logoutBtn">
+                <button class="btn-logout" onclick="auth.logout()">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </button>
@@ -66,47 +67,43 @@
         <main class="admin-main">
             <header class="admin-header">
                 <div class="header-left">
-                    <button class="menu-toggle" id="menuToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h1 class="header-title">Configurações</h1>
-                </div>
-                <div class="header-right">
-                    <a href="../index.html" target="_blank" class="btn btn-secondary btn-sm">
-                        <i class="fas fa-external-link-alt"></i>
-                        Ver Site
-                    </a>
+                    <h1 class="page-title">Configurações</h1>
+                    <p class="page-subtitle">Gerencie as configurações do sistema</p>
                 </div>
             </header>
 
             <div class="admin-content">
-                <div class="page-header">
-                    <h2 class="page-title">Configurações do Sistema</h2>
-                    <p class="page-subtitle">Gerencie credenciais e preferências</p>
-                </div>
-
-                <!-- Credenciais -->
-                <div class="content-card" style="margin-bottom: 2rem;">
-                    <div class="card-header">
-                        <h3 class="card-title">Credenciais de Acesso</h3>
+                <!-- Segurança -->
+                <div class="config-section">
+                    <div class="config-header">
+                        <h2 class="config-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Segurança
+                        </h2>
+                        <p class="config-description">Altere suas credenciais de acesso</p>
                     </div>
-                    <div style="padding: 1.5rem;">
-                        <form id="credentialsForm">
+                    <div class="config-body">
+                        <form id="credentialsForm" onsubmit="updateCredentials(event)">
                             <div class="form-group">
-                                <label class="form-label" for="newUsername">Novo Usuário</label>
-                                <input type="text" id="newUsername" class="form-input" placeholder="Digite o novo usuário">
+                                <label>Nome do Administrador</label>
+                                <input type="text" id="adminName" class="form-input" placeholder="Seu nome" required>
                             </div>
-                            
                             <div class="form-group">
-                                <label class="form-label" for="newPassword">Nova Senha</label>
-                                <input type="password" id="newPassword" class="form-input" placeholder="Digite a nova senha">
+                                <label>Novo Usuário</label>
+                                <input type="text" id="newUsername" class="form-input" placeholder="Nome de usuário" required>
                             </div>
-                            
                             <div class="form-group">
-                                <label class="form-label" for="newName">Nome do Administrador</label>
-                                <input type="text" id="newName" class="form-input" placeholder="Digite o nome">
+                                <label>Senha Atual</label>
+                                <input type="password" id="currentPassword" class="form-input" placeholder="Digite sua senha atual" required>
                             </div>
-                            
+                            <div class="form-group">
+                                <label>Nova Senha</label>
+                                <input type="password" id="newPassword" class="form-input" placeholder="Digite a nova senha" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirmar Nova Senha</label>
+                                <input type="password" id="confirmPassword" class="form-input" placeholder="Confirme a nova senha" required>
+                            </div>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i>
                                 Salvar Credenciais
@@ -115,18 +112,51 @@
                     </div>
                 </div>
 
-                <!-- Limpar Dados -->
-                <div class="content-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Manutenção</h3>
+                <!-- Informações do Sistema -->
+                <div class="config-section">
+                    <div class="config-header">
+                        <h2 class="config-title">
+                            <i class="fas fa-info-circle"></i>
+                            Informações do Sistema
+                        </h2>
                     </div>
-                    <div style="padding: 1.5rem;">
-                        <div class="form-group">
-                            <label class="form-label">Limpar Mensagens</label>
-                            <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                                Remove todas as mensagens de contato armazenadas. Esta ação não pode ser desfeita.
-                            </p>
-                            <button onclick="clearMessages()" class="btn btn-danger">
+                    <div class="config-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <strong>Versão do Painel:</strong>
+                                <span>1.0.0</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Total de Mensagens:</strong>
+                                <span id="totalMessagesInfo">0</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Mensagens Não Lidas:</strong>
+                                <span id="unreadMessagesInfo">0</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Último Acesso:</strong>
+                                <span id="lastAccessInfo">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações -->
+                <div class="config-section">
+                    <div class="config-header">
+                        <h2 class="config-title">
+                            <i class="fas fa-tools"></i>
+                            Ações
+                        </h2>
+                    </div>
+                    <div class="config-body">
+                        <div class="action-buttons">
+                            <button class="btn btn-warning" onclick="exportData()">
+                                <i class="fas fa-download"></i>
+                                Exportar Dados
+                            </button>
+                            <button class="btn btn-danger" onclick="clearAllData()">
                                 <i class="fas fa-trash"></i>
                                 Limpar Todas as Mensagens
                             </button>
@@ -141,54 +171,99 @@
     <script src="admin.js"></script>
     <script>
         // Verificar autenticação
-        if (!auth.isAuthenticated()) {
-            window.location.href = 'index.html';
+        if (!protectPage()) return;
+
+        // Carregar dados do usuário
+        const user = auth.getCurrentUser();
+        if (user) {
+            document.getElementById('userName').textContent = user.name || 'Administrador';
+            document.getElementById('adminName').value = user.name || 'Administrador';
+            document.getElementById('lastAccessInfo').textContent = adminUtils.formatDateFull(user.loginTime);
         }
 
-        // Carregar credenciais atuais
-        function loadCredentials() {
-            const saved = localStorage.getItem('admin_credentials');
-            if (saved) {
-                const creds = JSON.parse(saved);
-                document.getElementById('newUsername').value = creds.username || '';
-                document.getElementById('newName').value = creds.name || '';
-            }
+        // Carregar informações
+        function loadInfo() {
+            const messages = adminUtils.getMessages();
+            document.getElementById('totalMessagesInfo').textContent = messages.length;
+            document.getElementById('unreadMessagesInfo').textContent = adminUtils.getUnreadCount();
         }
 
-        // Salvar credenciais
-        document.getElementById('credentialsForm').addEventListener('submit', function(e) {
+        // Atualizar credenciais
+        function updateCredentials(e) {
             e.preventDefault();
-            
-            const username = document.getElementById('newUsername').value;
-            const password = document.getElementById('newPassword').value;
-            const name = document.getElementById('newName').value;
-            
-            if (!username || !password || !name) {
-                adminFunctions.showNotification('Preencha todos os campos!', 'error');
+
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const newUsername = document.getElementById('newUsername').value;
+            const adminName = document.getElementById('adminName').value;
+
+            // Verificar senha atual
+            if (!auth.verifyPassword(currentPassword)) {
+                adminUtils.showNotification('Senha atual incorreta!', 'error');
                 return;
             }
-            
-            if (auth.updateCredentials(username, password, name)) {
-                adminFunctions.showNotification('Credenciais atualizadas com sucesso!', 'success');
-                document.getElementById('newPassword').value = '';
-                setTimeout(() => {
-                    alert('Por favor, faça login novamente com as novas credenciais.');
-                    auth.logout();
-                }, 1000);
-            }
-        });
 
-        // Limpar mensagens
-        function clearMessages() {
-            if (confirm('Tem certeza que deseja excluir TODAS as mensagens? Esta ação não pode ser desfeita.')) {
-                localStorage.removeItem('contact_messages');
-                adminFunctions.showNotification('Todas as mensagens foram excluídas!', 'success');
+            // Verificar se as senhas coincidem
+            if (newPassword !== confirmPassword) {
+                adminUtils.showNotification('As senhas não coincidem!', 'error');
+                return;
             }
+
+            // Verificar tamanho mínimo
+            if (newPassword.length < 6) {
+                adminUtils.showNotification('A senha deve ter no mínimo 6 caracteres!', 'error');
+                return;
+            }
+
+            // Atualizar
+            auth.updateCredentials(newUsername, newPassword, adminName);
+            adminUtils.showNotification('Credenciais atualizadas com sucesso!', 'success');
+            
+            // Limpar formulário
+            document.getElementById('credentialsForm').reset();
+            document.getElementById('adminName').value = adminName;
+            
+            // Atualizar nome na interface
+            document.getElementById('userName').textContent = adminName;
+        }
+
+        // Exportar dados
+        function exportData() {
+            const messages = adminUtils.getMessages();
+            const data = {
+                messages: messages,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `backup-mensagens-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            adminUtils.showNotification('Dados exportados com sucesso!', 'success');
+        }
+
+        // Limpar todas as mensagens
+        function clearAllData() {
+            if (!confirm('Tem certeza que deseja excluir TODAS as mensagens? Esta ação não pode ser desfeita!')) {
+                return;
+            }
+
+            if (!confirm('Esta é sua última chance. Deseja realmente continuar?')) {
+                return;
+            }
+
+            localStorage.removeItem('contact_messages');
+            adminUtils.showNotification('Todas as mensagens foram excluídas!', 'success');
+            loadInfo();
         }
 
         // Inicializar
-        loadCredentials();
+        loadInfo();
     </script>
 </body>
 </html>
-

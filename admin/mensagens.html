@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensagens - Painel Administrativo</title>
-    <link rel="stylesheet" href="admin.css">
-    <style>
-        :root {
-            --primary-color: #2da7ba;
-            --primary-dark: #238a9a;
-            --secondary-color: #f19022;
-        }
-    </style>
+    <title>Mensagens - Painel Administrativo | Dra. Nadia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <div class="admin-container">
@@ -24,25 +17,32 @@
                     <i class="fas fa-tooth"></i>
                     <span>Admin</span>
                 </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
             
             <nav class="sidebar-menu">
                 <a href="dashboard.html" class="menu-item">
                     <i class="fas fa-home"></i>
-                    Dashboard
+                    <span>Dashboard</span>
                 </a>
                 <a href="mensagens.html" class="menu-item active">
                     <i class="fas fa-envelope"></i>
-                    Mensagens
-                    <span id="unreadBadge" class="badge badge-danger" style="float: right; margin-top: 2px;"></span>
+                    <span>Mensagens</span>
+                    <span id="unreadBadge" class="badge badge-danger"></span>
                 </a>
                 <a href="conteudo.html" class="menu-item">
                     <i class="fas fa-edit"></i>
-                    Conteúdo
+                    <span>Conteúdo</span>
                 </a>
                 <a href="config.html" class="menu-item">
                     <i class="fas fa-cog"></i>
-                    Configurações
+                    <span>Configurações</span>
+                </a>
+                <a href="../index.html" class="menu-item" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Ver Site</span>
                 </a>
             </nav>
             
@@ -52,11 +52,11 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="user-details">
-                        <div class="user-name" id="userName">Administrador</div>
-                        <div class="user-status" id="userInfo">Online</div>
+                        <span class="user-name" id="userName">Administrador</span>
+                        <span class="user-role">Admin</span>
                     </div>
                 </div>
-                <button class="btn-logout" id="logoutBtn">
+                <button class="btn-logout" onclick="auth.logout()">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </button>
@@ -67,63 +67,83 @@
         <main class="admin-main">
             <header class="admin-header">
                 <div class="header-left">
-                    <button class="menu-toggle" id="menuToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h1 class="header-title">Mensagens</h1>
+                    <h1 class="page-title">Mensagens</h1>
+                    <p class="page-subtitle">Gerencie as mensagens recebidas</p>
                 </div>
                 <div class="header-right">
-                    <button class="btn btn-secondary btn-sm" onclick="markAllAsRead()">
-                        <i class="fas fa-check-double"></i>
-                        Marcar Todas como Lidas
-                    </button>
-                    <a href="../index.html" target="_blank" class="btn btn-secondary btn-sm">
-                        <i class="fas fa-external-link-alt"></i>
-                        Ver Site
-                    </a>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="markAllAsRead()">
+                            <i class="fas fa-check-double"></i>
+                            Marcar todas como lidas
+                        </button>
+                        <button class="btn btn-danger" onclick="deleteAllRead()">
+                            <i class="fas fa-trash"></i>
+                            Excluir lidas
+                        </button>
+                        <button class="btn-icon" onclick="loadMessages()" title="Atualizar">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
                 </div>
             </header>
 
             <div class="admin-content">
-                <div class="page-header">
-                    <h2 class="page-title">Mensagens de Contato</h2>
-                    <p class="page-subtitle">Gerencie todas as mensagens recebidas pelo formulário</p>
+                <!-- Filters -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all" onclick="filterMessages('all')">
+                            Todas (<span id="countAll">0</span>)
+                        </button>
+                        <button class="filter-btn" data-filter="unread" onclick="filterMessages('unread')">
+                            Não Lidas (<span id="countUnread">0</span>)
+                        </button>
+                        <button class="filter-btn" data-filter="read" onclick="filterMessages('read')">
+                            Lidas (<span id="countRead">0</span>)
+                        </button>
+                    </div>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar mensagens..." onkeyup="searchMessages()">
+                    </div>
                 </div>
 
-                <div class="content-card">
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>E-mail</th>
-                                    <th>Telefone</th>
-                                    <th>Mensagem</th>
-                                    <th>Data</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="messagesTable">
-                                <!-- Será preenchido via JavaScript -->
-                            </tbody>
-                        </table>
+                <!-- Messages List -->
+                <div class="messages-container" id="messagesContainer">
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>Nenhuma mensagem encontrada</p>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Modal de Detalhes -->
-    <div id="messageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center;">
-        <div style="background: white; padding: 2rem; border-radius: 12px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h3 style="font-size: 1.5rem; font-weight: 700;">Detalhes da Mensagem</h3>
-                <button onclick="closeModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray);">&times;</button>
+    <!-- Message Modal -->
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalhes da Mensagem</h2>
+                <button class="modal-close" onclick="closeMessageModal()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div id="modalContent"></div>
-            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                <button onclick="closeModal()" class="btn btn-secondary">Fechar</button>
+            <div class="modal-body" id="messageDetails">
+                <!-- Conteúdo será preenchido via JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeMessageModal()">Fechar</button>
+                <button class="btn btn-primary" id="markReadBtn" onclick="toggleReadStatus()">
+                    <i class="fas fa-check"></i>
+                    Marcar como lida
+                </button>
+                <a class="btn btn-success" id="whatsappBtn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Responder no WhatsApp
+                </a>
+                <button class="btn btn-danger" id="deleteBtn" onclick="deleteMessage()">
+                    <i class="fas fa-trash"></i>
+                    Excluir
+                </button>
             </div>
         </div>
     </div>
@@ -132,145 +152,244 @@
     <script src="admin.js"></script>
     <script>
         // Verificar autenticação
-        if (!auth.isAuthenticated()) {
-            window.location.href = 'index.html';
+        if (!protectPage()) return;
+
+        // Carregar dados do usuário
+        const user = auth.getCurrentUser();
+        if (user) {
+            document.getElementById('userName').textContent = user.name || 'Administrador';
         }
+
+        let currentFilter = 'all';
+        let currentMessageId = null;
+        let allMessages = [];
 
         // Carregar mensagens
         function loadMessages() {
-            const messages = adminFunctions.loadMessages();
-            const unreadCount = adminFunctions.getUnreadCount();
+            allMessages = adminUtils.getMessages();
+            updateCounts();
+            filterMessages(currentFilter);
+        }
+
+        // Atualizar contadores
+        function updateCounts() {
+            const total = allMessages.length;
+            const unread = allMessages.filter(m => !m.read).length;
+            const read = allMessages.filter(m => m.read).length;
+
+            document.getElementById('countAll').textContent = total;
+            document.getElementById('countUnread').textContent = unread;
+            document.getElementById('countRead').textContent = read;
 
             // Atualizar badge
-            const unreadBadge = document.getElementById('unreadBadge');
-            if (unreadCount > 0) {
-                unreadBadge.textContent = unreadCount;
-                unreadBadge.style.display = 'inline-block';
+            const badge = document.getElementById('unreadBadge');
+            if (unread > 0) {
+                badge.textContent = unread;
+                badge.style.display = 'inline-block';
             } else {
-                unreadBadge.style.display = 'none';
-            }
-
-            // Renderizar tabela
-            const messagesTable = document.getElementById('messagesTable');
-            if (messages.length === 0) {
-                messagesTable.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="text-center" style="padding: 3rem;">
-                            <div class="empty-state">
-                                <i class="fas fa-inbox"></i>
-                                <p>Nenhuma mensagem ainda</p>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            } else {
-                messagesTable.innerHTML = messages.map(msg => `
-                    <tr style="${!msg.read ? 'background: rgba(45, 167, 186, 0.05);' : ''}">
-                        <td><strong>${msg.nome}</strong></td>
-                        <td>${msg.email}</td>
-                        <td>${msg.telefone}</td>
-                        <td>
-                            <span style="display: block; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                ${msg.mensagem}
-                            </span>
-                        </td>
-                        <td>${adminFunctions.formatDate(msg.date)}</td>
-                        <td>
-                            <span class="badge ${msg.read ? 'badge-success' : 'badge-warning'}">
-                                ${msg.read ? 'Lida' : 'Não lida'}
-                            </span>
-                        </td>
-                        <td>
-                            <button onclick="viewMessage(${msg.id})" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button onclick="deleteMessage(${msg.id})" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `).join('');
+                badge.style.display = 'none';
             }
         }
 
-        // Ver mensagem
-        function viewMessage(id) {
-            const messages = adminFunctions.loadMessages();
-            const message = messages.find(m => m.id === id);
+        // Filtrar mensagens
+        function filterMessages(filter) {
+            currentFilter = filter;
             
-            if (message) {
-                // Marcar como lida
-                if (!message.read) {
-                    adminFunctions.markAsRead(id);
-                }
+            // Atualizar botões
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
 
-                // Mostrar modal
-                document.getElementById('modalContent').innerHTML = `
-                    <div class="form-group">
-                        <label class="form-label">Nome</label>
-                        <div style="padding: 0.75rem; background: var(--light-gray); border-radius: 8px;">
-                            ${message.nome}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">E-mail</label>
-                        <div style="padding: 0.75rem; background: var(--light-gray); border-radius: 8px;">
-                            <a href="mailto:${message.email}">${message.email}</a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Telefone</label>
-                        <div style="padding: 0.75rem; background: var(--light-gray); border-radius: 8px;">
-                            <a href="tel:${message.telefone}">${message.telefone}</a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Mensagem</label>
-                        <div style="padding: 0.75rem; background: var(--light-gray); border-radius: 8px; min-height: 100px;">
-                            ${message.mensagem}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Data</label>
-                        <div style="padding: 0.75rem; background: var(--light-gray); border-radius: 8px;">
-                            ${adminFunctions.formatDate(message.date)}
-                        </div>
+            let filtered = allMessages;
+            
+            if (filter === 'unread') {
+                filtered = allMessages.filter(m => !m.read);
+            } else if (filter === 'read') {
+                filtered = allMessages.filter(m => m.read);
+            }
+
+            displayMessages(filtered);
+        }
+
+        // Buscar mensagens
+        function searchMessages() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            let filtered = allMessages;
+
+            if (currentFilter === 'unread') {
+                filtered = allMessages.filter(m => !m.read);
+            } else if (currentFilter === 'read') {
+                filtered = allMessages.filter(m => m.read);
+            }
+
+            if (searchTerm) {
+                filtered = filtered.filter(m => 
+                    m.nome.toLowerCase().includes(searchTerm) ||
+                    m.email.toLowerCase().includes(searchTerm) ||
+                    m.telefone.includes(searchTerm) ||
+                    m.mensagem.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            displayMessages(filtered);
+        }
+
+        // Exibir mensagens
+        function displayMessages(messages) {
+            const container = document.getElementById('messagesContainer');
+
+            if (messages.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>Nenhuma mensagem encontrada</p>
                     </div>
                 `;
-                document.getElementById('messageModal').style.display = 'flex';
-                loadMessages(); // Recarregar para atualizar status
+                return;
             }
+
+            container.innerHTML = messages.map(msg => `
+                <div class="message-card ${!msg.read ? 'unread' : ''}" onclick="openMessage(${msg.id})">
+                    <div class="message-card-header">
+                        <div class="message-card-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="message-card-info">
+                            <h3>${msg.nome}</h3>
+                            <p>${adminUtils.formatDate(msg.date)}</p>
+                        </div>
+                        ${!msg.read ? '<span class="unread-badge">Nova</span>' : ''}
+                    </div>
+                    <div class="message-card-body">
+                        <p><strong>Email:</strong> ${msg.email}</p>
+                        <p><strong>Telefone:</strong> ${msg.telefone}</p>
+                        <p class="message-preview">${msg.mensagem.substring(0, 150)}${msg.mensagem.length > 150 ? '...' : ''}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Abrir mensagem
+        function openMessage(id) {
+            const message = allMessages.find(m => m.id === id);
+            if (!message) return;
+
+            currentMessageId = id;
+            const modal = document.getElementById('messageModal');
+            const details = document.getElementById('messageDetails');
+
+            details.innerHTML = `
+                <div class="message-detail">
+                    <div class="detail-row">
+                        <strong>Nome:</strong>
+                        <span>${message.nome}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Email:</strong>
+                        <span><a href="mailto:${message.email}">${message.email}</a></span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Telefone:</strong>
+                        <span><a href="tel:${message.telefone}">${message.telefone}</a></span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Data:</strong>
+                        <span>${adminUtils.formatDate(message.date)}</span>
+                    </div>
+                    <div class="detail-row full">
+                        <strong>Mensagem:</strong>
+                        <p>${message.mensagem}</p>
+                    </div>
+                </div>
+            `;
+
+            // Atualizar botões
+            const markReadBtn = document.getElementById('markReadBtn');
+            if (message.read) {
+                markReadBtn.innerHTML = '<i class="fas fa-undo"></i> Marcar como não lida';
+            } else {
+                markReadBtn.innerHTML = '<i class="fas fa-check"></i> Marcar como lida';
+            }
+
+            // WhatsApp
+            const whatsappBtn = document.getElementById('whatsappBtn');
+            const whatsappMessage = `Olá ${message.nome}! Recebi sua mensagem. Como posso ajudar?`;
+            whatsappBtn.href = `https://wa.me/${message.telefone.replace(/\D/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+
+            // Marcar como lida automaticamente
+            if (!message.read) {
+                adminUtils.markAsRead(id);
+                loadMessages();
+            }
+
+            modal.classList.add('active');
         }
 
         // Fechar modal
-        function closeModal() {
-            document.getElementById('messageModal').style.display = 'none';
+        function closeMessageModal() {
+            document.getElementById('messageModal').classList.remove('active');
+            currentMessageId = null;
         }
 
-        // Deletar mensagem
-        function deleteMessage(id) {
+        // Alternar status de leitura
+        function toggleReadStatus() {
+            if (!currentMessageId) return;
+            const message = allMessages.find(m => m.id === currentMessageId);
+            if (!message) return;
+
+            if (message.read) {
+                adminUtils.markAsUnread(currentMessageId);
+            } else {
+                adminUtils.markAsRead(currentMessageId);
+            }
+            loadMessages();
+            closeMessageModal();
+        }
+
+        // Excluir mensagem
+        function deleteMessage() {
+            if (!currentMessageId) return;
             if (confirm('Tem certeza que deseja excluir esta mensagem?')) {
-                adminFunctions.deleteMessage(id);
-                adminFunctions.showNotification('Mensagem excluída com sucesso!', 'success');
+                adminUtils.deleteMessage(currentMessageId);
                 loadMessages();
+                closeMessageModal();
             }
         }
 
         // Marcar todas como lidas
         function markAllAsRead() {
-            const messages = adminFunctions.loadMessages();
-            messages.forEach(msg => {
-                if (!msg.read) {
-                    adminFunctions.markAsRead(msg.id);
-                }
-            });
-            adminFunctions.showNotification('Todas as mensagens foram marcadas como lidas!', 'success');
-            loadMessages();
+            if (confirm('Marcar todas as mensagens como lidas?')) {
+                allMessages.forEach(msg => {
+                    if (!msg.read) {
+                        adminUtils.markAsRead(msg.id);
+                    }
+                });
+                loadMessages();
+            }
+        }
+
+        // Excluir todas as lidas
+        function deleteAllRead() {
+            if (confirm('Tem certeza que deseja excluir todas as mensagens lidas?')) {
+                allMessages.forEach(msg => {
+                    if (msg.read) {
+                        adminUtils.deleteMessage(msg.id);
+                    }
+                });
+                loadMessages();
+            }
         }
 
         // Inicializar
         loadMessages();
+
+        // Fechar modal ao clicar fora
+        document.getElementById('messageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMessageModal();
+            }
+        });
     </script>
 </body>
 </html>
-

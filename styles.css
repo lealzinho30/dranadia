@@ -2410,18 +2410,18 @@ section {
 .como-chegar-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg);
     align-items: center;
-    margin-top: var(--spacing-lg);
+    margin-top: var(--spacing-md);
 }
 
 .endereco-card {
     background: var(--white);
-    padding: var(--spacing-xl);
-    border-radius: 25px;
-    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-md);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
     display: flex;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     border: 2px solid rgba(45, 167, 186, 0.1);
     transition: var(--transition);
     position: relative;
@@ -2445,17 +2445,17 @@ section {
 }
 
 .endereco-icon {
-    width: 70px;
-    height: 70px;
+    width: 55px;
+    height: 55px;
     background: var(--gradient-primary);
-    border-radius: 18px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 2rem;
+    font-size: 1.5rem;
     flex-shrink: 0;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
 }
 
@@ -2468,18 +2468,18 @@ section {
 }
 
 .endereco-content h3 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     color: var(--dark-gray);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     font-family: var(--font-display);
     font-weight: 700;
 }
 
 .endereco-texto {
     color: var(--gray);
-    line-height: 1.8;
-    font-size: 1.05rem;
-    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-sm);
 }
 
 .endereco-texto strong {
@@ -2488,8 +2488,8 @@ section {
 }
 
 .endereco-info {
-    margin: var(--spacing-md) 0;
-    padding: var(--spacing-sm) 0;
+    margin: var(--spacing-sm) 0;
+    padding: var(--spacing-xs) 0;
     border-top: 1px solid rgba(45, 167, 186, 0.2);
     border-bottom: 1px solid rgba(45, 167, 186, 0.2);
 }
@@ -2499,7 +2499,7 @@ section {
     align-items: center;
     gap: var(--spacing-xs);
     color: var(--gray);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 .endereco-info i {
@@ -2507,7 +2507,7 @@ section {
 }
 
 .btn-rota {
-    margin-top: var(--spacing-md);
+    margin-top: var(--spacing-sm);
     width: 100%;
     justify-content: center;
 }

@@ -34,7 +34,7 @@ class AuthSystem {
         // Usuário padrão (pode ser alterado nas configurações)
         const defaultUser = {
             username: 'admin',
-            password: 'admin123', // Senha padrão
+            password: 'DraNadia2024!@#', // Senha padrão mais segura
             name: 'Administrador'
         };
 

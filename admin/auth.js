@@ -94,7 +94,7 @@ class AuthSystem {
         const savedUser = localStorage.getItem('admin_credentials');
         const defaultUser = {
             username: 'admin',
-            password: 'admin123'
+            password: 'DraNadia2024!@#'
         };
         const credentials = savedUser ? JSON.parse(savedUser) : defaultUser;
         return password === credentials.password;

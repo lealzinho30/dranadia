@@ -6,17 +6,17 @@
 }
 
 :root {
-    /* Cores Principais - Paleta Harmoniosa de 4 Cores (Baseada no site antigo) */
-    --primary-color: #4ECDC4;        /* Azul Turquesa - Cor principal */
+    /* Cores Principais - 4 Cores do site antigo dranadiaodontopediatra.com.br */
+    --primary-color: #4ECDC4;        /* Azul Turquesa */
     --primary-dark: #3BA89F;
     --primary-light: #6EDDD5;
-    --secondary-color: #FF6B9D;      /* Rosa Suave - Cor secundária */
+    --secondary-color: #FF6B9D;      /* Rosa */
     --secondary-dark: #E55A8A;
     --secondary-light: #FF8BB0;
-    --accent-color: #FFE66D;         /* Amarelo Claro - Cor de destaque */
+    --accent-color: #FFE66D;         /* Amarelo */
     --accent-dark: #E6D15A;
     --accent-light: #FFF18A;
-    --tertiary-color: #F19022;       /* Laranja - Quarta cor */
+    --tertiary-color: #F19022;       /* Laranja */
     --tertiary-dark: #D17A1A;
     --tertiary-light: #F5A64A;
     
@@ -27,13 +27,12 @@
     --dark-gray: #2C3E50;
     --black: #1A1A1A;
     
-    /* Gradientes Harmoniosos */
+    /* Gradientes */
     --gradient-primary: linear-gradient(135deg, #4ECDC4 0%, #3BA89F 100%);
     --gradient-secondary: linear-gradient(135deg, #FF6B9D 0%, #E55A8A 100%);
     --gradient-accent: linear-gradient(135deg, #FFE66D 0%, #FFF18A 100%);
     --gradient-tertiary: linear-gradient(135deg, #F19022 0%, #F5A64A 100%);
-    --gradient-multicolor: linear-gradient(135deg, #4ECDC4 0%, #FF6B9D 33%, #FFE66D 66%, #F19022 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(255, 107, 157, 0.1) 33%, rgba(255, 230, 109, 0.1) 66%, rgba(241, 144, 34, 0.1) 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(255, 107, 157, 0.05) 50%, rgba(255, 230, 109, 0.05) 100%);
     
     /* Tipografia */
     --font-primary: 'Poppins', sans-serif;
@@ -565,10 +564,7 @@ section {
 .hero-title {
     font-size: 2.5rem;
     font-weight: 700;
-    background: var(--gradient-multicolor);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
 }
@@ -818,7 +814,7 @@ section {
 }
 
 .btn-primary {
-    background: var(--gradient-multicolor);
+    background: var(--gradient-primary);
     color: var(--white);
     box-shadow: var(--shadow-lg);
     border: none;
@@ -827,7 +823,7 @@ section {
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-xl);
-    background: var(--gradient-primary);
+    background: var(--primary-dark);
     color: var(--white);
 }
 
@@ -840,7 +836,7 @@ section {
 .btn-cta-faq,
 .btn-cta-porque,
 .btn-cta-chegar {
-    background: var(--gradient-multicolor) !important;
+    background: var(--gradient-primary) !important;
     color: var(--white) !important;
     font-size: 1.1rem !important;
     font-weight: 700 !important;
@@ -1162,7 +1158,7 @@ section {
 .section-tag {
     display: inline-block;
     padding: 0.5rem 1.5rem;
-    background: var(--gradient-multicolor);
+    background: var(--gradient-primary);
     color: var(--white);
     border-radius: 50px;
     font-size: 0.85rem;
@@ -1182,25 +1178,25 @@ section {
     line-height: 1.2;
 }
 
-/* Títulos coloridos em seções específicas - Distribuindo as 4 cores harmoniosamente */
+/* Títulos coloridos em seções específicas */
 .sobre .section-title {
-    color: var(--primary-color); /* Azul Turquesa */
+    color: var(--primary-color);
 }
 
 .galeria .section-title {
-    color: var(--secondary-color); /* Rosa Suave */
+    color: var(--secondary-color);
 }
 
 .dicas .section-title {
-    color: var(--accent-color); /* Amarelo Claro */
+    color: var(--accent-color);
 }
 
 .contato .section-title {
-    color: var(--tertiary-color); /* Laranja */
+    color: var(--tertiary-color);
 }
 
 .como-chegar .section-title {
-    color: var(--primary-color); /* Azul Turquesa */
+    color: var(--primary-color);
 }
 
 .section-description {
@@ -1213,7 +1209,7 @@ section {
 
 /* ===== SOBRE SECTION ===== */
 .sobre {
-    background: var(--white);
+    background: rgba(78, 205, 196, 0.03);
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
 }
@@ -1556,28 +1552,8 @@ section {
     height: 100%;
 }
 
-.servico-card:nth-child(1) {
-    border-color: var(--primary-color);
-}
-
-.servico-card:nth-child(2) {
-    border-color: var(--secondary-color);
-}
-
-.servico-card:nth-child(3) {
-    border-color: var(--accent-color);
-}
-
-.servico-card:nth-child(4) {
-    border-color: var(--tertiary-color);
-}
-
-.servico-card:nth-child(5) {
-    border-color: var(--primary-color);
-}
-
-.servico-card:nth-child(6) {
-    border-color: var(--secondary-color);
+.servico-card {
+    border-color: rgba(78, 205, 196, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -1629,28 +1605,8 @@ section {
     box-shadow: var(--shadow-md);
 }
 
-.servico-card:nth-child(1) .servico-icon {
+.servico-icon {
     background: var(--gradient-primary);
-}
-
-.servico-card:nth-child(2) .servico-icon {
-    background: var(--gradient-secondary);
-}
-
-.servico-card:nth-child(3) .servico-icon {
-    background: var(--gradient-accent);
-}
-
-.servico-card:nth-child(4) .servico-icon {
-    background: var(--gradient-tertiary);
-}
-
-.servico-card:nth-child(5) .servico-icon {
-    background: var(--gradient-primary);
-}
-
-.servico-card:nth-child(6) .servico-icon {
-    background: var(--gradient-secondary);
 }
 
 .servico-number {
@@ -1917,7 +1873,7 @@ section {
 
 /* ===== DICAS SECTION ===== */
 .dicas {
-    background: var(--white);
+    background: rgba(255, 230, 109, 0.03);
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
 }
@@ -1949,28 +1905,8 @@ section {
     box-shadow: var(--shadow-sm);
 }
 
-.dica-card:nth-child(1) {
-    border-top-color: var(--primary-color);
-}
-
-.dica-card:nth-child(2) {
-    border-top-color: var(--secondary-color);
-}
-
-.dica-card:nth-child(3) {
-    border-top-color: var(--accent-color);
-}
-
-.dica-card:nth-child(4) {
-    border-top-color: var(--tertiary-color);
-}
-
-.dica-card:nth-child(5) {
-    border-top-color: var(--primary-color);
-}
-
-.dica-card:nth-child(6) {
-    border-top-color: var(--secondary-color);
+.dica-card {
+    border-top-color: rgba(78, 205, 196, 0.3);
 }
 
 .dica-card.dica-hidden {
@@ -2065,28 +2001,8 @@ section {
     transition: var(--transition);
 }
 
-.dica-card:nth-child(1) .dica-icon {
+.dica-icon {
     background: var(--gradient-primary);
-}
-
-.dica-card:nth-child(2) .dica-icon {
-    background: var(--gradient-secondary);
-}
-
-.dica-card:nth-child(3) .dica-icon {
-    background: var(--gradient-accent);
-}
-
-.dica-card:nth-child(4) .dica-icon {
-    background: var(--gradient-tertiary);
-}
-
-.dica-card:nth-child(5) .dica-icon {
-    background: var(--gradient-primary);
-}
-
-.dica-card:nth-child(6) .dica-icon {
-    background: var(--gradient-secondary);
 }
 
 .dica-card:hover .dica-icon {
@@ -2764,20 +2680,8 @@ section {
     border-left: 4px solid var(--primary-color);
 }
 
-.info-card:nth-child(1) {
+.info-card {
     border-left-color: var(--primary-color);
-}
-
-.info-card:nth-child(2) {
-    border-left-color: var(--secondary-color);
-}
-
-.info-card:nth-child(3) {
-    border-left-color: var(--accent-color);
-}
-
-.info-card:nth-child(4) {
-    border-left-color: var(--tertiary-color);
 }
 
 .info-card:hover {
@@ -2792,20 +2696,8 @@ section {
     border-radius: 12px;
 }
 
-.info-card:nth-child(1) .info-icon {
+.info-icon {
     background: var(--gradient-primary);
-}
-
-.info-card:nth-child(2) .info-icon {
-    background: var(--gradient-secondary);
-}
-
-.info-card:nth-child(3) .info-icon {
-    background: var(--gradient-accent);
-}
-
-.info-card:nth-child(4) .info-icon {
-    background: var(--gradient-tertiary);
 }
 
 .info-icon {

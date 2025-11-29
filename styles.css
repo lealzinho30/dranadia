@@ -1209,9 +1209,18 @@ section {
 
 /* ===== SOBRE SECTION ===== */
 .sobre {
-    background: rgba(78, 205, 196, 0.03);
+    background: var(--primary-color);
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
+    color: var(--white);
+}
+
+.sobre .section-title,
+.sobre .section-description,
+.sobre p,
+.sobre h2,
+.sobre h3 {
+    color: var(--white);
 }
 
 .sobre-content {
@@ -1713,9 +1722,15 @@ section {
 
 /* ===== GALERIA SECTION ===== */
 .galeria {
-    background: rgba(255, 107, 157, 0.03);
+    background: var(--secondary-color);
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
+    color: var(--white);
+}
+
+.galeria .section-title,
+.galeria .section-description {
+    color: var(--white);
 }
 
 
@@ -1873,9 +1888,27 @@ section {
 
 /* ===== DICAS SECTION ===== */
 .dicas {
-    background: rgba(255, 230, 109, 0.03);
+    background: var(--accent-color);
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
+    color: var(--dark-gray);
+}
+
+.dicas .section-title,
+.dicas .section-description {
+    color: var(--dark-gray);
+}
+
+.dicas .dica-card {
+    background: var(--white);
+}
+
+.dicas .dica-card h3 {
+    color: var(--dark-gray);
+}
+
+.dicas .dica-card p {
+    color: var(--gray);
 }
 
 .dicas-grid {
@@ -2474,9 +2507,25 @@ section {
 
 /* ===== COMO CHEGAR SECTION ===== */
 .como-chegar {
-    background: rgba(78, 205, 196, 0.03);
+    background: var(--primary-color);
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
+    color: var(--white);
+}
+
+.como-chegar .section-title,
+.como-chegar .section-description {
+    color: var(--white);
+}
+
+.como-chegar .endereco-card {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.como-chegar .endereco-content h3,
+.como-chegar .endereco-texto,
+.como-chegar .endereco-info {
+    color: var(--dark-gray);
 }
 
 .como-chegar-wrapper {
@@ -2640,9 +2689,36 @@ section {
 
 /* ===== CONTATO SECTION ===== */
 .contato {
-    background: rgba(241, 144, 34, 0.03);
+    background: var(--tertiary-color);
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
+    color: var(--white);
+}
+
+.contato .section-title,
+.contato .section-description {
+    color: var(--white);
+}
+
+.contato .info-card {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.contato .info-content h4,
+.contato .info-content p {
+    color: var(--dark-gray);
+}
+
+.contato .form {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.contato .form h3 {
+    color: var(--dark-gray);
+}
+
+.contato .form-group label {
+    color: var(--dark-gray);
 }
 
 .contato-wrapper {

@@ -2273,23 +2273,31 @@ section {
 }
 
 .dicas-more-container .btn {
-    padding: 1rem 2rem;
-    font-size: 1rem;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     border-radius: 50px;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
 }
 
 .dicas-more-container .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.6);
+    background: var(--primary-dark) !important;
+    border-color: var(--primary-dark);
 }
 
 .dicas-cta {
     text-align: center;
     padding: var(--spacing-lg);
-    background: var(--light-gray);
+    background: rgba(78, 205, 196, 0.1);
     border-radius: 20px;
     margin-top: var(--spacing-md);
+    border: 3px solid rgba(78, 205, 196, 0.3);
 }
 
 .dicas-cta p {
@@ -2297,6 +2305,25 @@ section {
     color: var(--dark-gray);
     margin-bottom: var(--spacing-md);
     font-weight: 600;
+}
+
+.dicas-cta .btn-cta-dicas {
+    background: var(--gradient-primary) !important;
+    color: var(--white) !important;
+    border: 3px solid var(--primary-color);
+    padding: 1.3rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dicas-cta .btn-cta-dicas:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(78, 205, 196, 0.7);
+    background: var(--primary-dark) !important;
+    border-color: var(--primary-dark);
 }
 
 /* ===== FAQ SECTION ===== */

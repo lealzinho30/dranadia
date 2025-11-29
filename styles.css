@@ -2309,16 +2309,6 @@ section {
     border-color: rgba(255, 255, 255, 0.8);
 }
 
-.dica-btn:active {
-    transform: translateY(-2px) scale(1.02);
-}
-
-.dica-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
-    background: var(--primary-dark) !important;
-    border-color: var(--primary-dark);
-}
 
 .dica-card.dica-hidden {
     display: none;
@@ -2429,22 +2419,65 @@ section {
 }
 
 .dicas-cta .btn-cta-dicas {
-    background: var(--gradient-primary) !important;
+    background: linear-gradient(135deg, #4ECDC4 0%, #3BA89F 50%, #2DA7BA 100%) !important;
     color: var(--white) !important;
-    border: 3px solid var(--primary-color);
-    padding: 1.3rem 3rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.5);
+    border: 4px solid rgba(255, 255, 255, 0.6) !important;
+    padding: 1.5rem 3.5rem !important;
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    box-shadow: 0 12px 40px rgba(78, 205, 196, 0.7),
+                0 0 0 0 rgba(78, 205, 196, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3) !important;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: pulse-cta-button 2.5s ease-in-out infinite;
+    border-radius: 50px !important;
+}
+
+.dicas-cta .btn-cta-dicas::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.dicas-cta .btn-cta-dicas:hover::before {
+    width: 600px;
+    height: 600px;
 }
 
 .dicas-cta .btn-cta-dicas:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 12px 35px rgba(78, 205, 196, 0.7);
-    background: var(--primary-dark) !important;
-    border-color: var(--primary-dark);
+    transform: translateY(-6px) scale(1.1) !important;
+    box-shadow: 0 20px 60px rgba(78, 205, 196, 1),
+                0 0 40px rgba(78, 205, 196, 0.8),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4) !important;
+    background: linear-gradient(135deg, #3BA89F 0%, #2DA7BA 50%, #4ECDC4 100%) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    animation: none;
+}
+
+.dicas-cta .btn-cta-dicas:active {
+    transform: translateY(-3px) scale(1.05) !important;
+}
+
+@keyframes pulse-cta-button {
+    0%, 100% {
+        box-shadow: 0 12px 40px rgba(78, 205, 196, 0.7),
+                    0 0 0 0 rgba(78, 205, 196, 0.5);
+    }
+    50% {
+        box-shadow: 0 12px 45px rgba(78, 205, 196, 0.9),
+                    0 0 25px rgba(78, 205, 196, 0.7);
+    }
 }
 
 /* ===== FAQ SECTION ===== */

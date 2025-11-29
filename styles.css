@@ -2135,12 +2135,29 @@ section {
 
 /* ===== FAQ SECTION ===== */
 .faq {
-    background: var(--gradient-primary);
+    background: var(--secondary-color);
     color: var(--white);
     padding: var(--spacing-xl) 0;
     position: relative;
     overflow: hidden;
     scroll-margin-top: 120px;
+}
+
+.faq .section-title,
+.faq .section-description {
+    color: var(--white);
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.faq-question {
+    color: var(--dark-gray);
+}
+
+.faq-answer {
+    color: var(--gray);
 }
 
 .faq::before {

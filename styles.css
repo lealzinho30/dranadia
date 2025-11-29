@@ -6,15 +6,16 @@
 }
 
 :root {
-    /* Cores Principais - Baseado no site antigo dranadiaodontopediatra.com.br */
-    --primary-color: #2da7ba;
-    --primary-dark: #238a9a;
-    --primary-light: #4db8c9;
-    --secondary-color: #f19022;
-    --secondary-dark: #d17a1a;
-    --secondary-light: #f5a64a;
-    --accent-color: #f19022;
-    --accent-light: #f5a64a;
+    /* Cores Principais - Paleta Colorida (Laranja, Coral, Rosa/Magenta) */
+    --primary-color: #FF8C42;        /* Laranja quente */
+    --primary-dark: #E67E35;
+    --primary-light: #FFA366;
+    --secondary-color: #FF6B6B;      /* Coral vibrante */
+    --secondary-dark: #E55A5A;
+    --secondary-light: #FF8B8B;
+    --accent-color: #C44569;         /* Rosa/Magenta profundo */
+    --accent-dark: #A83656;
+    --accent-light: #D63384;
     
     /* Cores Neutras */
     --white: #FFFFFF;
@@ -23,11 +24,12 @@
     --dark-gray: #2C3E50;
     --black: #1A1A1A;
     
-    /* Gradientes */
-    --gradient-primary: linear-gradient(135deg, #2da7ba 0%, #238a9a 100%);
-    --gradient-secondary: linear-gradient(135deg, #f19022 0%, #f5a64a 100%);
-    --gradient-accent: linear-gradient(135deg, #f19022 0%, #f5a64a 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(45, 167, 186, 0.95) 0%, rgba(35, 138, 154, 0.95) 100%);
+    /* Gradientes Coloridos */
+    --gradient-primary: linear-gradient(135deg, #FF8C42 0%, #E67E35 100%);
+    --gradient-secondary: linear-gradient(135deg, #FF6B6B 0%, #E55A5A 100%);
+    --gradient-accent: linear-gradient(135deg, #C44569 0%, #A83656 100%);
+    --gradient-multicolor: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 50%, #C44569 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(255, 140, 66, 0.95) 0%, rgba(255, 107, 107, 0.95) 50%, rgba(196, 69, 105, 0.95) 100%);
     
     /* Tipografia */
     --font-primary: 'Poppins', sans-serif;
@@ -1171,13 +1173,25 @@ section {
     line-height: 1.2;
 }
 
-/* Títulos com cor laranja em seções específicas */
-.sobre .section-title,
-.galeria .section-title,
-.dicas .section-title,
-.porque-escolher .section-title,
+/* Títulos coloridos em seções específicas - Distribuindo as 3 cores */
+.sobre .section-title {
+    color: var(--primary-color); /* Laranja */
+}
+
+.galeria .section-title {
+    color: var(--secondary-color); /* Coral */
+}
+
+.dicas .section-title {
+    color: var(--accent-color); /* Rosa/Magenta */
+}
+
 .contato .section-title {
-    color: var(--secondary-color);
+    color: var(--primary-color); /* Laranja */
+}
+
+.como-chegar .section-title {
+    color: var(--secondary-color); /* Coral */
 }
 
 .section-description {

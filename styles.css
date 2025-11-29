@@ -3027,8 +3027,8 @@ section {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--dark-gray);
+    background: var(--primary-color);
+    color: var(--white) !important;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
     text-decoration: none;
@@ -3036,11 +3036,24 @@ section {
     transition: var(--transition);
     box-shadow: var(--shadow-md);
     font-size: 0.9rem;
+    border: 2px solid var(--primary-color);
 }
 
 .social-link:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.social-link:nth-child(2) {
+    background: #25D366;
+    border-color: #25D366;
+}
+
+.social-link:nth-child(2):hover {
+    background: #20ba5a;
+    border-color: #20ba5a;
 }
 
 .contato-form {

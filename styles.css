@@ -2209,11 +2209,11 @@ section {
 
 .dica-tag {
     display: inline-block;
-    padding: 0.7rem 1.6rem;
+    padding: 0.5rem 1.2rem;
     background: linear-gradient(135deg, #FF6B9D 0%, #E55A8A 100%) !important;
     color: var(--white) !important;
     border-radius: 50px;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 800;
     margin: var(--spacing-xs) var(--spacing-md) var(--spacing-sm);
     box-shadow: 0 6px 20px rgba(255, 107, 157, 0.6),

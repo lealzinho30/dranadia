@@ -865,9 +865,6 @@ section {
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-md);
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
 }
 
 .btn {
@@ -3779,8 +3776,7 @@ section {
 
     .hero-content {
         max-width: 100%;
-        padding: 0 var(--spacing-sm);
-        background: transparent !important;
+        padding: var(--spacing-sm) 0;
     }
 
     .hero-image {
@@ -3818,19 +3814,15 @@ section {
 
     .hero-buttons {
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xs);
         margin-bottom: var(--spacing-md);
-        width: 100%;
-        align-items: stretch;
     }
 
     .btn {
         width: 100%;
-        max-width: 100%;
         justify-content: center;
         padding: 1rem 1.5rem;
         font-size: 0.95rem;
-        margin: 0;
     }
 
     .btn-hero {
@@ -4370,8 +4362,7 @@ section {
     }
 
     .hero-content {
-        padding: 0 var(--spacing-xs);
-        background: transparent !important;
+        padding: 0;
     }
 
     .hero-badge {
@@ -4402,11 +4393,8 @@ section {
     }
 
     .hero-buttons {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-        margin-bottom: var(--spacing-md);
-        width: 100%;
-        align-items: stretch;
+        gap: 0.5rem;
+        margin-bottom: var(--spacing-sm);
         padding: 0;
     }
 

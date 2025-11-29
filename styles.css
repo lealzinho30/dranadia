@@ -567,6 +567,7 @@ section {
     color: var(--dark-gray);
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .hero-subtitle {
@@ -574,6 +575,7 @@ section {
     color: var(--dark-gray);
     margin-bottom: var(--spacing-md);
     line-height: 1.6;
+    font-weight: 600;
 }
 
 .hero-description {
@@ -581,6 +583,7 @@ section {
     color: var(--gray);
     margin-bottom: var(--spacing-sm);
     line-height: 1.8;
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
@@ -1175,19 +1178,26 @@ section {
     font-family: var(--font-display);
     font-size: 2.2rem;
     font-weight: 700;
-    color: var(--dark-gray);
     margin-bottom: var(--spacing-sm);
     line-height: 1.2;
 }
 
-/* Títulos já definidos nas seções com cores apropriadas (branco para backgrounds coloridos) */
+/* Títulos em seções com fundo colorido - garantir contraste */
+.sobre .section-title,
+.galeria .section-title,
+.contato .section-title,
+.como-chegar .section-title,
+.servicos .section-title,
+.faq .section-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 .section-description {
     font-size: 1rem;
-    color: var(--gray);
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.7;
+    font-weight: 500;
 }
 
 /* ===== SOBRE SECTION ===== */

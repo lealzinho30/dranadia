@@ -6,16 +6,19 @@
 }
 
 :root {
-    /* Cores Principais - Paleta Colorida (Laranja, Coral, Rosa/Magenta) */
-    --primary-color: #FF8C42;        /* Laranja quente */
-    --primary-dark: #E67E35;
-    --primary-light: #FFA366;
-    --secondary-color: #FF6B6B;      /* Coral vibrante */
-    --secondary-dark: #E55A5A;
-    --secondary-light: #FF8B8B;
-    --accent-color: #C44569;         /* Rosa/Magenta profundo */
-    --accent-dark: #A83656;
-    --accent-light: #D63384;
+    /* Cores Principais - Paleta Harmoniosa de 4 Cores (Baseada no site antigo) */
+    --primary-color: #4ECDC4;        /* Azul Turquesa - Cor principal */
+    --primary-dark: #3BA89F;
+    --primary-light: #6EDDD5;
+    --secondary-color: #FF6B9D;      /* Rosa Suave - Cor secundária */
+    --secondary-dark: #E55A8A;
+    --secondary-light: #FF8BB0;
+    --accent-color: #FFE66D;         /* Amarelo Claro - Cor de destaque */
+    --accent-dark: #E6D15A;
+    --accent-light: #FFF18A;
+    --tertiary-color: #F19022;       /* Laranja - Quarta cor */
+    --tertiary-dark: #D17A1A;
+    --tertiary-light: #F5A64A;
     
     /* Cores Neutras */
     --white: #FFFFFF;
@@ -24,12 +27,13 @@
     --dark-gray: #2C3E50;
     --black: #1A1A1A;
     
-    /* Gradientes Coloridos */
-    --gradient-primary: linear-gradient(135deg, #FF8C42 0%, #E67E35 100%);
-    --gradient-secondary: linear-gradient(135deg, #FF6B6B 0%, #E55A5A 100%);
-    --gradient-accent: linear-gradient(135deg, #C44569 0%, #A83656 100%);
-    --gradient-multicolor: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 50%, #C44569 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(255, 140, 66, 0.95) 0%, rgba(255, 107, 107, 0.95) 50%, rgba(196, 69, 105, 0.95) 100%);
+    /* Gradientes Harmoniosos */
+    --gradient-primary: linear-gradient(135deg, #4ECDC4 0%, #3BA89F 100%);
+    --gradient-secondary: linear-gradient(135deg, #FF6B9D 0%, #E55A8A 100%);
+    --gradient-accent: linear-gradient(135deg, #FFE66D 0%, #FFF18A 100%);
+    --gradient-tertiary: linear-gradient(135deg, #F19022 0%, #F5A64A 100%);
+    --gradient-multicolor: linear-gradient(135deg, #4ECDC4 0%, #FF6B9D 33%, #FFE66D 66%, #F19022 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(255, 107, 157, 0.1) 33%, rgba(255, 230, 109, 0.1) 66%, rgba(241, 144, 34, 0.1) 100%);
     
     /* Tipografia */
     --font-primary: 'Poppins', sans-serif;
@@ -456,7 +460,7 @@ section {
     padding-bottom: var(--spacing-xl);
     overflow: hidden;
     scroll-margin-top: 120px;
-    background: linear-gradient(135deg, rgba(255, 140, 66, 0.05) 0%, rgba(255, 107, 107, 0.05) 50%, rgba(196, 69, 105, 0.05) 100%);
+    background: var(--gradient-hero);
 }
 
 @media (max-width: 768px) {
@@ -1178,25 +1182,25 @@ section {
     line-height: 1.2;
 }
 
-/* Títulos coloridos em seções específicas - Distribuindo as 3 cores */
+/* Títulos coloridos em seções específicas - Distribuindo as 4 cores harmoniosamente */
 .sobre .section-title {
-    color: var(--primary-color); /* Laranja */
+    color: var(--primary-color); /* Azul Turquesa */
 }
 
 .galeria .section-title {
-    color: var(--secondary-color); /* Coral */
+    color: var(--secondary-color); /* Rosa Suave */
 }
 
 .dicas .section-title {
-    color: var(--accent-color); /* Rosa/Magenta */
+    color: var(--accent-color); /* Amarelo Claro */
 }
 
 .contato .section-title {
-    color: var(--primary-color); /* Laranja */
+    color: var(--tertiary-color); /* Laranja */
 }
 
 .como-chegar .section-title {
-    color: var(--secondary-color); /* Coral */
+    color: var(--primary-color); /* Azul Turquesa */
 }
 
 .section-description {
@@ -1565,15 +1569,15 @@ section {
 }
 
 .servico-card:nth-child(4) {
-    border-color: var(--primary-color);
+    border-color: var(--tertiary-color);
 }
 
 .servico-card:nth-child(5) {
-    border-color: var(--secondary-color);
+    border-color: var(--primary-color);
 }
 
 .servico-card:nth-child(6) {
-    border-color: var(--accent-color);
+    border-color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
@@ -1638,15 +1642,15 @@ section {
 }
 
 .servico-card:nth-child(4) .servico-icon {
-    background: var(--gradient-primary);
+    background: var(--gradient-tertiary);
 }
 
 .servico-card:nth-child(5) .servico-icon {
-    background: var(--gradient-secondary);
+    background: var(--gradient-primary);
 }
 
 .servico-card:nth-child(6) .servico-icon {
-    background: var(--gradient-accent);
+    background: var(--gradient-secondary);
 }
 
 .servico-number {
@@ -1958,15 +1962,15 @@ section {
 }
 
 .dica-card:nth-child(4) {
-    border-top-color: var(--primary-color);
+    border-top-color: var(--tertiary-color);
 }
 
 .dica-card:nth-child(5) {
-    border-top-color: var(--secondary-color);
+    border-top-color: var(--primary-color);
 }
 
 .dica-card:nth-child(6) {
-    border-top-color: var(--accent-color);
+    border-top-color: var(--secondary-color);
 }
 
 .dica-card.dica-hidden {
@@ -2074,15 +2078,15 @@ section {
 }
 
 .dica-card:nth-child(4) .dica-icon {
-    background: var(--gradient-primary);
+    background: var(--gradient-tertiary);
 }
 
 .dica-card:nth-child(5) .dica-icon {
-    background: var(--gradient-secondary);
+    background: var(--gradient-primary);
 }
 
 .dica-card:nth-child(6) .dica-icon {
-    background: var(--gradient-accent);
+    background: var(--gradient-secondary);
 }
 
 .dica-card:hover .dica-icon {
@@ -2773,7 +2777,7 @@ section {
 }
 
 .info-card:nth-child(4) {
-    border-left-color: var(--primary-color);
+    border-left-color: var(--tertiary-color);
 }
 
 .info-card:hover {
@@ -2801,7 +2805,7 @@ section {
 }
 
 .info-card:nth-child(4) .info-icon {
-    background: var(--gradient-primary);
+    background: var(--gradient-tertiary);
 }
 
 .info-icon {

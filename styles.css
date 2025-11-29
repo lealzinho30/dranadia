@@ -2289,10 +2289,12 @@ section {
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.3s ease;
-    background: var(--primary-color) !important;
+    background: var(--gradient-primary) !important;
     color: var(--white) !important;
-    border: 2px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
     box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .dicas-more-container .btn:hover {

@@ -28,11 +28,11 @@
     --black: #1A1A1A;
     
     /* Gradientes */
-    --gradient-primary: linear-gradient(135deg, #4ECDC4 0%, #3BA89F 100%);
-    --gradient-secondary: linear-gradient(135deg, #FF6B9D 0%, #E55A8A 100%);
-    --gradient-accent: linear-gradient(135deg, #FFE66D 0%, #FFF18A 100%);
+    --gradient-primary: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    --gradient-secondary: linear-gradient(135deg, #4ECDC4 0%, #3BA89F 100%);
+    --gradient-accent: linear-gradient(135deg, #F19022 0%, #F5A64A 100%);
     --gradient-tertiary: linear-gradient(135deg, #F19022 0%, #F5A64A 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(255, 107, 157, 0.05) 50%, rgba(255, 230, 109, 0.05) 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(78, 205, 196, 0.05) 50%, rgba(241, 144, 34, 0.05) 100%);
     
     /* Tipografia */
     --font-primary: 'Poppins', sans-serif;
@@ -856,7 +856,7 @@ section {
 }
 
 .hero-subtitle strong {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Roxo */
     font-weight: 700;
 }
 
@@ -883,9 +883,9 @@ section {
 }
 
 .btn-primary {
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     font-weight: 700;
     position: relative;
@@ -897,7 +897,7 @@ section {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     background: var(--primary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
@@ -911,12 +911,12 @@ section {
 .btn-cta-faq,
 .btn-cta-porque,
 .btn-cta-chegar {
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
     font-size: 1rem !important;
     font-weight: 700 !important;
     padding: 1.1rem 2.5rem !important;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     position: relative;
     overflow: hidden;
@@ -934,7 +934,7 @@ section {
 .btn-cta-porque:hover,
 .btn-cta-chegar:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5) !important;
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5) !important;
     background: var(--primary-dark) !important;
     color: var(--white) !important;
     border-color: rgba(255, 255, 255, 0.5) !important;
@@ -974,12 +974,12 @@ section {
 }
 
 .btn-hero {
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     font-size: 1rem;
     padding: 1.1rem 2.5rem;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.8px;
@@ -990,13 +990,13 @@ section {
 
 .btn-hero:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     background: var(--primary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
 
 .btn-secondary {
-    background: var(--secondary-color) !important;
+    background: var(--secondary-color) !important; /* Azul Turquesa */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     position: relative;
@@ -1004,13 +1004,13 @@ section {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
     transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
     background: var(--secondary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
@@ -1260,7 +1260,7 @@ section {
 
 /* ===== SOBRE SECTION ===== */
 .sobre {
-    background: var(--primary-color);
+    background: var(--accent-color) !important; /* Laranja */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);
@@ -1578,7 +1578,7 @@ section {
 
 /* ===== SERVIÇOS SECTION ===== */
 .servicos {
-    background: var(--primary-color);
+    background: var(--accent-color) !important; /* Laranja */
     color: var(--white);
     padding: var(--spacing-xl) 0;
     position: relative;
@@ -1845,7 +1845,7 @@ section {
 
 /* ===== GALERIA SECTION ===== */
 .galeria {
-    background: var(--secondary-color);
+    background: var(--accent-color) !important; /* Laranja */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);
@@ -2024,10 +2024,10 @@ section {
 
 /* ===== DICAS SECTION ===== */
 .dicas {
-    background: var(--accent-color);
+    background: var(--accent-color) !important; /* Laranja */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
-    color: var(--dark-gray);
+    color: var(--white);
 }
 
 .dicas .section-title,
@@ -2238,7 +2238,7 @@ section {
     width: calc(100% - var(--spacing-md) * 2);
     margin: 0 var(--spacing-md) var(--spacing-md);
     padding: 1.1rem 2.5rem;
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
@@ -2247,7 +2247,7 @@ section {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: var(--font-primary);
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
     text-transform: uppercase;
     letter-spacing: 0.8px;
     position: relative;
@@ -2256,7 +2256,7 @@ section {
 
 .dica-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     background: var(--primary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
@@ -2297,10 +2297,10 @@ section {
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.3s ease;
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
@@ -2309,7 +2309,7 @@ section {
 
 .dicas-more-container .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     background: var(--primary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
@@ -2331,13 +2331,13 @@ section {
 }
 
 .dicas-cta .btn-cta-dicas {
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     padding: 1.1rem 2.5rem !important;
     font-size: 1rem !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4) !important;
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
@@ -2348,14 +2348,14 @@ section {
 
 .dicas-cta .btn-cta-dicas:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5) !important;
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5) !important;
     background: var(--primary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* ===== FAQ SECTION ===== */
 .faq {
-    background: var(--secondary-color);
+    background: var(--accent-color) !important; /* Laranja */
     color: var(--white);
     padding: var(--spacing-xl) 0;
     position: relative;
@@ -2745,7 +2745,7 @@ section {
 
 /* ===== COMO CHEGAR SECTION ===== */
 .como-chegar {
-    background: var(--primary-color);
+    background: var(--accent-color) !important; /* Laranja */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);
@@ -3232,10 +3232,10 @@ section {
     padding: 1.1rem 2.5rem;
     font-size: 1rem;
     font-weight: 700;
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
     min-height: 50px;
     text-transform: uppercase;
     letter-spacing: 0.8px;
@@ -3263,7 +3263,7 @@ section {
 
 .btn-full:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     background: var(--primary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
@@ -3326,10 +3326,10 @@ section {
     padding: 1.1rem 2.5rem;
     font-size: 1rem;
     font-weight: 700;
-    background: var(--primary-color) !important;
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
     text-transform: uppercase;
     letter-spacing: 0.8px;
     position: relative;
@@ -3340,7 +3340,7 @@ section {
 
 .btn-footer-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     background: var(--primary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }

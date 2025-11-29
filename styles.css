@@ -847,7 +847,7 @@ section {
     line-height: 1.7;
     font-weight: 400;
     max-width: 550px;
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
 }
 
 .hero-subtitle strong {
@@ -1269,9 +1269,7 @@ section {
     color: var(--white);
 }
 
-.sobre * {
-    color: var(--white) !important;
-}
+/* Remover regra genérica que força tudo para branco */
 
 .sobre .section-title,
 .sobre .section-description,

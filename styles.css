@@ -2023,10 +2023,6 @@ section {
     transition: var(--transition);
 }
 
-.dica-icon {
-    background: var(--gradient-primary);
-}
-
 .dica-card:hover .dica-icon {
     transform: rotate(10deg) scale(1.1);
 }

@@ -810,11 +810,15 @@ section {
     font-size: 0.9rem;
     font-weight: 600;
     border: 2px solid rgba(78, 205, 196, 0.3);
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
 }
 
 .hero-badge i {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
+}
+
+.hero-badge span {
+    color: var(--primary-color) !important;
 }
 
 .hero-title {
@@ -823,15 +827,16 @@ section {
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: var(--spacing-sm);
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
 }
 
 .title-line {
     display: block;
+    color: var(--dark-gray) !important;
 }
 
 .title-line.highlight {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
     font-size: 1.1em;
 }
 

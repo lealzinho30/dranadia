@@ -456,6 +456,7 @@ section {
     padding-bottom: var(--spacing-xl);
     overflow: hidden;
     scroll-margin-top: 120px;
+    background: linear-gradient(135deg, rgba(255, 140, 66, 0.05) 0%, rgba(255, 107, 107, 0.05) 50%, rgba(196, 69, 105, 0.05) 100%);
 }
 
 @media (max-width: 768px) {
@@ -560,7 +561,10 @@ section {
 .hero-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    background: var(--gradient-multicolor);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
 }
@@ -810,16 +814,17 @@ section {
 }
 
 .btn-primary {
-    background: var(--white);
-    color: var(--primary-color);
+    background: var(--gradient-multicolor);
+    color: var(--white);
     box-shadow: var(--shadow-lg);
+    border: none;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-xl);
-    background: var(--accent-color);
-    color: var(--dark-gray);
+    background: var(--gradient-primary);
+    color: var(--white);
 }
 
 /* Botões CTA (Call to Action) - Mais Chamativos */
@@ -1541,10 +1546,34 @@ section {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 3px solid transparent;
     display: flex;
     flex-direction: column;
     height: 100%;
+}
+
+.servico-card:nth-child(1) {
+    border-color: var(--primary-color);
+}
+
+.servico-card:nth-child(2) {
+    border-color: var(--secondary-color);
+}
+
+.servico-card:nth-child(3) {
+    border-color: var(--accent-color);
+}
+
+.servico-card:nth-child(4) {
+    border-color: var(--primary-color);
+}
+
+.servico-card:nth-child(5) {
+    border-color: var(--secondary-color);
+}
+
+.servico-card:nth-child(6) {
+    border-color: var(--accent-color);
 }
 
 @media (max-width: 768px) {
@@ -1586,7 +1615,7 @@ section {
 .servico-icon {
     width: 60px;
     height: 60px;
-    background: var(--gradient-primary);
+    background: var(--gradient-multicolor);
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -1594,6 +1623,30 @@ section {
     color: var(--white);
     font-size: 1.8rem;
     box-shadow: var(--shadow-md);
+}
+
+.servico-card:nth-child(1) .servico-icon {
+    background: var(--gradient-primary);
+}
+
+.servico-card:nth-child(2) .servico-icon {
+    background: var(--gradient-secondary);
+}
+
+.servico-card:nth-child(3) .servico-icon {
+    background: var(--gradient-accent);
+}
+
+.servico-card:nth-child(4) .servico-icon {
+    background: var(--gradient-primary);
+}
+
+.servico-card:nth-child(5) .servico-icon {
+    background: var(--gradient-secondary);
+}
+
+.servico-card:nth-child(6) .servico-icon {
+    background: var(--gradient-accent);
 }
 
 .servico-number {
@@ -1886,9 +1939,34 @@ section {
     transition: var(--transition);
     position: relative;
     border: 2px solid transparent;
+    border-top: 4px solid transparent;
     overflow: hidden;
     cursor: pointer;
     box-shadow: var(--shadow-sm);
+}
+
+.dica-card:nth-child(1) {
+    border-top-color: var(--primary-color);
+}
+
+.dica-card:nth-child(2) {
+    border-top-color: var(--secondary-color);
+}
+
+.dica-card:nth-child(3) {
+    border-top-color: var(--accent-color);
+}
+
+.dica-card:nth-child(4) {
+    border-top-color: var(--primary-color);
+}
+
+.dica-card:nth-child(5) {
+    border-top-color: var(--secondary-color);
+}
+
+.dica-card:nth-child(6) {
+    border-top-color: var(--accent-color);
 }
 
 .dica-card.dica-hidden {
@@ -1971,7 +2049,7 @@ section {
 .dica-icon {
     width: 70px;
     height: 70px;
-    background: var(--gradient-primary);
+    background: var(--gradient-multicolor);
     border-radius: 18px;
     display: flex;
     align-items: center;
@@ -1981,6 +2059,30 @@ section {
     margin-bottom: var(--spacing-md);
     box-shadow: var(--shadow-md);
     transition: var(--transition);
+}
+
+.dica-card:nth-child(1) .dica-icon {
+    background: var(--gradient-primary);
+}
+
+.dica-card:nth-child(2) .dica-icon {
+    background: var(--gradient-secondary);
+}
+
+.dica-card:nth-child(3) .dica-icon {
+    background: var(--gradient-accent);
+}
+
+.dica-card:nth-child(4) .dica-icon {
+    background: var(--gradient-primary);
+}
+
+.dica-card:nth-child(5) .dica-icon {
+    background: var(--gradient-secondary);
+}
+
+.dica-card:nth-child(6) .dica-icon {
+    background: var(--gradient-accent);
 }
 
 .dica-card:hover .dica-icon {
@@ -2655,6 +2757,23 @@ section {
     border-radius: 15px;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-card:nth-child(1) {
+    border-left-color: var(--primary-color);
+}
+
+.info-card:nth-child(2) {
+    border-left-color: var(--secondary-color);
+}
+
+.info-card:nth-child(3) {
+    border-left-color: var(--accent-color);
+}
+
+.info-card:nth-child(4) {
+    border-left-color: var(--primary-color);
 }
 
 .info-card:hover {
@@ -2665,8 +2784,27 @@ section {
 .info-icon {
     width: 50px;
     height: 50px;
-    background: var(--gradient-primary);
+    background: var(--gradient-multicolor);
     border-radius: 12px;
+}
+
+.info-card:nth-child(1) .info-icon {
+    background: var(--gradient-primary);
+}
+
+.info-card:nth-child(2) .info-icon {
+    background: var(--gradient-secondary);
+}
+
+.info-card:nth-child(3) .info-icon {
+    background: var(--gradient-accent);
+}
+
+.info-card:nth-child(4) .info-icon {
+    background: var(--gradient-primary);
+}
+
+.info-icon {
     display: flex;
     align-items: center;
     justify-content: center;

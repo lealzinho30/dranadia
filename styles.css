@@ -901,13 +901,13 @@ section {
 .btn-cta-faq,
 .btn-cta-porque,
 .btn-cta-chegar {
-    background: var(--white) !important;
+    background: transparent !important;
     color: var(--dark-gray) !important;
     font-size: 1.1rem !important;
     font-weight: 700 !important;
     padding: 1.2rem 2.5rem !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
-    border: 3px solid var(--white) !important;
+    box-shadow: none !important;
+    border: 2px solid var(--dark-gray) !important;
     position: relative;
     overflow: hidden;
 }
@@ -952,10 +952,11 @@ section {
 .btn-cta-faq:hover,
 .btn-cta-porque:hover,
 .btn-cta-chegar:hover {
-    transform: translateY(-5px) scale(1.05) !important;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3) !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    color: var(--dark-gray) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
+    border-color: var(--primary-color) !important;
 }
 
 .btn-cta-hero i,

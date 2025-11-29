@@ -1276,14 +1276,14 @@ section {
     color: var(--white) !important;
 }
 
-/* Textos gerais da seção sobre - exceto cards */
-.sobre > .container > *:not(.formacao-card):not(.formacao-card *) p,
-.sobre > .container > *:not(.formacao-card):not(.formacao-card *) h2,
-.sobre > .container > *:not(.formacao-card):not(.formacao-card *) h3,
-.sobre > .container > *:not(.formacao-card):not(.formacao-card *) h4,
-.sobre > .container > *:not(.formacao-card):not(.formacao-card *) li,
-.sobre > .container > *:not(.formacao-card):not(.formacao-card *) strong,
-.sobre > .container > *:not(.formacao-card):not(.formacao-card *) em {
+/* Textos gerais da seção sobre - exceto cards de formação */
+.sobre p:not(.formacao-content p),
+.sobre h2:not(.formacao-content h2),
+.sobre h3:not(.formacao-content h3),
+.sobre h4:not(.formacao-content h4),
+.sobre li:not(.formacao-content li),
+.sobre strong:not(.formacao-content strong),
+.sobre em:not(.formacao-content em) {
     color: var(--white) !important;
 }
 

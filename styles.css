@@ -832,6 +832,12 @@ section {
     line-height: 1.7;
     font-weight: 400;
     max-width: 550px;
+    color: var(--dark-gray);
+}
+
+.hero-subtitle strong {
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
 .hero-buttons {

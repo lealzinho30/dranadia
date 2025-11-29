@@ -2882,24 +2882,31 @@ section {
 
 /* ===== CONTATO SECTION ===== */
 .contato {
-    background: var(--tertiary-color);
+    background: var(--white) !important;
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
-    color: var(--white);
+    color: var(--dark-gray);
 }
 
 .contato .section-title,
 .contato .section-description {
-    color: var(--white) !important;
+    color: var(--dark-gray) !important;
     font-weight: 700;
 }
 
 .contato .section-title {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: none;
+    color: var(--primary-color) !important;
 }
 
 .contato .section-description {
-    color: rgba(255, 255, 255, 0.95) !important;
+    color: var(--gray) !important;
+}
+
+.contato .section-tag {
+    background: rgba(78, 205, 196, 0.1);
+    color: var(--primary-color) !important;
+    border: 2px solid rgba(78, 205, 196, 0.3);
 }
 
 .contato .info-card {

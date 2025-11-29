@@ -210,6 +210,21 @@
                     </div>
                 </div>
 
+                <!-- Gráfico de Dias da Semana -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-calendar-week"></i>
+                            Mensagens por Dia da Semana
+                        </h2>
+                    </div>
+                    <div class="chart-bar-horizontal">
+                        <div class="horizontal-bars" id="weekdayChart">
+                            <!-- Será gerado via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Estatísticas Detalhadas -->
                 <div class="dashboard-section">
                     <div class="section-header">
@@ -561,6 +576,38 @@
             document.getElementById('readRateBar').style.width = readPercentage + '%';
         }
 
+        // Gerar gráfico de dias da semana
+        function generateWeekdayChart(messages) {
+            const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            const weekdayCounts = [0, 0, 0, 0, 0, 0, 0];
+            
+            messages.forEach(msg => {
+                const date = new Date(msg.date);
+                const day = date.getDay();
+                weekdayCounts[day]++;
+            });
+            
+            const maxCount = Math.max(...weekdayCounts, 1);
+            const container = document.getElementById('weekdayChart');
+            
+            if (!container) return; // Se o elemento não existir, não fazer nada
+            
+            container.innerHTML = weekdays.map((day, index) => {
+                const count = weekdayCounts[index];
+                const width = maxCount > 0 ? (count / maxCount) * 100 : 0;
+                return `
+                    <div class="horizontal-bar-item">
+                        <span class="bar-label">${day}</span>
+                        <div class="horizontal-bar-container">
+                            <div class="horizontal-bar" style="width: ${width}%">
+                                <span class="bar-value">${count}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         // Gerar gráfico de linha (tendência mensal)
         function generateLineChart(messages) {
             const canvas = document.getElementById('lineChart');
@@ -716,6 +763,7 @@
             const messages = adminUtils.getMessages();
             generateChart(messages);
             generatePieChart(messages);
+            generateLineChart(messages);
             generateWeekdayChart(messages);
             adminUtils.showNotification('Gráficos atualizados!', 'success');
         }

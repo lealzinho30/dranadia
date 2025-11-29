@@ -420,6 +420,165 @@ body {
     text-align: center;
 }
 
+/* ===== PIE CHART ===== */
+.charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.chart-pie-container {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.pie-chart {
+    position: relative;
+    margin: 0 auto 1.5rem;
+    width: 200px;
+    height: 200px;
+}
+
+.pie-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.pie-text {
+    font-family: var(--font-primary);
+}
+
+.pie-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    fill: var(--dark-gray);
+}
+
+.pie-label {
+    font-size: 0.9rem;
+    fill: var(--gray);
+}
+
+.pie-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* ===== HORIZONTAL BAR CHART ===== */
+.chart-bar-horizontal {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-bar-horizontal h4 {
+    margin-bottom: 1.5rem;
+    color: var(--dark-gray);
+    font-size: 1.1rem;
+}
+
+.horizontal-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.horizontal-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bar-label {
+    min-width: 40px;
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-weight: 500;
+}
+
+.horizontal-bar-container {
+    flex: 1;
+    height: 30px;
+    background: var(--light-gray);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.horizontal-bar {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 15px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+    min-width: 30px;
+}
+
+.bar-value {
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--light-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* ===== SECTION ACTIONS ===== */
+.section-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ===== RESPONSIVE CHARTS ===== */
+@media (max-width: 968px) {
+    .charts-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-detail-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
 /* ===== DASHBOARD CHARTS GRID ===== */
 .dashboard-charts-grid {
     display: grid;

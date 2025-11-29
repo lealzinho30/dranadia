@@ -379,6 +379,7 @@
             // Taxa de leitura
             const readRate = total > 0 ? Math.round((read / total) * 100) : 0;
             document.getElementById('readRate').textContent = readRate + '%';
+            document.getElementById('readProgress').style.width = readRate + '%';
 
             // Primeira e última mensagem
             if (messages.length > 0) {
@@ -390,7 +391,55 @@
                 document.getElementById('firstMessageDate').textContent = adminUtils.formatDateFull(first.date);
                 document.getElementById('lastMessage').textContent = last.nome;
                 document.getElementById('lastMessageDate').textContent = adminUtils.formatDateFull(last.date);
+                
+                // Tempo desde última mensagem
+                const lastDate = new Date(last.date);
+                const now = new Date();
+                const diff = now - lastDate;
+                const hours = Math.floor(diff / 3600000);
+                const days = Math.floor(diff / 86400000);
+                
+                if (days > 0) {
+                    document.getElementById('timeSinceLast').textContent = days + ' dias';
+                } else if (hours > 0) {
+                    document.getElementById('timeSinceLast').textContent = hours + ' horas';
+                } else {
+                    document.getElementById('timeSinceLast').textContent = 'Agora';
+                }
+            } else {
+                document.getElementById('timeSinceLast').textContent = '-';
             }
+
+            // Média diária (últimos 30 dias)
+            const thirtyDaysAgo = new Date(today);
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            const last30Days = messages.filter(m => new Date(m.date) >= thirtyDaysAgo);
+            const dailyAverage = last30Days.length > 0 ? (last30Days.length / 30).toFixed(1) : '0';
+            document.getElementById('dailyAverage').textContent = dailyAverage;
+
+            // Tendência semanal
+            const thisWeek = messages.filter(m => {
+                const msgDate = new Date(m.date);
+                return msgDate >= weekAgo;
+            }).length;
+            
+            const lastWeekStart = new Date(weekAgo);
+            lastWeekStart.setDate(lastWeekStart.getDate() - 7);
+            const lastWeek = messages.filter(m => {
+                const msgDate = new Date(m.date);
+                return msgDate >= lastWeekStart && msgDate < weekAgo;
+            }).length;
+            
+            let trend = 0;
+            if (lastWeek > 0) {
+                trend = Math.round(((thisWeek - lastWeek) / lastWeek) * 100);
+            } else if (thisWeek > 0) {
+                trend = 100;
+            }
+            
+            const trendEl = document.getElementById('weeklyTrend');
+            trendEl.textContent = (trend >= 0 ? '+' : '') + trend + '%';
+            trendEl.style.color = trend >= 0 ? 'var(--success)' : 'var(--error)';
 
             // Atualizar badge
             const badge = document.getElementById('unreadBadge');
@@ -413,6 +462,17 @@
 
         // Atualizar mudanças
         function updateChanges(total, unread, read, today, week, month) {
+            // Se é a primeira vez, não mostrar mudanças
+            if (previousStats.total === 0 && total === 0) {
+                document.getElementById('totalChange').textContent = 'Sem mudanças';
+                document.getElementById('unreadChange').textContent = 'Sem mudanças';
+                document.getElementById('readChange').textContent = 'Sem mudanças';
+                document.getElementById('todayChange').textContent = 'Sem mudanças';
+                document.getElementById('weekChange').textContent = 'Sem mudanças';
+                document.getElementById('monthChange').textContent = 'Sem mudanças';
+                return;
+            }
+
             const changes = {
                 total: total - previousStats.total,
                 unread: unread - previousStats.unread,
@@ -649,6 +709,15 @@
             loadStats();
             loadRecentMessages();
             adminUtils.showNotification('Dashboard atualizado!', 'success');
+        }
+
+        // Atualizar apenas gráfico
+        function refreshChart() {
+            const messages = adminUtils.getMessages();
+            generateChart(messages);
+            generatePieChart(messages);
+            generateWeekdayChart(messages);
+            adminUtils.showNotification('Gráficos atualizados!', 'success');
         }
 
         // Carregar mensagens recentes

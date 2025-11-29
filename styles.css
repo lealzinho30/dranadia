@@ -1272,14 +1272,18 @@ section {
 /* Remover regra genérica que força tudo para branco */
 
 .sobre .section-title,
-.sobre .section-description,
-.sobre p,
-.sobre h2,
-.sobre h3,
-.sobre h4,
-.sobre li,
-.sobre strong,
-.sobre em {
+.sobre .section-description {
+    color: var(--white) !important;
+}
+
+/* Textos gerais da seção sobre - exceto cards */
+.sobre > .container > *:not(.formacao-card):not(.formacao-card *) p,
+.sobre > .container > *:not(.formacao-card):not(.formacao-card *) h2,
+.sobre > .container > *:not(.formacao-card):not(.formacao-card *) h3,
+.sobre > .container > *:not(.formacao-card):not(.formacao-card *) h4,
+.sobre > .container > *:not(.formacao-card):not(.formacao-card *) li,
+.sobre > .container > *:not(.formacao-card):not(.formacao-card *) strong,
+.sobre > .container > *:not(.formacao-card):not(.formacao-card *) em {
     color: var(--white) !important;
 }
 
@@ -1506,13 +1510,13 @@ section {
 
 .formacao-content h4 {
     font-size: 1.1rem;
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
     margin-bottom: 0.3rem;
     font-weight: 700;
 }
 
 .formacao-content p {
-    color: var(--dark-gray);
+    color: var(--gray) !important;
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0;

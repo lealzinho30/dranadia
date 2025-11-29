@@ -1469,7 +1469,7 @@ section {
 }
 
 .formacao-card {
-    background: var(--white);
+    background: var(--white) !important;
     padding: var(--spacing-md);
     border-radius: 20px;
     box-shadow: var(--shadow-md);
@@ -1477,9 +1477,15 @@ section {
     align-items: center;
     gap: var(--spacing-md);
     transition: var(--transition);
-    border: 2px solid transparent;
+    border: 2px solid rgba(0, 0, 0, 0.1);
     opacity: 0;
     transform: translateY(30px);
+}
+
+/* Garantir que textos dentro dos cards de formação sejam escuros */
+.formacao-card h4,
+.formacao-card p {
+    color: var(--dark-gray) !important;
 }
 
 .formacao-card.scroll-fade-in.visible {
@@ -1497,12 +1503,12 @@ section {
 .formacao-icon {
     width: 60px;
     height: 60px;
-    background: var(--gradient-primary);
+    background: var(--primary-color) !important;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: var(--white) !important;
     font-size: 1.5rem;
     flex-shrink: 0;
     box-shadow: var(--shadow-md);

@@ -564,7 +564,7 @@ section {
 .hero-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--dark-gray);
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
 }
@@ -814,17 +814,18 @@ section {
 }
 
 .btn-primary {
-    background: var(--gradient-primary);
-    color: var(--white);
+    background: var(--white);
+    color: var(--dark-gray);
     box-shadow: var(--shadow-lg);
-    border: none;
+    border: 2px solid var(--white);
+    font-weight: 600;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-xl);
-    background: var(--primary-dark);
-    color: var(--white);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--dark-gray);
 }
 
 /* Botões CTA (Call to Action) - Mais Chamativos */
@@ -836,16 +837,15 @@ section {
 .btn-cta-faq,
 .btn-cta-porque,
 .btn-cta-chegar {
-    background: var(--gradient-primary) !important;
-    color: var(--white) !important;
+    background: var(--white) !important;
+    color: var(--dark-gray) !important;
     font-size: 1.1rem !important;
     font-weight: 700 !important;
     padding: 1.2rem 2.5rem !important;
-    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
     border: 3px solid var(--white) !important;
     position: relative;
     overflow: hidden;
-    animation: pulse-cta 2s ease-in-out infinite;
 }
 
 .btn-cta-hero::before,
@@ -889,8 +889,9 @@ section {
 .btn-cta-porque:hover,
 .btn-cta-chegar:hover {
     transform: translateY(-5px) scale(1.05) !important;
-    box-shadow: 0 12px 35px rgba(241, 144, 34, 0.6) !important;
-    background: var(--secondary-color) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: var(--dark-gray) !important;
 }
 
 .btn-cta-hero i,
@@ -1158,7 +1159,7 @@ section {
 .section-tag {
     display: inline-block;
     padding: 0.5rem 1.5rem;
-    background: var(--gradient-primary);
+    background: rgba(255, 255, 255, 0.25);
     color: var(--white);
     border-radius: 50px;
     font-size: 0.85rem;
@@ -1167,6 +1168,7 @@ section {
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
 }
 
 .section-title {
@@ -1178,26 +1180,7 @@ section {
     line-height: 1.2;
 }
 
-/* Títulos coloridos em seções específicas */
-.sobre .section-title {
-    color: var(--primary-color);
-}
-
-.galeria .section-title {
-    color: var(--secondary-color);
-}
-
-.dicas .section-title {
-    color: var(--accent-color);
-}
-
-.contato .section-title {
-    color: var(--tertiary-color);
-}
-
-.como-chegar .section-title {
-    color: var(--primary-color);
-}
+/* Títulos já definidos nas seções com cores apropriadas (branco para backgrounds coloridos) */
 
 .section-description {
     font-size: 1rem;
@@ -1495,12 +1478,17 @@ section {
 
 /* ===== SERVIÇOS SECTION ===== */
 .servicos {
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     color: var(--white);
     padding: var(--spacing-xl) 0;
     position: relative;
     overflow: hidden;
     scroll-margin-top: 120px;
+}
+
+.servicos .section-title,
+.servicos .section-description {
+    color: var(--white);
 }
 
 .servicos::before {
@@ -1615,7 +1603,8 @@ section {
 }
 
 .servico-icon {
-    background: var(--gradient-primary);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--dark-gray);
 }
 
 .servico-number {
@@ -2568,12 +2557,12 @@ section {
 .endereco-icon {
     width: 55px;
     height: 55px;
-    background: var(--gradient-primary);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: var(--dark-gray);
     font-size: 1.5rem;
     flex-shrink: 0;
     box-shadow: var(--shadow-sm);
@@ -2801,8 +2790,8 @@ section {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    background: var(--gradient-primary);
-    color: var(--white);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--dark-gray);
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
     text-decoration: none;

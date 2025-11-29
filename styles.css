@@ -951,13 +951,13 @@ section {
 .btn-cta-faq,
 .btn-cta-porque,
 .btn-cta-chegar {
-    background: linear-gradient(135deg, #F19022 0%, #F5A64A 100%) !important;
+    background: linear-gradient(135deg, #4ECDC4 0%, #FF6B9D 50%, #4ECDC4 100%) !important;
     color: var(--white) !important;
     font-size: 1rem !important;
     font-weight: 800 !important;
     padding: 1.1rem 2.5rem !important;
-    box-shadow: 0 8px 30px rgba(241, 144, 34, 0.6),
-                0 0 0 0 rgba(241, 144, 34, 0.4),
+    box-shadow: 0 8px 30px rgba(78, 205, 196, 0.6),
+                0 0 0 0 rgba(255, 107, 157, 0.4),
                 inset 0 2px 4px rgba(255, 255, 255, 0.3) !important;
     border: 4px solid rgba(255, 255, 255, 0.6) !important;
     position: relative;
@@ -1010,10 +1010,10 @@ section {
 .btn-cta-porque:hover,
 .btn-cta-chegar:hover {
     transform: translateY(-5px) scale(1.05) !important;
-    box-shadow: 0 15px 40px rgba(241, 144, 34, 0.8),
-                0 0 20px rgba(241, 144, 34, 0.6),
+    box-shadow: 0 15px 40px rgba(78, 205, 196, 0.8),
+                0 0 20px rgba(255, 107, 157, 0.6),
                 inset 0 2px 4px rgba(255, 255, 255, 0.4) !important;
-    background: linear-gradient(135deg, #F5A64A 0%, #F19022 100%) !important;
+    background: linear-gradient(135deg, #FF6B9D 0%, #4ECDC4 50%, #FF6B9D 100%) !important;
     color: var(--white) !important;
     border-color: rgba(255, 255, 255, 0.8) !important;
     animation: none;
@@ -1032,12 +1032,12 @@ section {
 
 @keyframes pulse-cta-all {
     0%, 100% {
-        box-shadow: 0 8px 30px rgba(241, 144, 34, 0.6),
-                    0 0 0 0 rgba(241, 144, 34, 0.4);
+        box-shadow: 0 8px 30px rgba(78, 205, 196, 0.6),
+                    0 0 0 0 rgba(255, 107, 157, 0.4);
     }
     50% {
-        box-shadow: 0 8px 35px rgba(241, 144, 34, 0.8),
-                    0 0 15px rgba(241, 144, 34, 0.6);
+        box-shadow: 0 8px 35px rgba(78, 205, 196, 0.8),
+                    0 0 15px rgba(255, 107, 157, 0.6);
     }
 }
 

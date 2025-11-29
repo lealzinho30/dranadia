@@ -813,6 +813,7 @@ section {
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: var(--spacing-sm);
+    color: var(--dark-gray);
 }
 
 .title-line {
@@ -820,8 +821,7 @@ section {
 }
 
 .title-line.highlight {
-    color: var(--accent-color);
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    color: var(--primary-color);
     font-size: 1.1em;
 }
 

@@ -920,28 +920,7 @@ section {
 .btn-cta-faq::before,
 .btn-cta-porque::before,
 .btn-cta-chegar::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn-cta-hero:hover::before,
-.btn-cta-sobre:hover::before,
-.btn-cta-servicos:hover::before,
-.btn-cta-galeria:hover::before,
-.btn-cta-dicas:hover::before,
-.btn-cta-faq:hover::before,
-.btn-cta-porque:hover::before,
-.btn-cta-chegar:hover::before {
-    width: 300px;
-    height: 300px;
+    display: none;
 }
 
 .btn-cta-hero:hover,

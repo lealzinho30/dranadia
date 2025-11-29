@@ -484,13 +484,10 @@ section {
 }
 
 .hero .container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
     align-items: center;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-md);
 }
 
 @media (max-width: 968px) {
@@ -567,12 +564,9 @@ section {
     z-index: 15;
     color: var(--dark-gray);
     max-width: 800px;
-    width: 100%;
     margin: 0 auto;
     text-align: center;
     animation: fadeInUp 1s ease;
-    background: transparent !important;
-    padding: 0;
 }
 
 .hero-title {

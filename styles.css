@@ -6,15 +6,15 @@
 }
 
 :root {
-    /* Cores Principais - Baseado no site antigo */
-    --primary-color: #4ECDC4;
-    --primary-dark: #3BA89F;
-    --primary-light: #6EDDD5;
-    --secondary-color: #FF6B9D;
-    --secondary-dark: #E55A8A;
-    --secondary-light: #FF8BB0;
-    --accent-color: #FFE66D;
-    --accent-light: #FFF18A;
+    /* Cores Principais - Baseado no site antigo dranadiaodontopediatra.com.br */
+    --primary-color: #2da7ba;
+    --primary-dark: #238a9a;
+    --primary-light: #4db8c9;
+    --secondary-color: #f19022;
+    --secondary-dark: #d17a1a;
+    --secondary-light: #f5a64a;
+    --accent-color: #f19022;
+    --accent-light: #f5a64a;
     
     /* Cores Neutras */
     --white: #FFFFFF;
@@ -24,10 +24,10 @@
     --black: #1A1A1A;
     
     /* Gradientes */
-    --gradient-primary: linear-gradient(135deg, #4ECDC4 0%, #3BA89F 100%);
-    --gradient-secondary: linear-gradient(135deg, #FF6B9D 0%, #E55A8A 100%);
-    --gradient-accent: linear-gradient(135deg, #FFE66D 0%, #FFF18A 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(78, 205, 196, 0.95) 0%, rgba(59, 168, 159, 0.95) 100%);
+    --gradient-primary: linear-gradient(135deg, #2da7ba 0%, #238a9a 100%);
+    --gradient-secondary: linear-gradient(135deg, #f19022 0%, #f5a64a 100%);
+    --gradient-accent: linear-gradient(135deg, #f19022 0%, #f5a64a 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(45, 167, 186, 0.95) 0%, rgba(35, 138, 154, 0.95) 100%);
     
     /* Tipografia */
     --font-primary: 'Poppins', sans-serif;

@@ -1198,12 +1198,31 @@ section {
     color: var(--white);
 }
 
+.sobre * {
+    color: var(--white) !important;
+}
+
 .sobre .section-title,
 .sobre .section-description,
 .sobre p,
 .sobre h2,
-.sobre h3 {
-    color: var(--white);
+.sobre h3,
+.sobre h4,
+.sobre li,
+.sobre strong,
+.sobre em {
+    color: var(--white) !important;
+}
+
+.sobre .feature-card,
+.sobre .sobre-image {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sobre .feature-card h4,
+.sobre .feature-card p {
+    color: var(--white) !important;
 }
 
 .sobre-content {
@@ -1487,8 +1506,42 @@ section {
 }
 
 .servicos .section-title,
+.servicos .section-description,
+.servicos p,
+.servicos h2,
+.servicos h3,
+.servicos h4 {
+    color: var(--white) !important;
+}
+
+.servicos .section-title {
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .servicos .section-description {
-    color: var(--white);
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.servicos .servico-card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.servicos .servico-card h3,
+.servicos .servico-card p,
+.servicos .servico-card li {
+    color: var(--dark-gray) !important;
+}
+
+.servicos .servico-card h3 {
+    font-weight: 700;
+}
+
+.servicos .servico-card p,
+.servicos .servico-card li {
+    color: var(--gray) !important;
+    font-weight: 500;
 }
 
 .servicos::before {
@@ -1718,8 +1771,21 @@ section {
 }
 
 .galeria .section-title,
+.galeria .section-description,
+.galeria p,
+.galeria h2,
+.galeria h3,
+.galeria h4 {
+    color: var(--white) !important;
+}
+
+.galeria .section-title {
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .galeria .section-description {
-    color: var(--white);
+    color: rgba(255, 255, 255, 0.95) !important;
 }
 
 
@@ -1885,19 +1951,42 @@ section {
 
 .dicas .section-title,
 .dicas .section-description {
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
+    font-weight: 700;
+}
+
+.dicas .section-description {
+    color: rgba(44, 62, 80, 0.9) !important;
 }
 
 .dicas .dica-card {
     background: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
 .dicas .dica-card h3 {
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
+    font-weight: 700;
 }
 
 .dicas .dica-card p {
-    color: var(--gray);
+    color: var(--gray) !important;
+}
+
+.dicas .dica-tag {
+    background: rgba(44, 62, 80, 0.9) !important;
+    color: var(--white) !important;
+}
+
+.dicas .dica-btn {
+    background: var(--dark-gray) !important;
+    color: var(--white) !important;
+    border-color: var(--dark-gray) !important;
+}
+
+.dicas .dica-btn:hover {
+    background: rgba(44, 62, 80, 0.9) !important;
+    color: var(--white) !important;
 }
 
 .dicas-grid {
@@ -2141,19 +2230,31 @@ section {
 
 .faq .section-title,
 .faq .section-description {
-    color: var(--white);
+    color: var(--white) !important;
+    font-weight: 700;
+}
+
+.faq .section-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.faq .section-description {
+    color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .faq-item {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .faq-question {
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
+    font-weight: 700;
 }
 
 .faq-answer {
-    color: var(--gray);
+    color: var(--gray) !important;
+    font-weight: 500;
 }
 
 .faq::before {
@@ -2517,17 +2618,38 @@ section {
 
 .como-chegar .section-title,
 .como-chegar .section-description {
-    color: var(--white);
+    color: var(--white) !important;
+    font-weight: 700;
+}
+
+.como-chegar .section-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.como-chegar .section-description {
+    color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .como-chegar .endereco-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .como-chegar .endereco-content h3,
 .como-chegar .endereco-texto,
-.como-chegar .endereco-info {
-    color: var(--dark-gray);
+.como-chegar .endereco-info,
+.como-chegar .endereco-texto strong {
+    color: var(--dark-gray) !important;
+    font-weight: 600;
+}
+
+.como-chegar .endereco-content h3 {
+    font-weight: 700;
+}
+
+.como-chegar .endereco-texto {
+    color: var(--gray) !important;
+    font-weight: 500;
 }
 
 .como-chegar-wrapper {
@@ -2699,28 +2821,54 @@ section {
 
 .contato .section-title,
 .contato .section-description {
-    color: var(--white);
+    color: var(--white) !important;
+    font-weight: 700;
+}
+
+.contato .section-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.contato .section-description {
+    color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .contato .info-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .contato .info-content h4,
+.contato .info-content p,
+.contato .info-content a {
+    color: var(--dark-gray) !important;
+    font-weight: 600;
+}
+
 .contato .info-content p {
-    color: var(--dark-gray);
+    font-weight: 500;
 }
 
 .contato .form {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .contato .form h3 {
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
+    font-weight: 700;
 }
 
 .contato .form-group label {
-    color: var(--dark-gray);
+    color: var(--dark-gray) !important;
+    font-weight: 600;
+}
+
+.contato .form-group input,
+.contato .form-group textarea {
+    color: var(--dark-gray) !important;
+    background: var(--white) !important;
+    border-color: #D1D5DB !important;
 }
 
 .contato-wrapper {

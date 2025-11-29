@@ -2043,19 +2043,27 @@ section {
 }
 
 .dicas .dica-tag {
-    background: rgba(44, 62, 80, 0.9) !important;
+    background: var(--primary-color) !important;
     color: var(--white) !important;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.4);
 }
 
 .dicas .dica-btn {
-    background: var(--dark-gray) !important;
+    background: var(--primary-color) !important;
     color: var(--white) !important;
-    border-color: var(--dark-gray) !important;
+    border-color: var(--primary-color) !important;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    transition: all 0.3s ease;
 }
 
 .dicas .dica-btn:hover {
-    background: rgba(44, 62, 80, 0.9) !important;
+    background: var(--primary-dark) !important;
     color: var(--white) !important;
+    border-color: var(--primary-dark) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
 }
 
 .dicas-grid {
@@ -2201,34 +2209,38 @@ section {
 
 .dica-tag {
     display: inline-block;
-    padding: 0.4rem 1rem;
-    background: var(--gradient-primary);
-    color: var(--white);
+    padding: 0.5rem 1.2rem;
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
     border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 700;
     margin: var(--spacing-xs) var(--spacing-md) var(--spacing-sm);
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.4);
+    border: 2px solid var(--primary-color);
 }
 
 .dica-btn {
     width: calc(100% - var(--spacing-md) * 2);
     margin: 0 var(--spacing-md) var(--spacing-md);
-    padding: 0.75rem;
-    background: var(--white) !important;
-    color: var(--dark-gray) !important;
-    border: 2px solid var(--white);
-    border-radius: 10px;
-    font-weight: 600;
+    padding: 1rem 1.5rem;
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    font-weight: 700;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     font-family: var(--font-primary);
-    font-size: 0.9rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
 }
 
 .dica-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
+    background: var(--primary-dark) !important;
+    border-color: var(--primary-dark);
 }
 
 .dica-card.dica-hidden {

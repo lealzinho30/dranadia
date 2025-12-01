@@ -1260,7 +1260,7 @@ section {
 
 /* ===== SOBRE SECTION ===== */
 .sobre {
-    background: var(--primary-color) !important; /* Roxo */
+    background: var(--accent-color) !important; /* Laranja */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);
@@ -1578,7 +1578,7 @@ section {
 
 /* ===== SERVIÇOS SECTION ===== */
 .servicos {
-    background: var(--accent-color) !important; /* Laranja */
+    background: var(--primary-color) !important; /* Roxo */
     color: var(--white);
     padding: var(--spacing-xl) 0;
     position: relative;
@@ -1845,7 +1845,7 @@ section {
 
 /* ===== GALERIA SECTION ===== */
 .galeria {
-    background: var(--secondary-color) !important; /* Azul Turquesa */
+    background: var(--primary-color) !important; /* Roxo */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);
@@ -2024,7 +2024,7 @@ section {
 
 /* ===== DICAS SECTION ===== */
 .dicas {
-    background: var(--accent-color) !important; /* Laranja */
+    background: var(--accent-color) !important; /* Laranja - mantido */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);
@@ -2355,7 +2355,7 @@ section {
 
 /* ===== FAQ SECTION ===== */
 .faq {
-    background: var(--primary-color) !important; /* Roxo */
+    background: var(--accent-color) !important; /* Laranja */
     color: var(--white);
     padding: var(--spacing-xl) 0;
     position: relative;
@@ -2745,7 +2745,7 @@ section {
 
 /* ===== COMO CHEGAR SECTION ===== */
 .como-chegar {
-    background: var(--secondary-color) !important; /* Azul Turquesa */
+    background: var(--primary-color) !important; /* Roxo */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);

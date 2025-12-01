@@ -2222,13 +2222,13 @@ section {
 .dica-tag {
     display: inline-block;
     padding: 0.5rem 1.2rem;
-    background: var(--primary-color) !important; /* Roxo */
+    background: var(--secondary-color) !important; /* Azul Turquesa */
     color: var(--white) !important;
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 700;
     margin: var(--spacing-xs) var(--spacing-md) var(--spacing-sm);
-    box-shadow: 0 3px 10px rgba(139, 92, 246, 0.4); /* Roxo */
+    box-shadow: 0 3px 10px rgba(78, 205, 196, 0.4); /* Azul Turquesa */
     border: 2px solid rgba(255, 255, 255, 0.3);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -2238,7 +2238,7 @@ section {
     width: calc(100% - var(--spacing-md) * 2);
     margin: 0 var(--spacing-md) var(--spacing-md);
     padding: 1.1rem 2.5rem;
-    background: var(--primary-color) !important; /* Roxo */
+    background: var(--secondary-color) !important; /* Azul Turquesa */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
@@ -2247,7 +2247,7 @@ section {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: var(--font-primary);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
     text-transform: uppercase;
     letter-spacing: 0.8px;
     position: relative;
@@ -2256,8 +2256,8 @@ section {
 
 .dica-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
-    background: var(--primary-dark) !important;
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    background: var(--secondary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -2297,10 +2297,10 @@ section {
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.3s ease;
-    background: var(--primary-color) !important; /* Roxo */
+    background: var(--secondary-color) !important; /* Azul Turquesa */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
@@ -2309,8 +2309,8 @@ section {
 
 .dicas-more-container .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
-    background: var(--primary-dark) !important;
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+    background: var(--secondary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -2331,13 +2331,13 @@ section {
 }
 
 .dicas-cta .btn-cta-dicas {
-    background: var(--primary-color) !important; /* Roxo */
+    background: var(--secondary-color) !important; /* Azul Turquesa */
     color: var(--white) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     padding: 1.1rem 2.5rem !important;
     font-size: 1rem !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4) !important;
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
@@ -2348,8 +2348,8 @@ section {
 
 .dicas-cta .btn-cta-dicas:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5) !important;
-    background: var(--primary-dark) !important;
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5) !important;
+    background: var(--secondary-dark) !important;
     border-color: rgba(255, 255, 255, 0.5) !important;
 }
 

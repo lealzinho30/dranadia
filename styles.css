@@ -1260,7 +1260,7 @@ section {
 
 /* ===== SOBRE SECTION ===== */
 .sobre {
-    background: var(--accent-color) !important; /* Laranja */
+    background: var(--secondary-color) !important; /* Azul Turquesa */
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--white);
@@ -1500,7 +1500,7 @@ section {
 .formacao-icon {
     width: 60px;
     height: 60px;
-    background: var(--primary-color) !important;
+    background: var(--secondary-color) !important; /* Azul Turquesa */
     border-radius: 15px;
     display: flex;
     align-items: center;

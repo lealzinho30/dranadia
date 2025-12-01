@@ -2228,7 +2228,7 @@ section {
     font-size: 0.85rem;
     font-weight: 700;
     margin: var(--spacing-xs) var(--spacing-md) var(--spacing-sm);
-    box-shadow: 0 3px 10px rgba(255, 107, 157, 0.4);
+    box-shadow: 0 3px 10px rgba(139, 92, 246, 0.4); /* Roxo */
     border: 2px solid rgba(255, 255, 255, 0.3);
     text-transform: uppercase;
     letter-spacing: 0.5px;

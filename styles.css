@@ -4325,14 +4325,125 @@ section {
         padding: 0.3rem 0.8rem;
     }
 
-    /* Serviços Mobile */
+    /* OTIMIZAÇÃO MOBILE - Reduzir comprimento do site */
+    /* Reduzir padding de todas as seções */
+    .sobre,
+    .galeria,
+    .dicas,
+    .contato,
+    .faq,
+    .como-chegar,
     .servicos {
-        padding: var(--spacing-md) 0;
+        padding: var(--spacing-sm) 0 !important;
     }
 
-    /* Dicas Mobile */
-    .dicas {
-        padding: var(--spacing-md) 0;
+    /* Reduzir espaçamento entre elementos */
+    .section-header {
+        margin-bottom: var(--spacing-sm) !important;
+    }
+
+    .section-title {
+        margin-bottom: var(--spacing-xs) !important;
+    }
+
+    .section-description {
+        margin-bottom: var(--spacing-sm) !important;
+    }
+
+    /* Compactar cards */
+    .servico-card,
+    .dica-card,
+    .info-card,
+    .formacao-card {
+        padding: var(--spacing-sm) !important;
+        margin-bottom: var(--spacing-sm) !important;
+    }
+
+    /* Reduzir altura de imagens */
+    .dica-image {
+        height: 150px !important;
+    }
+
+    .galeria-item {
+        aspect-ratio: 1;
+    }
+
+    /* Compactar hero */
+    .hero {
+        padding-top: 50px !important;
+        padding-bottom: var(--spacing-sm) !important;
+    }
+
+    .hero-content {
+        margin-bottom: var(--spacing-sm) !important;
+    }
+
+    .hero-image {
+        max-width: 50% !important;
+        margin-top: var(--spacing-xs) !important;
+    }
+
+    /* Reduzir espaçamento de grids */
+    .servicos-grid,
+    .dicas-grid,
+    .formacao-grid {
+        gap: var(--spacing-sm) !important;
+        margin-top: var(--spacing-sm) !important;
+    }
+
+    /* Compactar formulário */
+    .contato-wrapper {
+        gap: var(--spacing-sm) !important;
+    }
+
+    .contato-form {
+        padding: var(--spacing-sm) !important;
+    }
+
+    /* Compactar FAQ */
+    .faq-list {
+        margin-top: var(--spacing-sm) !important;
+    }
+
+    .faq-item {
+        margin-bottom: var(--spacing-xs) !important;
+    }
+
+    /* Compactar Como Chegar */
+    .como-chegar-wrapper {
+        gap: var(--spacing-sm) !important;
+        margin-top: var(--spacing-sm) !important;
+    }
+
+    .endereco-card {
+        padding: var(--spacing-sm) !important;
+    }
+
+    .mapa-container {
+        min-height: 200px !important;
+        margin-top: var(--spacing-sm) !important;
+    }
+
+    /* Reduzir espaçamento de CTAs */
+    .dicas-cta,
+    .faq-cta,
+    .sobre-cta {
+        margin-top: var(--spacing-sm) !important;
+        padding: var(--spacing-sm) !important;
+    }
+
+    /* Compactar footer */
+    .footer {
+        padding: var(--spacing-md) 0 var(--spacing-sm) !important;
+    }
+
+    .footer-content {
+        gap: var(--spacing-md) !important;
+        margin-bottom: var(--spacing-sm) !important;
+    }
+
+    .footer-section {
+        margin-bottom: var(--spacing-sm) !important;
     }
 
     /* Galeria Mobile */
@@ -4451,11 +4562,11 @@ section {
         font-size: 1.2rem;
     }
 
-    /* Hero Extra Small */
+    /* Hero Extra Small - Mais Compacto */
     .hero {
         min-height: auto;
-        padding-top: 50px;
-        padding-bottom: var(--spacing-sm);
+        padding-top: 40px !important;
+        padding-bottom: var(--spacing-xs) !important;
     }
 
     .hero .container {
@@ -4488,15 +4599,15 @@ section {
     }
 
     .hero-subtitle {
-        font-size: 0.8rem;
-        line-height: 1.5;
-        margin-bottom: var(--spacing-sm);
+        font-size: 0.75rem;
+        line-height: 1.4;
+        margin-bottom: var(--spacing-xs) !important;
         padding: 0;
     }
 
     .hero-buttons {
-        gap: 0.5rem;
-        margin-bottom: var(--spacing-sm);
+        gap: 0.4rem !important;
+        margin-bottom: var(--spacing-xs) !important;
         padding: 0;
     }
 
@@ -4518,8 +4629,8 @@ section {
     }
 
     .hero-image {
-        margin-top: var(--spacing-sm);
-        max-width: 70%;
+        margin-top: var(--spacing-xs) !important;
+        max-width: 50% !important;
         margin-left: auto;
         margin-right: auto;
     }
@@ -4536,12 +4647,13 @@ section {
     }
 
     .hero-location {
-        font-size: 0.7rem;
-        padding: 0.4rem;
+        font-size: 0.65rem;
+        padding: 0.3rem;
         margin-top: var(--spacing-xs);
         flex-wrap: wrap;
         text-align: center;
         justify-content: center;
+        display: none; /* Ocultar no mobile muito pequeno para economizar espaço */
     }
 
     .hero-location i {
@@ -4556,15 +4668,31 @@ section {
         line-height: 1.4;
     }
 
-    /* Sections Extra Small */
+    /* Sections Extra Small - Mais Compactas */
+    .sobre,
+    .galeria,
+    .dicas,
+    .contato,
+    .faq,
+    .como-chegar,
+    .servicos {
+        padding: var(--spacing-xs) 0 !important;
+    }
+
     .section-title {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         padding: 0;
+        margin-bottom: var(--spacing-xs) !important;
     }
 
     .section-description {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         padding: 0;
+        margin-bottom: var(--spacing-xs) !important;
+    }
+
+    .section-header {
+        margin-bottom: var(--spacing-xs) !important;
     }
 
     .section-tag {
@@ -4619,9 +4747,14 @@ section {
         font-size: 0.8rem;
     }
 
-    /* Dicas Extra Small */
+    /* Dicas Extra Small - Mais Compactas */
     .dica-image {
-        height: 180px;
+        height: 140px !important;
+    }
+
+    .dica-card {
+        padding: var(--spacing-xs) !important;
+        margin-bottom: var(--spacing-xs) !important;
     }
 
     .dica-card h3 {
@@ -4632,9 +4765,14 @@ section {
         font-size: 0.8rem;
     }
 
-    /* Como Chegar Extra Small */
+    /* Como Chegar Extra Small - Mais Compacto */
     .endereco-card {
-        padding: var(--spacing-sm);
+        padding: var(--spacing-xs) !important;
+    }
+
+    .mapa-container {
+        min-height: 180px !important;
+        margin-top: var(--spacing-xs) !important;
     }
 
     .endereco-content h3 {

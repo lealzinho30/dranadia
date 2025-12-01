@@ -6,16 +6,16 @@
 }
 
 :root {
-    /* Cores Principais - 4 Cores do site antigo dranadiaodontopediatra.com.br */
-    --primary-color: #4ECDC4;        /* Azul Turquesa */
-    --primary-dark: #3BA89F;
-    --primary-light: #6EDDD5;
-    --secondary-color: #FF6B9D;      /* Rosa */
-    --secondary-dark: #E55A8A;
-    --secondary-light: #FF8BB0;
-    --accent-color: #FFE66D;         /* Amarelo */
-    --accent-dark: #E6D15A;
-    --accent-light: #FFF18A;
+    /* Cores Principais - Baseadas na Logo */
+    --primary-color: #8B5CF6;        /* Roxo - Cor principal da logo */
+    --primary-dark: #7C3AED;
+    --primary-light: #A78BFA;
+    --secondary-color: #4ECDC4;      /* Azul Turquesa - Cor do adulto na logo */
+    --secondary-dark: #3BA89F;
+    --secondary-light: #6EDDD5;
+    --accent-color: #F19022;         /* Laranja - Cor da criança na logo */
+    --accent-dark: #D17A1A;
+    --accent-light: #F5A64A;
     --tertiary-color: #F19022;       /* Laranja */
     --tertiary-dark: #D17A1A;
     --tertiary-light: #F5A64A;
@@ -1123,7 +1123,7 @@ section {
 @media (max-width: 768px) {
     .diferenciais-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-sm);
+    gap: var(--spacing-sm);
     }
 }
 
@@ -1879,7 +1879,7 @@ section {
 @media (max-width: 768px) {
     .galeria-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-sm);
+    gap: var(--spacing-sm);
     }
 }
 
@@ -3609,7 +3609,7 @@ section {
     
     .footer-bottom-content {
         flex-direction: column;
-        text-align: center;
+    text-align: center;
     }
 }
 

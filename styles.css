@@ -1345,7 +1345,7 @@ section {
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: 50px;
     box-shadow: var(--shadow-lg);
-    color: var(--primary-color);
+    color: var(--secondary-color); /* Azul Turquesa */
     font-weight: 600;
     font-size: 0.9rem;
 }
@@ -1368,7 +1368,7 @@ section {
 }
 
 .certificado-item i {
-    color: var(--primary-color);
+    color: var(--secondary-color); /* Azul Turquesa */
     font-size: 1.2rem;
 }
 
@@ -1494,7 +1494,7 @@ section {
 .formacao-card:hover {
     transform: translateY(-5px) !important;
     box-shadow: var(--shadow-xl);
-    border-color: var(--primary-color);
+    border-color: var(--secondary-color); /* Azul Turquesa */
 }
 
 .formacao-icon {

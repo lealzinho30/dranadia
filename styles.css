@@ -1550,7 +1550,7 @@ section {
 .feature-icon {
     width: 60px;
     height: 60px;
-    background: var(--gradient-primary);
+    background: var(--gradient-secondary); /* Azul Turquesa */
     border-radius: 15px;
     display: flex;
     align-items: center;

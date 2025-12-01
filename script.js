@@ -99,28 +99,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-// ===== SCROLL ANIMATIONS =====
+// ===== SCROLL ANIMATIONS MELHORADAS =====
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target); // Para de observar após animar
+            entry.target.classList.add('scroll-animate');
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Animar elementos ao scrollar
-const animateElements = document.querySelectorAll('.servico-card, .sobre-item, .porque-card, .info-card, .diferencial-card, .feature-item, .dica-card');
-animateElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+// Animar elementos ao scrollar com classes CSS
+const animateElements = document.querySelectorAll('.servico-card, .sobre-item, .porque-card, .info-card, .diferencial-card, .feature-item, .dica-card, .formacao-card, .galeria-item, .faq-item, .endereco-card');
+animateElements.forEach((el, index) => {
+    el.classList.add('scroll-animate');
+    if (index % 3 === 1) el.classList.add('scroll-animate-delay-1');
+    if (index % 3 === 2) el.classList.add('scroll-animate-delay-2');
     observer.observe(el);
 });
 
@@ -254,48 +253,120 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// ===== FORM SUBMISSION =====
+// ===== FORM SUBMISSION COM FEEDBACK VISUAL =====
 const contactForm = document.getElementById('contactForm');
+const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Coletar dados do formulário
-    const formData = {
-        nome: document.getElementById('nome').value,
-        email: document.getElementById('email').value,
-        telefone: document.getElementById('telefone').value,
-        mensagem: document.getElementById('mensagem').value
-    };
-
-    // Salvar mensagem no localStorage para o painel admin
-    try {
-        const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
-        const newMessage = {
-            id: Date.now(),
-            ...formData,
-            date: new Date().toISOString(),
-            read: false
+if (contactForm && submitButton) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Adicionar estado de loading
+        contactForm.classList.add('form-submitting');
+        submitButton.classList.add('btn-submitting');
+        submitButton.disabled = true;
+        
+        // Coletar dados do formulário
+        const formData = {
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            telefone: document.getElementById('telefone').value,
+            mensagem: document.getElementById('mensagem').value
         };
-        messages.push(newMessage);
-        localStorage.setItem('contact_messages', JSON.stringify(messages));
-    } catch (error) {
-        console.error('Erro ao salvar mensagem:', error);
-    }
 
-    // Criar mensagem para WhatsApp
-    const whatsappMessage = `Olá! Meu nome é ${formData.nome}.\n\nEmail: ${formData.email}\nTelefone: ${formData.telefone}\n\nMensagem: ${formData.mensagem}`;
-    const whatsappURL = `https://wa.me/5511913141625?text=${encodeURIComponent(whatsappMessage)}`;
+        // Simular delay para melhor UX (mostrar feedback)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Salvar mensagem no localStorage para o painel admin
+        try {
+            const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
+            const newMessage = {
+                id: Date.now(),
+                ...formData,
+                date: new Date().toISOString(),
+                read: false
+            };
+            messages.push(newMessage);
+            localStorage.setItem('contact_messages', JSON.stringify(messages));
+        } catch (error) {
+            console.error('Erro ao salvar mensagem:', error);
+        }
+
+        // Criar mensagem para WhatsApp
+        const whatsappMessage = `Olá! Meu nome é ${formData.nome}.\n\nEmail: ${formData.email}\nTelefone: ${formData.telefone}\n\nMensagem: ${formData.mensagem}`;
+        const whatsappURL = `https://wa.me/5511913141625?text=${encodeURIComponent(whatsappMessage)}`;
+        
+        // Remover estado de loading
+        contactForm.classList.remove('form-submitting');
+        submitButton.classList.remove('btn-submitting');
+        submitButton.disabled = false;
+        
+        // Mostrar mensagem de confirmação
+        showFormSuccessMessage(formData.nome);
+        
+        // Limpar formulário
+        contactForm.reset();
+        
+        // Abrir WhatsApp após um breve delay
+        setTimeout(() => {
+            window.open(whatsappURL, '_blank');
+        }, 2000);
+    });
+}
+
+// Função para mostrar mensagem de confirmação
+function showFormSuccessMessage(nome) {
+    // Remover mensagem existente se houver
+    const existingMessage = document.querySelector('.form-success-message');
+    const existingOverlay = document.querySelector('.form-success-overlay');
+    if (existingMessage) existingMessage.remove();
+    if (existingOverlay) existingOverlay.remove();
     
-    // Abrir WhatsApp
-    window.open(whatsappURL, '_blank');
+    // Criar overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'form-success-overlay';
     
-    // Mostrar mensagem de sucesso
-    showNotification('Mensagem enviada! Redirecionando para o WhatsApp...', 'success');
+    // Criar mensagem
+    const message = document.createElement('div');
+    message.className = 'form-success-message';
+    message.innerHTML = `
+        <div class="form-success-message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <h3>Mensagem Enviada!</h3>
+        <p>Olá, <strong>${nome}</strong>! Sua mensagem foi enviada com sucesso.</p>
+        <p>Você será redirecionado para o WhatsApp em instantes...</p>
+        <button class="btn btn-primary" onclick="closeFormSuccessMessage()" style="margin-top: var(--spacing-md);">
+            <i class="fas fa-times"></i>
+            <span>Fechar</span>
+        </button>
+    `;
     
-    // Limpar formulário
-    contactForm.reset();
-});
+    document.body.appendChild(overlay);
+    document.body.appendChild(message);
+    
+    // Fechar automaticamente após 5 segundos
+    setTimeout(() => {
+        closeFormSuccessMessage();
+    }, 5000);
+}
+
+// Função para fechar mensagem de confirmação
+function closeFormSuccessMessage() {
+    const message = document.querySelector('.form-success-message');
+    const overlay = document.querySelector('.form-success-overlay');
+    if (message) {
+        message.style.animation = 'slideInDown 0.3s ease-out reverse';
+        setTimeout(() => message.remove(), 300);
+    }
+    if (overlay) {
+        overlay.style.animation = 'fadeIn 0.3s ease-out reverse';
+        setTimeout(() => overlay.remove(), 300);
+    }
+}
+
+// Tornar função global para uso no onclick
+window.closeFormSuccessMessage = closeFormSuccessMessage;
 
 // ===== NOTIFICATION SYSTEM =====
 function showNotification(message, type = 'info') {
@@ -803,6 +874,47 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && dicaModal.classList.contains('active')) {
         closeDicaModal();
     }
+});
+
+// ===== LOADING SKELETON PARA IMAGENS =====
+document.addEventListener('DOMContentLoaded', () => {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                }
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    lazyImages.forEach(img => {
+        imageObserver.observe(img);
+    });
+});
+
+// ===== MICROINTERAÇÕES NOS BOTÕES (RIPPLE EFFECT) =====
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.btn, button, a.btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Ripple effect já está no CSS via ::before
+            // Adicionar feedback tátil adicional
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
 });
 
 // ===== CONSOLE MESSAGE =====

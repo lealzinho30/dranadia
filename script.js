@@ -605,7 +605,7 @@ const dicasDetalhadas = {
             
             <h4>Benefícios de começar cedo:</h4>
             <ul>
-                <li>Previne o desenvolvimento de cáries e outros problemas</li>
+                <li>Previne o desenvolvimento de cárie e outros problemas</li>
                 <li>Cria hábitos saudáveis desde cedo</li>
                 <li>Estabelece uma relação positiva com o dentista</li>
                 <li>Economiza tempo e dinheiro com tratamentos futuros</li>
@@ -620,7 +620,7 @@ const dicasDetalhadas = {
         imagem: 'images/retrato-de-crianca-segurando-o-icone-de-papel-editado.jpg',
         conteudo: `
             <h4>A importância da escovação correta</h4>
-            <p>A escovação adequada é a base da saúde bucal. Quando feita corretamente desde cedo, previne cáries, gengivite e outros problemas dentários.</p>
+            <p>A escovação adequada é a base da saúde bucal. Quando feita corretamente desde cedo, previne cárie, gengivite e outros problemas dentários.</p>
             
             <h4>Como escolher a escova ideal?</h4>
             <ul>
@@ -654,7 +654,7 @@ const dicasDetalhadas = {
         imagem: 'images/vista-superior-de-uma-variedade-de-vegetais-em-um-saco-de-papel-editado.jpg',
         conteudo: `
             <h4>A relação entre alimentação e saúde bucal</h4>
-            <p>A alimentação tem um papel fundamental na saúde bucal das crianças. Uma dieta equilibrada previne cáries e fortalece os dentes.</p>
+            <p>A alimentação tem um papel fundamental na saúde bucal das crianças. Uma dieta equilibrada previne cárie e fortalece os dentes.</p>
             
             <h4>Alimentos que fazem bem aos dentes:</h4>
             <ul>
@@ -689,29 +689,29 @@ const dicasDetalhadas = {
         imagem: 'images/2025-11-10-editado.webp',
         conteudo: `
             <h4>Flúor: proteção essencial</h4>
-            <p>O flúor é um mineral natural que fortalece o esmalte dos dentes, tornando-os mais resistentes às cáries. É uma das formas mais eficazes de prevenção.</p>
+            <p>O flúor é um mineral natural que fortalece o esmalte dos dentes, tornando-os mais resistentes à cárie. É uma das formas mais eficazes de prevenção.</p>
             
             <h4>Como o flúor funciona?</h4>
             <ul>
                 <li>Fortalece o esmalte dos dentes</li>
-                <li>Repara pequenas lesões antes que se tornem cáries</li>
+                <li>Repara pequenas lesões antes que se tornem cárie</li>
                 <li>Reduz a capacidade das bactérias de produzirem ácidos</li>
                 <li>Pode ser aplicado topicamente ou ingerido (água fluoretada)</li>
             </ul>
             
             <h4>Selantes dentários:</h4>
-            <p>Os selantes são uma camada protetora aplicada nas superfícies de mastigação dos dentes posteriores (molares e pré-molares), onde as cáries são mais comuns.</p>
+            <p>Os selantes são uma camada protetora aplicada nas superfícies de mastigação dos dentes posteriores (molares e pré-molares), onde a cárie é mais comum.</p>
             
             <ul>
                 <li><strong>Quando aplicar:</strong> Assim que os dentes permanentes nascem (geralmente entre 6-12 anos)</li>
                 <li><strong>Duração:</strong> Podem durar até 10 anos com cuidados adequados</li>
-                <li><strong>Benefícios:</strong> Reduzem em até 80% o risco de cáries nas superfícies tratadas</li>
+                <li><strong>Benefícios:</strong> Reduzem em até 80% o risco de cárie nas superfícies tratadas</li>
             </ul>
             
             <h4>Quando usar cada proteção?</h4>
             <ul>
                 <li><strong>Flúor:</strong> Indicado para todas as idades, através de creme dental, água fluoretada ou aplicação profissional</li>
-                <li><strong>Selantes:</strong> Indicados principalmente para crianças com alto risco de cáries ou quando os dentes permanentes nascem</li>
+                <li><strong>Selantes:</strong> Indicados principalmente para crianças com alto risco de cárie ou quando os dentes permanentes nascem</li>
             </ul>
             
             <p><strong>Importante:</strong> Converse com o odontopediatra sobre a melhor estratégia de prevenção para o seu filho. Cada criança tem necessidades específicas!</p>
@@ -768,7 +768,7 @@ const dicasDetalhadas = {
             <h4>Frequência recomendada:</h4>
             <ul>
                 <li><strong>Consulta preventiva:</strong> A cada 6 meses para a maioria das crianças</li>
-                <li><strong>Alto risco de cáries:</strong> A cada 3-4 meses</li>
+                <li><strong>Alto risco de cárie:</strong> A cada 3-4 meses</li>
                 <li><strong>Tratamento em andamento:</strong> Conforme orientação do odontopediatra</li>
             </ul>
             
@@ -783,7 +783,7 @@ const dicasDetalhadas = {
             
             <h4>Benefícios das consultas regulares:</h4>
             <ul>
-                <li>Prevenção de cáries e outros problemas</li>
+                <li>Prevenção de cárie e outros problemas</li>
                 <li>Detecção precoce de problemas ortodônticos</li>
                 <li>Manutenção da saúde bucal</li>
                 <li>Educação contínua para pais e crianças</li>

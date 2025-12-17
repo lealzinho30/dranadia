@@ -115,7 +115,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Animar elementos ao scrollar com classes CSS
-const animateElements = document.querySelectorAll('.servico-card, .sobre-item, .porque-card, .info-card, .diferencial-card, .feature-item, .dica-card, .formacao-card, .galeria-item, .faq-item, .endereco-card');
+const animateElements = document.querySelectorAll('.servico-card, .sobre-item, .porque-card, .info-card, .diferencial-card, .feature-item, .dica-card, .formacao-card, .galeria-item, .endereco-card');
 animateElements.forEach((el, index) => {
     el.classList.add('scroll-animate');
     if (index % 3 === 1) el.classList.add('scroll-animate-delay-1');
@@ -576,27 +576,6 @@ document.querySelectorAll('img').forEach(img => {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.3s ease';
     }
-});
-
-// ===== FAQ ACCORDION =====
-const faqItems = document.querySelectorAll('.faq-item');
-
-faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    
-    question.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        
-        // Fechar todos os outros
-        faqItems.forEach(otherItem => {
-            if (otherItem !== item) {
-                otherItem.classList.remove('active');
-            }
-        });
-        
-        // Toggle do item atual
-        item.classList.toggle('active', !isActive);
-    });
 });
 
 // ===== DICA MODAL =====

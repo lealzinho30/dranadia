@@ -2563,21 +2563,18 @@ section {
     position: relative;
     z-index: 1;
     font-style: italic;
-    overflow: hidden;
 }
 
 .depoimento-texto.truncado {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 7 !important;
-    -webkit-box-orient: vertical !important;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    max-height: calc(1.8em * 7.5);
+    text-overflow: ellipsis;
 }
 
 .depoimento-texto.expandido {
     display: block;
-    -webkit-line-clamp: unset;
 }
 
 .depoimento-ler-mais {

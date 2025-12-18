@@ -562,11 +562,8 @@ function initDepoimentosLerMais() {
     const depoimentosTexto = document.querySelectorAll('.depoimento-texto');
     
     if (depoimentosTexto.length === 0) {
-        console.log('Nenhum depoimento encontrado');
         return;
     }
-    
-    console.log(`Encontrados ${depoimentosTexto.length} depoimentos`);
     
     depoimentosTexto.forEach((texto, index) => {
         // Remover qualquer botão existente
@@ -578,27 +575,22 @@ function initDepoimentosLerMais() {
         // Resetar classes
         texto.classList.remove('truncado', 'expandido');
         
-        // Aguardar um pouco para garantir que o CSS foi aplicado
+        // Aguardar para garantir que o CSS foi aplicado
         setTimeout(() => {
-            // Forçar reflow para medir altura corretamente
+            // Forçar reflow
             void texto.offsetHeight;
             
-            // Medir altura original
+            // Salvar altura original ANTES de truncar
             const alturaOriginal = texto.scrollHeight;
-            const lineHeight = parseFloat(getComputedStyle(texto).lineHeight) || 1.9 * parseFloat(getComputedStyle(texto).fontSize);
-            const alturaMaxima = lineHeight * 7;
             
-            console.log(`Depoimento ${index + 1}: alturaOriginal=${alturaOriginal}, alturaMaxima=${alturaMaxima}`);
+            // Aplicar truncamento temporariamente para medir
+            texto.classList.add('truncado');
+            void texto.offsetHeight;
+            const alturaTruncada = texto.scrollHeight;
             
-            // Se a altura original é maior que 7 linhas, aplicar truncamento
-            if (alturaOriginal > alturaMaxima) {
-                // Aplicar truncamento
-                texto.classList.add('truncado');
-                
-                // Forçar reflow novamente
-                void texto.offsetHeight;
-                
-                // Criar botão "Ler mais"
+            // Se a altura original é maior que a truncada, precisa do botão
+            if (alturaOriginal > alturaTruncada + 20) {
+                // Manter truncado e criar botão
                 const lerMaisBtn = document.createElement('span');
                 lerMaisBtn.className = 'depoimento-ler-mais';
                 lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
@@ -616,14 +608,6 @@ function initDepoimentosLerMais() {
                         texto.classList.add('truncado');
                         lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
                         lerMaisBtn.classList.remove('expandido');
-                        
-                        // Scroll suave para o card
-                        setTimeout(() => {
-                            texto.closest('.depoimento-card').scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'nearest' 
-                            });
-                        }, 100);
                     } else {
                         // Expandir
                         texto.classList.remove('truncado');
@@ -633,26 +617,27 @@ function initDepoimentosLerMais() {
                     }
                 });
                 
-                // Inserir o botão após o texto
-                texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
-                console.log(`Botão "Ler mais" adicionado ao depoimento ${index + 1}`);
+                // Inserir o botão logo após o texto
+                texto.insertAdjacentElement('afterend', lerMaisBtn);
+            } else {
+                // Não precisa truncar, remover classe
+                texto.classList.remove('truncado');
             }
-        }, index * 100); // Delay escalonado para cada card
+        }, index * 150);
     });
 }
 
 // Executar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM carregado, inicializando depoimentos...');
-    // Executar após um delay para garantir que tudo foi renderizado
-    setTimeout(initDepoimentosLerMais, 300);
-    
-    // Executar novamente após um delay maior
-    setTimeout(initDepoimentosLerMais, 800);
-    
-    // Executar uma última vez após um delay ainda maior
-    setTimeout(initDepoimentosLerMais, 1500);
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initDepoimentosLerMais, 500);
+        setTimeout(initDepoimentosLerMais, 1000);
+    });
+} else {
+    // DOM já carregado
+    setTimeout(initDepoimentosLerMais, 100);
+    setTimeout(initDepoimentosLerMais, 500);
+}
 
 // ===== LOADING SKELETON PARA IMAGENS =====
 document.addEventListener('DOMContentLoaded', () => {

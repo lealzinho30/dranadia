@@ -2633,21 +2633,24 @@ section {
 }
 
 .depoimento-ler-mais {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
-    margin-top: var(--spacing-sm);
-    color: var(--primary-color);
+    margin-top: var(--spacing-md) !important;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color) !important;
     font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
     font-style: normal;
-    padding: 0.5rem 1rem;
-    background: rgba(45, 167, 186, 0.08);
-    border-radius: 20px;
+    padding: 0.6rem 1.2rem;
+    background: rgba(45, 167, 186, 0.12);
+    border-radius: 25px;
     position: relative;
-    z-index: 2;
+    z-index: 10;
+    border: 2px solid rgba(45, 167, 186, 0.2);
+    width: fit-content;
 }
 
 .depoimento-ler-mais:hover {

@@ -557,6 +557,63 @@ document.querySelectorAll('img').forEach(img => {
 });
 
 
+// ===== DEPOIMENTOS - LER MAIS =====
+document.addEventListener('DOMContentLoaded', () => {
+    const depoimentosTexto = document.querySelectorAll('.depoimento-texto');
+    
+    depoimentosTexto.forEach(texto => {
+        // Calcular altura de 7 linhas
+        const lineHeight = parseFloat(getComputedStyle(texto).lineHeight);
+        const fontSize = parseFloat(getComputedStyle(texto).fontSize);
+        const maxHeight = lineHeight * 7;
+        
+        // Verificar altura real do texto
+        const actualHeight = texto.scrollHeight;
+        
+        // Se o texto tem mais de 7 linhas, adicionar funcionalidade de truncar
+        if (actualHeight > maxHeight + 5) { // +5 para margem de erro
+            // Adicionar classe truncado
+            texto.classList.add('truncado');
+            
+            // Criar botão "Ler mais"
+            const lerMaisBtn = document.createElement('span');
+            lerMaisBtn.className = 'depoimento-ler-mais';
+            lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+            
+            // Adicionar evento de clique
+            lerMaisBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isExpanded = texto.classList.contains('expandido');
+                
+                if (isExpanded) {
+                    // Colapsar
+                    texto.classList.remove('expandido');
+                    texto.classList.add('truncado');
+                    lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                    lerMaisBtn.classList.remove('expandido');
+                    
+                    // Scroll suave para o topo do card
+                    texto.closest('.depoimento-card').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
+                } else {
+                    // Expandir
+                    texto.classList.remove('truncado');
+                    texto.classList.add('expandido');
+                    lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
+                    lerMaisBtn.classList.add('expandido');
+                }
+            });
+            
+            // Inserir o botão após o texto
+            texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
+        }
+    });
+});
+
 // ===== LOADING SKELETON PARA IMAGENS =====
 document.addEventListener('DOMContentLoaded', () => {
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');

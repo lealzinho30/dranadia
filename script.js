@@ -561,6 +561,13 @@ document.querySelectorAll('img').forEach(img => {
 function initDepoimentosLerMais() {
     const depoimentosTexto = document.querySelectorAll('.depoimento-texto');
     
+    if (depoimentosTexto.length === 0) {
+        console.log('Nenhum depoimento encontrado');
+        return;
+    }
+    
+    console.log(`Encontrados ${depoimentosTexto.length} depoimentos`);
+    
     depoimentosTexto.forEach((texto, index) => {
         // Remover qualquer botão existente
         const btnExistente = texto.parentNode.querySelector('.depoimento-ler-mais');
@@ -578,8 +585,10 @@ function initDepoimentosLerMais() {
             
             // Medir altura original
             const alturaOriginal = texto.scrollHeight;
-            const lineHeight = parseFloat(getComputedStyle(texto).lineHeight);
+            const lineHeight = parseFloat(getComputedStyle(texto).lineHeight) || 1.9 * parseFloat(getComputedStyle(texto).fontSize);
             const alturaMaxima = lineHeight * 7;
+            
+            console.log(`Depoimento ${index + 1}: alturaOriginal=${alturaOriginal}, alturaMaxima=${alturaMaxima}`);
             
             // Se a altura original é maior que 7 linhas, aplicar truncamento
             if (alturaOriginal > alturaMaxima) {
@@ -589,61 +598,60 @@ function initDepoimentosLerMais() {
                 // Forçar reflow novamente
                 void texto.offsetHeight;
                 
-                // Verificar se realmente foi truncado
-                const alturaAposTruncar = texto.scrollHeight;
+                // Criar botão "Ler mais"
+                const lerMaisBtn = document.createElement('span');
+                lerMaisBtn.className = 'depoimento-ler-mais';
+                lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
                 
-                // Sempre adicionar botão se o texto for longo
-                if (alturaOriginal > alturaMaxima) {
-                    // Criar botão "Ler mais"
-                    const lerMaisBtn = document.createElement('span');
-                    lerMaisBtn.className = 'depoimento-ler-mais';
-                    lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                // Adicionar evento de clique
+                lerMaisBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     
-                    // Adicionar evento de clique
-                    lerMaisBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        const isExpanded = texto.classList.contains('expandido');
-                        
-                        if (isExpanded) {
-                            // Colapsar
-                            texto.classList.remove('expandido');
-                            texto.classList.add('truncado');
-                            lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
-                            lerMaisBtn.classList.remove('expandido');
-                            
-                            // Scroll suave para o card
-                            setTimeout(() => {
-                                texto.closest('.depoimento-card').scrollIntoView({ 
-                                    behavior: 'smooth', 
-                                    block: 'nearest' 
-                                });
-                            }, 100);
-                        } else {
-                            // Expandir
-                            texto.classList.remove('truncado');
-                            texto.classList.add('expandido');
-                            lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
-                            lerMaisBtn.classList.add('expandido');
-                        }
-                    });
+                    const isExpanded = texto.classList.contains('expandido');
                     
-                    // Inserir o botão após o texto
-                    texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
-                }
+                    if (isExpanded) {
+                        // Colapsar
+                        texto.classList.remove('expandido');
+                        texto.classList.add('truncado');
+                        lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                        lerMaisBtn.classList.remove('expandido');
+                        
+                        // Scroll suave para o card
+                        setTimeout(() => {
+                            texto.closest('.depoimento-card').scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'nearest' 
+                            });
+                        }, 100);
+                    } else {
+                        // Expandir
+                        texto.classList.remove('truncado');
+                        texto.classList.add('expandido');
+                        lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
+                        lerMaisBtn.classList.add('expandido');
+                    }
+                });
+                
+                // Inserir o botão após o texto
+                texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
+                console.log(`Botão "Ler mais" adicionado ao depoimento ${index + 1}`);
             }
-        }, index * 50); // Delay escalonado para cada card
+        }, index * 100); // Delay escalonado para cada card
     });
 }
 
 // Executar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM carregado, inicializando depoimentos...');
     // Executar após um delay para garantir que tudo foi renderizado
-    setTimeout(initDepoimentosLerMais, 200);
+    setTimeout(initDepoimentosLerMais, 300);
     
     // Executar novamente após um delay maior
-    setTimeout(initDepoimentosLerMais, 500);
+    setTimeout(initDepoimentosLerMais, 800);
+    
+    // Executar uma última vez após um delay ainda maior
+    setTimeout(initDepoimentosLerMais, 1500);
 });
 
 // ===== LOADING SKELETON PARA IMAGENS =====

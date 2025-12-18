@@ -558,60 +558,80 @@ document.querySelectorAll('img').forEach(img => {
 
 
 // ===== DEPOIMENTOS - LER MAIS =====
-document.addEventListener('DOMContentLoaded', () => {
+function initDepoimentosLerMais() {
     const depoimentosTexto = document.querySelectorAll('.depoimento-texto');
     
     depoimentosTexto.forEach(texto => {
-        // Calcular altura de 7 linhas
+        // Remover qualquer botão existente
+        const btnExistente = texto.parentNode.querySelector('.depoimento-ler-mais');
+        if (btnExistente) {
+            btnExistente.remove();
+        }
+        
+        // Resetar classes
+        texto.classList.remove('truncado', 'expandido');
+        
+        // Forçar reflow para medir altura corretamente
+        void texto.offsetHeight;
+        
+        // Medir altura original
+        const alturaOriginal = texto.scrollHeight;
         const lineHeight = parseFloat(getComputedStyle(texto).lineHeight);
-        const fontSize = parseFloat(getComputedStyle(texto).fontSize);
-        const maxHeight = lineHeight * 7;
+        const alturaMaxima = lineHeight * 7;
         
-        // Verificar altura real do texto
-        const actualHeight = texto.scrollHeight;
-        
-        // Se o texto tem mais de 7 linhas, adicionar funcionalidade de truncar
-        if (actualHeight > maxHeight + 5) { // +5 para margem de erro
-            // Adicionar classe truncado
+        // Se a altura original é maior que 7 linhas, aplicar truncamento
+        if (alturaOriginal > alturaMaxima) {
+            // Aplicar truncamento
             texto.classList.add('truncado');
             
-            // Criar botão "Ler mais"
-            const lerMaisBtn = document.createElement('span');
-            lerMaisBtn.className = 'depoimento-ler-mais';
-            lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+            // Forçar reflow novamente
+            void texto.offsetHeight;
             
-            // Adicionar evento de clique
-            lerMaisBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+            // Verificar se realmente foi truncado
+            const alturaAposTruncar = texto.scrollHeight;
+            
+            if (alturaAposTruncar < alturaOriginal - 5) {
+                // Criar botão "Ler mais"
+                const lerMaisBtn = document.createElement('span');
+                lerMaisBtn.className = 'depoimento-ler-mais';
+                lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
                 
-                const isExpanded = texto.classList.contains('expandido');
-                
-                if (isExpanded) {
-                    // Colapsar
-                    texto.classList.remove('expandido');
-                    texto.classList.add('truncado');
-                    lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
-                    lerMaisBtn.classList.remove('expandido');
+                // Adicionar evento de clique
+                lerMaisBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     
-                    // Scroll suave para o topo do card
-                    texto.closest('.depoimento-card').scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'nearest' 
-                    });
-                } else {
-                    // Expandir
-                    texto.classList.remove('truncado');
-                    texto.classList.add('expandido');
-                    lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
-                    lerMaisBtn.classList.add('expandido');
-                }
-            });
-            
-            // Inserir o botão após o texto
-            texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
+                    const isExpanded = texto.classList.contains('expandido');
+                    
+                    if (isExpanded) {
+                        // Colapsar
+                        texto.classList.remove('expandido');
+                        texto.classList.add('truncado');
+                        lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                        lerMaisBtn.classList.remove('expandido');
+                    } else {
+                        // Expandir
+                        texto.classList.remove('truncado');
+                        texto.classList.add('expandido');
+                        lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
+                        lerMaisBtn.classList.add('expandido');
+                    }
+                });
+                
+                // Inserir o botão após o texto
+                texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
+            }
         }
     });
+}
+
+// Executar quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    // Executar imediatamente
+    initDepoimentosLerMais();
+    
+    // Executar novamente após um pequeno delay para garantir que o CSS foi aplicado
+    setTimeout(initDepoimentosLerMais, 100);
 });
 
 // ===== LOADING SKELETON PARA IMAGENS =====

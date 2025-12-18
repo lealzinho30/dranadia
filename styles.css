@@ -2564,22 +2564,24 @@ section {
     z-index: 1;
     font-style: italic;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: all 0.4s ease;
+    display: block;
 }
 
 .depoimento-texto.truncado {
-    max-height: calc(1.8em * 7); /* 7 linhas baseado no line-height */
     display: -webkit-box;
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
+    max-height: calc(1.8em * 7.5); /* 7 linhas + margem */
 }
 
 .depoimento-texto.expandido {
-    max-height: 5000px !important; /* Valor alto para permitir expansão completa */
-    display: block;
-    -webkit-line-clamp: unset;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    max-height: none !important;
+    overflow: visible;
 }
 
 .depoimento-ler-mais {

@@ -598,6 +598,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// ===== DEPOIMENTOS - LER MAIS =====
+function initDepoimentosLerMais() {
+    const depoimentosTexto = document.querySelectorAll('.depoimento-texto');
+    
+    depoimentosTexto.forEach((texto) => {
+        // Remover botão existente se houver
+        const btnExistente = texto.parentNode.querySelector('.depoimento-ler-mais');
+        if (btnExistente) {
+            btnExistente.remove();
+        }
+        
+        // Resetar classes
+        texto.classList.remove('truncado', 'expandido');
+        
+        // Aguardar um pouco para garantir renderização
+        setTimeout(() => {
+            // Medir altura original
+            const alturaOriginal = texto.scrollHeight;
+            const lineHeight = parseFloat(getComputedStyle(texto).lineHeight) || 1.8 * parseFloat(getComputedStyle(texto).fontSize);
+            const alturaMaxima = lineHeight * 7;
+            
+            // Se o texto tem mais de 7 linhas
+            if (alturaOriginal > alturaMaxima) {
+                // Aplicar truncamento
+                texto.classList.add('truncado');
+                
+                // Criar botão "Ler mais"
+                const lerMaisBtn = document.createElement('span');
+                lerMaisBtn.className = 'depoimento-ler-mais';
+                lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                
+                // Adicionar evento de clique
+                lerMaisBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isExpanded = texto.classList.contains('expandido');
+                    
+                    if (isExpanded) {
+                        // Colapsar
+                        texto.classList.remove('expandido');
+                        texto.classList.add('truncado');
+                        lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                        lerMaisBtn.classList.remove('expandido');
+                    } else {
+                        // Expandir
+                        texto.classList.remove('truncado');
+                        texto.classList.add('expandido');
+                        lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
+                        lerMaisBtn.classList.add('expandido');
+                    }
+                });
+                
+                // Inserir botão após o texto
+                texto.insertAdjacentElement('afterend', lerMaisBtn);
+            }
+        }, 100);
+    });
+}
+
+// Executar quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initDepoimentosLerMais, 300);
+    setTimeout(initDepoimentosLerMais, 800);
+});
+
 // ===== CONSOLE MESSAGE =====
 console.log('%c👋 Olá! Bem-vindo ao site da Dra. Nadia!', 'color: #00B4A6; font-size: 20px; font-weight: bold;');
 console.log('%cSite desenvolvido com carinho para cuidar do sorriso das crianças! 😊', 'color: #FF6B9D; font-size: 14px;');

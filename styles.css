@@ -2563,6 +2563,47 @@ section {
     position: relative;
     z-index: 1;
     font-style: italic;
+    overflow: hidden;
+}
+
+.depoimento-texto.truncado {
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.depoimento-texto.expandido {
+    display: block;
+    -webkit-line-clamp: unset;
+}
+
+.depoimento-ler-mais {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    font-style: normal;
+}
+
+.depoimento-ler-mais:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.depoimento-ler-mais i {
+    margin-left: 0.3rem;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.depoimento-ler-mais.expandido i {
+    transform: rotate(180deg);
 }
 
 .depoimento-autor {

@@ -54,7 +54,7 @@
                         <li><a href="#inicio" class="nav-link">Início</a></li>
                         <li><a href="#sobre" class="nav-link">Sobre</a></li>
                         <li><a href="#galeria" class="nav-link">Galeria</a></li>
-                        <li><a href="#dicas" class="nav-link">Dicas</a></li>
+                        <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
                         <li><a href="#como-chegar" class="nav-link">Como Chegar</a></li>
                         <li><a href="#contato" class="nav-link">Contato</a></li>
                     </ul>
@@ -322,129 +322,85 @@
         <img src="" alt="" class="lightbox-img" id="lightboxImg">
     </div>
 
-    <!-- Modal Dica Detalhada -->
-    <div class="dica-modal" id="dicaModal">
-        <div class="dica-modal-overlay" id="dicaModalOverlay"></div>
-        <div class="dica-modal-content">
-            <button class="dica-modal-close" id="dicaModalClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="dica-modal-body" id="dicaModalBody">
-                <!-- Conteúdo será inserido via JavaScript -->
-            </div>
-        </div>
-    </div>
 
-    <!-- Dicas e Educação Section -->
-    <section class="dicas" id="dicas">
+    <!-- Depoimentos Section -->
+    <section class="depoimentos" id="depoimentos">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Dicas e Educação</span>
-                <h2 class="section-title">Cuidados com a Saúde Bucal Infantil</h2>
+                <span class="section-tag">Depoimentos</span>
+                <h2 class="section-title">O que nossos pacientes dizem</h2>
                 <p class="section-description">
-                    Informações importantes para cuidar do sorriso do seu filho desde cedo
+                    Avaliações reais de famílias que confiam no nosso atendimento
                 </p>
             </div>
-            <div class="dicas-grid">
-                <div class="dica-card" data-dica="primeira-consulta">
-                    <div class="dica-image">
-                        <img src="images/dentista-examinando-condicao-dos-dentes-pequeno-paciente-editado.jpg" alt="Primeira consulta odontopediátrica - criança no dentista" loading="lazy" decoding="async">
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <div class="depoimento-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="dica-icon">
-                        <i class="fas fa-baby"></i>
-                    </div>
-                    <h3>Primeira Consulta</h3>
-                    <p>
-                        A primeira consulta deve acontecer quando o primeiro dente nasce ou até 
-                        o primeiro aniversário. Quanto mais cedo, melhor para prevenir problemas futuros.
+                    <p class="depoimento-texto">
+                        Dra. Nádia e equipe super atenciosas. Um capricho e cuidado com cada detalhe. Amamos!
                     </p>
-                    <div class="dica-tag">Importante</div>
-                    <button class="dica-btn">Ler Mais</button>
+                    <div class="depoimento-autor">
+                        <strong>Danielle Pacheco de Souza</strong>
+                        <span style="display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem;">3 meses atrás</span>
+                    </div>
                 </div>
-                <div class="dica-card" data-dica="escovacao">
-                    <div class="dica-image">
-                        <img src="images/retrato-de-crianca-segurando-o-icone-de-papel-editado.jpg" alt="Criança escovando os dentes corretamente" loading="lazy" decoding="async">
+                <div class="depoimento-card">
+                    <div class="depoimento-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="dica-icon">
-                        <i class="fas fa-toothbrush"></i>
-                    </div>
-                    <h3>Escovação Correta</h3>
-                    <p>
-                        Use escova macia e creme dental com flúor (quantidade equivalente a um grão de arroz 
-                        para crianças até 3 anos). Escove pelo menos 2 vezes ao dia.
+                    <p class="depoimento-texto">
+                        A Dra Nádia acompanha meu filho tem muitos anos, ela é uma profissional fora da curva, e extremamente humanizada. Indico demais a equipe, elas são maravilhosas. O consultório é lindo e com uma boa estrutura. Nota 10/10
                     </p>
-                    <div class="dica-tag">Higiene</div>
-                    <button class="dica-btn">Ler Mais</button>
+                    <div class="depoimento-autor">
+                        <strong>Ana Cristina Pereira Wandeur</strong>
+                        <span style="display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem;">9 meses atrás</span>
+                    </div>
                 </div>
-                <div class="dica-card" data-dica="alimentacao">
-                    <div class="dica-image">
-                        <img src="images/vista-superior-de-uma-variedade-de-vegetais-em-um-saco-de-papel-editado.jpg" alt="Alimentação saudável para crianças - frutas e legumes" loading="lazy" decoding="async">
+                <div class="depoimento-card">
+                    <div class="depoimento-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="dica-icon">
-                        <i class="fas fa-candy-cane"></i>
-                    </div>
-                    <h3>Alimentação Saudável</h3>
-                    <p>
-                        Evite açúcares em excesso, especialmente antes de dormir. Prefira frutas, 
-                        legumes e alimentos naturais. A água é a melhor bebida para os dentes.
+                    <p class="depoimento-texto">
+                        A melhor Odontopediatra é a doutora Nádia! Digo isso sem medo de errar, pois passei com meu filho em vários dentistas e ele não deixava nenhum mexer na boca dele. Ela com muita empatia, muita paciência e com carinho, nos orientando a cada consulta, meu filho conseguiu terminar o tratamento. A doutora atendeu meus 3 filhos, sempre com um sorriso no rosto e em um ambiente acolhedor e lúdico. Eu super recomendo! Muita gratidão a doutora Nádia e sua equipe
                     </p>
-                    <div class="dica-tag">Prevenção</div>
-                    <button class="dica-btn">Ler Mais</button>
+                    <div class="depoimento-autor">
+                        <strong>Gisele Dantas</strong>
+                        <span style="display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem;">1 ano atrás</span>
+                    </div>
                 </div>
-                <div class="dica-card dica-hidden" data-dica="fluor">
-                    <div class="dica-image">
-                        <img src="https://images.unsplash.com/photo-1606811971618-4486c8054375?w=400&h=300&fit=crop&q=80" alt="Aplicação de flúor e selantes dentários em crianças" loading="lazy" decoding="async">
+                <div class="depoimento-card">
+                    <div class="depoimento-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="dica-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Flúor e Selantes</h3>
-                    <p>
-                        A aplicação de flúor e selantes dentários são importantes para prevenir cárie. 
-                        Converse com o odontopediatra sobre a melhor opção para seu filho.
+                    <p class="depoimento-texto">
+                        Meu filho Artur é paciente da Dra. Nadia há vários anos, e não poderia estar mais satisfeito com o cuidado e atenção que ele sempre recebe. Desde o primeiro atendimento, ela conquistou a confiança dele com sua paciência, carinho e uma abordagem sempre tranquila. Cada consulta é feita com profissionalismo e dedicação, e o Artur sempre sai de lá feliz e confiante. Se você está buscando uma odontopediatra de confiança para cuidar do sorriso dos seus filhos a longo prazo, recomendo a Dra. Nadia de olhos fechados!
                     </p>
-                    <div class="dica-tag">Proteção</div>
-                    <button class="dica-btn">Ler Mais</button>
-                </div>
-                <div class="dica-card dica-hidden" data-dica="traumatismo">
-                    <div class="dica-image">
-                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=400&h=300&fit=crop&q=80" alt="Atendimento de emergência - traumatismo dental infantil" loading="lazy" decoding="async">
+                    <div class="depoimento-autor">
+                        <strong>Alex Ramalho</strong>
+                        <span style="display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem;">1 ano atrás</span>
                     </div>
-                    <div class="dica-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h3>Traumatismo Dental</h3>
-                    <p>
-                        Em caso de queda ou batida nos dentes, procure atendimento imediato. 
-                        Guarde o dente em leite ou soro fisiológico e vá ao dentista rapidamente.
-                    </p>
-                    <div class="dica-tag">Emergência</div>
-                    <button class="dica-btn">Ler Mais</button>
-                </div>
-                <div class="dica-card dica-hidden" data-dica="consultas">
-                    <div class="dica-image">
-                        <img src="https://images.unsplash.com/photo-1606811971618-4486c8054375?w=400&h=300&fit=crop&q=80" alt="Consultas regulares ao odontopediatra" loading="lazy" decoding="async">
-                    </div>
-                    <div class="dica-icon">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <h3>Consultas Regulares</h3>
-                    <p>
-                        Visitas periódicas ao odontopediatra (a cada 6 meses) são essenciais para 
-                        prevenir problemas e manter a saúde bucal em dia.
-                    </p>
-                    <div class="dica-tag">Rotina</div>
-                    <button class="dica-btn">Ler Mais</button>
                 </div>
             </div>
-            <div class="dicas-more-container">
-                <button class="btn btn-secondary" id="dicasLerMais">
-                    <i class="fas fa-chevron-down"></i>
-                    <span>Ver Mais Dicas</span>
-                </button>
-            </div>
-            <div class="dicas-cta" style="text-align: center; margin-top: var(--spacing-lg);">
-                <a href="#formulario-contato" class="btn btn-primary btn-cta-dicas">
+            <div style="text-align: center; margin-top: var(--spacing-xl);">
+                <a href="#formulario-contato" class="btn btn-primary">
                     <i class="fas fa-calendar-check"></i>
                     <span>Agendar Consulta</span>
                 </a>
@@ -621,7 +577,7 @@
                         <li><a href="#inicio"><i class="fas fa-chevron-right"></i> Início</a></li>
                         <li><a href="#sobre"><i class="fas fa-chevron-right"></i> Sobre</a></li>
                         <li><a href="#galeria"><i class="fas fa-chevron-right"></i> Galeria</a></li>
-                        <li><a href="#dicas"><i class="fas fa-chevron-right"></i> Dicas</a></li>
+                        <li><a href="#depoimentos"><i class="fas fa-chevron-right"></i> Depoimentos</a></li>
                         <li><a href="#contato"><i class="fas fa-chevron-right"></i> Contato</a></li>
                     </ul>
                 </div>

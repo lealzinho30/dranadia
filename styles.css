@@ -2567,11 +2567,12 @@ section {
 }
 
 .depoimento-texto.truncado {
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 7 !important;
+    -webkit-box-orient: vertical !important;
     text-overflow: ellipsis;
     overflow: hidden;
+    max-height: calc(1.8em * 7.5);
 }
 
 .depoimento-texto.expandido {

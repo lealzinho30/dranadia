@@ -602,29 +602,34 @@ document.addEventListener('DOMContentLoaded', () => {
 function initDepoimentosLerMais() {
     const depoimentosTexto = document.querySelectorAll('.depoimento-texto');
     
-    depoimentosTexto.forEach((texto) => {
+    if (depoimentosTexto.length === 0) return;
+    
+    depoimentosTexto.forEach((texto, index) => {
         // Remover botão existente se houver
-        const btnExistente = texto.parentNode.querySelector('.depoimento-ler-mais');
-        if (btnExistente) {
+        const btnExistente = texto.nextElementSibling;
+        if (btnExistente && btnExistente.classList.contains('depoimento-ler-mais')) {
             btnExistente.remove();
         }
         
         // Resetar classes
         texto.classList.remove('truncado', 'expandido');
         
-        // Aguardar um pouco para garantir renderização
+        // Aguardar para garantir renderização completa
         setTimeout(() => {
-            // Medir altura original
-            const alturaOriginal = texto.scrollHeight;
-            const lineHeight = parseFloat(getComputedStyle(texto).lineHeight) || 1.8 * parseFloat(getComputedStyle(texto).fontSize);
-            const alturaMaxima = lineHeight * 7;
+            // Forçar reflow
+            void texto.offsetHeight;
             
-            // Se o texto tem mais de 7 linhas
-            if (alturaOriginal > alturaMaxima) {
-                // Aplicar truncamento
-                texto.classList.add('truncado');
-                
-                // Criar botão "Ler mais"
+            // Salvar altura original ANTES de truncar
+            const alturaOriginal = texto.scrollHeight;
+            
+            // Aplicar truncamento temporariamente
+            texto.classList.add('truncado');
+            void texto.offsetHeight;
+            const alturaTruncada = texto.scrollHeight;
+            
+            // Se há diferença significativa, precisa do botão
+            if (alturaOriginal > alturaTruncada + 10) {
+                // Manter truncado e criar botão
                 const lerMaisBtn = document.createElement('span');
                 lerMaisBtn.className = 'depoimento-ler-mais';
                 lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
@@ -651,18 +656,27 @@ function initDepoimentosLerMais() {
                     }
                 });
                 
-                // Inserir botão após o texto
+                // Inserir botão logo após o texto
                 texto.insertAdjacentElement('afterend', lerMaisBtn);
+            } else {
+                // Não precisa truncar
+                texto.classList.remove('truncado');
             }
-        }, 100);
+        }, index * 150 + 200);
     });
 }
 
 // Executar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initDepoimentosLerMais, 300);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initDepoimentosLerMais, 500);
+        setTimeout(initDepoimentosLerMais, 1200);
+    });
+} else {
+    // DOM já carregado
+    setTimeout(initDepoimentosLerMais, 200);
     setTimeout(initDepoimentosLerMais, 800);
-});
+}
 
 // ===== CONSOLE MESSAGE =====
 console.log('%c👋 Olá! Bem-vindo ao site da Dra. Nadia!', 'color: #00B4A6; font-size: 20px; font-weight: bold;');

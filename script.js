@@ -561,7 +561,7 @@ document.querySelectorAll('img').forEach(img => {
 function initDepoimentosLerMais() {
     const depoimentosTexto = document.querySelectorAll('.depoimento-texto');
     
-    depoimentosTexto.forEach(texto => {
+    depoimentosTexto.forEach((texto, index) => {
         // Remover qualquer botão existente
         const btnExistente = texto.parentNode.querySelector('.depoimento-ler-mais');
         if (btnExistente) {
@@ -571,67 +571,79 @@ function initDepoimentosLerMais() {
         // Resetar classes
         texto.classList.remove('truncado', 'expandido');
         
-        // Forçar reflow para medir altura corretamente
-        void texto.offsetHeight;
-        
-        // Medir altura original
-        const alturaOriginal = texto.scrollHeight;
-        const lineHeight = parseFloat(getComputedStyle(texto).lineHeight);
-        const alturaMaxima = lineHeight * 7;
-        
-        // Se a altura original é maior que 7 linhas, aplicar truncamento
-        if (alturaOriginal > alturaMaxima) {
-            // Aplicar truncamento
-            texto.classList.add('truncado');
-            
-            // Forçar reflow novamente
+        // Aguardar um pouco para garantir que o CSS foi aplicado
+        setTimeout(() => {
+            // Forçar reflow para medir altura corretamente
             void texto.offsetHeight;
             
-            // Verificar se realmente foi truncado
-            const alturaAposTruncar = texto.scrollHeight;
+            // Medir altura original
+            const alturaOriginal = texto.scrollHeight;
+            const lineHeight = parseFloat(getComputedStyle(texto).lineHeight);
+            const alturaMaxima = lineHeight * 7;
             
-            if (alturaAposTruncar < alturaOriginal - 5) {
-                // Criar botão "Ler mais"
-                const lerMaisBtn = document.createElement('span');
-                lerMaisBtn.className = 'depoimento-ler-mais';
-                lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+            // Se a altura original é maior que 7 linhas, aplicar truncamento
+            if (alturaOriginal > alturaMaxima) {
+                // Aplicar truncamento
+                texto.classList.add('truncado');
                 
-                // Adicionar evento de clique
-                lerMaisBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const isExpanded = texto.classList.contains('expandido');
-                    
-                    if (isExpanded) {
-                        // Colapsar
-                        texto.classList.remove('expandido');
-                        texto.classList.add('truncado');
-                        lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
-                        lerMaisBtn.classList.remove('expandido');
-                    } else {
-                        // Expandir
-                        texto.classList.remove('truncado');
-                        texto.classList.add('expandido');
-                        lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
-                        lerMaisBtn.classList.add('expandido');
-                    }
-                });
+                // Forçar reflow novamente
+                void texto.offsetHeight;
                 
-                // Inserir o botão após o texto
-                texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
+                // Verificar se realmente foi truncado
+                const alturaAposTruncar = texto.scrollHeight;
+                
+                // Sempre adicionar botão se o texto for longo
+                if (alturaOriginal > alturaMaxima) {
+                    // Criar botão "Ler mais"
+                    const lerMaisBtn = document.createElement('span');
+                    lerMaisBtn.className = 'depoimento-ler-mais';
+                    lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                    
+                    // Adicionar evento de clique
+                    lerMaisBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const isExpanded = texto.classList.contains('expandido');
+                        
+                        if (isExpanded) {
+                            // Colapsar
+                            texto.classList.remove('expandido');
+                            texto.classList.add('truncado');
+                            lerMaisBtn.innerHTML = 'Ler mais <i class="fas fa-chevron-down"></i>';
+                            lerMaisBtn.classList.remove('expandido');
+                            
+                            // Scroll suave para o card
+                            setTimeout(() => {
+                                texto.closest('.depoimento-card').scrollIntoView({ 
+                                    behavior: 'smooth', 
+                                    block: 'nearest' 
+                                });
+                            }, 100);
+                        } else {
+                            // Expandir
+                            texto.classList.remove('truncado');
+                            texto.classList.add('expandido');
+                            lerMaisBtn.innerHTML = 'Ler menos <i class="fas fa-chevron-up"></i>';
+                            lerMaisBtn.classList.add('expandido');
+                        }
+                    });
+                    
+                    // Inserir o botão após o texto
+                    texto.parentNode.insertBefore(lerMaisBtn, texto.nextSibling);
+                }
             }
-        }
+        }, index * 50); // Delay escalonado para cada card
     });
 }
 
 // Executar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-    // Executar imediatamente
-    initDepoimentosLerMais();
+    // Executar após um delay para garantir que tudo foi renderizado
+    setTimeout(initDepoimentosLerMais, 200);
     
-    // Executar novamente após um pequeno delay para garantir que o CSS foi aplicado
-    setTimeout(initDepoimentosLerMais, 100);
+    // Executar novamente após um delay maior
+    setTimeout(initDepoimentosLerMais, 500);
 });
 
 // ===== LOADING SKELETON PARA IMAGENS =====

@@ -2641,8 +2641,19 @@ section {
 
 /* ===== DEPOIMENTOS SECTION ===== */
 .depoimentos {
-    background: var(--white);
+    background: var(--accent-color);
     padding: var(--spacing-xl) 0;
+}
+
+.depoimentos .section-tag,
+.depoimentos .section-title,
+.depoimentos .section-description {
+    color: var(--white) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.depoimentos .section-title {
+    color: var(--white) !important;
 }
 
 .depoimentos-grid {

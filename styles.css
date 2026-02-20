@@ -854,6 +854,10 @@ section {
 .star-face-3 { bottom: 28%; right: 18%; animation-delay: 1.2s; }
 .star-face-4 { bottom: 22%; left: 8%; animation-delay: 0.3s; }
 .star-face-5 { top: 35%; right: 5%; animation-delay: 0.9s; }
+.star-face-6 { top: 55%; left: 5%; animation-delay: 0.4s; }
+.star-face-7 { bottom: 8%; right: 28%; animation-delay: 1s; }
+.star-face-8 { top: 22%; right: 35%; animation-delay: 0.2s; }
+.star-face-9 { bottom: 38%; left: 25%; animation-delay: 0.7s; }
 @keyframes starFaceFloat {
     0%, 100% { transform: translateY(0) rotate(-5deg); }
     50% { transform: translateY(-12px) rotate(5deg); }
@@ -862,6 +866,10 @@ section {
 @media (max-width: 768px) {
     .hero-sky .cloud { opacity: 0.85; }
     .hero-sky .star-face { width: 28px; height: 28px; }
+    .hero-sky .star-face-6,
+    .hero-sky .star-face-7,
+    .hero-sky .star-face-8,
+    .hero-sky .star-face-9 { display: none; }
 }
 @media (max-width: 480px) {
     .hero-sky .cloud-2 { display: none; }

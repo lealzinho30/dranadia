@@ -738,8 +738,8 @@ section {
 .decoration-heart {
     position: absolute;
     font-size: 2rem;
-    animation: floatDecoration 2s ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    animation: floatDecoration 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 2px 6px rgba(241, 144, 34, 0.25));
 }
 
 .star-1 {
@@ -762,10 +762,10 @@ section {
 
 @keyframes floatDecoration {
     0%, 100% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0) rotate(0deg) scale(1);
     }
     50% {
-        transform: translateY(-15px) rotate(10deg);
+        transform: translateY(-18px) rotate(8deg) scale(1.08);
     }
 }
 
@@ -776,6 +776,132 @@ section {
     100% {
         transform: translate(-50px, -50px);
     }
+}
+
+/* ===== Céu lúdico: nuvens e estrelinhas sorridentes (como no consultório) ===== */
+.hero-sky {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
+    animation: cloudFloat 25s ease-in-out infinite;
+}
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+.cloud-1 {
+    width: 80px;
+    height: 40px;
+    top: 12%;
+    left: 8%;
+    animation-delay: 0s;
+}
+.cloud-1::before {
+    width: 45px;
+    height: 45px;
+    top: -18px;
+    left: 15px;
+}
+.cloud-1::after {
+    width: 55px;
+    height: 35px;
+    top: -12px;
+    left: 35px;
+}
+.cloud-2 {
+    width: 100px;
+    height: 45px;
+    top: 25%;
+    right: 10%;
+    animation-delay: -8s;
+}
+.cloud-2::before {
+    width: 50px;
+    height: 50px;
+    top: -22px;
+    left: 20px;
+}
+.cloud-2::after {
+    width: 60px;
+    height: 40px;
+    top: -15px;
+    left: 45px;
+}
+.cloud-3 {
+    width: 70px;
+    height: 35px;
+    bottom: 35%;
+    left: 15%;
+    animation-delay: -15s;
+}
+.cloud-3::before {
+    width: 40px;
+    height: 40px;
+    top: -15px;
+    left: 12px;
+}
+.cloud-3::after {
+    width: 48px;
+    height: 30px;
+    top: -10px;
+    left: 28px;
+}
+@keyframes cloudFloat {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(15px, -8px); }
+    50% { transform: translate(-10px, 5px); }
+    75% { transform: translate(8px, 3px); }
+}
+
+.star-face {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F5A64A' d='M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z'/%3E%3Ccircle fill='%232C3E50' cx='9' cy='11' r='1.2'/%3E%3Ccircle fill='%232C3E50' cx='15' cy='11' r='1.2'/%3E%3Cpath fill='none' stroke='%232C3E50' stroke-width='0.8' stroke-linecap='round' d='M9 14.5q3 .8 6 0'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: starFaceFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 8px rgba(241, 144, 34, 0.35));
+}
+.star-face--teal {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236EDDD5' d='M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z'/%3E%3Ccircle fill='%232C3E50' cx='9' cy='11' r='1.2'/%3E%3Ccircle fill='%232C3E50' cx='15' cy='11' r='1.2'/%3E%3Cpath fill='none' stroke='%232C3E50' stroke-width='0.8' stroke-linecap='round' d='M9 14.5q3 .8 6 0'/%3E%3C/svg%3E");
+    filter: drop-shadow(0 2px 8px rgba(78, 205, 196, 0.35));
+}
+.star-face--purple {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23A78BFA' d='M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z'/%3E%3Ccircle fill='%232C3E50' cx='9' cy='11' r='1.2'/%3E%3Ccircle fill='%232C3E50' cx='15' cy='11' r='1.2'/%3E%3Cpath fill='none' stroke='%232C3E50' stroke-width='0.8' stroke-linecap='round' d='M9 14.5q3 .8 6 0'/%3E%3C/svg%3E");
+    filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.35));
+}
+.star-face-1 { top: 18%; left: 12%; animation-delay: 0s; }
+.star-face-2 { top: 8%; right: 22%; animation-delay: 0.6s; }
+.star-face-3 { bottom: 28%; right: 18%; animation-delay: 1.2s; }
+.star-face-4 { bottom: 22%; left: 8%; animation-delay: 0.3s; }
+.star-face-5 { top: 35%; right: 5%; animation-delay: 0.9s; }
+@keyframes starFaceFloat {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+@media (max-width: 768px) {
+    .hero-sky .cloud { opacity: 0.85; }
+    .hero-sky .star-face { width: 28px; height: 28px; }
+}
+@media (max-width: 480px) {
+    .hero-sky .cloud-2 { display: none; }
+    .hero-sky .star-face-4,
+    .hero-sky .star-face-5 { display: none; }
 }
 
 .hero-location {
@@ -807,23 +933,24 @@ section {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    background: rgba(78, 205, 196, 0.1);
+    background: rgba(241, 144, 34, 0.12);
     backdrop-filter: blur(10px);
     padding: 0.5rem 1.5rem;
     border-radius: 50px;
     margin-bottom: var(--spacing-md);
     font-size: 0.9rem;
     font-weight: 600;
-    border: 2px solid rgba(78, 205, 196, 0.3);
-    color: var(--primary-color) !important;
+    border: 2px solid rgba(241, 144, 34, 0.35);
+    color: var(--accent-dark) !important;
+    box-shadow: 0 4px 14px rgba(241, 144, 34, 0.15);
 }
 
 .hero-badge i {
-    color: var(--primary-color) !important;
+    color: var(--accent-color) !important;
 }
 
 .hero-badge span {
-    color: var(--primary-color) !important;
+    color: var(--accent-dark) !important;
 }
 
 .hero-title {
@@ -841,7 +968,11 @@ section {
 }
 
 .title-line.highlight {
-    color: var(--primary-color) !important;
+    color: var(--primary-color); /* fallback */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-size: 1.1em;
 }
 
@@ -962,6 +1093,16 @@ section {
 .btn-cta-porque:hover i,
 .btn-cta-chegar:hover i {
     transform: scale(1.2) rotate(5deg);
+}
+
+/* Botão "Agendar Consulta" no hero em laranja (mais alegre) */
+.btn-cta-hero {
+    background: var(--accent-color) !important;
+    box-shadow: 0 4px 15px rgba(241, 144, 34, 0.4) !important;
+}
+.btn-cta-hero:hover {
+    background: var(--accent-dark) !important;
+    box-shadow: 0 6px 20px rgba(241, 144, 34, 0.5) !important;
 }
 
 @keyframes pulse-cta {

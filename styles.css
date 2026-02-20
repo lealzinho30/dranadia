@@ -3199,12 +3199,39 @@ section {
     pointer-events: auto;
 }
 
-/* ===== CONTATO SECTION ===== */
+/* ===== CONTATO SECTION (mais alegre) ===== */
 .contato {
-    background: var(--white) !important;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #FFFBF7 0%, #FFF8F0 25%, #F0F9F8 60%, #FFFFFF 100%) !important;
     padding: var(--spacing-xl) 0;
     scroll-margin-top: 120px;
     color: var(--dark-gray);
+}
+
+/* Decoração suave: estrelinhas no fundo da seção */
+.contato-deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+.contato-star {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.35;
+    animation: contatoStarFloat 4s ease-in-out infinite;
+}
+.contato-star-1 { top: 15%; right: 12%; animation-delay: 0s; }
+.contato-star-2 { bottom: 20%; left: 8%; animation-delay: 1.2s; }
+.contato-star-3 { top: 50%; right: 5%; animation-delay: 0.6s; }
+.contato .container {
+    position: relative;
+    z-index: 1;
+}
+@keyframes contatoStarFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-8px) scale(1.1); }
 }
 
 .contato .section-title,
@@ -3215,23 +3242,32 @@ section {
 
 .contato .section-title {
     text-shadow: none;
-    color: var(--primary-color) !important;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .contato .section-description {
     color: var(--gray) !important;
 }
 
+/* Tag "Entre em Contato" em laranja (mais alegre) */
 .contato .section-tag {
-    background: rgba(139, 92, 246, 0.1); /* Roxo com transparência */
-    color: var(--primary-color) !important;
-    border: 2px solid rgba(139, 92, 246, 0.3);
+    background: rgba(241, 144, 34, 0.15);
+    color: var(--accent-dark) !important;
+    border: 2px solid rgba(241, 144, 34, 0.4);
 }
 
 .contato .info-card {
-    background: rgba(255, 255, 255, 0.98);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 16px rgba(241, 144, 34, 0.08);
 }
+.contato .info-card:nth-child(1) { border-left: 4px solid var(--accent-color); }
+.contato .info-card:nth-child(2) { border-left: 4px solid var(--secondary-color); }
+.contato .info-card:nth-child(3) { border-left: 4px solid var(--accent-color); }
+.contato .info-card:nth-child(4) { border-left: 4px solid var(--secondary-color); }
 
 .contato .info-content h4,
 .contato .info-content p,
@@ -3246,12 +3282,19 @@ section {
 
 .contato .form {
     background: rgba(255, 255, 255, 0.98);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(241, 144, 34, 0.2);
+    box-shadow: 0 8px 32px rgba(241, 144, 34, 0.1);
 }
 
-.contato .form h3 {
+.contato .form h3.form-title-joy {
     color: var(--dark-gray) !important;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.contato .form-title-icon {
+    font-size: 1.4rem;
 }
 
 .contato .form-group label {
@@ -3263,7 +3306,22 @@ section {
 .contato .form-group textarea {
     color: var(--dark-gray) !important;
     background: var(--white) !important;
-    border-color: #D1D5DB !important;
+    border: 2px solid #E5E7EB !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.contato .form-group input:focus,
+.contato .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 3px rgba(241, 144, 34, 0.15);
+}
+.contato .form .btn-primary {
+    background: var(--accent-color) !important;
+    box-shadow: 0 4px 14px rgba(241, 144, 34, 0.35);
+}
+.contato .form .btn-primary:hover {
+    background: var(--accent-dark) !important;
+    box-shadow: 0 6px 20px rgba(241, 144, 34, 0.45);
 }
 
 .contato-wrapper {
@@ -3376,11 +3434,13 @@ section {
 }
 
 .contato-form {
+    position: relative;
+    z-index: 1;
     background: var(--white);
     padding: var(--spacing-lg);
     border-radius: 20px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(45, 167, 186, 0.1);
+    box-shadow: 0 10px 40px rgba(241, 144, 34, 0.12);
+    border: 2px solid rgba(241, 144, 34, 0.2);
     scroll-margin-top: 120px;
 }
 

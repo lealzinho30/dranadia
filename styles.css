@@ -787,76 +787,41 @@ section {
     overflow: hidden;
 }
 
+/* Nuvem hero: mesmo formato clássico em SVG */
 .cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 65'%3E%3Cellipse fill='%23fff' opacity='0.9' cx='28' cy='48' rx='26' ry='16'/%3E%3Cellipse fill='%23fff' opacity='0.9' cx='60' cy='42' rx='34' ry='20'/%3E%3Cellipse fill='%23fff' opacity='0.9' cx='92' cy='48' rx='26' ry='16'/%3E%3Cellipse fill='%23fff' opacity='0.9' cx='48' cy='26' rx='22' ry='17'/%3E%3Cellipse fill='%23fff' opacity='0.9' cx='78' cy='24' rx='22' ry='17'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
     animation: cloudFloat 25s ease-in-out infinite;
 }
 .cloud::before,
 .cloud::after {
-    content: '';
-    position: absolute;
-    background: inherit;
-    border-radius: 50%;
+    content: none;
 }
 .cloud-1 {
-    width: 80px;
-    height: 40px;
+    width: 88px;
+    height: 48px;
     top: 12%;
     left: 8%;
     animation-delay: 0s;
 }
-.cloud-1::before {
-    width: 45px;
-    height: 45px;
-    top: -18px;
-    left: 15px;
-}
-.cloud-1::after {
-    width: 55px;
-    height: 35px;
-    top: -12px;
-    left: 35px;
-}
 .cloud-2 {
-    width: 100px;
-    height: 45px;
+    width: 108px;
+    height: 58px;
     top: 25%;
     right: 10%;
     animation-delay: -8s;
 }
-.cloud-2::before {
-    width: 50px;
-    height: 50px;
-    top: -22px;
-    left: 20px;
-}
-.cloud-2::after {
-    width: 60px;
-    height: 40px;
-    top: -15px;
-    left: 45px;
-}
 .cloud-3 {
-    width: 70px;
-    height: 35px;
+    width: 76px;
+    height: 41px;
     bottom: 35%;
     left: 15%;
     animation-delay: -15s;
-}
-.cloud-3::before {
-    width: 40px;
-    height: 40px;
-    top: -15px;
-    left: 12px;
-}
-.cloud-3::after {
-    width: 48px;
-    height: 30px;
-    top: -10px;
-    left: 28px;
 }
 @keyframes cloudFloat {
     0%, 100% { transform: translate(0, 0); }
@@ -1418,31 +1383,31 @@ section {
     overflow: hidden;
 }
 
+/* Nuvem em SVG: formato clássico fofo (vários puffs sobrepostos) */
 .cloud-smile {
     position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.08));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 65'%3E%3Cellipse fill='%23fff' opacity='0.95' cx='28' cy='48' rx='26' ry='16'/%3E%3Cellipse fill='%23fff' opacity='0.95' cx='60' cy='42' rx='34' ry='20'/%3E%3Cellipse fill='%23fff' opacity='0.95' cx='92' cy='48' rx='26' ry='16'/%3E%3Cellipse fill='%23fff' opacity='0.95' cx='48' cy='26' rx='22' ry='17'/%3E%3Cellipse fill='%23fff' opacity='0.95' cx='78' cy='24' rx='22' ry='17'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.1));
     animation: cloudFloatSobre 28s ease-in-out infinite;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-bottom: 8%;
 }
 .cloud-smile::before,
 .cloud-smile::after {
-    content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
+    content: none;
 }
 .cloud-face {
     position: absolute;
-    bottom: 12%;
+    bottom: 18%;
     left: 50%;
     transform: translateX(-50%);
-    width: 28px;
-    height: 20px;
+    width: 26px;
+    height: 18px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Ccircle fill='%233BA89F' cx='6' cy='6' r='2.5'/%3E%3Ccircle fill='%233BA89F' cx='18' cy='6' r='2.5'/%3E%3Cpath fill='none' stroke='%233BA89F' stroke-width='1.5' stroke-linecap='round' d='M7 13 Q12 17 17 13'/%3E%3C/svg%3E");
     background-size: contain;
     background-repeat: no-repeat;
@@ -1450,99 +1415,39 @@ section {
     z-index: 1;
 }
 .cloud-smile-1 {
-    width: 90px;
-    height: 45px;
+    width: 100px;
+    height: 54px;
     top: 10%;
     left: 5%;
     animation-delay: 0s;
 }
-.cloud-smile-1::before {
-    width: 48px;
-    height: 48px;
-    top: -22px;
-    left: 18px;
-}
-.cloud-smile-1::after {
-    width: 52px;
-    height: 38px;
-    top: -14px;
-    left: 38px;
-}
 .cloud-smile-2 {
-    width: 75px;
-    height: 38px;
+    width: 82px;
+    height: 44px;
     top: 25%;
     right: 8%;
     animation-delay: -6s;
 }
-.cloud-smile-2::before {
-    width: 40px;
-    height: 40px;
-    top: -18px;
-    left: 14px;
-}
-.cloud-smile-2::after {
-    width: 44px;
-    height: 32px;
-    top: -12px;
-    left: 30px;
-}
 .cloud-smile-3 {
-    width: 85px;
-    height: 42px;
+    width: 94px;
+    height: 51px;
     bottom: 25%;
     left: 10%;
     animation-delay: -12s;
 }
-.cloud-smile-3::before {
-    width: 45px;
-    height: 45px;
-    top: -20px;
-    left: 16px;
-}
-.cloud-smile-3::after {
-    width: 50px;
-    height: 36px;
-    top: -13px;
-    left: 34px;
-}
 .cloud-smile-4 {
-    width: 65px;
-    height: 32px;
+    width: 72px;
+    height: 39px;
     bottom: 15%;
     right: 15%;
     animation-delay: -18s;
 }
-.cloud-smile-4::before {
-    width: 35px;
-    height: 35px;
-    top: -14px;
-    left: 12px;
-}
-.cloud-smile-4::after {
-    width: 38px;
-    height: 28px;
-    top: -10px;
-    left: 26px;
-}
 .cloud-smile-5 {
-    width: 70px;
-    height: 35px;
+    width: 78px;
+    height: 42px;
     top: 50%;
-    left: calc(50% - 35px);
+    left: calc(50% - 39px);
     animation-delay: -24s;
-}
-.cloud-smile-5::before {
-    width: 38px;
-    height: 38px;
-    top: -16px;
-    left: 14px;
-}
-.cloud-smile-5::after {
-    width: 42px;
-    height: 30px;
-    top: -11px;
-    left: 28px;
 }
 @keyframes cloudFloatSobre {
     0%, 100% { transform: translate(0, 0); }
